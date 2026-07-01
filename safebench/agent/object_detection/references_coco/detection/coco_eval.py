@@ -5,7 +5,8 @@ import numpy as np
 import copy
 import time
 import torch
-import torch._six
+#import torch._six
+string_classes = (str,)
 
 from pycocotools.cocoeval import COCOeval
 from pycocotools.coco import COCO

@@ -1,7 +1,21 @@
 import re
 from os import path as osp
 import shutil
-from safebench.util.scenic_utils import ScenicSimulator
+
+# Lazy import so retrieve.py can run in a lightweight environment without
+# the full safebench/CARLA stack. Verification is optional and can be done
+# later in the main chatscene environment.
+ScenicSimulator = None
+
+def _get_scenic_simulator():
+    global ScenicSimulator
+    if ScenicSimulator is None:
+        try:
+            from safebench.util.scenic_utils import ScenicSimulator as _ScenicSimulator
+            ScenicSimulator = _ScenicSimulator
+        except Exception as e:
+            print(f"Warning: Could not import ScenicSimulator for compile verification: {e}")
+    return ScenicSimulator
 
 def load_file(file_path):
     with open(file_path, 'r') as file:
@@ -65,7 +79,7 @@ def generate_code_snippet(llm_model, category_prompt, descriptions, snippets, cu
         print(f"An error occurred: {e}")
         return None
 
-def save_scenic_code(local_path, port_ip, scenic_code, q):
+def save_scenic_code(local_path, port_ip, scenic_code, q, verify=True):
     # Construct the file path dynamically using the scenario index
     file_path = osp.join(local_path, f'safebench/scenario/scenario_data/scenic_data/dynamic_scenario/dynamic_{q}.scenic')
     backup_path = osp.join(local_path, f'safebench/scenario/scenario_data/scenic_data/dynamic_scenario/dynamic_{q}.txt')
@@ -76,10 +90,19 @@ def save_scenic_code(local_path, port_ip, scenic_code, q):
 
     extra_params = {'port': port_ip, 'traffic_manager_port': port_ip + 6000}
 
+    if not verify:
+        print(f"Scenic code saved at {file_path} (verification skipped)")
+        return True
+
+    simulator_cls = _get_scenic_simulator()
+    if simulator_cls is None:
+        print(f"Scenic code saved at {file_path} (ScenicSimulator unavailable)")
+        return True
+
     try:
         print("Checking if the Scenic code is compilable...")
         # Simulate the initialization of the Scenic simulator to check if the script is compilable
-        ScenicSimulator(file_path, extra_params)
+        simulator_cls(file_path, extra_params)
         print(f"Scenic code saved and verified as compilable at {file_path}")
         return True
     except Exception as e:

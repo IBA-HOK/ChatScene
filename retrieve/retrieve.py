@@ -1,4 +1,8 @@
-import setGPU
+try:
+    import setGPU
+except ImportError:
+    pass
+
 import os
 import csv
 import pickle
@@ -18,6 +22,7 @@ parser.add_argument('--port_ip', type=int, default=2000, help='Port IP address (
 parser.add_argument('--topk', type=int, default=3, help='Top K value (default: 3) for retrieval')
 parser.add_argument('--model', type=str, default='gpt-4o', help="Model name (default: 'gpt-4o'), also support transformers model")
 parser.add_argument('--use_llm', action='store_true', help='if use llm for generating new snippets')
+parser.add_argument('--no_verify', action='store_true', help='skip Scenic compile verification; useful when running retrieval in a separate environment without CARLA')
 args = parser.parse_args()
 
 port_ip = args.port_ip
@@ -87,7 +92,7 @@ with open(log_file_path, mode='w', newline='') as file:
 
         Town, generated_geometry_code = generated_geometry_code.split('\n', 1)
         scenic_code = '\n'.join([f"'''{current_scenario}'''", Town, head, generated_behavior_code, generated_geometry_code, generated_spawn_code.format(AdvObject = current_adv_object)])
-        save_scenic_code(local_path, port_ip, scenic_code, q)
+        save_scenic_code(local_path, port_ip, scenic_code, q, verify=not args.no_verify)
 
         # except:
         #     log_writer.writerow([current_scenario, '', '', '', '', '', '', '', 0])

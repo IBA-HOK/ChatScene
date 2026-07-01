@@ -2,7 +2,11 @@ import os
 import openai
 import torch
 import transformers
-os.environ["OPENAI_API_KEY"] = 'sk-proj-xxx'
+from dotenv import load_dotenv
+
+load_dotenv()
+if not os.environ.get("OPENAI_API_KEY"):
+    raise ValueError("OPENAI_API_KEY is not set. Please configure it in the .env file.")
 
 class LLMChat():
     def __init__(self, model_name = 'meta-llama/Meta-Llama-3-8B-Instruct'):

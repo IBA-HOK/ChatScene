@@ -1,0 +1,16 @@
+# Minimal dependencies for running retrieve/retrieve.py in a separate environment.
+# This avoids the CARLA 0.9.13 / Python 3.8 deadlock while allowing RTX 50-series GPUs
+# to use a modern PyTorch build (CUDA 12.x) for sentence-transformer embeddings.
+
+--extra-index-url https://download.pytorch.org/whl/cu124
+
+torch
+torchvision
+torchaudio
+
+numpy
+sentence_transformers
+openai
+python-dotenv
+tqdm
+transformers

@@ -4,4 +4,23 @@
 # Ignore Jupyter notebook checkpoints
 .ipynb_checkpoints/
 
+# Python cache
 __pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+*.egg-info/
+*.egg
+
+# Training/evaluation outputs
+log/
+*.pkl
+*.pth
+*.pt
+
+# Logs
+*.log
+
+# Ignore environment variables file
+.env

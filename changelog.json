@@ -1,0 +1,156 @@
+[
+  {
+    "step": 1,
+    "timestamp": "2026-07-01T00:00:00+09:00",
+    "title": "ChatGPT/OpenAI 通信部分の調査",
+    "description": "プロジェクト全体から ChatGPT との通信を担う部分を抽出・調査した。",
+    "details": [
+      "retrieve/architecture.py: LLMChat クラスが openai.OpenAI() クライアントを使用",
+      "retrieve/retrieve.py: シナリオ記述を読み込み、LLM で Scenic コードを生成するメインスクリプト",
+      "retrieve/utils.py: RAG 検索、プロンプト構築、生成コードの後処理、コンパイル検証",
+      "retrieve/prompts/*.txt: extraction/behavior/geometry/spawn の各プロンプト",
+      "retrieve/scenario_descriptions.txt: 入力となる自然言語シナリオ記述",
+      "retrieve/database_v1.pkl: RAG 用既存スニペットデータベース"
+    ],
+    "files_affected": [
+      "retrieve/architecture.py",
+      "retrieve/retrieve.py",
+      "retrieve/utils.py",
+      "retrieve/prompts/extraction.txt",
+      "retrieve/prompts/behavior.txt",
+      "retrieve/prompts/geometry.txt",
+      "retrieve/prompts/spawn.txt",
+      "retrieve/scenario_descriptions.txt",
+      "retrieve/database_v1.pkl"
+    ]
+  },
+  {
+    "step": 2,
+    "timestamp": "2026-07-01T00:00:00+09:00",
+    "title": "run_train.py の実行フロー調査",
+    "description": "README.md に記載された run_train.py コマンドが実際に何をするかを調査した。",
+    "details": [
+      "scripts/run_train.py: 引数解析、設定ファイル読み込み、ScenicRunner または CarlaRunner の起動",
+      "--mode train_agent の場合: Scenic ファイルを使ってエゴ車両の SAC エージェントを追加学習",
+      "--mode train_scenario の場合: 最も厳しいシーンの選定・パラメータ最適化を実施",
+      "ScenicRunner.run(): scenic_parse → ScenicDataLoader → train/eval の流れ",
+      "train_agent は route_id [0-7] を使用、train_scenario は [0-9] を使用"
+    ],
+    "files_affected": [
+      "scripts/run_train.py",
+      "safebench/scenic_runner.py",
+      "safebench/scenario/scenario_data_loader.py",
+      "safebench/scenario/tools/scenario_utils.py",
+      "safebench/agent/config/adv_scenic.yaml",
+      "safebench/scenario/config/train_agent_scenic.yaml",
+      "safebench/scenario/config/train_scenario_scenic.yaml"
+    ]
+  },
+  {
+    "step": 3,
+    "timestamp": "2026-07-01T00:00:00+09:00",
+    "title": "OpenAI API キーを .env ファイル方式に切り替え",
+    "description": "retrieve/architecture.py にハードコードされていた API キーを .env ファイルから読み込む方式に変更した。",
+    "details": [
+      ".env ファイルを新規作成し、OPENAI_API_KEY=sk-proj-xxx を配置",
+      "retrieve/architecture.py で python-dotenv を使って .env からキーを読み込むよう修正",
+      "キー未設定時は ValueError を発生させる検証を追加",
+      ".gitignore に .env を追加して誤コミットを防止",
+      "requirements.txt に python-dotenv を追加",
+      "python-dotenv を現在の環境に pip install した"
+    ],
+    "files_affected": [
+      ".env",
+      ".gitignore",
+      "requirements.txt",
+      "retrieve/architecture.py"
+    ],
+    "commands_run": [
+      "pip install python-dotenv"
+    ]
+  },
+  {
+    "step": 4,
+    "timestamp": "2026-07-01T00:00:00+09:00",
+    "title": "sentence_transformers / huggingface_hub 互換性エラーの解決",
+    "description": "retrieve.py 実行時に sentence_transformers の cached_download インポートでエラーが発生した。",
+    "details": [
+      "エラー: ImportError: cannot import name 'cached_download' from 'huggingface_hub'",
+      "原因: sentence_transformers==2.2.1 が古く、新しい huggingface_hub と互換性がない",
+      "解決策: pip install --upgrade sentence_transformers を実行"
+    ],
+    "files_affected": [],
+    "commands_run": [
+      "pip install --upgrade sentence_transformers"
+    ]
+  },
+  {
+    "step": 5,
+    "timestamp": "2026-07-01T00:00:00+09:00",
+    "title": "RTX 5080 / PyTorch / CARLA デッドロックの分析",
+    "description": "RTX 5080 (sm_120) を使うには PyTorch 2.5+ / CUDA 12.x が必要だが、それは Python 3.8 をサポートしておらず、CARLA 0.9.13 は Python 3.8 が前提というデッドロックを分析した。",
+    "details": [
+      "RTX 5080 → sm_120 → PyTorch 2.5+ / CUDA 12.x 必要",
+      "PyTorch 2.5+ → Python 3.9+ 必須",
+      "CARLA 0.9.13 → Python 3.8 前提",
+      "結論: シナリオ生成とエージェント訓練を別環境に分離するのが最善"
+    ],
+    "files_affected": []
+  },
+  {
+    "step": 6,
+    "timestamp": "2026-07-01T00:00:00+09:00",
+    "title": "案1: retrieval 専用環境の実装",
+    "description": "シナリオ生成専用の conda 環境 chatscene-retrieval を作成し、メイン環境と分離した。",
+    "details": [
+      "requirements-retrieval.txt を新規作成",
+      "retrieve/utils.py で ScenicSimulator を遅延 import するよう修正",
+      "retrieve/retrieve.py に --no_verify 引数を追加",
+      "retrieve/retrieve.py の setGPU import を optional に変更",
+      "scripts/verify_dynamic_scenarios.py を新規作成（メイン環境でのコンパイル検証用）",
+      "chatscene-retrieval 環境を Python 3.10 で作成",
+      "requirements-retrieval.txt を chatscene-retrieval 環境にインストール"
+    ],
+    "files_affected": [
+      "requirements-retrieval.txt",
+      "retrieve/utils.py",
+      "retrieve/retrieve.py",
+      "scripts/verify_dynamic_scenarios.py"
+    ],
+    "commands_run": [
+      "conda create -n chatscene-retrieval python=3.10 -y",
+      "conda run -n chatscene-retrieval pip install -r requirements-retrieval.txt"
+    ]
+  },
+  {
+    "step": 7,
+    "timestamp": "2026-07-01T00:00:00+09:00",
+    "title": "chatscene-retrieval 環境での動作テスト",
+    "description": "chatscene-retrieval 環境で retrieve.py をテスト実行し、GPU 認識とモデルロードを確認した。",
+    "details": [
+      "PyTorch 2.12.1+cu130 がインストールされたことを確認",
+      "CUDA available: True、GPU: NVIDIA GeForce RTX 5080 を確認",
+      "sentence-transformer モデルのロード成功",
+      "OpenAI API キーがプレースホルダーのままだったため、ChatGPT 呼び出しは 401 エラー（想定内）"
+    ],
+    "files_affected": [],
+    "commands_run": [
+      "conda run -n chatscene-retrieval python -c \"import torch; print(torch.__version__); print(torch.cuda.get_device_name(0))\"",
+      "conda run -n chatscene-retrieval python retrieve/retrieve.py --model gpt-4o --use_llm --no_verify"
+    ]
+  },
+  {
+    "step": 8,
+    "timestamp": "2026-07-01T00:00:00+09:00",
+    "title": "手順書と変更履歴の作成",
+    "description": " LLM ベースシナリオ生成・訓練手順を readme_llmtrain.md にまとめ、すべての作業履歴を changelog.json に記録した。",
+    "details": [
+      "readme_llmtrain.md: 環境構築から訓練・評価までの手順書",
+      "changelog.json: ステップごとの作業内容を JSON 形式で記録"
+    ],
+    "files_affected": [
+      "readme_llmtrain.md",
+      "changelog.json"
+    ]
+  }
+]

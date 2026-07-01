@@ -192,7 +192,8 @@ class SAC(Policy):
 
     def load_model(self, path):
         if '.pt' in path:
-            actor_state_dict, critic_state_dict = torch.load(path)
+            #actor_state_dict, critic_state_dict = torch.load(path)
+            actor_state_dict, critic_state_dict = torch.load(path, map_location='cpu')
             self.actor.load_state_dict(actor_state_dict)
             self.critic.load_state_dict(critic_state_dict)
             self._ac_training_setup(self.actor, self.critic)
