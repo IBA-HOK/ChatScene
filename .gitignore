@@ -24,3 +24,4 @@ log/
 
 # Ignore environment variables file
 .env
+safebench/scenario/scenario_data/scenic_data/dynamic_scenario/*

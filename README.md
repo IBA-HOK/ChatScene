@@ -154,7 +154,7 @@ The above part ensures using the same scenario and routes for fair comparison wi
 
 1. Please first install openai and sentence_transformers packages following the requirements.
 2. Put your description under file `retrieve/scenario_descriptions.txt`
-3. run `python retrieve.py` to get the corresponding scenic code under `safebench/scenario/scenario_data/scenic_data/dynamic_scenario`
+3. run `python retrieve/retrieve.py` to get the corresponding scenic code under `safebench/scenario/scenario_data/scenic_data/dynamic_scenario`. You can use either OpenAI GPT-4o (set `OPENAI_API_KEY` in `.env`) or a local Ollama server via its OpenAI-compatible API (set `OLLAMA_BASE_URL` in `.env` or pass `--ollama_url`).
 4. Then, for running the dynamic scenarios, just replace the `run_train.py` or `run_eval.py` with `run_train_dynamic.py` or `run_eval_dynamic.py`, and use `dynamic_scenic.yaml` (please specify your settings there), an exmaple could be:
    
    ```

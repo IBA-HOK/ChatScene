@@ -7,6 +7,7 @@ import os
 import csv
 import pickle
 import re
+import time
 from sentence_transformers import SentenceTransformer
 from os import path as osp
 from tqdm import tqdm
@@ -21,6 +22,7 @@ parser = argparse.ArgumentParser(description="Set up configurations for your scr
 parser.add_argument('--port_ip', type=int, default=2000, help='Port IP address (default: 2000)')
 parser.add_argument('--topk', type=int, default=3, help='Top K value (default: 3) for retrieval')
 parser.add_argument('--model', type=str, default='gpt-4o', help="Model name (default: 'gpt-4o'), also support transformers model")
+parser.add_argument('--ollama_url', type=str, default=None, help="Ollama OpenAI-compatible API base URL (e.g. 'http://localhost:11434/v1'). Overrides OLLAMA_BASE_URL env var.")
 parser.add_argument('--use_llm', action='store_true', help='if use llm for generating new snippets')
 parser.add_argument('--no_verify', action='store_true', help='skip Scenic compile verification; useful when running retrieval in a separate environment without CARLA')
 args = parser.parse_args()
@@ -29,7 +31,8 @@ port_ip = args.port_ip
 topk = args.topk
 use_llm = args.use_llm
 
-llm_model = LLMChat(args.model)
+ollama_url = args.ollama_url or os.environ.get("OLLAMA_BASE_URL")
+llm_model = LLMChat(args.model, ollama_base_url=ollama_url)
 local_path = osp.abspath(osp.dirname(osp.dirname(osp.realpath(__file__))))
 extraction_prompt = load_file(osp.join(local_path, 'retrieve', 'prompts', 'extraction.txt'))
 behavior_prompt = load_file(osp.join(local_path, 'retrieve', 'prompts', 'behavior.txt'))
@@ -37,6 +40,7 @@ geometry_prompt = load_file(osp.join(local_path, 'retrieve', 'prompts', 'geometr
 spawn_prompt = load_file(osp.join(local_path, 'retrieve', 'prompts', 'spawn.txt'))
 scenario_descriptions = load_file(osp.join(local_path, 'retrieve', 'scenario_descriptions.txt')).split('\n')
 encoder = SentenceTransformer('sentence-transformers/sentence-t5-large', device='cuda')
+start_time = time.time()
 
 with open(osp.join(local_path, 'retrieve/database_v1.pkl'), 'rb') as file:
     database = pickle.load(file)
@@ -97,3 +101,6 @@ with open(log_file_path, mode='w', newline='') as file:
         # except:
         #     log_writer.writerow([current_scenario, '', '', '', '', '', '', '', 0])
         #     print("Failure for scenario:", current_scenario)
+
+elapsed_time = time.time() - start_time
+print(f"Scenario generation completed in {time.strftime('%H:%M:%S', time.gmtime(elapsed_time))}")
