@@ -1,0 +1,66 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "UnprotectedLeftTurn",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "While executing an unprotected left turn at a signalized intersection, a jaywalking pedestrian suddenly emerges from behind a parked vehicle and dashes directly into the ego vehicle's path.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly emerges from behind a parked vehicle and dashes directly into the ego vehicle's path.\nGeometry: A signalized four-way intersection where an unprotected left turn is being executed by the ego vehicle.\nSpawn Position: The adversarial agent spawns hidden behind a parked vehicle at the corner of the intersection, emerging to cross in front of the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly emerges from behind a parked vehicle and dashes directly into the ego vehicle's path.",
+        "Geometry": "A signalized four-way intersection where an unprotected left turn is being executed by the ego vehicle.",
+        "Spawn Position": "The adversarial agent spawns hidden behind a parked vehicle at the corner of the intersection, emerging to cross in front of the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "The ego vehicle attempts an unprotected left turn at an uncontrolled intersection when a jaywalking cyclist abruptly crosses from behind a parked car, moving faster than expected and cutting directly into the turning path without signaling.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist abruptly crosses without signaling and cuts directly into the ego vehicle's turning path while moving faster than expected.\nGeometry: An uncontrolled intersection where the ego vehicle attempts an unprotected left turn.\nSpawn Position: The adversarial agent spawns from behind a parked car on the cross street at the corner of the intersection.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist abruptly crosses without signaling and cuts directly into the ego vehicle's turning path while moving faster than expected.",
+        "Geometry": "An uncontrolled intersection where the ego vehicle attempts an unprotected left turn.",
+        "Spawn Position": "The adversarial agent spawns from behind a parked car on the cross street at the corner of the intersection."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "As the ego vehicle executes an unprotected left turn across oncoming lanes, a motorcyclist suddenly accelerates from behind a stationary car directly into its trajectory without signaling or braking for right-of-way signals.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly accelerates from behind a stationary car directly into its trajectory without signaling or braking for right-of-way signals.\nGeometry: An intersection with oncoming lanes where the ego vehicle executes an unprotected left turn; traffic light conditions imply signalized control but lack of protected phase.\nSpawn Position: Behind a stationary car directly into its trajectory relative to the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly accelerates from behind a stationary car directly into its trajectory without signaling or braking for right-of-way signals.",
+        "Geometry": "An intersection with oncoming lanes where the ego vehicle executes an unprotected left turn; traffic light conditions imply signalized control but lack of protected phase.",
+        "Spawn Position": "Behind a stationary car directly into its trajectory relative to the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "While executing an unprotected left turn across open lanes at high speeds with limited visibility within intersection boundaries, a jaywalking pedestrian suddenly steps into my path from behind a stationary parked car directly in front of me without any visible warning or movement before they began walking causing immediate collision risk.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian unexpectedly jaywalks and enters the ego vehicle's turning lane with no prior visible warning or indication of motion.\nGeometry: An intersection where the ego vehicle is executing an unprotected left turn across open lanes at high speeds; limited visibility exists within boundaries due to obstructions like a parked car.\nSpawn Position: The adversarial agent spawns from behind a stationary parked car directly in front of the ego vehicle's path, emerging into the lane without warning.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian unexpectedly jaywalks and enters the ego vehicle's turning lane with no prior visible warning or indication of motion.",
+        "Geometry": "An intersection where the ego vehicle is executing an unprotected left turn across open lanes at high speeds; limited visibility exists within boundaries due to obstructions like a parked car.",
+        "Spawn Position": "The adversarial agent spawns from behind a stationary parked car directly in front of the ego vehicle's path, emerging into the lane without warning."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A pedestrian jaywalks directly across my lane as I execute an unprotected left turn without yielding to cross traffic on a red light creating zero safe braking distance before impact occurs while driving at high speed approaching the intersection. They then run unexpectedly forward with no time for emergency maneuvering and stopping available due to insufficient gap detection during the unsafe turn attempt just now occurring with me moving towards them too quickly?",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: Jaywalks across lane and runs unexpectedly forward without yielding to cross traffic\nGeometry: Intersection with high-speed approach creating zero safe braking distance before impact occurs\nSpawn Position: Opposite side of the road entering directly into my path",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "Jaywalks across lane and runs unexpectedly forward without yielding to cross traffic",
+        "Geometry": "Intersection with high-speed approach creating zero safe braking distance before impact occurs",
+        "Spawn Position": "Opposite side of the road entering directly into my path"
+      },
+      "success": true
+    }
+  ]
+}

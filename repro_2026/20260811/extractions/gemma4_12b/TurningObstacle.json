@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:12b",
+  "base_scenario": "TurningObstacle",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "As the ego vehicle performs a left turn through an intersection, a cyclist suddenly swerves into its path from a side street.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist suddenly swerves into the ego vehicle's path.\nGeometry: An intersection where the ego vehicle is performing a left turn.\nSpawn Position: The adversarial agent enters from a side street and crosses into the ego vehicle's path during its turn.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist suddenly swerves into the ego vehicle's path.",
+        "Geometry": "An intersection where the ego vehicle is performing a left turn.",
+        "Spawn Position": "The adversarial agent enters from a side street and crosses into the ego vehicle's path during its turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "While the ego vehicle is executing a left turn at an intersection, a cyclist suddenly swerves into its path from behind a parked delivery truck.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicycle suddenly swerves into the path of the ego vehicle.\nGeometry: An intersection where the ego vehicle is performing a left turn.\nSpawn Position: The adversarial agent is positioned behind a parked delivery truck, which acts as an obstruction before it enters the ego's path.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicycle suddenly swerves into the path of the ego vehicle.",
+        "Geometry": "An intersection where the ego vehicle is performing a left turn.",
+        "Spawn Position": "The adversarial agent is positioned behind a parked delivery truck, which acts as an obstruction before it enters the ego's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A pedestrian steps out from behind a parked van and enters the roadway just as the ego vehicle begins its right turn.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The pedestrian steps out from behind a parked van and enters the roadway.\nGeometry: A road where the ego vehicle is performing a right turn.\nSpawn Position: The adversarial agent is positioned behind a parked van, which acts as an obstruction, on the path of the ego vehicle's right turn.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The pedestrian steps out from behind a parked van and enters the roadway.",
+        "Geometry": "A road where the ego vehicle is performing a right turn.",
+        "Spawn Position": "The adversarial agent is positioned behind a parked van, which acts as an obstruction, on the path of the ego vehicle's right turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A pedestrian suddenly steps into the roadway from behind a parked car just as the ego vehicle begins its right turn at the intersection.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly steps into the roadway from behind a parked car.\nGeometry: An intersection where the ego vehicle is performing a right turn.\nSpawn Position: The adversarial agent is positioned behind a parked car on the side of the road where the ego vehicle is turning.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly steps into the roadway from behind a parked car.",
+        "Geometry": "An intersection where the ego vehicle is performing a right turn.",
+        "Spawn Position": "The adversarial agent is positioned behind a parked car on the side of the road where the ego vehicle is turning."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A pedestrian suddenly steps into the ego vehicle's path from behind a parked van while it is executing a left turn at the intersection.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly steps into the ego vehicle's path.\nGeometry: An intersection where the ego vehicle is executing a left turn.\nSpawn Position: The adversarial agent is positioned behind a parked van, which acts as an obstruction to the ego vehicle's view during the turn.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly steps into the ego vehicle's path.",
+        "Geometry": "An intersection where the ego vehicle is executing a left turn.",
+        "Spawn Position": "The adversarial agent is positioned behind a parked van, which acts as an obstruction to the ego vehicle's view during the turn."
+      },
+      "success": true
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e2b",
+  "base_scenario": "StraightObstacle",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A motorcycle unexpectedly drifts across the lane and enters the ego vehicle\u2019s path, forcing an immediate evasive maneuver to avoid a collision.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: Drifts across the lane and enters the ego vehicle\u2019s path.\nGeometry: Lane structure/road environment where lateral movement occurs.\nSpawn Position: The motorcycle moves from an adjacent lane into the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "Drifts across the lane and enters the ego vehicle\u2019s path.",
+        "Geometry": "Lane structure/road environment where lateral movement occurs.",
+        "Spawn Position": "The motorcycle moves from an adjacent lane into the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "A cyclist unexpectedly weaves across three lanes of traffic to pass, forcing the ego vehicle into an immediate emergency braking maneuver.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist weaves across multiple lanes of traffic to pass.\nGeometry: Multi-lane road.\nSpawn Position: The adversarial agent is weaving across the lanes of traffic relative to the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist weaves across multiple lanes of traffic to pass.",
+        "Geometry": "Multi-lane road.",
+        "Spawn Position": "The adversarial agent is weaving across the lanes of traffic relative to the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A cyclist unexpectedly swerves into the ego vehicle's lane without signaling, forcing the autonomous system to brake hard to avoid a collision.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly swerves into the ego vehicle's lane without signaling.\nGeometry: The scenario occurs while the ego vehicle is navigating a lane structure.\nSpawn Position: The adversarial agent was positioned in an adjacent lane or shoulder, initiating the swerve into the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly swerves into the ego vehicle's lane without signaling.",
+        "Geometry": "The scenario occurs while the ego vehicle is navigating a lane structure.",
+        "Spawn Position": "The adversarial agent was positioned in an adjacent lane or shoulder, initiating the swerve into the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A pedestrian suddenly darts from behind a parked bus into the travel lane as the ego vehicle passes.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: Suddenly darts from behind an obstruction into the travel lane.\nGeometry: A road context involving a parked vehicle/bus stop area.\nSpawn Position: Behind a parked bus, entering the travel lane as the ego vehicle passes.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "Suddenly darts from behind an obstruction into the travel lane.",
+        "Geometry": "A road context involving a parked vehicle/bus stop area.",
+        "Spawn Position": "Behind a parked bus, entering the travel lane as the ego vehicle passes."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A cyclist unexpectedly drifts into the travel lane from the shoulder, forcing the ego vehicle to brake sharply to avoid a collision.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly drifts into the travel lane.\nGeometry: A road with shoulders.\nSpawn Position: The adversarial agent spawns from the shoulder of the road.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly drifts into the travel lane.",
+        "Geometry": "A road with shoulders.",
+        "Spawn Position": "The adversarial agent spawns from the shoulder of the road."
+      },
+      "success": true
+    }
+  ]
+}

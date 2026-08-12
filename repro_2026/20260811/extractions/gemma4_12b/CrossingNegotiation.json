@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:12b",
+  "base_scenario": "CrossingNegotiation",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A pedestrian suddenly steps into the crosswalk from behind a parked delivery truck just as the ego vehicle enters the intersection.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly steps into the crosswalk.\nGeometry: An intersection.\nSpawn Position: The adversarial agent is located behind a parked delivery truck in front of the ego vehicle at the intersection.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly steps into the crosswalk.",
+        "Geometry": "An intersection.",
+        "Spawn Position": "The adversarial agent is located behind a parked delivery truck in front of the ego vehicle at the intersection."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "A pedestrian suddenly steps into the crosswalk from behind a parked vehicle while the ego vehicle is executing a left turn at the intersection.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The pedestrian suddenly steps into the crosswalk.\nGeometry: An intersection where the ego vehicle is executing a left turn.\nSpawn Position: The adversarial agent is positioned behind a parked vehicle in the crosswalk area.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The pedestrian suddenly steps into the crosswalk.",
+        "Geometry": "An intersection where the ego vehicle is executing a left turn.",
+        "Spawn Position": "The adversarial agent is positioned behind a parked vehicle in the crosswalk area."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A pedestrian abruptly steps off the curb from behind a parked delivery truck, crossing directly into the ego vehicle's path at a signalized intersection.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The pedestrian abruptly steps off the curb and crosses directly into the ego vehicle's path.\nGeometry: A signalized intersection.\nSpawn Position: The adversarial agent is on the sidewalk, hidden behind a parked delivery truck in front of the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The pedestrian abruptly steps off the curb and crosses directly into the ego vehicle's path.",
+        "Geometry": "A signalized intersection.",
+        "Spawn Position": "The adversarial agent is on the sidewalk, hidden behind a parked delivery truck in front of the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A motorcyclist suddenly weaves across multiple lanes of travel, cutting directly into the ego vehicle\u2019s path while passing through the intersection.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly weaves across multiple lanes of travel, cutting directly into the ego vehicle\u2019s path.\nGeometry: An intersection.\nSpawn Position: The adversarial agent is in an adjacent lane or crossing path within the intersection, weaving into the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly weaves across multiple lanes of travel, cutting directly into the ego vehicle\u2019s path.",
+        "Geometry": "An intersection.",
+        "Spawn Position": "The adversarial agent is in an adjacent lane or crossing path within the intersection, weaving into the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A cyclist unexpectedly swerves into the ego vehicle's path while crossing an intersection from a side street.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist swerves into the ego vehicle's path.\nGeometry: An intersection where a side street meets the main road.\nSpawn Position: The adversarial agent is crossing from a side street into the ego vehicle's path at the intersection.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist swerves into the ego vehicle's path.",
+        "Geometry": "An intersection where a side street meets the main road.",
+        "Spawn Position": "The adversarial agent is crossing from a side street into the ego vehicle's path at the intersection."
+      },
+      "success": true
+    }
+  ]
+}

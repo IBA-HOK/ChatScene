@@ -1,0 +1,66 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "StraightObstacle",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A motorcyclist traveling parallel on the right accelerates forward unexpectedly and cuts sharply left into my lane without warning while I maintain speed through an urban stretch of road.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcyclist accelerates forward unexpectedly and cuts sharply left into the ego vehicle's lane without warning.\nGeometry: An urban stretch of road with adjacent lanes for parallel traffic flow.\nSpawn Position: The adversarial agent is traveling parallel to the right side of the ego vehicle before cutting inwards.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcyclist accelerates forward unexpectedly and cuts sharply left into the ego vehicle's lane without warning.",
+        "Geometry": "An urban stretch of road with adjacent lanes for parallel traffic flow.",
+        "Spawn Position": "The adversarial agent is traveling parallel to the right side of the ego vehicle before cutting inwards."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "A motorcyclist traveling alongside on a straight roadway suddenly accelerates forward into my lane without warning or braking to avoid debris near the curb. I am forced to slam brakes at high speed while maintaining course just inches away from their sudden direction change.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly accelerates forward into the ego vehicle's lane without warning or braking to avoid debris near the curb.\nGeometry: A straight roadway alongside a curb where debris is located.\nSpawn Position: The adversarial agent was traveling directly alongside the ego vehicle on the same road before accelerating into my path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly accelerates forward into the ego vehicle's lane without warning or braking to avoid debris near the curb.",
+        "Geometry": "A straight roadway alongside a curb where debris is located.",
+        "Spawn Position": "The adversarial agent was traveling directly alongside the ego vehicle on the same road before accelerating into my path."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A motorcycle traveling in the opposing direction suddenly accelerates across a hidden divider to cut diagonally into the ego vehicle's lane, causing an imminent head-on collision due to zero lateral reaction time available for braking at speed relative to sudden path deviation conditions without warning signals or prior braking cues indicating high-speed hazard on straight road geometry.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly accelerates across a hidden divider and cuts diagonally into the ego vehicle's lane without warning signals or prior braking cues.\nGeometry: A straight road with opposing traffic flow separated by a hidden divider.\nSpawn Position: The adversarial agent is traveling in the opposite direction on the other side of the hidden divider before crossing to cut diagonally into the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly accelerates across a hidden divider and cuts diagonally into the ego vehicle's lane without warning signals or prior braking cues.",
+        "Geometry": "A straight road with opposing traffic flow separated by a hidden divider.",
+        "Spawn Position": "The adversarial agent is traveling in the opposite direction on the other side of the hidden divider before crossing to cut diagonally into the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A pedestrian abruptly steps off the curb onto the active roadway directly across the ego vehicle\u2019s path without any warning signals or crossing signs present to indicate presence of hazards. This unexpected behavior creates an immediate collision course requiring emergency braking but presents insufficient reaction time available to mitigate risk.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: Abruptly steps off curb onto active roadway without warning signals\nGeometry: Active roadway directly across ego vehicle's path with no crossing signs present\nSpawn Position: Directly opposite the ego vehicle on opposing side",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "Abruptly steps off curb onto active roadway without warning signals",
+        "Geometry": "Active roadway directly across ego vehicle's path with no crossing signs present",
+        "Spawn Position": "Directly opposite the ego vehicle on opposing side"
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "While driving straight at highway speed under normal conditions, a pedestrian unexpectedly dashes out from between two parked vehicles directly ahead of the car requiring an immediate emergency stop to impact-free maneuvering.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian unexpectedly dashes out from between two parked vehicles directly ahead of the car requiring an immediate emergency stop to impact-free maneuvering.\nGeometry: A straight highway road under normal conditions.\nSpawn Position: The adversarial agent is located between two parked vehicles on a high-speed lane, positioned directly in front of the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian unexpectedly dashes out from between two parked vehicles directly ahead of the car requiring an immediate emergency stop to impact-free maneuvering.",
+        "Geometry": "A straight highway road under normal conditions.",
+        "Spawn Position": "The adversarial agent is located between two parked vehicles on a high-speed lane, positioned directly in front of the ego vehicle's path."
+      },
+      "success": true
+    }
+  ]
+}

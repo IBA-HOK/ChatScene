@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e2b",
+  "base_scenario": "LaneChanging",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "As the ego vehicle initiates a lane change into the left lane, a motorcycle unexpectedly drifts into the path of the changing lane, forcing an immediate evasive maneuver.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The motorcycle unexpectedly drifts into the path of the ego vehicle's changing lane.\nGeometry: The ego vehicle is initiating a lane change on a multi-lane road.\nSpawn Position: The motorcycle enters the path of the ego vehicle during the lane change maneuver.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The motorcycle unexpectedly drifts into the path of the ego vehicle's changing lane.",
+        "Geometry": "The ego vehicle is initiating a lane change on a multi-lane road.",
+        "Spawn Position": "The motorcycle enters the path of the ego vehicle during the lane change maneuver."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "The ego vehicle initiates a lane change to the right; simultaneously, a cyclist abruptly drifts into the ego vehicle's path attempting to avoid an unseen obstacle.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist abruptly drifts into the ego vehicle's path.\nGeometry: The ego vehicle is initiating a lane change on a road with multiple lanes.\nSpawn Position: The adversarial cyclist enters the ego vehicle's path from the adjacent lane during the right lane change maneuver.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist abruptly drifts into the ego vehicle's path.",
+        "Geometry": "The ego vehicle is initiating a lane change on a road with multiple lanes.",
+        "Spawn Position": "The adversarial cyclist enters the ego vehicle's path from the adjacent lane during the right lane change maneuver."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "While executing a left lane change, a cyclist suddenly swerves across the path of the ego vehicle to avoid an unseen obstacle.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: Suddenly swerves across the path of the ego vehicle.\nGeometry: Lane change maneuver on a multi-lane road.\nSpawn Position: The cyclist is positioned in the adjacent lane or crossing into the ego vehicle's path during the left lane change execution.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "Suddenly swerves across the path of the ego vehicle.",
+        "Geometry": "Lane change maneuver on a multi-lane road.",
+        "Spawn Position": "The cyclist is positioned in the adjacent lane or crossing into the ego vehicle's path during the left lane change execution."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "While changing from the right lane to the middle lane, a cyclist unexpectedly drifts into the ego vehicle's path, forcing an immediate emergency braking maneuver.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly drifts into the ego vehicle's path.\nGeometry: The ego vehicle is changing lanes on a road.\nSpawn Position: The adversarial agent enters the ego vehicle's path during a lane change maneuver.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly drifts into the ego vehicle's path.",
+        "Geometry": "The ego vehicle is changing lanes on a road.",
+        "Spawn Position": "The adversarial agent enters the ego vehicle's path during a lane change maneuver."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "An autonomous vehicle attempting to change lanes suddenly encounters a motorcycle drifting into its intended path, requiring immediate emergency braking.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle drifts into the ego vehicle's intended path during a lane change attempt.\nGeometry: The ego vehicle is attempting to change lanes on a multi-lane road.\nSpawn Position: The adversarial motorcycle enters the ego vehicle's intended path from an adjacent lane.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle drifts into the ego vehicle's intended path during a lane change attempt.",
+        "Geometry": "The ego vehicle is attempting to change lanes on a multi-lane road.",
+        "Spawn Position": "The adversarial motorcycle enters the ego vehicle's intended path from an adjacent lane."
+      },
+      "success": true
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "TurningObstacle",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A non-signaling pedestrian suddenly steps out from behind a parked car directly into the ego vehicle\u2019s right-turning lane. The driver must perform immediate braking to avoid collision with the unsuspecting individual at high intersection speed.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: Steps forward unexpectedly without signaling or looking into traffic lane\nGeometry: Intersection with right-turning lane and stationary obstacles blocking view\nSpawn Position: Ahead of the ego vehicle behind a parked car in the turning lane",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "Steps forward unexpectedly without signaling or looking into traffic lane",
+        "Geometry": "Intersection with right-turning lane and stationary obstacles blocking view",
+        "Spawn Position": "Ahead of the ego vehicle behind a parked car in the turning lane"
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "The ego vehicle completes a right turn at an intersection when a motorcyclist suddenly accelerates from behind the stop line and enters its path without signaling or yielding to oncoming traffic.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: Suddenly accelerates and enters its path without signaling or yielding to traffic\nGeometry: Intersection where ego vehicle completes a right turn\nSpawn Position: Directly ahead of the ego vehicle at the stop line",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "Suddenly accelerates and enters its path without signaling or yielding to traffic",
+        "Geometry": "Intersection where ego vehicle completes a right turn",
+        "Spawn Position": "Directly ahead of the ego vehicle at the stop line"
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "As I execute a left turn at an intersection, an unexpected motorcycle swerves from behind into my blind spot without signaling or warning before cutting directly across my path. This sudden intrusion triggers emergency steering maneuvers that risk sliding out of control due to limited traction near the curb edge during braking.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle swerves unexpectedly from behind into a blind spot without signaling or warning before cutting directly across the ego vehicle's path.\nGeometry: An intersection where the ego vehicle is executing a left turn maneuver near the curb edge with limited traction conditions during braking.\nSpawn Position: The adversarial agent spawns directly behind the ego vehicle in a rear-side blind spot area near the curb edge before moving forward across the path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle swerves unexpectedly from behind into a blind spot without signaling or warning before cutting directly across the ego vehicle's path.",
+        "Geometry": "An intersection where the ego vehicle is executing a left turn maneuver near the curb edge with limited traction conditions during braking.",
+        "Spawn Position": "The adversarial agent spawns directly behind the ego vehicle in a rear-side blind spot area near the curb edge before moving forward across the path."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "While navigating the wet road during a left turn in low light conditions, a motorcyclist unexpectedly weaves across my lane from behind without signaling and collides directly against my rear bumper.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle unexpectedly weaves across the ego vehicle's lane from behind without signaling and collides directly against my rear bumper.\nGeometry: A wet road during a left turn by the ego vehicle in low light conditions.\nSpawn Position: The adversarial agent is positioned directly behind the ego vehicle, moving forward into the path of travel.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle unexpectedly weaves across the ego vehicle's lane from behind without signaling and collides directly against my rear bumper.",
+        "Geometry": "A wet road during a left turn by the ego vehicle in low light conditions.",
+        "Spawn Position": "The adversarial agent is positioned directly behind the ego vehicle, moving forward into the path of travel."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "While completing a right turn at an uncontrolled intersection under heavy rain conditions, a jaywalking cyclist unexpectedly weaves through traffic from the adjacent lane and cuts directly across my path without slowing down or signaling.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly weaves through adjacent lane traffic and cuts directly across the ego vehicle's path without slowing down or signaling.\nGeometry: An uncontrolled intersection under heavy rain conditions.\nSpawn Position: The adversarial agent originates from an adjacent lane relative to the ego vehicle, moving into its turning trajectory.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly weaves through adjacent lane traffic and cuts directly across the ego vehicle's path without slowing down or signaling.",
+        "Geometry": "An uncontrolled intersection under heavy rain conditions.",
+        "Spawn Position": "The adversarial agent originates from an adjacent lane relative to the ego vehicle, moving into its turning trajectory."
+      },
+      "success": true
+    }
+  ]
+}

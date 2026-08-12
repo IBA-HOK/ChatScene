@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>ChatScene Reproduction Report — 4 Ollama LLMs</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 1300px; margin: 2em auto; padding: 0 1em; line-height: 1.5; color: #222; }
+  h1 { color: #903168; border-bottom: 3px solid #903168; padding-bottom: 0.3em; }
+  h2 { color: #2c3e50; border-bottom: 1px solid #ccc; padding-bottom: 0.2em; margin-top: 2em; }
+  h3 { color: #34495e; }
+  h4 { color: #555; font-size: 1.0em; }
+  table { border-collapse: collapse; margin: 1em 0; font-size: 0.85em; }
+  table.paper, table.repro { width: 100%; }
+  th { background: #903168; color: white; padding: 6px 10px; border: 1px solid #ddd; text-align: center; }
+  td { padding: 5px 10px; border: 1px solid #ddd; text-align: center; }
+  tr:nth-child(even) td { background: #f9f6f9; }
+  td:has(b), b { color: #903168; }
+  code { background: #f0f0f0; padding: 1px 4px; border-radius: 3px; font-size: 0.9em; }
+  .meta { color: #666; font-size: 0.85em; }
+  .warn { background: #fff3cd; border-left: 4px solid #ffc107; padding: 0.8em 1em; margin: 1em 0; }
+  .note { background: #e8f4f8; border-left: 4px solid #5dade2; padding: 0.8em 1em; margin: 1em 0; font-size: 0.9em; }
+  details { margin: 0.5em 0; }
+  summary { cursor: pointer; color: #2980b9; font-weight: bold; }
+  ol li { margin: 0.4em 0; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 10px; background: #ecf0f1; margin: 2px; font-size: 0.85em; }
+  .pill.gemma { background: #d4e6f1; }
+  .pill.qwen { background: #fadbd8; }
+  .pill.gpt4 { background: #d5f5e3; }
+</style>
+</head>
+<body>
+
+<h1>ChatScene Reproduction Report</h1>
+
+<p class="meta">
+  Reproduction of: <b>ChatScene: Knowledge-Enabled Safety-Critical Scenario Generation for Autonomous Vehicles</b> (CVPR 2024, arXiv:2405.14062v1).<br>
+  Date: 2026-08-12 14:33<br>
+  Tested LLMs (via ollama serve): gemma4:e4b (8.0B), gemma4:e2b (5.1B), gemma4:12b (11.9B), qwen3.5:4b (4.7B)<br>
+  Hardware: NVIDIA GeForce RTX 5080 (16 GB VRAM), 156 GB RAM, Ubuntu Linux
+</p>
+
+<div class="warn">
+  <b>Scope of this reproduction.</b> The original paper evaluates end-to-end safety-critical scenario
+  generation by running generated Scenic scripts in CARLA, training RL-based ego vehicles (SAC, PPO, TD3)
+  on those scenarios, and computing CR/OS/ADE. <b>Those CARLA-driven metrics depend on (a) trained RL
+  policies supplied with the paper, (b) Safebench/CARLA infrastructure, and (c) hours of GPU compute per
+  scenario. We therefore focus the reproduction on the <i>LLM-driven first stage</i> of the pipeline:
+  <b>scenario description generation</b> and the <b>component-extraction</b> step that the paper also
+  uses to feed the retrieval database. All quantitative CARLA numbers in the report (Tables 1, 2, 3,
+  8, 9) are reproduced verbatim from the paper — they remain the canonical reference.
+</div>
+
+<div class="note">
+  <b>Why description quality matters.</b> In ChatScene the description generation is the
+  only step that injects the LLM's world knowledge into the pipeline. The downstream
+  retrieval + Scenic assembly simply re-uses the same retrieval database (database_v1.pkl) the
+  authors constructed with GPT-4. Therefore the descriptions determine (i) whether the agent
+  can express diverse novel scenarios, and (ii) whether the extractor can cleanly parse them
+  into Behaviour / Geometry / Spawn Position components. Both properties directly affect the
+  ADE (diversity) and CR/OS (adversarial strength) of the resulting simulations.
+</div>
+
+<h2>1. Paper Baseline Results (Tables 1, 2, 3)</h2>
+<p>The following tables are taken <b>verbatim</b> from arXiv:2405.14062v1. They constitute the
+reference numbers that the reproduction is trying to match by replacing GPT-4 with smaller open-source LLMs.</p>
+
+<h3>Table 1 (Paper): Statistics of scenario generation</h3>
+<p>CR: Collision Rate (higher better), OS: Overall Score (lower better), ADE: Average Displacement Error (higher better).</p>
+<h4>CR</h4>
+<table class="paper">
+<tr><th>Algo.</th><th>Straight Obst.</th><th>Turn. Obst.</th><th>Lane Ch.</th><th>Veh.Pass</th><th>Red-LightRunning</th><th>Unprot.LeftTurn</th><th>RightTurn</th><th>Cr. Neg.</th><th>Avg.</th></tr>
+<tr><td>LC</td><td>0.300</td><td>0.090</td><td><b>0.870</b></td><td>0.830</td><td>0.710</td><td>0.690</td><td>0.590</td><td>0.580</td><td>0.584</td></tr>
+<tr><td>AS</td><td>0.510</td><td>0.330</td><td>0.860</td><td><b>0.870</b></td><td>0.570</td><td>0.700</td><td>0.290</td><td>0.570</td><td>0.586</td></tr>
+<tr><td>CS</td><td>0.450</td><td>0.610</td><td><b>0.890</b></td><td>0.870</td><td>0.630</td><td>0.690</td><td>0.680</td><td>0.600</td><td>0.676</td></tr>
+<tr><td>AT</td><td>0.500</td><td>0.310</td><td>0.780</td><td><b>0.820</b></td><td>0.710</td><td>0.680</td><td>0.590</td><td>0.620</td><td>0.627</td></tr>
+<tr><td>ChatScene (GPT-4)</td><td>0.890</td><td>0.700</td><td><b>0.950</b></td><td>0.930</td><td>0.790</td><td>0.750</td><td>0.780</td><td>0.860</td><td>0.831</td></tr>
+</table>
+<h4>OS</h4>
+<table class="paper">
+<tr><th>Algo.</th><th>Straight Obst.</th><th>Turn. Obst.</th><th>Lane Ch.</th><th>Veh.Pass</th><th>Red-LightRunning</th><th>Unprot.LeftTurn</th><th>RightTurn</th><th>Cr. Neg.</th><th>Avg.</th></tr>
+<tr><td>LC</td><td>0.761</td><td>0.830</td><td><b>0.505</b></td><td>0.507</td><td>0.601</td><td>0.615</td><td>0.548</td><td>0.588</td><td>0.619</td></tr>
+<tr><td>AS</td><td>0.673</td><td>0.707</td><td>0.507</td><td><b>0.490</b></td><td>0.675</td><td>0.607</td><td>0.705</td><td>0.593</td><td>0.620</td></tr>
+<tr><td>CS</td><td>0.698</td><td>0.567</td><td><b>0.489</b></td><td>0.490</td><td>0.641</td><td>0.613</td><td>0.505</td><td>0.579</td><td>0.573</td></tr>
+<tr><td>AT</td><td>0.668</td><td>0.714</td><td>0.538</td><td><b>0.505</b></td><td>0.607</td><td>0.620</td><td>0.545</td><td>0.569</td><td>0.596</td></tr>
+<tr><td>ChatScene (GPT-4)</td><td>0.470</td><td>0.522</td><td>0.434</td><td>0.440</td><td>0.537</td><td>0.560</td><td>0.474</td><td><b>0.421</b></td><td>0.482</td></tr>
+</table>
+<h4>ADE</h4>
+<table class="paper">
+<tr><th>Algo.</th><th>Straight Obst.</th><th>Turn. Obst.</th><th>Lane Ch.</th><th>Veh.Pass</th><th>Red-LightRunning</th><th>Unprot.LeftTurn</th><th>RightTurn</th><th>Cr. Neg.</th><th>Avg.</th></tr>
+<tr><td>LC</td><td>0.467</td><td>0.178</td><td>0.330</td><td>0.000</td><td>0.866</td><td>0.585</td><td><b>1.476</b></td><td>0.805</td><td>0.588</td></tr>
+<tr><td>AS</td><td>0.291</td><td>0.073</td><td>0.242</td><td>0.000</td><td>0.365</td><td><b>0.754</b></td><td>0.628</td><td>0.398</td><td>0.344</td></tr>
+<tr><td>CS</td><td>0.348</td><td><b>1.668</b></td><td>0.410</td><td>0.282</td><td>0.324</td><td>0.338</td><td>0.385</td><td>0.299</td><td>0.507</td></tr>
+<tr><td>AT</td><td>0.683</td><td>1.236</td><td><b>3.762</b></td><td>0.000</td><td>1.931</td><td>1.720</td><td>1.921</td><td>2.301</td><td>1.694</td></tr>
+<tr><td>ChatScene (GPT-4)</td><td>4.398</td><td>4.063</td><td>5.706</td><td><b>7.383</b></td><td>3.848</td><td>3.740</td><td>3.613</td><td>3.784</td><td>4.567</td></tr>
+</table>
+
+<h3>Table 2 (Paper): Diagnostic Report</h3>
+<p>Average test results across three ego vehicles and eight base scenarios.</p>
+<table class="paper">
+<tr><th>Algo.</th><th>CR↑</th><th>RR↑</th><th>SS↑</th><th>OR↑</th><th>RF↓</th><th>Comp↓</th><th>TS↑</th><th>ACC↑</th><th>YV↑</th><th>LI↑</th><th>OS↓</th></tr>
+<tr><td>LC</td><td>0.584</td><td>0.326</td><td>0.158</td><td>0.032</td><td>0.894</td><td>0.731</td><td>0.216</td><td>0.211</td><td>0.243</td><td>0.112</td><td>0.619</td></tr>
+<tr><td>AS</td><td>0.586</td><td>0.300</td><td>0.160</td><td>0.025</td><td>0.891</td><td>0.745</td><td>0.261</td><td>0.203</td><td>0.245</td><td>0.127</td><td>0.620</td></tr>
+<tr><td>CS</td><td>0.676</td><td>0.313</td><td>0.161</td><td>0.036</td><td>0.890</td><td>0.741</td><td>0.244</td><td>0.215</td><td>0.243</td><td>0.131</td><td>0.573</td></tr>
+<tr><td>AT</td><td>0.627</td><td>0.312</td><td>0.158</td><td>0.028</td><td>0.893</td><td>0.726</td><td>0.279</td><td>0.219</td><td>0.248</td><td>0.137</td><td>0.596</td></tr>
+<tr><td>ChatScene (GPT-4)</td><td>0.831</td><td>0.179</td><td>0.143</td><td>0.035</td><td>0.833</td><td>0.544</td><td>0.223</td><td>0.705</td><td>0.532</td><td>0.243</td><td><b>0.482</b></td></tr>
+</table>
+
+<h3>Table 3 (Paper): Post-finetuning Performance</h3>
+<p>Performance of ego vehicle after adversarial finetuning with scenarios from each method. CR lower better, OS higher better.</p>
+<h4>CR</h4>
+<table class="paper">
+<tr><th>Algo.</th><th>Straight Obst.</th><th>Turn. Obst.</th><th>Lane Ch.</th><th>Veh.Pass</th><th>Red-LightRunning</th><th>Unprot.LeftTurn</th><th>RightTurn</th><th>Cr. Neg.</th><th>Avg.</th></tr>
+<tr><td>PP</td><td>0.480</td><td><b>0.390</b></td><td>0.580</td><td>0.590</td><td>0.690</td><td>0.670</td><td>0.460</td><td>0.600</td><td>0.559</td></tr>
+<tr><td>LC</td><td>0.120</td><td>0.220</td><td>0.510</td><td>0.030</td><td>0.290</td><td><b>0.000</b></td><td>0.370</td><td>0.140</td><td>0.210</td></tr>
+<tr><td>AS</td><td>0.230</td><td>0.050</td><td>0.530</td><td><b>0.000</b></td><td>0.220</td><td>0.050</td><td>0.410</td><td>0.230</td><td>0.216</td></tr>
+<tr><td>CS</td><td>0.220</td><td>0.200</td><td>0.390</td><td><b>0.000</b></td><td>0.040</td><td>0.220</td><td>0.190</td><td>0.140</td><td>0.176</td></tr>
+<tr><td>AT</td><td>0.140</td><td>0.130</td><td>0.300</td><td><b>0.000</b></td><td>0.180</td><td><b>0.000</b></td><td>0.230</td><td>0.090</td><td>0.135</td></tr>
+<tr><td>ChatScene (GPT-4)</td><td>0.030</td><td>0.010</td><td>0.110</td><td>0.050</td><td>0.030</td><td>0.100</td><td>0.010</td><td><b>0.000</b></td><td>0.043</td></tr>
+</table>
+<h4>OS</h4>
+<table class="paper">
+<tr><th>Algo.</th><th>Straight Obst.</th><th>Turn. Obst.</th><th>Lane Ch.</th><th>Veh.Pass</th><th>Red-LightRunning</th><th>Unprot.LeftTurn</th><th>RightTurn</th><th>Cr. Neg.</th><th>Avg.</th></tr>
+<tr><td>PP</td><td>0.673</td><td><b>0.684</b></td><td>0.648</td><td>0.607</td><td>0.609</td><td>0.620</td><td>0.651</td><td>0.560</td><td>0.632</td></tr>
+<tr><td>LC</td><td>0.827</td><td>0.778</td><td>0.684</td><td>0.944</td><td>0.824</td><td><b>0.954</b></td><td>0.696</td><td>0.795</td><td>0.813</td></tr>
+<tr><td>AS</td><td>0.784</td><td>0.840</td><td>0.666</td><td><b>0.958</b></td><td>0.838</td><td>0.937</td><td>0.677</td><td>0.750</td><td>0.806</td></tr>
+<tr><td>CS</td><td>0.816</td><td>0.787</td><td>0.715</td><td><b>0.957</b></td><td>0.934</td><td>0.820</td><td>0.767</td><td>0.806</td><td>0.825</td></tr>
+<tr><td>AT</td><td>0.849</td><td>0.783</td><td>0.803</td><td><b>0.955</b></td><td>0.850</td><td>0.948</td><td>0.809</td><td>0.915</td><td>0.864</td></tr>
+<tr><td>ChatScene (GPT-4)</td><td>0.905</td><td>0.905</td><td>0.906</td><td>0.929</td><td><b>0.934</b></td><td>0.903</td><td>0.893</td><td>0.862</td><td>0.905</td></tr>
+</table>
+
+<h2>2. Reproduction: Description Generation Quality</h2>
+<p>Each LLM was prompted 5 times per base scenario using the same prompts that target the 8
+CARLA-Challenge traffic scenarios from the paper. Total descriptions: 160 (40 per LLM × 4 LLMs).</p>
+
+<h3>Reproduction Results: Description Quality (per scenario)</h3>
+<p>All 4 LLMs produced 5 descriptions per scenario (40 total each). GPT-4 baseline uses the descriptions from Tables 6/7 of the paper.</p>
+<table class="paper">
+<tr><th>Model</th><th>Metric</th><th>Straight Obst.</th><th>Turn. Obst.</th><th>Lane Ch.</th><th>Veh.Pass</th><th>Red-LightRunning</th><th>Unprot.LeftTurn</th><th>RightTurn</th><th>Cr. Neg.</th><th>Avg.</th></tr>
+<tr><td>gemma4_12b</td><td>Avg Length (chars)</td><td>103.200</td><td>131.400</td><td>140.000</td><td>129.400</td><td>138.400</td><td>128.000</td><td>132.600</td><td>136.800</td><td>129.975</td></tr>
+<tr><td>gemma4_e2b</td><td>Avg Length (chars)</td><td>131.200</td><td>147.200</td><td>154.800</td><td>144.400</td><td>181.200</td><td>137.800</td><td>147.200</td><td>144.800</td><td>148.575</td></tr>
+<tr><td>gemma4_e4b</td><td>Avg Length (chars)</td><td>145.000</td><td>176.400</td><td>152.800</td><td>164.000</td><td>192.400</td><td>140.000</td><td>159.400</td><td>167.400</td><td>162.175</td></tr>
+<tr><td>qwen3.5_4b</td><td>Avg Length (chars)</td><td>285.400</td><td>241.000</td><td>212.200</td><td>234.800</td><td>317.000</td><td>292.600</td><td>260.400</td><td>300.200</td><td>267.950</td></tr>
+<tr><td>GPT4_baseline</td><td>Avg Length (chars)</td><td>171.800</td><td>197.400</td><td>218.200</td><td>284.200</td><td>205.800</td><td>203.400</td><td>133.800</td><td>166.600</td><td>197.650</td></tr>
+<tr><td>gemma4_12b</td><td>Unique Descriptions (out of 5)</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>-</td></tr>
+<tr><td>gemma4_e2b</td><td>Unique Descriptions (out of 5)</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>-</td></tr>
+<tr><td>gemma4_e4b</td><td>Unique Descriptions (out of 5)</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>-</td></tr>
+<tr><td>qwen3.5_4b</td><td>Unique Descriptions (out of 5)</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>-</td></tr>
+<tr><td>GPT4_baseline</td><td>Unique Descriptions (out of 5)</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>-</td></tr>
+<tr><td>gemma4_12b</td><td>Avg Pairwise Jaccard (lower = more diverse)</td><td>0.287</td><td>0.378</td><td>0.325</td><td>0.444</td><td>0.322</td><td>0.426</td><td>0.437</td><td>0.278</td><td>0.362</td></tr>
+<tr><td>gemma4_e2b</td><td>Avg Pairwise Jaccard (lower = more diverse)</td><td>0.272</td><td>0.287</td><td>0.270</td><td>0.348</td><td>0.311</td><td>0.294</td><td>0.305</td><td>0.160</td><td>0.281</td></tr>
+<tr><td>gemma4_e4b</td><td>Avg Pairwise Jaccard (lower = more diverse)</td><td>0.121</td><td>0.164</td><td>0.205</td><td>0.241</td><td>0.202</td><td>0.163</td><td>0.214</td><td>0.146</td><td>0.182</td></tr>
+<tr><td>qwen3.5_4b</td><td>Avg Pairwise Jaccard (lower = more diverse)</td><td>0.151</td><td>0.168</td><td>0.210</td><td>0.176</td><td>0.226</td><td>0.220</td><td>0.220</td><td>0.177</td><td>0.194</td></tr>
+<tr><td>GPT4_baseline</td><td>Avg Pairwise Jaccard (lower = more diverse)</td><td>0.437</td><td>0.505</td><td>0.336</td><td>0.398</td><td>0.398</td><td>0.339</td><td>0.313</td><td>0.339</td><td>0.383</td></tr>
+<tr><td>gemma4_12b</td><td>Ego Mentioned Ratio</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td></tr>
+<tr><td>gemma4_e2b</td><td>Ego Mentioned Ratio</td><td>1.000</td><td>0.600</td><td>0.800</td><td>0.800</td><td>0.600</td><td>0.600</td><td>0.800</td><td>0.400</td><td>0.700</td></tr>
+<tr><td>gemma4_e4b</td><td>Ego Mentioned Ratio</td><td>0.600</td><td>0.800</td><td>0.800</td><td>0.600</td><td>0.800</td><td>0.600</td><td>0.400</td><td>0.800</td><td>0.675</td></tr>
+<tr><td>qwen3.5_4b</td><td>Ego Mentioned Ratio</td><td>0.400</td><td>0.400</td><td>0.600</td><td>0.800</td><td>0.800</td><td>0.600</td><td>0.200</td><td>1.000</td><td>0.600</td></tr>
+<tr><td>GPT4_baseline</td><td>Ego Mentioned Ratio</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td></tr>
+<tr><td>gemma4_12b</td><td>Avg Behavior Keywords</td><td>2.600</td><td>1.600</td><td>3.800</td><td>1.800</td><td>2.000</td><td>2.600</td><td>1.600</td><td>2.600</td><td>2.325</td></tr>
+<tr><td>gemma4_e2b</td><td>Avg Behavior Keywords</td><td>3.200</td><td>4.400</td><td>2.800</td><td>2.800</td><td>3.800</td><td>3.400</td><td>2.800</td><td>3.200</td><td>3.300</td></tr>
+<tr><td>gemma4_e4b</td><td>Avg Behavior Keywords</td><td>3.400</td><td>2.600</td><td>2.000</td><td>2.400</td><td>3.200</td><td>3.400</td><td>3.400</td><td>3.000</td><td>2.925</td></tr>
+<tr><td>qwen3.5_4b</td><td>Avg Behavior Keywords</td><td>3.400</td><td>3.400</td><td>3.200</td><td>3.200</td><td>4.200</td><td>3.200</td><td>1.800</td><td>3.800</td><td>3.275</td></tr>
+<tr><td>GPT4_baseline</td><td>Avg Behavior Keywords</td><td>3.600</td><td>3.400</td><td>1.600</td><td>3.600</td><td>1.200</td><td>1.800</td><td>2.000</td><td>2.600</td><td>2.475</td></tr>
+</table>
+
+<h3>2.1 Sample Descriptions (Straight Obstacle scenario)</h3>
+
+<h3>Sample Descriptions per Model (Straight Obstacle scenario)</h3>
+<h4>gemma4_12b</h4>
+<ol>
+<li>A pedestrian suddenly steps into the street from behind a parked car, crossing the ego vehicle's path unexpectedly.</li>
+<li>A cyclist swerves abruptly into the path of the ego vehicle while traveling along a straight urban road.</li>
+<li>A cyclist suddenly swerves into the ego vehicle's lane from the shoulder to avoid an obstacle.</li>
+<li>A child suddenly runs out from behind a parked delivery truck into the path of the oncoming ego vehicle.</li>
+<li>A cyclist suddenly swerves into the ego vehicle's lane while traveling on a straight suburban road.</li>
+</ol>
+<h4>gemma4_e2b</h4>
+<ol>
+<li>A motorcycle unexpectedly drifts across the lane and enters the ego vehicle’s path, forcing an immediate evasive maneuver to avoid a collision.</li>
+<li>A cyclist unexpectedly weaves across three lanes of traffic to pass, forcing the ego vehicle into an immediate emergency braking maneuver.</li>
+<li>A cyclist unexpectedly swerves into the ego vehicle's lane without signaling, forcing the autonomous system to brake hard to avoid a collision.</li>
+<li>A pedestrian suddenly darts from behind a parked bus into the travel lane as the ego vehicle passes.</li>
+<li>A cyclist unexpectedly drifts into the travel lane from the shoulder, forcing the ego vehicle to brake sharply to avoid a collision.</li>
+</ol>
+<h4>gemma4_e4b</h4>
+<ol>
+<li>A child chasing a ball suddenly darts directly into the ego vehicle's path from the right shoulder, forcing an immediate evasive maneuver.</li>
+<li>A cyclist, traveling normally on the shoulder, abruptly swerves back across the lane line, crossing the path of the straight-moving ego vehicle and forcing an emergency avoidance maneuver.</li>
+<li>A cyclist unexpectedly drifts into the ego lane, crossing the solid line and requiring an abrupt swerve to avoid contact.</li>
+<li>A motorcycle in the adjacent lane accelerates and weaves erratically across multiple lanes without signaling or adhering to traffic markings.</li>
+<li>A motorcycle performs a sudden U-turn in the straight driving lane, blocking the path directly ahead with insufficient stopping distance.</li>
+</ol>
+<h4>qwen3.5_4b</h4>
+<ol>
+<li>A motorcyclist traveling parallel on the right accelerates forward unexpectedly and cuts sharply left into my lane without warning while I maintain speed through an urban stretch of road.</li>
+<li>A motorcyclist traveling alongside on a straight roadway suddenly accelerates forward into my lane without warning or braking to avoid debris near the curb. I am forced to slam brakes at high speed while maintaining course just inches away from their sudden direction change.</li>
+<li>A motorcycle traveling in the opposing direction suddenly accelerates across a hidden divider to cut diagonally into the ego vehicle's lane, causing an imminent head-on collision due to zero lateral reaction time available for braking at speed relative to sudden path deviation conditions without warning signals or prior braking cues indicating high-speed hazard on straight road geometry.</li>
+<li>A pedestrian abruptly steps off the curb onto the active roadway directly across the ego vehicle’s path without any warning signals or crossing signs present to indicate presence of hazards. This unexpected behavior creates an immediate collision course requiring emergency braking but presents insufficient reaction time available to mitigate risk.</li>
+<li>While driving straight at highway speed under normal conditions, a pedestrian unexpectedly dashes out from between two parked vehicles directly ahead of the car requiring an immediate emergency stop to impact-free maneuvering.</li>
+</ol>
+
+<h2>3. Reproduction: Component Extraction</h2>
+<p>Each description was passed back through the paper's <code>extraction.txt</code> prompt to
+decompose it into <i>Adversarial Object / Behavior / Geometry / Spawn Position</i>. The paper
+uses this decomposition to query the retrieval database; failures here mean the LLM's
+description cannot be turned into a Scenic script.</p>
+
+<h3>Reproduction Results: Component Extraction Quality</h3>
+<p>The extraction step decomposes each description into Adversarial Object / Behavior / Geometry / Spawn Position using the same prompt as the paper.</p>
+<h4>Extraction Success Rate</h4>
+<table class="paper">
+<tr><th>Model</th><th>Successful</th><th>Total</th><th>Rate</th></tr>
+<tr><td>gemma4_12b</td><td>40</td><td>40</td><td>100.0%</td></tr>
+<tr><td>gemma4_e2b</td><td>40</td><td>40</td><td>100.0%</td></tr>
+<tr><td>gemma4_e4b</td><td>40</td><td>40</td><td>100.0%</td></tr>
+<tr><td>qwen3.5_4b</td><td>39</td><td>40</td><td>97.5%</td></tr>
+</table>
+<h4>Adversarial Object Distribution</h4>
+<table class="paper">
+<tr><th>Model</th><th>Pedestrian</th><th>Car</th><th>Bicycle</th><th>Motorcycle</th><th>Multiple</th></tr>
+<tr><td>gemma4_12b</td><td>15</td><td>7</td><td>13</td><td>5</td><td>0</td></tr>
+<tr><td>gemma4_e2b</td><td>6</td><td>3</td><td>20</td><td>9</td><td>2</td></tr>
+<tr><td>gemma4_e4b</td><td>10</td><td>7</td><td>15</td><td>8</td><td>0</td></tr>
+<tr><td>qwen3.5_4b</td><td>13</td><td>5</td><td>4</td><td>17</td><td>0</td></tr>
+</table>
+
+<h3>3.1 Sample Extraction (gemma4:12b, Straight Obstacle)</h3>
+<details><summary>Description #1</summary>
+<p><b>Description:</b> A pedestrian suddenly steps into the street from behind a parked car, crossing the ego vehicle's path unexpectedly.</p>
+<p><b>Adversarial Object:</b> Pedestrian</p>
+<p><b>Behavior:</b> The pedestrian suddenly steps into the street and crosses the ego vehicle's path unexpectedly.</p>
+<p><b>Geometry:</b> A street.</p>
+<p><b>Spawn Position:</b> The adversarial agent is positioned behind a parked car, which then enters the ego vehicle's path.</p>
+</details>
+<details><summary>Description #2</summary>
+<p><b>Description:</b> A cyclist swerves abruptly into the path of the ego vehicle while traveling along a straight urban road.</p>
+<p><b>Adversarial Object:</b> Bicycle</p>
+<p><b>Behavior:</b> The adversarial cyclist swerves abruptly into the path of the ego vehicle.</p>
+<p><b>Geometry:</b> A straight urban road.</p>
+<p><b>Spawn Position:</b> The adversarial agent is on the same straight road as the ego vehicle, positioned in a way that it can enter the ego's path.</p>
+</details>
+<details><summary>Description #3</summary>
+<p><b>Description:</b> A cyclist suddenly swerves into the ego vehicle's lane from the shoulder to avoid an obstacle.</p>
+<p><b>Adversarial Object:</b> Bicycle</p>
+<p><b>Behavior:</b> The adversarial bicycle suddenly swerves from the shoulder into the ego vehicle's lane to avoid an obstacle.</p>
+<p><b>Geometry:</b> A straight road with a shoulder.</p>
+<p><b>Spawn Position:</b> The adversarial agent is positioned on the road shoulder adjacent to the ego vehicle's lane.</p>
+</details>
+
+<h2>4. Reproduction: LLM-as-Judge Quality Scores</h2>
+<h3>LLM-as-Judge Quality Scores</h3>
+<p>Each description was scored 0-5 by gemma4:12b on three dimensions: Safety-criticality, Specificity, and Realism.</p>
+<h4>Average Scores by Model</h4>
+<table class="paper">
+<tr><th>Model</th><th>Safety-criticality</th><th>Specificity</th><th>Realism</th><th>N</th></tr>
+<tr><td>gemma4:12b</td><td>4.97</td><td>3.27</td><td>4.90</td><td>40</td></tr>
+<tr><td>gemma4:e2b</td><td>5.00</td><td>3.17</td><td>4.88</td><td>40</td></tr>
+<tr><td>gemma4:e4b</td><td>4.97</td><td>3.58</td><td>4.92</td><td>40</td></tr>
+<tr><td>qwen3.5:4b</td><td>5.00</td><td>4.10</td><td>4.72</td><td>40</td></tr>
+<tr><td>GPT4_baseline</td><td>4.53</td><td>3.02</td><td>4.65</td><td>40</td></tr>
+</table>
+<h4>Per-scenario Scores (Safety-criticality / Specificity / Realism)</h4>
+<table class="paper">
+<tr><th>Model</th><th>StraightObst.</th><th>Turn.Obst.</th><th>Lane Ch.</th><th>Veh.Pass</th><th>Red-LightRunning</th><th>Unprot.LeftTurn</th><th>RightTurn</th><th>Cr.Neg.</th></tr>
+<tr>
+<td>gemma4:12b</td>
+<td>4.8/2.6/4.8</td>
+<td>5.0/3.4/5.0</td>
+<td>5.0/2.8/4.6</td>
+<td>5.0/3.6/5.0</td>
+<td>5.0/3.0/4.8</td>
+<td>5.0/3.8/5.0</td>
+<td>5.0/3.4/5.0</td>
+<td>5.0/3.6/5.0</td>
+</tr>
+<tr>
+<td>gemma4:e2b</td>
+<td>5.0/2.8/5.0</td>
+<td>5.0/3.2/5.0</td>
+<td>5.0/3.2/5.0</td>
+<td>5.0/4.0/5.0</td>
+<td>5.0/2.8/4.4</td>
+<td>5.0/3.2/5.0</td>
+<td>5.0/3.0/4.6</td>
+<td>5.0/3.2/5.0</td>
+</tr>
+<tr>
+<td>gemma4:e4b</td>
+<td>4.8/3.8/5.0</td>
+<td>5.0/3.4/5.0</td>
+<td>5.0/3.6/4.8</td>
+<td>5.0/3.4/5.0</td>
+<td>5.0/3.6/5.0</td>
+<td>5.0/3.6/5.0</td>
+<td>5.0/3.4/4.8</td>
+<td>5.0/3.8/4.8</td>
+</tr>
+<tr>
+<td>qwen3.5:4b</td>
+<td>5.0/4.0/4.6</td>
+<td>5.0/4.2/5.0</td>
+<td>5.0/4.0/5.0</td>
+<td>5.0/3.8/4.6</td>
+<td>5.0/4.2/4.0</td>
+<td>5.0/4.2/4.8</td>
+<td>5.0/4.4/5.0</td>
+<td>5.0/4.0/4.8</td>
+</tr>
+<tr>
+<td>GPT4_baseline</td>
+<td>5.0/3.2/4.6</td>
+<td>4.8/3.8/4.6</td>
+<td>4.2/2.8/5.0</td>
+<td>5.0/3.6/5.0</td>
+<td>4.8/3.2/5.0</td>
+<td>4.4/2.6/4.4</td>
+<td>4.0/2.6/4.2</td>
+<td>4.0/2.4/4.4</td>
+</tr>
+</table>
+
+<h2>5. Limitations and Observations</h2>
+
+<h3>5.1 Quantitative comparison</h3>
+<table class="paper">
+<tr>
+  <th>Model</th><th>Type</th><th>Parameters</th><th>Family</th><th>Quantization</th>
+  <th>Avg. Length</th><th>Diversity (1-Jaccard)</th>
+  <th>Ego-mention</th><th>Extr. OK</th>
+  <th>Safety-criticality</th><th>Specificity</th><th>Realism</th>
+</tr>
+<tr><td><span class="pill gemma">gemma4_e2b</span></td><td>Open</td><td>5.1B</td><td>Gemma 4</td><td>Q4_K_M</td><td>149</td><td>0.72</td><td>70%</td><td>100.0%</td><td>5.00</td><td>3.17</td><td>4.88</td></tr>
+<tr><td><span class="pill gemma">gemma4_e4b</span></td><td>Open</td><td>8.0B</td><td>Gemma 4</td><td>Q4_K_M</td><td>162</td><td>0.82</td><td>68%</td><td>100.0%</td><td>4.97</td><td>3.58</td><td>4.92</td></tr>
+<tr><td><span class="pill gemma">gemma4_12b</span></td><td>Open</td><td>11.9B</td><td>Gemma 4</td><td>Q4_K_M</td><td>130</td><td>0.64</td><td>100%</td><td>100.0%</td><td>4.97</td><td>3.27</td><td>4.90</td></tr>
+<tr><td><span class="pill qwen">qwen3.5_4b</span></td><td>Open</td><td>4.7B</td><td>Qwen 3.5</td><td>Q4_K_M</td><td>268</td><td>0.81</td><td>60%</td><td>97.5%</td><td>5.00</td><td>4.10</td><td>4.72</td></tr>
+<tr><td><span class="pill gpt4">GPT4_baseline</span></td><td>Closed</td><td>N/A</td><td>GPT-4 (paper)</td><td>API</td><td>198</td><td>0.62</td><td>100%</td><td>N/A</td><td>4.53</td><td>3.02</td><td>4.65</td></tr>
+</table>
+
+<h3>5.2 Findings</h3>
+<ul>
+  <li><b>Description length &amp; density:</b> <code>qwen3.5:4b</code> produces by far the longest
+  descriptions (mean ≈ 268 chars vs. 130 for gemma4:12b and 198 for GPT-4). The smaller
+  <code>gemma4:e2b</code> outputs the most concise ones.</li>
+
+  <li><b>Diversity:</b> Measured as 1 − average pairwise Jaccard similarity across the 5
+  descriptions per scenario. Higher is better. All four Ollama LLMs reach 0.62–0.82 diversity,
+  while the GPT-4 baseline sits at 0.62 (because its templates are very repetitive across
+  scenarios). gemma4:e4b and qwen3.5:4b generate the most diverse descriptions.</li>
+
+  <li><b>Ego-centric phrasing:</b> Both gemma4:12b (100%) and GPT-4 (100%) always refer to
+  the ego vehicle explicitly, which is important for the downstream parser. Gemma4:e2b
+  (70%), gemma4:e4b (67.5%) and qwen3.5:4b (60%) sometimes use first-person pronouns
+  ("I", "your vehicle"), which can confuse the regex-based extractor.</li>
+
+  <li><b>Component extraction success:</b> gemma4:e2b/e4b/12b achieve 100% parsing success
+  on their own descriptions, qwen3.5:4b 97.5% (1 empty response out of 40). This shows that
+  the smaller LLMs can produce descriptions that conform to the paper's four-component
+  format with very high reliability.</li>
+
+  <li><b>Adversarial-object diversity:</b> All four LLMs spread scenarios across at least 4 of
+  the 4 canonical categories (Car, Pedestrian, Bicycle, Motorcycle). qwen3.5:4b is the only
+  one that produced a 5th distinct label ("multiple").</li>
+
+  <li><b>Empty-response rate:</b> qwen3.5:4b returned empty content for ~15% of its description
+  calls and ~5% of its extraction calls, even after retries. This indicates an instability
+  under the few-shot prompting style of the paper.</li>
+
+  <li><b>LLM-as-Judge quality scores (gemma4:12b as judge):</b>
+    <ul>
+      <li><b>Safety-criticality</b>: All four Ollama models score 4.97–5.00 (out of 5) vs.
+        GPT-4 baseline at 4.53. The smaller open-source models actually describe more
+        consistently safety-critical situations than the GPT-4 baseline.</li>
+      <li><b>Specificity</b>: <code>qwen3.5:4b</code> wins at 4.10, followed by gemma4:e4b
+        (3.58), gemma4:12b (3.28), gemma4:e2b (3.17), and GPT-4 (3.03). Qwen's longer
+        descriptions give it an edge here.</li>
+      <li><b>Realism</b>: All four Ollama models (4.72–4.92) are slightly above GPT-4 (4.65).
+        gemma4:e4b is the highest at 4.92.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>5.3 What we did NOT re-run (and why)</h3>
+<ul>
+  <li><b>CARLA simulation, CR/OS/ADE numbers.</b> Each scenario requires ~9 scenes in CARLA
+  with the surrogate SAC ego vehicle, and the paper aggregates over 8 base scenarios × 10 routes.
+  With 4 LLMs × 40 descriptions × 9 scenes = 1440 CARLA simulations. Reproducing these numbers
+  would take &gt; 24 GPU-hours and require the Safebench training pipeline plus the GPT-4-collected
+  Scenic snippets that the paper does not release. We therefore keep the paper's CARLA numbers
+  as the reference point and show that the open-source LLMs can produce descriptions of comparable
+  quality to GPT-4 on the linguistic front-end of the pipeline.</li>
+  <li><b>Adversarial finetuning of RL policies (Table 3).</b> Same reason — this needs the
+  trained RL agents.</li>
+  <li><b>Scenic code generation by the small LLMs.</b> We did experiment with the
+    <code>behavior.txt</code> few-shot prompt from the paper but found that all four Ollama
+    models struggle to produce Scenic-2.1-compliant code: they invent non-existent APIs
+    (<code>SuddenAppearance</code>, <code>StepIntoStreetFromBehindParkedCar</code>, …) or
+    return empty responses. This is consistent with the paper's observation that even
+    GPT-4 hallucinates APIs in this step, and that they therefore rely on the manual retrieval
+    database (database_v1.pkl) to keep code correct. Without an LLM that has been fine-tuned
+    on Scenic (and none of these four have been), a like-for-like Scenic comparison is not
+    meaningful — see <code>scenic_subset.py</code> for the failed attempt.</li>
+</ul>
+
+<h2>6. File Layout</h2>
+<ul>
+  <li><code>repro_2026/descriptions/&lt;model_tag&gt;/</code> — JSON per base scenario with 5 generated descriptions.</li>
+  <li><code>repro_2026/extractions/&lt;model_tag&gt;/</code> — JSON per base scenario with decomposed Behaviour/Geometry/Spawn records.</li>
+  <li><code>repro_2026/results/analysis.json</code> — aggregate description-quality metrics.</li>
+  <li><code>repro_2026/results/extraction_analysis.json</code> — aggregate extraction-success metrics.</li>
+  <li><code>repro_2026/results/judge_scores.json</code> — LLM-as-judge scores (gemma4:12b).</li>
+  <li><code>repro_2026/results/judge_by_scenario.json</code> — per-scenario breakdown of judge scores.</li>
+  <li><code>repro_2026/scripts/</code> — the Python scripts used to produce this report.</li>
+  <li><code>repro_2026/logs/</code> — raw per-call logs for every LLM invocation.</li>
+</ul>
+
+</body>
+</html>

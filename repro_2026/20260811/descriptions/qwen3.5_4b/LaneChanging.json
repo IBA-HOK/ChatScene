@@ -1,0 +1,12 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "LaneChanging",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is changing lanes. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "While shifting lanes to overtake slower vehicles, an oncoming motorcycle suddenly accelerates across my path without signaling. It cuts off directly in front of me before I can react due to the lack of warning lights visible nearby at high speed.",
+    "While changing lanes to overtake oncoming traffic, a motorcyclist suddenly swerves leftward from my blind spot directly into the gap between me and the curb.",
+    "The ego vehicle initiates a left lane merge when an unexpected motorcyclist suddenly accelerates from behind and cuts directly into your new path without signaling first.",
+    "As the ego vehicle initiates a left merge through dense traffic, an unexpected motorcyclist suddenly exits from between two parked cars in the adjacent blind spot and cuts off at speed while accelerating hard forward into my trajectory.",
+    "The ego vehicle initiates a right merge maneuver while maintaining steady acceleration when an unexpected motorcyclist accelerates from behind cutting directly into the intended space and forcing abrupt braking to avoid collision with its front bumper."
+  ]
+}

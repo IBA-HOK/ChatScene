@@ -1,0 +1,66 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "CrossingNegotiation",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A motorcyclist unexpectedly accelerates into the ego vehicle\u2019s path while crossing an uncontrolled intersection without yielding right-of-way during cross-traffic negotiation. The sudden lateral movement creates a high-speed collision risk requiring immediate emergency braking and steering correction by autonomous systems to avoid impact with the rider.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcyclist unexpectedly accelerates and enters the ego vehicle's path without yielding right-of-way during cross-traffic negotiation.\nGeometry: An uncontrolled intersection with cross-traffic flow.\nSpawn Position: The adversarial agent is approaching from a perpendicular direction at the intersection, moving laterally into the ego vehicle's lane.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcyclist unexpectedly accelerates and enters the ego vehicle's path without yielding right-of-way during cross-traffic negotiation.",
+        "Geometry": "An uncontrolled intersection with cross-traffic flow.",
+        "Spawn Position": "The adversarial agent is approaching from a perpendicular direction at the intersection, moving laterally into the ego vehicle's lane."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "While negotiating right-of-way at a signalized intersection on green light conditions, the ego vehicle encounters an opposing car that suddenly accelerates and cuts diagonally across its path without signaling or yielding priority to established traffic rules.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car suddenly accelerates and cuts diagonally across the ego vehicle's path without signaling or yielding priority to established traffic rules.\nGeometry: A signalized four-way intersection with green light conditions for the ego vehicle.\nSpawn Position: The adversarial agent approaches from the opposing lane (left side) relative to the ego vehicle, cutting into its trajectory diagonally across the center of the road.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car suddenly accelerates and cuts diagonally across the ego vehicle's path without signaling or yielding priority to established traffic rules.",
+        "Geometry": "A signalized four-way intersection with green light conditions for the ego vehicle.",
+        "Spawn Position": "The adversarial agent approaches from the opposing lane (left side) relative to the ego vehicle, cutting into its trajectory diagonally across the center of the road."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A jaywalking pedestrian suddenly steps out from behind parked cars and runs directly across my path while negotiating right-turn traffic at an uncontrolled intersection, creating a high risk of collision due to sudden trajectory changes in front of me.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian jaywalks by stepping out suddenly from behind parked cars and running directly across the ego vehicle's path with sudden trajectory changes.\nGeometry: An uncontrolled intersection where right-turn traffic is being negotiated.\nSpawn Position: Behind parked cars, moving into the direct path of the ego vehicle to cross in front.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian jaywalks by stepping out suddenly from behind parked cars and running directly across the ego vehicle's path with sudden trajectory changes.",
+        "Geometry": "An uncontrolled intersection where right-turn traffic is being negotiated.",
+        "Spawn Position": "Behind parked cars, moving into the direct path of the ego vehicle to cross in front."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A jaywalking pedestrian suddenly runs across the ego vehicle's path inside a marked crosswalk without yielding during an unsignalized intersection crossing event, accelerating unexpectedly into the center of the road just as Ego completes its turn causing imminent head-on collision risk before a full crash occurs between both parties' lanes.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian runs across without yielding and accelerates unexpectedly into the center of the road.\nGeometry: An unsignalized intersection with a marked crosswalk.\nSpawn Position: The adversarial agent is running from one side towards the ego vehicle's path within the intersection, entering the center just as Ego completes its turn.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian runs across without yielding and accelerates unexpectedly into the center of the road.",
+        "Geometry": "An unsignalized intersection with a marked crosswalk.",
+        "Spawn Position": "The adversarial agent is running from one side towards the ego vehicle's path within the intersection, entering the center just as Ego completes its turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A motorcycle suddenly accelerates out of an unlit cross-angle into my vehicle's right-front blind spot while I am negotiating straight through the intersection, creating a sudden collision risk that forces emergency braking without warning signals or right-of-way cues from crossing traffic.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: Suddenly accelerates out of an unlit cross-angle into my vehicle's right-front blind spot without warning signals or right-of-way cues\nGeometry: Unlit intersection, ego negotiating straight through the intersection\nSpawn Position: Right-front blind spot relative to the ego",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "Suddenly accelerates out of an unlit cross-angle into my vehicle's right-front blind spot without warning signals or right-of-way cues",
+        "Geometry": "Unlit intersection, ego negotiating straight through the intersection",
+        "Spawn Position": "Right-front blind spot relative to the ego"
+      },
+      "success": true
+    }
+  ]
+}

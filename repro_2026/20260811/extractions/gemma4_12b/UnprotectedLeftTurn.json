@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:12b",
+  "base_scenario": "UnprotectedLeftTurn",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "As the ego vehicle executes an unprotected left turn, a cyclist suddenly swerves into its path from the opposite lane.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The cyclist suddenly swerves into the path of the ego vehicle during its left turn.\nGeometry: A road with two lanes for traffic flowing in opposite directions.\nSpawn Position: The adversarial agent is located in the opposite lane, approaching from the front-left of the ego vehicle's turning path.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The cyclist suddenly swerves into the path of the ego vehicle during its left turn.",
+        "Geometry": "A road with two lanes for traffic flowing in opposite directions.",
+        "Spawn Position": "The adversarial agent is located in the opposite lane, approaching from the front-left of the ego vehicle's turning path."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "A cyclist suddenly swerves into the ego vehicle's path from an adjacent lane just as it begins its unprotected left turn.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The cyclist suddenly swerves into the ego vehicle's path.\nGeometry: A multi-lane road where the ego vehicle is performing an unprotected left turn.\nSpawn Position: The adversarial agent is in an adjacent lane to the ego vehicle's path during its turn.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The cyclist suddenly swerves into the ego vehicle's path.",
+        "Geometry": "A multi-lane road where the ego vehicle is performing an unprotected left turn.",
+        "Spawn Position": "The adversarial agent is in an adjacent lane to the ego vehicle's path during its turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A pedestrian unexpectedly steps into the crosswalk from behind a parked vehicle as the ego vehicle initiates its unprotected left turn.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian unexpectedly steps into the crosswalk from behind a parked vehicle.\nGeometry: An intersection where the ego vehicle is performing an unprotected left turn.\nSpawn Position: The adversarial agent is in the crosswalk, initially hidden by a parked vehicle on the side of the road where the ego vehicle is turning.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian unexpectedly steps into the crosswalk from behind a parked vehicle.",
+        "Geometry": "An intersection where the ego vehicle is performing an unprotected left turn.",
+        "Spawn Position": "The adversarial agent is in the crosswalk, initially hidden by a parked vehicle on the side of the road where the ego vehicle is turning."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A motorcycle filtering through oncoming traffic swerves unexpectedly into the ego vehicle's path during its unprotected left turn.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle swerves unexpectedly into the ego vehicle's path while filtering through traffic.\nGeometry: An intersection where the ego vehicle is performing an unprotected left turn.\nSpawn Position: The adversarial motorcycle is in the oncoming lane, moving toward the ego vehicle's path from the opposite direction.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle swerves unexpectedly into the ego vehicle's path while filtering through traffic.",
+        "Geometry": "An intersection where the ego vehicle is performing an unprotected left turn.",
+        "Spawn Position": "The adversarial motorcycle is in the oncoming lane, moving toward the ego vehicle's path from the opposite direction."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A pedestrian suddenly steps into the crosswalk from behind a parked vehicle just as the ego vehicle initiates its unprotected left turn.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly steps into the crosswalk.\nGeometry: An intersection where the ego vehicle is performing an unprotected left turn.\nSpawn Position: The adversarial agent is positioned behind a parked vehicle, which acts as an obstruction, before entering the crosswalk in front of the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly steps into the crosswalk.",
+        "Geometry": "An intersection where the ego vehicle is performing an unprotected left turn.",
+        "Spawn Position": "The adversarial agent is positioned behind a parked vehicle, which acts as an obstruction, before entering the crosswalk in front of the ego vehicle."
+      },
+      "success": true
+    }
+  ]
+}

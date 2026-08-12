@@ -1,0 +1,12 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "UnprotectedLeftTurn",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is making an unprotected left turn at an intersection. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "While executing an unprotected left turn at a signalized intersection, a jaywalking pedestrian suddenly emerges from behind a parked vehicle and dashes directly into the ego vehicle's path.",
+    "The ego vehicle attempts an unprotected left turn at an uncontrolled intersection when a jaywalking cyclist abruptly crosses from behind a parked car, moving faster than expected and cutting directly into the turning path without signaling.",
+    "As the ego vehicle executes an unprotected left turn across oncoming lanes, a motorcyclist suddenly accelerates from behind a stationary car directly into its trajectory without signaling or braking for right-of-way signals.",
+    "While executing an unprotected left turn across open lanes at high speeds with limited visibility within intersection boundaries, a jaywalking pedestrian suddenly steps into my path from behind a stationary parked car directly in front of me without any visible warning or movement before they began walking causing immediate collision risk.",
+    "A pedestrian jaywalks directly across my lane as I execute an unprotected left turn without yielding to cross traffic on a red light creating zero safe braking distance before impact occurs while driving at high speed approaching the intersection. They then run unexpectedly forward with no time for emergency maneuvering and stopping available due to insufficient gap detection during the unsafe turn attempt just now occurring with me moving towards them too quickly?"
+  ]
+}

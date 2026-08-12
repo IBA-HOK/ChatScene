@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:12b",
+  "base_scenario": "LaneChanging",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "As the ego vehicle begins a left lane change, a motorcyclist in the adjacent lane swerves abruptly into the ego's projected path.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The motorcyclist swerves abruptly into the ego vehicle's projected path during a lane change.\nGeometry: A multi-lane road where the ego vehicle is performing a lane change.\nSpawn Position: The adversarial agent is in the adjacent lane to the left of the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The motorcyclist swerves abruptly into the ego vehicle's projected path during a lane change.",
+        "Geometry": "A multi-lane road where the ego vehicle is performing a lane change.",
+        "Spawn Position": "The adversarial agent is in the adjacent lane to the left of the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "As the ego vehicle initiates a merge into the left lane, a vehicle in that lane suddenly swerves toward the ego vehicle to avoid an obstacle on the road.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car suddenly swerves toward the ego vehicle while the ego is merging into its lane.\nGeometry: A multi-lane road with a merge point.\nSpawn Position: The adversarial car is located in the left lane, ahead of or adjacent to the ego's position during the merge.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car suddenly swerves toward the ego vehicle while the ego is merging into its lane.",
+        "Geometry": "A multi-lane road with a merge point.",
+        "Spawn Position": "The adversarial car is located in the left lane, ahead of or adjacent to the ego's position during the merge."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "As the ego vehicle merges into the adjacent lane, a motorcycle suddenly swerves across the lane markings and into the vehicle's path.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly swerves across the lane markings and into the ego vehicle's path.\nGeometry: A multi-lane road.\nSpawn Position: The adversarial agent is in an adjacent lane to the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly swerves across the lane markings and into the ego vehicle's path.",
+        "Geometry": "A multi-lane road.",
+        "Spawn Position": "The adversarial agent is in an adjacent lane to the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "While the ego vehicle is executing a lane change, a motorcyclist suddenly swerves across lanes and enters its path from an adjacent lane.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The motorcyclist suddenly swerves across lanes and enters the ego vehicle's path.\nGeometry: A multi-lane road where the ego vehicle is performing a lane change.\nSpawn Position: The motorcyclist starts in an adjacent lane to the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The motorcyclist suddenly swerves across lanes and enters the ego vehicle's path.",
+        "Geometry": "A multi-lane road where the ego vehicle is performing a lane change.",
+        "Spawn Position": "The motorcyclist starts in an adjacent lane to the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "As the ego vehicle begins a left lane change, the vehicle in the target lane suddenly swerves toward the ego vehicle's front fender without braking.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car suddenly swerves toward the ego vehicle's front fender without braking.\nGeometry: A multi-lane road where the ego vehicle is performing a left lane change.\nSpawn Position: The adversarial car is located in the adjacent lane to the left of the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car suddenly swerves toward the ego vehicle's front fender without braking.",
+        "Geometry": "A multi-lane road where the ego vehicle is performing a left lane change.",
+        "Spawn Position": "The adversarial car is located in the adjacent lane to the left of the ego vehicle."
+      },
+      "success": true
+    }
+  ]
+}

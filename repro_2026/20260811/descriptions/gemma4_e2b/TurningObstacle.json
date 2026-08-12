@@ -1,0 +1,12 @@
+{
+  "model": "gemma4:e2b",
+  "base_scenario": "TurningObstacle",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is turning at an intersection. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "The ego vehicle is executing a left turn across three lanes, but a cyclist suddenly swerves into the turning path from the adjacent lane without signaling.",
+    "While executing a left turn at a four-way stop, a cyclist unexpectedly swerves from the bike lane into the intersection, blocking the ego vehicle's path.",
+    "A vehicle abruptly cuts across the turning lane from the opposing direction, forcing the ego vehicle to brake hard and risk side-swipe collision.",
+    "While executing a left turn across an intersection, a bicyclist unexpectedly enters the travel lane from the wrong direction, blocking the path entirely.",
+    "While making a left turn across a four-way stop, a cyclist unexpectedly swerves into the turning lane from the opposite direction."
+  ]
+}

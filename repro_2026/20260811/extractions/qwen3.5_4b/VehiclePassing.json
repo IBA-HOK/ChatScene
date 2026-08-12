@@ -1,0 +1,66 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "VehiclePassing",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "As I navigate through oncoming traffic to bypass a parked vehicle in my lane, an unexpected pedestrian steps out from behind them and runs directly across my path.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian unexpectedly steps out from behind a parked vehicle in front of the ego lane and runs directly across its path.\nGeometry: A two-lane road with oncoming traffic, featuring an obstruction (parked vehicle) blocking part of the ego's lane.\nSpawn Position: The adversarial agent is initially positioned hidden behind the parked vehicle located at the start of the crossing zone relative to the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian unexpectedly steps out from behind a parked vehicle in front of the ego lane and runs directly across its path.",
+        "Geometry": "A two-lane road with oncoming traffic, featuring an obstruction (parked vehicle) blocking part of the ego's lane.",
+        "Spawn Position": "The adversarial agent is initially positioned hidden behind the parked vehicle located at the start of the crossing zone relative to the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "The ego vehicle enters the opposing traffic lane to navigate around stationary cars but encounters no braking signals until a motorcycle suddenly emerges in front of it.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly emerges directly in front of the ego vehicle without prior braking signals.\nGeometry: A two-lane road with stationary cars obstructing one lane, forcing entry into the opposing traffic flow.\nSpawn Position: The adversarial agent is initially positioned behind or obscured by the stationary cars and moves forward to emerge directly in front of the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly emerges directly in front of the ego vehicle without prior braking signals.",
+        "Geometry": "A two-lane road with stationary cars obstructing one lane, forcing entry into the opposing traffic flow.",
+        "Spawn Position": "The adversarial agent is initially positioned behind or obscured by the stationary cars and moves forward to emerge directly in front of the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "The ego vehicle shifts into oncoming traffic lanes to bypass a stationary sedan but encounters an unexpectedly emerging motorcycle accelerating rapidly and cutting directly across its path without signaling any intent for safety purposes. This creates immediate collision risk if the motorcyclist does not yield or brake in reaction time expected within standard driving protocols.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: Accelerates rapidly and cuts directly across the ego vehicle's path without signaling intent for safety purposes or yielding/braking as expected.\nGeometry: A road with oncoming traffic lanes where a stationary sedan blocks part of the lane, requiring the ego to shift into opposing traffic.\nSpawn Position: The adversarial agent emerges unexpectedly from near the stationary obstacle directly across and in front of the shifting ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "Accelerates rapidly and cuts directly across the ego vehicle's path without signaling intent for safety purposes or yielding/braking as expected.",
+        "Geometry": "A road with oncoming traffic lanes where a stationary sedan blocks part of the lane, requiring the ego to shift into opposing traffic.",
+        "Spawn Position": "The adversarial agent emerges unexpectedly from near the stationary obstacle directly across and in front of the shifting ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "Ego vehicle enters the opposite traffic lane to bypass stopped cars, but an unexpected cyclist accelerates from behind the obstruction and drifts into ego's direct path while moving against normal flow direction.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: Accelerates from behind obstruction and drifts into direct path against flow direction\nGeometry: Two-lane road with stopped cars obstructing ego lane\nSpawn Position: Behind obstruction on the opposite side of traffic flow",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "Accelerates from behind obstruction and drifts into direct path against flow direction",
+        "Geometry": "Two-lane road with stopped cars obstructing ego lane",
+        "Spawn Position": "Behind obstruction on the opposite side of traffic flow"
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "The ego vehicle enters the opposing traffic lane to overtake a stationary car that completely blocks its path. A motorcycle suddenly cuts across my front right trajectory while I am driving in this narrow gap between parked cars and the center line.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The motorcycle suddenly cuts across the ego vehicle's front right trajectory while overtaking a stationary car.\nGeometry: A narrow gap between parked cars and the center line where the ego vehicle is driving in the opposing traffic lane to overtake an obstacle.\nSpawn Position: The adversarial agent enters from the side/front-right of the ego vehicle within this narrow gap, cutting into its path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The motorcycle suddenly cuts across the ego vehicle's front right trajectory while overtaking a stationary car.",
+        "Geometry": "A narrow gap between parked cars and the center line where the ego vehicle is driving in the opposing traffic lane to overtake an obstacle.",
+        "Spawn Position": "The adversarial agent enters from the side/front-right of the ego vehicle within this narrow gap, cutting into its path."
+      },
+      "success": true
+    }
+  ]
+}

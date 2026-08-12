@@ -1,0 +1,12 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "RedLightRunning",
+  "prompt": "Provide a description of a safety-critical scenario where a vehicle runs a red light at an intersection while the ego vehicle is proceeding through. The adversarial agent should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "The adversarial vehicle runs a red light while proceeding straight through an intersection with clear right-of-way signals for the ego traffic on green lights. It unexpectedly accelerates rapidly and swerves leftward into the lane just as it crosses directly in front of the ego car at high speed, causing imminent impact risk.",
+    "The adversarial agent ignores the red signal and accelerates straight through the intersection directly into ego traffic without signaling intent or yielding to cross-traffic. Simultaneously, it executes an unexpected sharp turn as if reacting to non-existent hazards while maintaining forward momentum toward impact.",
+    "A vehicle runs a red light at an intersection and accelerates directly into my lane while I proceed straight on green traffic signal phase with clear road markings visible ahead of me. The adversarial agent suddenly swerves violently rightward without signaling or braking due to unseen obstacle, leading to imminent collision risk at 50km/h from the ego vehicle's perspective.",
+    "An adversarial vehicle runs a red light into the intersection at speed but executes a sudden right turn directly across EGO\u2019s path while braking hard in place before accelerating again without warning to collide head-on with ego just as it enters the stop line zone.",
+    "An adversarial vehicle accelerates across the intersection without stopping at the signal and unexpectedly begins running in reverse gear inside the junction area; when it then resumes straight-line motion, its trajectory intersects mine head-on as I remain proceeding through my green light phase."
+  ]
+}

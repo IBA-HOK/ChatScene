@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e2b",
+  "base_scenario": "VehiclePassing",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "The ego vehicle is attempting to pass a parked delivery truck in the opposite lane when a motorcycle unexpectedly speeds out from behind the truck, colliding with the trailing vehicle.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle unexpectedly speeds out from behind a parked truck, resulting in a collision with a trailing vehicle.\nGeometry: Passing maneuver in the opposite lane of traffic flow.\nSpawn Position: The adversarial motorcycle spawns from behind a parked delivery truck in the opposite lane relative to the ego vehicle's passing attempt.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle unexpectedly speeds out from behind a parked truck, resulting in a collision with a trailing vehicle.",
+        "Geometry": "Passing maneuver in the opposite lane of traffic flow.",
+        "Spawn Position": "The adversarial motorcycle spawns from behind a parked delivery truck in the opposite lane relative to the ego vehicle's passing attempt."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "While passing a parked delivery truck in the opposing lane, a cyclist unexpectedly swerves into the ego vehicle's path from behind the truck.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly swerves into the ego vehicle's path.\nGeometry: Passing a parked object in the opposing lane.\nSpawn Position: The adversarial agent spawns from behind the parked delivery truck, entering the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly swerves into the ego vehicle's path.",
+        "Geometry": "Passing a parked object in the opposing lane.",
+        "Spawn Position": "The adversarial agent spawns from behind the parked delivery truck, entering the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A motorcycle suddenly accelerates from a stop into the ego vehicle's path while attempting to pass a parked truck in the opposite lane.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: Suddenly accelerates from a stop into the ego vehicle's path while attempting to pass an obstruction.\nGeometry: A two-lane road with opposing traffic flow.\nSpawn Position: The motorcycle is in the opposite lane, attempting to pass a parked truck relative to the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "Suddenly accelerates from a stop into the ego vehicle's path while attempting to pass an obstruction.",
+        "Geometry": "A two-lane road with opposing traffic flow.",
+        "Spawn Position": "The motorcycle is in the opposite lane, attempting to pass a parked truck relative to the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "While passing a parked delivery van in the opposite lane, a cyclist abruptly swerves into the ego vehicle's path without signaling.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist abruptly swerves into the ego vehicle's path without signaling.\nGeometry: Passing a parked delivery van in the opposite lane.\nSpawn Position: The adversarial agent is in the opposite lane relative to the ego vehicle, attempting to pass the parked object and enter the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist abruptly swerves into the ego vehicle's path without signaling.",
+        "Geometry": "Passing a parked delivery van in the opposite lane.",
+        "Spawn Position": "The adversarial agent is in the opposite lane relative to the ego vehicle, attempting to pass the parked object and enter the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "While passing a stopped delivery truck in the opposite lane, a child suddenly runs out from behind a parked sedan into the roadway.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly runs out from behind a parked sedan into the roadway.\nGeometry: A two-lane road where the ego vehicle is passing a stopped truck in the opposite lane, near parked vehicles.\nSpawn Position: The adversarial agent spawns from behind a parked sedan and enters the roadway from the side.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly runs out from behind a parked sedan into the roadway.",
+        "Geometry": "A two-lane road where the ego vehicle is passing a stopped truck in the opposite lane, near parked vehicles.",
+        "Spawn Position": "The adversarial agent spawns from behind a parked sedan and enters the roadway from the side."
+      },
+      "success": true
+    }
+  ]
+}

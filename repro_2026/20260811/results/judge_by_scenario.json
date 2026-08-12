@@ -1,0 +1,252 @@
+{
+  "gemma4:12b": {
+    "CrossingNegotiation": {
+      "sc": 5.0,
+      "sp": 3.6,
+      "re": 5.0,
+      "n": 5
+    },
+    "LaneChanging": {
+      "sc": 5.0,
+      "sp": 2.8,
+      "re": 4.6,
+      "n": 5
+    },
+    "RedLightRunning": {
+      "sc": 5.0,
+      "sp": 3.0,
+      "re": 4.8,
+      "n": 5
+    },
+    "RightTurn": {
+      "sc": 5.0,
+      "sp": 3.4,
+      "re": 5.0,
+      "n": 5
+    },
+    "StraightObstacle": {
+      "sc": 4.8,
+      "sp": 2.6,
+      "re": 4.8,
+      "n": 5
+    },
+    "TurningObstacle": {
+      "sc": 5.0,
+      "sp": 3.4,
+      "re": 5.0,
+      "n": 5
+    },
+    "UnprotectedLeftTurn": {
+      "sc": 5.0,
+      "sp": 3.8,
+      "re": 5.0,
+      "n": 5
+    },
+    "VehiclePassing": {
+      "sc": 5.0,
+      "sp": 3.6,
+      "re": 5.0,
+      "n": 5
+    }
+  },
+  "gemma4:e2b": {
+    "CrossingNegotiation": {
+      "sc": 5.0,
+      "sp": 3.2,
+      "re": 5.0,
+      "n": 5
+    },
+    "LaneChanging": {
+      "sc": 5.0,
+      "sp": 3.2,
+      "re": 5.0,
+      "n": 5
+    },
+    "RedLightRunning": {
+      "sc": 5.0,
+      "sp": 2.8,
+      "re": 4.4,
+      "n": 5
+    },
+    "RightTurn": {
+      "sc": 5.0,
+      "sp": 3.0,
+      "re": 4.6,
+      "n": 5
+    },
+    "StraightObstacle": {
+      "sc": 5.0,
+      "sp": 2.8,
+      "re": 5.0,
+      "n": 5
+    },
+    "TurningObstacle": {
+      "sc": 5.0,
+      "sp": 3.2,
+      "re": 5.0,
+      "n": 5
+    },
+    "UnprotectedLeftTurn": {
+      "sc": 5.0,
+      "sp": 3.2,
+      "re": 5.0,
+      "n": 5
+    },
+    "VehiclePassing": {
+      "sc": 5.0,
+      "sp": 4.0,
+      "re": 5.0,
+      "n": 5
+    }
+  },
+  "gemma4:e4b": {
+    "CrossingNegotiation": {
+      "sc": 5.0,
+      "sp": 3.8,
+      "re": 4.8,
+      "n": 5
+    },
+    "LaneChanging": {
+      "sc": 5.0,
+      "sp": 3.6,
+      "re": 4.8,
+      "n": 5
+    },
+    "RedLightRunning": {
+      "sc": 5.0,
+      "sp": 3.6,
+      "re": 5.0,
+      "n": 5
+    },
+    "RightTurn": {
+      "sc": 5.0,
+      "sp": 3.4,
+      "re": 4.8,
+      "n": 5
+    },
+    "StraightObstacle": {
+      "sc": 4.8,
+      "sp": 3.8,
+      "re": 5.0,
+      "n": 5
+    },
+    "TurningObstacle": {
+      "sc": 5.0,
+      "sp": 3.4,
+      "re": 5.0,
+      "n": 5
+    },
+    "UnprotectedLeftTurn": {
+      "sc": 5.0,
+      "sp": 3.6,
+      "re": 5.0,
+      "n": 5
+    },
+    "VehiclePassing": {
+      "sc": 5.0,
+      "sp": 3.4,
+      "re": 5.0,
+      "n": 5
+    }
+  },
+  "qwen3.5:4b": {
+    "CrossingNegotiation": {
+      "sc": 5.0,
+      "sp": 4.0,
+      "re": 4.8,
+      "n": 5
+    },
+    "LaneChanging": {
+      "sc": 5.0,
+      "sp": 4.0,
+      "re": 5.0,
+      "n": 5
+    },
+    "RedLightRunning": {
+      "sc": 5.0,
+      "sp": 4.2,
+      "re": 4.0,
+      "n": 5
+    },
+    "RightTurn": {
+      "sc": 5.0,
+      "sp": 4.4,
+      "re": 5.0,
+      "n": 5
+    },
+    "StraightObstacle": {
+      "sc": 5.0,
+      "sp": 4.0,
+      "re": 4.6,
+      "n": 5
+    },
+    "TurningObstacle": {
+      "sc": 5.0,
+      "sp": 4.2,
+      "re": 5.0,
+      "n": 5
+    },
+    "UnprotectedLeftTurn": {
+      "sc": 5.0,
+      "sp": 4.2,
+      "re": 4.8,
+      "n": 5
+    },
+    "VehiclePassing": {
+      "sc": 5.0,
+      "sp": 3.8,
+      "re": 4.6,
+      "n": 5
+    }
+  },
+  "GPT4_baseline": {
+    "StraightObstacle": {
+      "sc": 5.0,
+      "sp": 3.2,
+      "re": 4.6,
+      "n": 5
+    },
+    "TurningObstacle": {
+      "sc": 4.8,
+      "sp": 3.8,
+      "re": 4.6,
+      "n": 5
+    },
+    "LaneChanging": {
+      "sc": 4.2,
+      "sp": 2.8,
+      "re": 5.0,
+      "n": 5
+    },
+    "VehiclePassing": {
+      "sc": 5.0,
+      "sp": 3.6,
+      "re": 5.0,
+      "n": 5
+    },
+    "RedLightRunning": {
+      "sc": 4.8,
+      "sp": 3.2,
+      "re": 5.0,
+      "n": 5
+    },
+    "UnprotectedLeftTurn": {
+      "sc": 4.4,
+      "sp": 2.6,
+      "re": 4.4,
+      "n": 5
+    },
+    "RightTurn": {
+      "sc": 4.0,
+      "sp": 2.6,
+      "re": 4.2,
+      "n": 5
+    },
+    "CrossingNegotiation": {
+      "sc": 4.0,
+      "sp": 2.4,
+      "re": 4.4,
+      "n": 5
+    }
+  }
+}

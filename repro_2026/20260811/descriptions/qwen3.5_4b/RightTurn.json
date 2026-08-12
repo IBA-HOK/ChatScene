@@ -1,0 +1,12 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "RightTurn",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is making a right turn at an intersection. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "While executing a sharp right turn at an intersection, a pedestrian unexpectedly steps off the curb directly into my front tire line without looking left or signaling their intent to move.",
+    "As I complete the right turn at the intersection, an adversary cyclist suddenly accelerates from behind a parked car and cuts directly into my path without signaling or braking.",
+    "A distracted pedestrian steps off a curb directly in front of the ego vehicle while checking their phone during its right turn at an intersection with no traffic lights, creating immediate impact risk due to insufficient braking distance available for emergency maneuvers made by other vehicles nearby present.",
+    "As I complete a sharp right turn at an uncontrolled intersection, a jaywalking pedestrian suddenly emerges from behind parked cars and sprints directly into my path without any warning signal visible causing insufficient braking distance remaining before impact becomes unavoidable due to lack of reaction time for effective evasion maneuvers.",
+    "While turning sharply right through an unmarked intersection, a jaywalking pedestrian suddenly steps out from behind parked vehicles into my direct line of travel and crosses the lane just as I begin decelerating to avoid impact with the vehicle moving forward towards crosswalk area."
+  ]
+}

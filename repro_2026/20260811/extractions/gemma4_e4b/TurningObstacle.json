@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e4b",
+  "base_scenario": "TurningObstacle",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A pedestrian, looking at their phone, suddenly steps into the crosswalk directly into the trajectory of the turning ego vehicle's path.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly steps into the crosswalk directly into the path of the turning ego vehicle.\nGeometry: An intersection with a designated crosswalk.\nSpawn Position: The adversarial agent spawns in the crosswalk area, directly intersecting the trajectory of the turning ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly steps into the crosswalk directly into the path of the turning ego vehicle.",
+        "Geometry": "An intersection with a designated crosswalk.",
+        "Spawn Position": "The adversarial agent spawns in the crosswalk area, directly intersecting the trajectory of the turning ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "While performing a left turn, a motorcycle accelerates abruptly from the opposite curb line directly into the vehicle's intended path. The immediate lateral change of speed and direction causes an unavoidable near-miss collision risk.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle accelerates abruptly and cuts into the ego vehicle's intended left turn path.\nGeometry: The ego vehicle performs a left turn at an intersection.\nSpawn Position: The adversarial agent spawns from the opposite curb line directly into the ego vehicle's turning path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle accelerates abruptly and cuts into the ego vehicle's intended left turn path.",
+        "Geometry": "The ego vehicle performs a left turn at an intersection.",
+        "Spawn Position": "The adversarial agent spawns from the opposite curb line directly into the ego vehicle's turning path."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "The ego vehicle initiates a left turn across traffic. An aggressive motorcycle suddenly swerves into the intersection from an adjacent lane, forcing an immediate avoidance maneuver.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly swerves into the intersection from an adjacent lane.\nGeometry: The ego vehicle is performing a left turn across traffic/an intersection.\nSpawn Position: The adversarial agent comes from an adjacent lane, crossing into the path of the turning ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly swerves into the intersection from an adjacent lane.",
+        "Geometry": "The ego vehicle is performing a left turn across traffic/an intersection.",
+        "Spawn Position": "The adversarial agent comes from an adjacent lane, crossing into the path of the turning ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "While completing a left turn, the ego vehicle is unexpectedly confronted by a jogger who suddenly veers into the street without crossing the crosswalk first.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly veers into the street/roadway without crossing the crosswalk first.\nGeometry: The ego vehicle is completing a left turn at an intersection.\nSpawn Position: The adversarial agent spawns from the sidewalk or curb adjacent to the turning path, entering the road unexpectedly.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly veers into the street/roadway without crossing the crosswalk first.",
+        "Geometry": "The ego vehicle is completing a left turn at an intersection.",
+        "Spawn Position": "The adversarial agent spawns from the sidewalk or curb adjacent to the turning path, entering the road unexpectedly."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "While turning left across a busy intersection, an elderly pedestrian darts out from behind parked cars into the path of the ego vehicle before it can fully commit to the turn.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian darts out into the path of the ego vehicle while it is turning left across the intersection.\nGeometry: The ego vehicle drives across a four-way signalized intersection while performing a left turn.\nSpawn Position: The adversarial agent spawns from behind parked cars located on the side of the road adjacent to the intersection's crossing path.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian darts out into the path of the ego vehicle while it is turning left across the intersection.",
+        "Geometry": "The ego vehicle drives across a four-way signalized intersection while performing a left turn.",
+        "Spawn Position": "The adversarial agent spawns from behind parked cars located on the side of the road adjacent to the intersection's crossing path."
+      },
+      "success": true
+    }
+  ]
+}

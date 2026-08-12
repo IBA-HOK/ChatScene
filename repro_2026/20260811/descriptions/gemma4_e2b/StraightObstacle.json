@@ -1,0 +1,12 @@
+{
+  "model": "gemma4:e2b",
+  "base_scenario": "StraightObstacle",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is driving on a straight road. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "A motorcycle unexpectedly drifts across the lane and enters the ego vehicle\u2019s path, forcing an immediate evasive maneuver to avoid a collision.",
+    "A cyclist unexpectedly weaves across three lanes of traffic to pass, forcing the ego vehicle into an immediate emergency braking maneuver.",
+    "A cyclist unexpectedly swerves into the ego vehicle's lane without signaling, forcing the autonomous system to brake hard to avoid a collision.",
+    "A pedestrian suddenly darts from behind a parked bus into the travel lane as the ego vehicle passes.",
+    "A cyclist unexpectedly drifts into the travel lane from the shoulder, forcing the ego vehicle to brake sharply to avoid a collision."
+  ]
+}

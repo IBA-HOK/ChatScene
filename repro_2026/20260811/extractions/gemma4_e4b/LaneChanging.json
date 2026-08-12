@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e4b",
+  "base_scenario": "LaneChanging",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "Ego vehicle begins executing a lane change when an elderly pedestrian unexpectedly crosses the street against the light from behind the parked vehicles.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian unexpectedly crosses the street against the light.\nGeometry: A four-way signalized intersection (or crossing a street).\nSpawn Position: The adversarial agent spawns from behind parked vehicles on the side of the road where the ego vehicle is executing the lane change/crossing maneuver.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian unexpectedly crosses the street against the light.",
+        "Geometry": "A four-way signalized intersection (or crossing a street).",
+        "Spawn Position": "The adversarial agent spawns from behind parked vehicles on the side of the road where the ego vehicle is executing the lane change/crossing maneuver."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "As the ego vehicle initiates a lane change, a cyclist suddenly swerves directly into the path of travel from the shoulder without warning.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist suddenly swerves directly into the path of travel from the shoulder without warning.\nGeometry: A multi-lane road with a shoulder adjacent to the travel lane.\nSpawn Position: The adversarial agent spawns from the shoulder adjacent to the ego vehicle's current lane of travel.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist suddenly swerves directly into the path of travel from the shoulder without warning.",
+        "Geometry": "A multi-lane road with a shoulder adjacent to the travel lane.",
+        "Spawn Position": "The adversarial agent spawns from the shoulder adjacent to the ego vehicle's current lane of travel."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "During a steady lane change maneuver, an adjacent motorcycle unexpectedly drifts back into the merging path just as the ego vehicle crosses the solid line.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle unexpectedly drifts back into the merging path.\nGeometry: The ego vehicle is performing a lane change/merging maneuver across solid lines.\nSpawn Position: The adversarial agent is in an adjacent lane relative to the ego vehicle's current trajectory, near the solid line boundary.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle unexpectedly drifts back into the merging path.",
+        "Geometry": "The ego vehicle is performing a lane change/merging maneuver across solid lines.",
+        "Spawn Position": "The adversarial agent is in an adjacent lane relative to the ego vehicle's current trajectory, near the solid line boundary."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "While executing a lane change, an adjacent cyclist suddenly pulls perpendicularly into my intended travel path without signaling or warning.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicycle suddenly pulls perpendicularly into the ego vehicle's intended path during a lane change.\nGeometry: A straight road with adjacent lanes allowing for lane changes.\nSpawn Position: The adversarial agent is in an adjacent lane, positioned perpendicular to the ego vehicle's current travel direction.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicycle suddenly pulls perpendicularly into the ego vehicle's intended path during a lane change.",
+        "Geometry": "A straight road with adjacent lanes allowing for lane changes.",
+        "Spawn Position": "The adversarial agent is in an adjacent lane, positioned perpendicular to the ego vehicle's current travel direction."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "As the ego vehicle initiates a right lane change, a motorcycle suddenly pulls out from behind a parked truck, cutting off the established trajectory with minimal braking distance.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly pulls out from behind a parked obstruction, cutting off the ego vehicle's established trajectory with minimal braking distance.\nGeometry: A straight road allowing for lane changes, with parked vehicles present.\nSpawn Position: The adversarial agent spawns from behind a parked truck on the side of the road relative to the ego vehicle's intended right lane change path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly pulls out from behind a parked obstruction, cutting off the ego vehicle's established trajectory with minimal braking distance.",
+        "Geometry": "A straight road allowing for lane changes, with parked vehicles present.",
+        "Spawn Position": "The adversarial agent spawns from behind a parked truck on the side of the road relative to the ego vehicle's intended right lane change path."
+      },
+      "success": true
+    }
+  ]
+}

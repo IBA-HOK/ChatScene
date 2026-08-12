@@ -1,0 +1,2212 @@
+{
+  "gemma4:12b": [
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 0,
+      "description": "A pedestrian suddenly steps into the crosswalk from behind a parked delivery truck just as the ego vehicle enters the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 1,
+      "description": "A pedestrian suddenly steps into the crosswalk from behind a parked vehicle while the ego vehicle is executing a left turn at the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 2,
+      "description": "A pedestrian abruptly steps off the curb from behind a parked delivery truck, crossing directly into the ego vehicle's path at a signalized intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 3,
+      "description": "A motorcyclist suddenly weaves across multiple lanes of travel, cutting directly into the ego vehicle\u2019s path while passing through the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 4,
+      "description": "A cyclist unexpectedly swerves into the ego vehicle's path while crossing an intersection from a side street.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 0,
+      "description": "As the ego vehicle begins a left lane change, a motorcyclist in the adjacent lane swerves abruptly into the ego's projected path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 1,
+      "description": "As the ego vehicle initiates a merge into the left lane, a vehicle in that lane suddenly swerves toward the ego vehicle to avoid an obstacle on the road.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 2,
+      "description": "As the ego vehicle merges into the adjacent lane, a motorcycle suddenly swerves across the lane markings and into the vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 3,
+      "description": "While the ego vehicle is executing a lane change, a motorcyclist suddenly swerves across lanes and enters its path from an adjacent lane.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 4,
+      "description": "As the ego vehicle begins a left lane change, the vehicle in the target lane suddenly swerves toward the ego vehicle's front fender without braking.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 0,
+      "description": "An oncoming vehicle ignores its red light and accelerates rapidly across an intersection, cutting directly into the ego vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 1,
+      "description": "An oncoming vehicle ignores a red light and swerves sharply into the ego vehicle's path at the center of the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 2,
+      "description": "An oncoming vehicle from a cross-street ignores a red light and performs an aggressive, sudden lane change into the ego vehicle\u2019s path at the center of the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 3,
+      "description": "A vehicle from the cross-street abruptly speeds through a red light, entering the ego vehicle's lane in the middle of the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 4,
+      "description": "A vehicle from a side street accelerates abruptly through a red light, crossing directly into the ego vehicle's path at high speed.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 0,
+      "description": "As the ego vehicle initiates a right turn, a pedestrian suddenly steps into its path from behind a parked delivery truck.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 1,
+      "description": "A cyclist suddenly swerves into the ego vehicle's path from an adjacent lane while the ego vehicle is executing its right turn at the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 2,
+      "description": "A pedestrian steps into the roadway from behind a parked delivery truck just as the ego vehicle initiates its right turn at the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 3,
+      "description": "A pedestrian unexpectedly steps into the roadway from behind a parked delivery truck as the ego vehicle executes its right turn.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 4,
+      "description": "A cyclist suddenly swerves into the ego vehicle's path from an adjacent lane as it initiates a right turn at the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 0,
+      "description": "A pedestrian suddenly steps into the street from behind a parked car, crossing the ego vehicle's path unexpectedly.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 1,
+      "description": "A cyclist swerves abruptly into the path of the ego vehicle while traveling along a straight urban road.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 2,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 2\nRealism: 4"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 2,
+      "description": "A cyclist suddenly swerves into the ego vehicle's lane from the shoulder to avoid an obstacle.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 3,
+      "description": "A child suddenly runs out from behind a parked delivery truck into the path of the oncoming ego vehicle.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 4,
+      "description": "A cyclist suddenly swerves into the ego vehicle's lane while traveling on a straight suburban road.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 0,
+      "description": "As the ego vehicle performs a left turn through an intersection, a cyclist suddenly swerves into its path from a side street.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 1,
+      "description": "While the ego vehicle is executing a left turn at an intersection, a cyclist suddenly swerves into its path from behind a parked delivery truck.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 2,
+      "description": "A pedestrian steps out from behind a parked van and enters the roadway just as the ego vehicle begins its right turn.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 3,
+      "description": "A pedestrian suddenly steps into the roadway from behind a parked car just as the ego vehicle begins its right turn at the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 4,
+      "description": "A pedestrian suddenly steps into the ego vehicle's path from behind a parked van while it is executing a left turn at the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 0,
+      "description": "As the ego vehicle executes an unprotected left turn, a cyclist suddenly swerves into its path from the opposite lane.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 1,
+      "description": "A cyclist suddenly swerves into the ego vehicle's path from an adjacent lane just as it begins its unprotected left turn.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 2,
+      "description": "A pedestrian unexpectedly steps into the crosswalk from behind a parked vehicle as the ego vehicle initiates its unprotected left turn.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 3,
+      "description": "A motorcycle filtering through oncoming traffic swerves unexpectedly into the ego vehicle's path during its unprotected left turn.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 4,
+      "description": "A pedestrian suddenly steps into the crosswalk from behind a parked vehicle just as the ego vehicle initiates its unprotected left turn.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 0,
+      "description": "While the ego vehicle passes a parked car in the opposite lane, a pedestrian suddenly steps out from behind the stationary vehicle into the ego's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 1,
+      "description": "A cyclist suddenly veers into the ego vehicle's path from behind a parked car on the opposite side of the road.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 2,
+      "description": "A cyclist suddenly swerves out from behind the parked car into the ego vehicle's path as it passes in the opposite lane.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 3,
+      "description": "A cyclist suddenly swerves into the ego vehicle's path from behind a parked truck as it is passed in the opposite lane.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 4,
+      "description": "While passing a parked delivery truck in the opposing lane, a pedestrian suddenly steps out from behind the truck and into the ego vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    }
+  ],
+  "gemma4:e2b": [
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 0,
+      "description": "An autonomous vehicle approaches a four-way intersection and begins to proceed when a cyclist unexpectedly swerves into the path, attempting to avoid a sudden obstacle.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 1,
+      "description": "A pedestrian suddenly darts from behind a parked bus and into the crosswalk just as the ego vehicle attempts to proceed through the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 2,
+      "description": "A cyclist unexpectedly enters the intersection from the wrong side, weaving between stopped vehicles and ignoring traffic signals.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 3,
+      "description": "While entering a four-way intersection in a moderate speed zone, a cyclist unexpectedly veers across the lane into the ego vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 4,
+      "description": "A pedestrian darts unexpectedly from behind a parked delivery truck directly into the crosswalk, forcing an immediate emergency brake maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 0,
+      "description": "As the ego vehicle initiates a lane change into the left lane, a motorcycle unexpectedly drifts into the path of the changing lane, forcing an immediate evasive maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 1,
+      "description": "The ego vehicle initiates a lane change to the right; simultaneously, a cyclist abruptly drifts into the ego vehicle's path attempting to avoid an unseen obstacle.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 2,
+      "description": "While executing a left lane change, a cyclist suddenly swerves across the path of the ego vehicle to avoid an unseen obstacle.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 3,
+      "description": "While changing from the right lane to the middle lane, a cyclist unexpectedly drifts into the ego vehicle's path, forcing an immediate emergency braking maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 4,
+      "description": "An autonomous vehicle attempting to change lanes suddenly encounters a motorcycle drifting into its intended path, requiring immediate emergency braking.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 0,
+      "description": "An autonomous vehicle runs a red light into an intersection; a following vehicle unexpectedly swerves across the lane, forcing the ego vehicle to execute an emergency stop to avoid a collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 1,
+      "description": "A vehicle running a red light enters the intersection, and an adjacent pedestrian unexpectedly darts into the roadway, forcing the ego vehicle to brake suddenly and risk rear-end collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 2,
+      "description": "The ego vehicle proceeds through an intersection with a red light, and an opposing vehicle unexpectedly drifts into the intersection, blocking the lane and forcing the ego vehicle into an unavoidable collision course.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 3,
+      "description": "An autonomous vehicle illegally runs a red light onto an intersection while a cyclist unexpectedly ignores traffic signals and enters the crosswalk directly into its path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 2,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 2\nRealism: 4"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 4,
+      "description": "A vehicle runs a red light and proceeds through an intersection, while an adjacent cyclist unexpectedly swerves into the vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 2,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 2\nRealism: 4"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 0,
+      "description": "As the ego vehicle begins a right turn, a motorcycle unexpectedly enters the intersection from the left lane, forcing an abrupt emergency brake.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 1,
+      "description": "As the ego vehicle begins its right turn, a motorcycle unexpectedly enters the intersection from the left, blocking the turning lane and forcing an immediate evasive maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 2,
+      "description": "While making a right turn, an oncoming motorcycle unexpectedly swerves across the lane, directly into the turning vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 3,
+      "description": "As the ego vehicle begins a right turn, a cyclist unexpectedly swerves into the travel lane from the opposing direction immediately before the turn.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 4,
+      "description": "As the ego vehicle initiates a right turn, a pedestrian unexpectedly steps into the crosswalk directly into the path of the turning vehicle.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 0,
+      "description": "A motorcycle unexpectedly drifts across the lane and enters the ego vehicle\u2019s path, forcing an immediate evasive maneuver to avoid a collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 1,
+      "description": "A cyclist unexpectedly weaves across three lanes of traffic to pass, forcing the ego vehicle into an immediate emergency braking maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 2,
+      "description": "A cyclist unexpectedly swerves into the ego vehicle's lane without signaling, forcing the autonomous system to brake hard to avoid a collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 3,
+      "description": "A pedestrian suddenly darts from behind a parked bus into the travel lane as the ego vehicle passes.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 4,
+      "description": "A cyclist unexpectedly drifts into the travel lane from the shoulder, forcing the ego vehicle to brake sharply to avoid a collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 0,
+      "description": "The ego vehicle is executing a left turn across three lanes, but a cyclist suddenly swerves into the turning path from the adjacent lane without signaling.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 1,
+      "description": "While executing a left turn at a four-way stop, a cyclist unexpectedly swerves from the bike lane into the intersection, blocking the ego vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 2,
+      "description": "A vehicle abruptly cuts across the turning lane from the opposing direction, forcing the ego vehicle to brake hard and risk side-swipe collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 3,
+      "description": "While executing a left turn across an intersection, a bicyclist unexpectedly enters the travel lane from the wrong direction, blocking the path entirely.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 4,
+      "description": "While making a left turn across a four-way stop, a cyclist unexpectedly swerves into the turning lane from the opposite direction.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 0,
+      "description": "While making an unprotected left turn, a cyclist ignoring traffic signals suddenly enters the ego vehicle's path from the right.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 1,
+      "description": "While executing an unprotected left turn, a motorcycle unexpectedly swerves into the path of the turning vehicle's lane.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 2,
+      "description": "While executing an unprotected left turn, a cyclist suddenly swerves across the path of the ego vehicle, forcing an emergency brake.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 3,
+      "description": "An SUV attempts an unprotected left turn across three lanes of traffic, and a cyclist unexpectedly swerves into the bike lane directly into its path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 4,
+      "description": "The ego vehicle attempts an unprotected left turn across four lanes of traffic; a pedestrian suddenly darts into the crosswalk immediately before the turn line.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 0,
+      "description": "The ego vehicle is attempting to pass a parked delivery truck in the opposite lane when a motorcycle unexpectedly speeds out from behind the truck, colliding with the trailing vehicle.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 1,
+      "description": "While passing a parked delivery truck in the opposing lane, a cyclist unexpectedly swerves into the ego vehicle's path from behind the truck.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 2,
+      "description": "A motorcycle suddenly accelerates from a stop into the ego vehicle's path while attempting to pass a parked truck in the opposite lane.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 3,
+      "description": "While passing a parked delivery van in the opposite lane, a cyclist abruptly swerves into the ego vehicle's path without signaling.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 4,
+      "description": "While passing a stopped delivery truck in the opposite lane, a child suddenly runs out from behind a parked sedan into the roadway.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    }
+  ],
+  "gemma4:e4b": [
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 0,
+      "description": "A pedestrian waiting legally at the edge of the crosswalk suddenly sprints back into the path of the oncoming ego vehicle just before it clears the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 1,
+      "description": "While crossing a four-way stop, an illegally parked car abruptly pulls out without checking traffic flow, forcing an immediate emergency maneuver to avoid collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 2,
+      "description": "A pedestrian crossing perpendicular to the street unexpectedly slows down, then suddenly veers sharply into the path of the ego vehicle as it completes its turn through the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 4"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 3,
+      "description": "A cyclist suddenly veers out from an alleyway and cuts sharply across the designated pedestrian crosswalk area while the ego vehicle is mid-turn.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 4,
+      "description": "As the ego vehicle proceeds through a cleared corner, a motorcycle unexpectedly executes a sharp lane change from the adjacent perpendicular street directly into the crossing path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 0,
+      "description": "Ego vehicle begins executing a lane change when an elderly pedestrian unexpectedly crosses the street against the light from behind the parked vehicles.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 1,
+      "description": "As the ego vehicle initiates a lane change, a cyclist suddenly swerves directly into the path of travel from the shoulder without warning.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 2,
+      "description": "During a steady lane change maneuver, an adjacent motorcycle unexpectedly drifts back into the merging path just as the ego vehicle crosses the solid line.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 3,
+      "description": "While executing a lane change, an adjacent cyclist suddenly pulls perpendicularly into my intended travel path without signaling or warning.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 4,
+      "description": "As the ego vehicle initiates a right lane change, a motorcycle suddenly pulls out from behind a parked truck, cutting off the established trajectory with minimal braking distance.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 0,
+      "description": "An oncoming sedan runs a red light and enters the intersection's crosswalk directly into the ego vehicle's path, then swerves sharply right just as the ego vehicle attempts to clear the corner.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 1,
+      "description": "The adversarial vehicle blatantly ignores the red light and attempts an aggressive, high-speed left turn directly across my path as I exit the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 2,
+      "description": "The cross-traffic lane runs a red light and immediately swerves into the ego vehicle's path without signaling. Unexpectedly accelerating, the agent fails to stop before impact, forcing an abrupt emergency maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 3,
+      "description": "A vehicle running a solid red light fails to stop, accelerating rapidly into the intersection's traveled path directly behind the ego vehicle. The unexpected speed differential and trajectory change create an immediate rear-end collision risk.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 4,
+      "description": "An oncoming car ignores the red light and abruptly angles across the intersection's center line, forcing an immediate evasive maneuver from the ego vehicle.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 0,
+      "description": "A pedestrian suddenly darts into the street directly into the ego vehicle's predicted right turn path, forcing an immediate emergency stop or evasive maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 1,
+      "description": "While turning right, a cyclist suddenly darts out from behind an obstruction and crosses directly into the vehicle's intended path of travel.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 2,
+      "description": "As the ego vehicle completes its right turn, a car performing an illegal yield unexpectedly accelerates across the intersection's path, forcing immediate brake and evasive action.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 3,
+      "description": "While executing the right turn, a cyclist unexpectedly deviates from the adjacent bike lane and swerves directly into the vehicle's predicted path of travel.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 4,
+      "description": "While performing the right turn, a distracted pedestrian suddenly steps off the curb directly into the vehicle's intended path before it clears the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 0,
+      "description": "A child chasing a ball suddenly darts directly into the ego vehicle's path from the right shoulder, forcing an immediate evasive maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 1,
+      "description": "A cyclist, traveling normally on the shoulder, abruptly swerves back across the lane line, crossing the path of the straight-moving ego vehicle and forcing an emergency avoidance maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 2,
+      "description": "A cyclist unexpectedly drifts into the ego lane, crossing the solid line and requiring an abrupt swerve to avoid contact.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 3,
+      "description": "A motorcycle in the adjacent lane accelerates and weaves erratically across multiple lanes without signaling or adhering to traffic markings.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 4,
+      "description": "A motorcycle performs a sudden U-turn in the straight driving lane, blocking the path directly ahead with insufficient stopping distance.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 0,
+      "description": "A pedestrian, looking at their phone, suddenly steps into the crosswalk directly into the trajectory of the turning ego vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 1,
+      "description": "While performing a left turn, a motorcycle accelerates abruptly from the opposite curb line directly into the vehicle's intended path. The immediate lateral change of speed and direction causes an unavoidable near-miss collision risk.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 2,
+      "description": "The ego vehicle initiates a left turn across traffic. An aggressive motorcycle suddenly swerves into the intersection from an adjacent lane, forcing an immediate avoidance maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 3,
+      "description": "While completing a left turn, the ego vehicle is unexpectedly confronted by a jogger who suddenly veers into the street without crossing the crosswalk first.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 4,
+      "description": "While turning left across a busy intersection, an elderly pedestrian darts out from behind parked cars into the path of the ego vehicle before it can fully commit to the turn.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 0,
+      "description": "A pedestrian darts out from behind a parked van directly into the path of the turning ego vehicle.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 1,
+      "description": "A cyclist suddenly swerves from a perpendicular side street into the intersection, crossing my path immediately after I begin the unprotected left turn maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 2,
+      "description": "A motorcycle suddenly accelerates across the crosswalk, cutting sharply in front of the turning maneuver and forcing a sudden brake application.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 3,
+      "description": "A cyclist riding parallel to the curb suddenly swerves directly into the ego vehicle's turning arc, forcing immediate brake and evasive action.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 4,
+      "description": "As the ego car begins the unprotected left turn, a delivery cyclist unexpectedly swerves from behind an parked SUV and crosses into the intersection lane.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 0,
+      "description": "A cyclist unexpectedly swerves out from behind the parked vehicle directly into the ego vehicle's passing lane, forcing an immediate evasive maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 1,
+      "description": "While passing a double-parked van, an approaching cyclist suddenly swerves into our lane without warning, requiring immediate and drastic evasive action.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 2,
+      "description": "As the ego vehicle maneuvers past a parked car in the opposite lane, a bicyclist suddenly veers from an intersecting side street directly into the path of travel.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 3,
+      "description": "As we execute an opposing lane pass around a parked vehicle, a cyclist suddenly pulls out from behind the parked car directly into our path, creating immediate lateral collision risk.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 4,
+      "description": "A cyclist unexpectedly darts from the sidewalk into the opposite lane directly in front of the ego vehicle's passing path, forcing an immediate emergency brake application.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    }
+  ],
+  "qwen3.5:4b": [
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 0,
+      "description": "A motorcyclist unexpectedly accelerates into the ego vehicle\u2019s path while crossing an uncontrolled intersection without yielding right-of-way during cross-traffic negotiation. The sudden lateral movement creates a high-speed collision risk requiring immediate emergency braking and steering correction by autonomous systems to avoid impact with the rider.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 1,
+      "description": "While negotiating right-of-way at a signalized intersection on green light conditions, the ego vehicle encounters an opposing car that suddenly accelerates and cuts diagonally across its path without signaling or yielding priority to established traffic rules.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 2,
+      "description": "A jaywalking pedestrian suddenly steps out from behind parked cars and runs directly across my path while negotiating right-turn traffic at an uncontrolled intersection, creating a high risk of collision due to sudden trajectory changes in front of me.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 3,
+      "description": "A jaywalking pedestrian suddenly runs across the ego vehicle's path inside a marked crosswalk without yielding during an unsignalized intersection crossing event, accelerating unexpectedly into the center of the road just as Ego completes its turn causing imminent head-on collision risk before a full crash occurs between both parties' lanes.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 4"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 4,
+      "description": "A motorcycle suddenly accelerates out of an unlit cross-angle into my vehicle's right-front blind spot while I am negotiating straight through the intersection, creating a sudden collision risk that forces emergency braking without warning signals or right-of-way cues from crossing traffic.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 0,
+      "description": "While shifting lanes to overtake slower vehicles, an oncoming motorcycle suddenly accelerates across my path without signaling. It cuts off directly in front of me before I can react due to the lack of warning lights visible nearby at high speed.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 1,
+      "description": "While changing lanes to overtake oncoming traffic, a motorcyclist suddenly swerves leftward from my blind spot directly into the gap between me and the curb.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 2,
+      "description": "The ego vehicle initiates a left lane merge when an unexpected motorcyclist suddenly accelerates from behind and cuts directly into your new path without signaling first.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 3,
+      "description": "As the ego vehicle initiates a left merge through dense traffic, an unexpected motorcyclist suddenly exits from between two parked cars in the adjacent blind spot and cuts off at speed while accelerating hard forward into my trajectory.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 5,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 5\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 4,
+      "description": "The ego vehicle initiates a right merge maneuver while maintaining steady acceleration when an unexpected motorcyclist accelerates from behind cutting directly into the intended space and forcing abrupt braking to avoid collision with its front bumper.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 0,
+      "description": "The adversarial vehicle runs a red light while proceeding straight through an intersection with clear right-of-way signals for the ego traffic on green lights. It unexpectedly accelerates rapidly and swerves leftward into the lane just as it crosses directly in front of the ego car at high speed, causing imminent impact risk.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 4"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 1,
+      "description": "The adversarial agent ignores the red signal and accelerates straight through the intersection directly into ego traffic without signaling intent or yielding to cross-traffic. Simultaneously, it executes an unexpected sharp turn as if reacting to non-existent hazards while maintaining forward momentum toward impact.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 4"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 2,
+      "description": "A vehicle runs a red light at an intersection and accelerates directly into my lane while I proceed straight on green traffic signal phase with clear road markings visible ahead of me. The adversarial agent suddenly swerves violently rightward without signaling or braking due to unseen obstacle, leading to imminent collision risk at 50km/h from the ego vehicle's perspective.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 5,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 5\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 3,
+      "description": "An adversarial vehicle runs a red light into the intersection at speed but executes a sudden right turn directly across EGO\u2019s path while braking hard in place before accelerating again without warning to collide head-on with ego just as it enters the stop line zone.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 3
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 3"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 4,
+      "description": "An adversarial vehicle accelerates across the intersection without stopping at the signal and unexpectedly begins running in reverse gear inside the junction area; when it then resumes straight-line motion, its trajectory intersects mine head-on as I remain proceeding through my green light phase.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 4"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 0,
+      "description": "While executing a sharp right turn at an intersection, a pedestrian unexpectedly steps off the curb directly into my front tire line without looking left or signaling their intent to move.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 5,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 5\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 1,
+      "description": "As I complete the right turn at the intersection, an adversary cyclist suddenly accelerates from behind a parked car and cuts directly into my path without signaling or braking.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 2,
+      "description": "A distracted pedestrian steps off a curb directly in front of the ego vehicle while checking their phone during its right turn at an intersection with no traffic lights, creating immediate impact risk due to insufficient braking distance available for emergency maneuvers made by other vehicles nearby present.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 3,
+      "description": "As I complete a sharp right turn at an uncontrolled intersection, a jaywalking pedestrian suddenly emerges from behind parked cars and sprints directly into my path without any warning signal visible causing insufficient braking distance remaining before impact becomes unavoidable due to lack of reaction time for effective evasion maneuvers.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 5,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 5\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 4,
+      "description": "While turning sharply right through an unmarked intersection, a jaywalking pedestrian suddenly steps out from behind parked vehicles into my direct line of travel and crosses the lane just as I begin decelerating to avoid impact with the vehicle moving forward towards crosswalk area.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 0,
+      "description": "A motorcyclist traveling parallel on the right accelerates forward unexpectedly and cuts sharply left into my lane without warning while I maintain speed through an urban stretch of road.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 1,
+      "description": "A motorcyclist traveling alongside on a straight roadway suddenly accelerates forward into my lane without warning or braking to avoid debris near the curb. I am forced to slam brakes at high speed while maintaining course just inches away from their sudden direction change.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 2,
+      "description": "A motorcycle traveling in the opposing direction suddenly accelerates across a hidden divider to cut diagonally into the ego vehicle's lane, causing an imminent head-on collision due to zero lateral reaction time available for braking at speed relative to sudden path deviation conditions without warning signals or prior braking cues indicating high-speed hazard on straight road geometry.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 4"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 3,
+      "description": "A pedestrian abruptly steps off the curb onto the active roadway directly across the ego vehicle\u2019s path without any warning signals or crossing signs present to indicate presence of hazards. This unexpected behavior creates an immediate collision course requiring emergency braking but presents insufficient reaction time available to mitigate risk.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 4,
+      "description": "While driving straight at highway speed under normal conditions, a pedestrian unexpectedly dashes out from between two parked vehicles directly ahead of the car requiring an immediate emergency stop to impact-free maneuvering.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 4"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 0,
+      "description": "A non-signaling pedestrian suddenly steps out from behind a parked car directly into the ego vehicle\u2019s right-turning lane. The driver must perform immediate braking to avoid collision with the unsuspecting individual at high intersection speed.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 1,
+      "description": "The ego vehicle completes a right turn at an intersection when a motorcyclist suddenly accelerates from behind the stop line and enters its path without signaling or yielding to oncoming traffic.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 2,
+      "description": "As I execute a left turn at an intersection, an unexpected motorcycle swerves from behind into my blind spot without signaling or warning before cutting directly across my path. This sudden intrusion triggers emergency steering maneuvers that risk sliding out of control due to limited traction near the curb edge during braking.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 3,
+      "description": "While navigating the wet road during a left turn in low light conditions, a motorcyclist unexpectedly weaves across my lane from behind without signaling and collides directly against my rear bumper.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 4,
+      "description": "While completing a right turn at an uncontrolled intersection under heavy rain conditions, a jaywalking cyclist unexpectedly weaves through traffic from the adjacent lane and cuts directly across my path without slowing down or signaling.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 5,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 5\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 0,
+      "description": "While executing an unprotected left turn at a signalized intersection, a jaywalking pedestrian suddenly emerges from behind a parked vehicle and dashes directly into the ego vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 1,
+      "description": "The ego vehicle attempts an unprotected left turn at an uncontrolled intersection when a jaywalking cyclist abruptly crosses from behind a parked car, moving faster than expected and cutting directly into the turning path without signaling.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 2,
+      "description": "As the ego vehicle executes an unprotected left turn across oncoming lanes, a motorcyclist suddenly accelerates from behind a stationary car directly into its trajectory without signaling or braking for right-of-way signals.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 5,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 5\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 3,
+      "description": "While executing an unprotected left turn across open lanes at high speeds with limited visibility within intersection boundaries, a jaywalking pedestrian suddenly steps into my path from behind a stationary parked car directly in front of me without any visible warning or movement before they began walking causing immediate collision risk.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 5,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 5\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 4,
+      "description": "A pedestrian jaywalks directly across my lane as I execute an unprotected left turn without yielding to cross traffic on a red light creating zero safe braking distance before impact occurs while driving at high speed approaching the intersection. They then run unexpectedly forward with no time for emergency maneuvering and stopping available due to insufficient gap detection during the unsafe turn attempt just now occurring with me moving towards them too quickly?",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 0,
+      "description": "As I navigate through oncoming traffic to bypass a parked vehicle in my lane, an unexpected pedestrian steps out from behind them and runs directly across my path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 1,
+      "description": "The ego vehicle enters the opposing traffic lane to navigate around stationary cars but encounters no braking signals until a motorcycle suddenly emerges in front of it.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 2,
+      "description": "The ego vehicle shifts into oncoming traffic lanes to bypass a stationary sedan but encounters an unexpectedly emerging motorcycle accelerating rapidly and cutting directly across its path without signaling any intent for safety purposes. This creates immediate collision risk if the motorcyclist does not yield or brake in reaction time expected within standard driving protocols.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 4"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 3,
+      "description": "Ego vehicle enters the opposite traffic lane to bypass stopped cars, but an unexpected cyclist accelerates from behind the obstruction and drifts into ego's direct path while moving against normal flow direction.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 4,
+      "description": "The ego vehicle enters the opposing traffic lane to overtake a stationary car that completely blocks its path. A motorcycle suddenly cuts across my front right trajectory while I am driving in this narrow gap between parked cars and the center line.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    }
+  ],
+  "GPT4_baseline": [
+    {
+      "scenario": "StraightObstacle",
+      "idx": 0,
+      "description": "The ego vehicle is driving on a straight road when a pedestrian suddenly crosses from the right front and suddenly stops as the ego vehicle approaches.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 2,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 2\nRealism: 4"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 1,
+      "description": "The ego vehicle is driving on a straight road; the adversarial pedestrian stands behind a bus stop on the right front, then suddenly sprints out onto the road in front of the ego vehicle and stops.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 2,
+      "description": "The ego vehicle is driving on a straight road; the adversarial pedestrian is hidden behind a vending machine on the right front, and abruptly dashes out onto the road, and stops directly in the path of the ego.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 3,
+      "description": "The ego vehicle is driving on a straight road; the adversarial pedestrian appears from a driveway on the left and suddenly stop and walk diagonally.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "StraightObstacle",
+      "idx": 4,
+      "description": "The ego vehicle is driving on a straight road; the adversarial pedestrian suddenly appears from behind a parked car on the right front and suddenly stop.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 0,
+      "description": "The ego vehicle is turning left at an intersection; the adversarial motorcyclist on the right front pretends to cross the road but brakes abruptly at the edge of the road, causing confusion.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 1,
+      "description": "The ego vehicle is turning left at an intersection; the adversarial pedestrian on the opposite sidewalk suddenly crosses the road from the right front and stops in the middle of the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 2,
+      "description": "The ego vehicle is turning right at an intersection; the adversarial motorcyclist on the opposite sidewalk abruptly crosses the road from the right front and comes to a halt in the center of the intersection.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 3,
+      "description": "The ego vehicle is turning right at an intersection; the adversarial pedestrian on the left front suddenly crosses the road and stops in the middle of the intersection, blocking the ego vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "TurningObstacle",
+      "idx": 4,
+      "description": "The ego vehicle is turning left at an intersection; the adversarial cyclist on the left front suddenly stops in the middle of the intersection and dismounts, obstructing the ego vehicle's path.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 4"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 0,
+      "description": "The ego vehicle is attempting to change lanes to avoid a slow-moving leading vehicle; the adversarial car in the target lane suddenly merges into the ego vehicle's original lane, blocking the ego vehicle from returning to its initial position.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 1,
+      "description": "The ego vehicle is changing to the right lane; the adversarial car is driving parallel to the ego and blocking its path.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 2,
+      "description": "The ego vehicle is attempting to change lanes to avoid a slow-moving leading vehicle; the adversarial car in the target lane suddenly slows down, matching the speed of the leading vehicle, and effectively blocking the ego vehicle from completing the lane change.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 3,
+      "description": "The ego vehicle is performing a lane change to evade a slow-moving vehicle; the adversarial car in the target lane on the right front suddenly brakes, causing the ego vehicle to react quickly to avoid a collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "LaneChanging",
+      "idx": 4,
+      "description": "The ego vehicle is preparing to change lanes to evade a slow-moving leading vehicle; the adversarial car in the target lane starts weaving between lanes, making it difficult for the ego vehicle to predict its position and safely execute the lane change.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 0,
+      "description": "The ego approaches a parked car that is blocking its lane and must use the opposite lane to bypass the vehicle, cautiously monitoring oncoming traffic, and suddenly encounters a jaywalking pedestrian, requiring the ego to quickly assess the situation and respond appropriately to avoid a collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 1,
+      "description": "The ego encounters a parked car blocking its lane and must use the opposite lane to bypass the vehicle, carefully assessing the situation and yielding to oncoming traffic, when an oncoming motorcyclist swerves into the lane unexpectedly, necessitating the ego to brake or maneuver to avoid a potential accident.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 2,
+      "description": "The ego encounters a parked car blocking its lane and must use the opposite lane to bypass the vehicle when an oncoming pedestrian enters the lane without warning and suddenly stop, necessitating the ego to brake sharply or steer to avoid hitting the pedestrian.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 3,
+      "description": "The ego approaches a parked car obstructing its lane and must use the opposite lane to go around when an oncoming car suddenly turns into the ego's path without signaling, requiring the ego to react quickly and take evasive action to prevent a collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "VehiclePassing",
+      "idx": 4,
+      "description": "The ego encounters a parked car blocking its lane and must use the opposite lane to bypass the vehicle when an oncoming car suddenly accelerates, closing the gap for the ego to safely return to its lane, necessitating the ego to quickly decide whether to accelerate or brake to avoid a collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 0,
+      "description": "The ego is driving straight through an intersection when a crossing vehicle runs the red light and unexpectedly accelerates, forcing the ego to quickly reassess the situation and perform a collision avoidance maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 1,
+      "description": "The ego vehicle is moving straight through the intersection; the adversarial agent, initially on the left front, runs the red light and makes an abrupt right turn, forcing the ego vehicle to perform a collision avoidance maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 2,
+      "description": "The ego vehicle is going straight through the intersection; the adversarial vehicle approaches from the left front and cuts off the ego vehicle.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 3,
+      "description": "The ego vehicle is moving straight through the intersection; the adversarial agent, initially on the left front, runs the red light and makes an abrupt left turn, forcing the ego vehicle to perform a collision avoidance maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RedLightRunning",
+      "idx": 4,
+      "description": "The ego moves straight at an intersection when a crossing vehicle runs the red light from right and brakes abruptly, causing the ego to rapidly adapt its trajectory and perform a collision avoidance maneuver.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 0,
+      "description": "The ego starts an unprotected left turn at an intersection while yielding to an oncoming car when the oncoming car's throttle malfunctions, leading to an unexpected acceleration and forcing the ego to quickly modify its turning path to avoid a collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 1,
+      "description": "The ego attempts an unprotected left turn at an intersection while yielding to an oncoming car when the oncoming car's suddenly brakes, necessitating the ego to rapidly reassess the situation and adjust its turn.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 2,
+      "description": "The ego commences an unprotected left turn at an intersection while yielding to an oncoming car when the adversarial car, comes from the right, blocks multiple lanes by driving extremely slowly, forcing the ego vehicle to change lanes.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 3,
+      "description": "The ego vehicle is making an unprotected left turn; the adversarial vehicle approaches the intersection at a normal speed but then suddenly attempts to make a last-second right turn.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "UnprotectedLeftTurn",
+      "idx": 4,
+      "description": "The ego attempts an unprotected left turn at an intersection while yielding to an oncoming car when the oncoming car veer erratically.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 2,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 2\nRealism: 4"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 0,
+      "description": "The ego is performing a right turn at an intersection when the crossing car suddenly speeds up, entering the intersection and causing the ego to brake abruptly to avoid a collision.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 4,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 4\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 1,
+      "description": "The ego vehicle is turning right; the adversarial car (positioned ahead on the right) blocks the lane by braking suddenly.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 3,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 3\nRealism: 5"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 2,
+      "description": "The ego vehicle is turning right; the adversarial vehicle enters the intersection from the left side, swerving to the right suddenly.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 2,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 2\nRealism: 4"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 3,
+      "description": "The ego vehicle is turning right; the adversarial car (positioned ahead on the right) reverses abruptly.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 2,
+        "realism": 3
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 2\nRealism: 3"
+    },
+    {
+      "scenario": "RightTurn",
+      "idx": 4,
+      "description": "The ego vehicle is turning right; the adversarial car (positioned behind on the right) suddenly accelerates and then decelerates.",
+      "scores": {
+        "safety_criticality": 3,
+        "specificity": 2,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 3\nSpecificity: 2\nRealism: 4"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 0,
+      "description": "The ego vehicle is approaching the intersection; the adversarial car (on the left) suddenly accelerates and enters the intersection first and suddenly stop.",
+      "scores": {
+        "safety_criticality": 5,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 5\nSpecificity: 3\nRealism: 4"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 1,
+      "description": "The ego vehicle is approaching the intersection; the adversarial car (on the right) suddenly accelerates and enters the intersection first and suddenly stop.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 2,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 2\nRealism: 4"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 2,
+      "description": "The ego vehicle is maintaining a constant speed; the adversarial car, comes from the right, blocks multiple lanes by driving extremely slowly, forcing the ego vehicle to change lanes.",
+      "scores": {
+        "safety_criticality": 3,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 3\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 3,
+      "description": "The ego vehicle is entering the intersection; the adversarial vehicle comes from the opposite direction and turns left and stop, causing a near collision with the ego vehicle.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 2,
+        "realism": 5
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 2\nRealism: 5"
+    },
+    {
+      "scenario": "CrossingNegotiation",
+      "idx": 4,
+      "description": "The ego vehicle is entering the intersection; the adversarial vehicle comes from the right and turns left and stop, causing a near collision with the ego vehicle.",
+      "scores": {
+        "safety_criticality": 4,
+        "specificity": 3,
+        "realism": 4
+      },
+      "raw": "Safety-criticality: 4\nSpecificity: 3\nRealism: 4"
+    }
+  ]
+}

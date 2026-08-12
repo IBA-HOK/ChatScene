@@ -1,0 +1,12 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "StraightObstacle",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is driving on a straight road. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "A motorcyclist traveling parallel on the right accelerates forward unexpectedly and cuts sharply left into my lane without warning while I maintain speed through an urban stretch of road.",
+    "A motorcyclist traveling alongside on a straight roadway suddenly accelerates forward into my lane without warning or braking to avoid debris near the curb. I am forced to slam brakes at high speed while maintaining course just inches away from their sudden direction change.",
+    "A motorcycle traveling in the opposing direction suddenly accelerates across a hidden divider to cut diagonally into the ego vehicle's lane, causing an imminent head-on collision due to zero lateral reaction time available for braking at speed relative to sudden path deviation conditions without warning signals or prior braking cues indicating high-speed hazard on straight road geometry.",
+    "A pedestrian abruptly steps off the curb onto the active roadway directly across the ego vehicle\u2019s path without any warning signals or crossing signs present to indicate presence of hazards. This unexpected behavior creates an immediate collision course requiring emergency braking but presents insufficient reaction time available to mitigate risk.",
+    "While driving straight at highway speed under normal conditions, a pedestrian unexpectedly dashes out from between two parked vehicles directly ahead of the car requiring an immediate emergency stop to impact-free maneuvering."
+  ]
+}

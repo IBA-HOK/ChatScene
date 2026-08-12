@@ -1,0 +1,12 @@
+{
+  "model": "gemma4:12b",
+  "base_scenario": "RedLightRunning",
+  "prompt": "Provide a description of a safety-critical scenario where a vehicle runs a red light at an intersection while the ego vehicle is proceeding through. The adversarial agent should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "An oncoming vehicle ignores its red light and accelerates rapidly across an intersection, cutting directly into the ego vehicle's path.",
+    "An oncoming vehicle ignores a red light and swerves sharply into the ego vehicle's path at the center of the intersection.",
+    "An oncoming vehicle from a cross-street ignores a red light and performs an aggressive, sudden lane change into the ego vehicle\u2019s path at the center of the intersection.",
+    "A vehicle from the cross-street abruptly speeds through a red light, entering the ego vehicle's lane in the middle of the intersection.",
+    "A vehicle from a side street accelerates abruptly through a red light, crossing directly into the ego vehicle's path at high speed."
+  ]
+}

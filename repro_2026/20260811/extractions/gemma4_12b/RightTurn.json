@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:12b",
+  "base_scenario": "RightTurn",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "As the ego vehicle initiates a right turn, a pedestrian suddenly steps into its path from behind a parked delivery truck.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly steps into the path of the ego vehicle.\nGeometry: A road where the ego vehicle is performing a right turn.\nSpawn Position: The adversarial agent is located behind a parked delivery truck, which acts as an obstruction to the ego vehicle's view during the turn.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly steps into the path of the ego vehicle.",
+        "Geometry": "A road where the ego vehicle is performing a right turn.",
+        "Spawn Position": "The adversarial agent is located behind a parked delivery truck, which acts as an obstruction to the ego vehicle's view during the turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "A cyclist suddenly swerves into the ego vehicle's path from an adjacent lane while the ego vehicle is executing its right turn at the intersection.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist suddenly swerves into the ego vehicle's path.\nGeometry: An intersection where the ego vehicle is executing a right turn.\nSpawn Position: The adversarial agent is located in an adjacent lane to the ego vehicle's path during its right turn.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist suddenly swerves into the ego vehicle's path.",
+        "Geometry": "An intersection where the ego vehicle is executing a right turn.",
+        "Spawn Position": "The adversarial agent is located in an adjacent lane to the ego vehicle's path during its right turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A pedestrian steps into the roadway from behind a parked delivery truck just as the ego vehicle initiates its right turn at the intersection.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The pedestrian steps into the roadway from behind a parked delivery truck.\nGeometry: An intersection where the ego vehicle is performing a right turn.\nSpawn Position: The adversarial agent is positioned behind a parked delivery truck on the path of the ego's right turn at the intersection.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The pedestrian steps into the roadway from behind a parked delivery truck.",
+        "Geometry": "An intersection where the ego vehicle is performing a right turn.",
+        "Spawn Position": "The adversarial agent is positioned behind a parked delivery truck on the path of the ego's right turn at the intersection."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A pedestrian unexpectedly steps into the roadway from behind a parked delivery truck as the ego vehicle executes its right turn.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian unexpectedly steps into the roadway from behind a parked delivery truck.\nGeometry: An intersection where the ego vehicle is performing a right turn.\nSpawn Position: The adversarial agent is located behind a parked delivery truck on the right side of the ego vehicle's path during its turn.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian unexpectedly steps into the roadway from behind a parked delivery truck.",
+        "Geometry": "An intersection where the ego vehicle is performing a right turn.",
+        "Spawn Position": "The adversarial agent is located behind a parked delivery truck on the right side of the ego vehicle's path during its turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A cyclist suddenly swerves into the ego vehicle's path from an adjacent lane as it initiates a right turn at the intersection.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist suddenly swerves into the ego vehicle's path.\nGeometry: An intersection where the ego vehicle is initiating a right turn.\nSpawn Position: The adversarial agent starts in an adjacent lane to the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist suddenly swerves into the ego vehicle's path.",
+        "Geometry": "An intersection where the ego vehicle is initiating a right turn.",
+        "Spawn Position": "The adversarial agent starts in an adjacent lane to the ego vehicle."
+      },
+      "success": true
+    }
+  ]
+}

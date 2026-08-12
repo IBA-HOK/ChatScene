@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e2b",
+  "base_scenario": "RedLightRunning",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "An autonomous vehicle runs a red light into an intersection; a following vehicle unexpectedly swerves across the lane, forcing the ego vehicle to execute an emergency stop to avoid a collision.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car unexpectedly swerves across the lane.\nGeometry: A four-way intersection where the ego vehicle is running a red light.\nSpawn Position: The adversarial car is following the ego vehicle in the lane immediately ahead, attempting to cross or move into the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car unexpectedly swerves across the lane.",
+        "Geometry": "A four-way intersection where the ego vehicle is running a red light.",
+        "Spawn Position": "The adversarial car is following the ego vehicle in the lane immediately ahead, attempting to cross or move into the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "A vehicle running a red light enters the intersection, and an adjacent pedestrian unexpectedly darts into the roadway, forcing the ego vehicle to brake suddenly and risk rear-end collision.",
+      "extraction_raw": "Adversarial Object: Car and Pedestrian\nBehavior: The car runs a red light into the intersection, and an adjacent pedestrian unexpectedly darts into the roadway.\nGeometry: A four-way intersection with a traffic signal (red light).\nSpawn Position: The car is entering the intersection; the pedestrian is adjacent to the road/intersection area.",
+      "extraction": {
+        "Adversarial Object": "Car and Pedestrian",
+        "Behavior": "The car runs a red light into the intersection, and an adjacent pedestrian unexpectedly darts into the roadway.",
+        "Geometry": "A four-way intersection with a traffic signal (red light).",
+        "Spawn Position": "The car is entering the intersection; the pedestrian is adjacent to the road/intersection area."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "The ego vehicle proceeds through an intersection with a red light, and an opposing vehicle unexpectedly drifts into the intersection, blocking the lane and forcing the ego vehicle into an unavoidable collision course.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car unexpectedly drifts into the intersection, blocking the lane.\nGeometry: A signalized intersection with a red light.\nSpawn Position: The adversarial car is approaching from the opposing direction, entering the intersection to block the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car unexpectedly drifts into the intersection, blocking the lane.",
+        "Geometry": "A signalized intersection with a red light.",
+        "Spawn Position": "The adversarial car is approaching from the opposing direction, entering the intersection to block the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "An autonomous vehicle illegally runs a red light onto an intersection while a cyclist unexpectedly ignores traffic signals and enters the crosswalk directly into its path.",
+      "extraction_raw": "Adversarial Object: Car, Bicycle\nBehavior: The car illegally runs a red light onto an intersection; the cyclist ignores traffic signals and enters the crosswalk directly into the path of the ego vehicle.\nGeometry: A four-way intersection with signalized traffic lights (red light violation).\nSpawn Position: The adversarial car is entering the intersection from the red light side; the adversarial bicycle is entering the crosswalk directly into the path of the ego vehicle at the intersection.",
+      "extraction": {
+        "Adversarial Object": "Car, Bicycle",
+        "Behavior": "The car illegally runs a red light onto an intersection; the cyclist ignores traffic signals and enters the crosswalk directly into the path of the ego vehicle.",
+        "Geometry": "A four-way intersection with signalized traffic lights (red light violation).",
+        "Spawn Position": "The adversarial car is entering the intersection from the red light side; the adversarial bicycle is entering the crosswalk directly into the path of the ego vehicle at the intersection."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A vehicle runs a red light and proceeds through an intersection, while an adjacent cyclist unexpectedly swerves into the vehicle's path.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly swerves into the vehicle's path.\nGeometry: A four-way intersection.\nSpawn Position: The adversarial agent is adjacent to the ego vehicle, in an adjacent lane or path.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly swerves into the vehicle's path.",
+        "Geometry": "A four-way intersection.",
+        "Spawn Position": "The adversarial agent is adjacent to the ego vehicle, in an adjacent lane or path."
+      },
+      "success": true
+    }
+  ]
+}

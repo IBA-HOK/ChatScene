@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e4b",
+  "base_scenario": "CrossingNegotiation",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A pedestrian waiting legally at the edge of the crosswalk suddenly sprints back into the path of the oncoming ego vehicle just before it clears the intersection.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly sprints back into the path of the ego vehicle.\nGeometry: A four-way signalized intersection.\nSpawn Position: The adversarial agent spawns from the edge of the crosswalk, directly into the oncoming lane of the ego vehicle at the intersection.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly sprints back into the path of the ego vehicle.",
+        "Geometry": "A four-way signalized intersection.",
+        "Spawn Position": "The adversarial agent spawns from the edge of the crosswalk, directly into the oncoming lane of the ego vehicle at the intersection."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "While crossing a four-way stop, an illegally parked car abruptly pulls out without checking traffic flow, forcing an immediate emergency maneuver to avoid collision.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car abruptly pulls out from a parked position, failing to check traffic flow.\nGeometry: The ego vehicle is crossing a four-way stop/intersection.\nSpawn Position: The adversarial agent is illegally parked at the corner or curb adjacent to the crossing path, pulling out into the flow of traffic.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car abruptly pulls out from a parked position, failing to check traffic flow.",
+        "Geometry": "The ego vehicle is crossing a four-way stop/intersection.",
+        "Spawn Position": "The adversarial agent is illegally parked at the corner or curb adjacent to the crossing path, pulling out into the flow of traffic."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A pedestrian crossing perpendicular to the street unexpectedly slows down, then suddenly veers sharply into the path of the ego vehicle as it completes its turn through the intersection.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian crosses perpendicular to the street, unexpectedly slowing down, and then veers sharply into the path of the ego vehicle as it completes its turn.\nGeometry: The ego vehicle drives through a four-way signalized intersection while completing a turn.\nSpawn Position: The adversarial agent spawns from across the street or from a perpendicular direction relative to the ego vehicle's turning path at the intersection.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian crosses perpendicular to the street, unexpectedly slowing down, and then veers sharply into the path of the ego vehicle as it completes its turn.",
+        "Geometry": "The ego vehicle drives through a four-way signalized intersection while completing a turn.",
+        "Spawn Position": "The adversarial agent spawns from across the street or from a perpendicular direction relative to the ego vehicle's turning path at the intersection."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A cyclist suddenly veers out from an alleyway and cuts sharply across the designated pedestrian crosswalk area while the ego vehicle is mid-turn.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist suddenly veers out from an alleyway and cuts sharply across the designated pedestrian crosswalk area.\nGeometry: The ego vehicle is performing a turn near a pedestrian crosswalk, adjacent to an alleyway.\nSpawn Position: The adversarial agent spawns from an alleyway onto the path of the pedestrian crosswalk while the ego vehicle is mid-turn.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist suddenly veers out from an alleyway and cuts sharply across the designated pedestrian crosswalk area.",
+        "Geometry": "The ego vehicle is performing a turn near a pedestrian crosswalk, adjacent to an alleyway.",
+        "Spawn Position": "The adversarial agent spawns from an alleyway onto the path of the pedestrian crosswalk while the ego vehicle is mid-turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "As the ego vehicle proceeds through a cleared corner, a motorcycle unexpectedly executes a sharp lane change from the adjacent perpendicular street directly into the crossing path.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle unexpectedly executes a sharp lane change from the adjacent perpendicular street directly into the crossing path.\nGeometry: The ego vehicle proceeds through a corner/intersection.\nSpawn Position: The adversarial agent spawns from the adjacent perpendicular street relative to the ego vehicle's crossing path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle unexpectedly executes a sharp lane change from the adjacent perpendicular street directly into the crossing path.",
+        "Geometry": "The ego vehicle proceeds through a corner/intersection.",
+        "Spawn Position": "The adversarial agent spawns from the adjacent perpendicular street relative to the ego vehicle's crossing path."
+      },
+      "success": true
+    }
+  ]
+}

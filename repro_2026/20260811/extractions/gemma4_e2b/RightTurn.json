@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e2b",
+  "base_scenario": "RightTurn",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "As the ego vehicle begins a right turn, a motorcycle unexpectedly enters the intersection from the left lane, forcing an abrupt emergency brake.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: Unexpectedly enters the intersection and performs an emergency brake.\nGeometry: A four-way intersection during a right turn maneuver.\nSpawn Position: The motorcycle enters the intersection from the left lane relative to the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "Unexpectedly enters the intersection and performs an emergency brake.",
+        "Geometry": "A four-way intersection during a right turn maneuver.",
+        "Spawn Position": "The motorcycle enters the intersection from the left lane relative to the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "As the ego vehicle begins its right turn, a motorcycle unexpectedly enters the intersection from the left, blocking the turning lane and forcing an immediate evasive maneuver.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: Unexpectedly enters the intersection from the left, blocking the turning lane.\nGeometry: An intersection during a right turn.\nSpawn Position: The motorcycle enters the intersection from the left side relative to the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "Unexpectedly enters the intersection from the left, blocking the turning lane.",
+        "Geometry": "An intersection during a right turn.",
+        "Spawn Position": "The motorcycle enters the intersection from the left side relative to the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "While making a right turn, an oncoming motorcycle unexpectedly swerves across the lane, directly into the turning vehicle's path.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle unexpectedly swerves across the lane directly into the turning vehicle's path.\nGeometry: The ego vehicle is executing a right turn in traffic where oncoming vehicles are present.\nSpawn Position: The adversarial motorcycle is in the oncoming lane, crossing the path of the ego vehicle during the turn maneuver.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle unexpectedly swerves across the lane directly into the turning vehicle's path.",
+        "Geometry": "The ego vehicle is executing a right turn in traffic where oncoming vehicles are present.",
+        "Spawn Position": "The adversarial motorcycle is in the oncoming lane, crossing the path of the ego vehicle during the turn maneuver."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "As the ego vehicle begins a right turn, a cyclist unexpectedly swerves into the travel lane from the opposing direction immediately before the turn.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: Unexpectedly swerves into the travel lane.\nGeometry: Right turn maneuver context.\nSpawn Position: From the opposing direction immediately before the turn.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "Unexpectedly swerves into the travel lane.",
+        "Geometry": "Right turn maneuver context.",
+        "Spawn Position": "From the opposing direction immediately before the turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "As the ego vehicle initiates a right turn, a pedestrian unexpectedly steps into the crosswalk directly into the path of the turning vehicle.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: Unexpectedly steps into the path of the ego vehicle.\nGeometry: The ego vehicle is initiating a right turn, involving a crosswalk or intersection.\nSpawn Position: The adversarial pedestrian enters the crosswalk directly into the turning vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "Unexpectedly steps into the path of the ego vehicle.",
+        "Geometry": "The ego vehicle is initiating a right turn, involving a crosswalk or intersection.",
+        "Spawn Position": "The adversarial pedestrian enters the crosswalk directly into the turning vehicle's path."
+      },
+      "success": true
+    }
+  ]
+}

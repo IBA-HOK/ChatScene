@@ -1,0 +1,66 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "LaneChanging",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "While shifting lanes to overtake slower vehicles, an oncoming motorcycle suddenly accelerates across my path without signaling. It cuts off directly in front of me before I can react due to the lack of warning lights visible nearby at high speed.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly accelerates across my path without signaling and cuts off directly in front of me before I can react at high speed due to lack of warning lights visible nearby.\nGeometry: A straight road with multiple lanes allowing for overtaking, featuring opposing traffic flow where the ego vehicle is shifting lanes to overtake slower vehicles.\nSpawn Position: The adversarial agent approaches from the near opposite lane (oncoming) moving towards the center of the road directly in front of me to cut off my path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly accelerates across my path without signaling and cuts off directly in front of me before I can react at high speed due to lack of warning lights visible nearby.",
+        "Geometry": "A straight road with multiple lanes allowing for overtaking, featuring opposing traffic flow where the ego vehicle is shifting lanes to overtake slower vehicles.",
+        "Spawn Position": "The adversarial agent approaches from the near opposite lane (oncoming) moving towards the center of the road directly in front of me to cut off my path."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "While changing lanes to overtake oncoming traffic, a motorcyclist suddenly swerves leftward from my blind spot directly into the gap between me and the curb.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: suddenly swerves leftward into ego path\nGeometry: lane change near curb during overtaking maneuver\nSpawn Position: in blind spot",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "suddenly swerves leftward into ego path",
+        "Geometry": "lane change near curb during overtaking maneuver",
+        "Spawn Position": "in blind spot"
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "The ego vehicle initiates a left lane merge when an unexpected motorcyclist suddenly accelerates from behind and cuts directly into your new path without signaling first.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcyclist suddenly accelerates from behind and cuts directly into the ego vehicle's new path without signaling first.\nGeometry: A multi-lane road where lane merging is permitted in the same direction of traffic flow.\nSpawn Position: The adversarial agent starts directly behind and slightly offset from the ego vehicle, accelerating rapidly to enter the space ahead of the original trajectory.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcyclist suddenly accelerates from behind and cuts directly into the ego vehicle's new path without signaling first.",
+        "Geometry": "A multi-lane road where lane merging is permitted in the same direction of traffic flow.",
+        "Spawn Position": "The adversarial agent starts directly behind and slightly offset from the ego vehicle, accelerating rapidly to enter the space ahead of the original trajectory."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "As the ego vehicle initiates a left merge through dense traffic, an unexpected motorcyclist suddenly exits from between two parked cars in the adjacent blind spot and cuts off at speed while accelerating hard forward into my trajectory.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly accelerates hard forward to cut off into the ego vehicle's trajectory after exiting between two parked cars.\nGeometry: A road with dense traffic where an ego vehicle is attempting a left merge; there are no specific signalized intersections mentioned, but implies urban driving conditions near parked vehicles.\nSpawn Position: The adversarial agent exits from between two parked cars in the adjacent blind spot of the ego vehicle's path for merging.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly accelerates hard forward to cut off into the ego vehicle's trajectory after exiting between two parked cars.",
+        "Geometry": "A road with dense traffic where an ego vehicle is attempting a left merge; there are no specific signalized intersections mentioned, but implies urban driving conditions near parked vehicles.",
+        "Spawn Position": "The adversarial agent exits from between two parked cars in the adjacent blind spot of the ego vehicle's path for merging."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "The ego vehicle initiates a right merge maneuver while maintaining steady acceleration when an unexpected motorcyclist accelerates from behind cutting directly into the intended space and forcing abrupt braking to avoid collision with its front bumper.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly accelerates from behind and cuts directly into the ego vehicle's intended merge space, forcing abrupt braking.\nGeometry: A multi-lane road where a right lane merge maneuver is taking place by the ego vehicle.\nSpawn Position: The adversarial agent starts from behind and to the side of the ego vehicle before cutting forward into its path.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly accelerates from behind and cuts directly into the ego vehicle's intended merge space, forcing abrupt braking.",
+        "Geometry": "A multi-lane road where a right lane merge maneuver is taking place by the ego vehicle.",
+        "Spawn Position": "The adversarial agent starts from behind and to the side of the ego vehicle before cutting forward into its path."
+      },
+      "success": true
+    }
+  ]
+}

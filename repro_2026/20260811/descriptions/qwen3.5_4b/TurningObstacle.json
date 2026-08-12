@@ -1,0 +1,12 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "TurningObstacle",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is turning at an intersection. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "A non-signaling pedestrian suddenly steps out from behind a parked car directly into the ego vehicle\u2019s right-turning lane. The driver must perform immediate braking to avoid collision with the unsuspecting individual at high intersection speed.",
+    "The ego vehicle completes a right turn at an intersection when a motorcyclist suddenly accelerates from behind the stop line and enters its path without signaling or yielding to oncoming traffic.",
+    "As I execute a left turn at an intersection, an unexpected motorcycle swerves from behind into my blind spot without signaling or warning before cutting directly across my path. This sudden intrusion triggers emergency steering maneuvers that risk sliding out of control due to limited traction near the curb edge during braking.",
+    "While navigating the wet road during a left turn in low light conditions, a motorcyclist unexpectedly weaves across my lane from behind without signaling and collides directly against my rear bumper.",
+    "While completing a right turn at an uncontrolled intersection under heavy rain conditions, a jaywalking cyclist unexpectedly weaves through traffic from the adjacent lane and cuts directly across my path without slowing down or signaling."
+  ]
+}

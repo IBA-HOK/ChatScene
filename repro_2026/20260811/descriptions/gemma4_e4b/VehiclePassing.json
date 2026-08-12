@@ -1,0 +1,12 @@
+{
+  "model": "gemma4:e4b",
+  "base_scenario": "VehiclePassing",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is passing a parked vehicle using the opposite lane. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "A cyclist unexpectedly swerves out from behind the parked vehicle directly into the ego vehicle's passing lane, forcing an immediate evasive maneuver.",
+    "While passing a double-parked van, an approaching cyclist suddenly swerves into our lane without warning, requiring immediate and drastic evasive action.",
+    "As the ego vehicle maneuvers past a parked car in the opposite lane, a bicyclist suddenly veers from an intersecting side street directly into the path of travel.",
+    "As we execute an opposing lane pass around a parked vehicle, a cyclist suddenly pulls out from behind the parked car directly into our path, creating immediate lateral collision risk.",
+    "A cyclist unexpectedly darts from the sidewalk into the opposite lane directly in front of the ego vehicle's passing path, forcing an immediate emergency brake application."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e4b",
+  "base_scenario": "UnprotectedLeftTurn",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A pedestrian darts out from behind a parked van directly into the path of the turning ego vehicle.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian darts out from behind a parked van directly into the path of the ego vehicle.\nGeometry: A road where the ego vehicle is performing a turn, with parked vehicles present.\nSpawn Position: The adversarial agent spawns from behind a parked van located on the side of the road, directly into the turning path of the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian darts out from behind a parked van directly into the path of the ego vehicle.",
+        "Geometry": "A road where the ego vehicle is performing a turn, with parked vehicles present.",
+        "Spawn Position": "The adversarial agent spawns from behind a parked van located on the side of the road, directly into the turning path of the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "A cyclist suddenly swerves from a perpendicular side street into the intersection, crossing my path immediately after I begin the unprotected left turn maneuver.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicycle suddenly swerves from a perpendicular side street and crosses the ego vehicle's path.\nGeometry: The ego vehicle is performing an unprotected left turn at a four-way signalized intersection.\nSpawn Position: The adversarial agent spawns from the perpendicular side street intersecting the current path of the ego vehicle during the turn maneuver.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicycle suddenly swerves from a perpendicular side street and crosses the ego vehicle's path.",
+        "Geometry": "The ego vehicle is performing an unprotected left turn at a four-way signalized intersection.",
+        "Spawn Position": "The adversarial agent spawns from the perpendicular side street intersecting the current path of the ego vehicle during the turn maneuver."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A motorcycle suddenly accelerates across the crosswalk, cutting sharply in front of the turning maneuver and forcing a sudden brake application.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly accelerates across the crosswalk, cutting sharply into the ego vehicle's path during a turning maneuver.\nGeometry: The ego vehicle is performing a turning maneuver at an intersection/crosswalk.\nSpawn Position: The adversarial agent spawns from the opposite side of the road/crosswalk and moves directly into the path of the ego vehicle's turn.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly accelerates across the crosswalk, cutting sharply into the ego vehicle's path during a turning maneuver.",
+        "Geometry": "The ego vehicle is performing a turning maneuver at an intersection/crosswalk.",
+        "Spawn Position": "The adversarial agent spawns from the opposite side of the road/crosswalk and moves directly into the path of the ego vehicle's turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A cyclist riding parallel to the curb suddenly swerves directly into the ego vehicle's turning arc, forcing immediate brake and evasive action.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicycle suddenly swerves into the turning arc of the ego vehicle.\nGeometry: The ego vehicle is executing a turn near the curb/sidewalk.\nSpawn Position: The adversarial agent spawns along the curb, parallel to the road, adjacent to the ego vehicle's path during the turn.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicycle suddenly swerves into the turning arc of the ego vehicle.",
+        "Geometry": "The ego vehicle is executing a turn near the curb/sidewalk.",
+        "Spawn Position": "The adversarial agent spawns along the curb, parallel to the road, adjacent to the ego vehicle's path during the turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "As the ego car begins the unprotected left turn, a delivery cyclist unexpectedly swerves from behind an parked SUV and crosses into the intersection lane.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly swerves from behind a parked SUV and crosses into the intersection lane.\nGeometry: The ego vehicle is executing an unprotected left turn at an intersection.\nSpawn Position: The adversarial agent spawns from behind a parked SUV on the side where the ego vehicle is initiating its left turn across traffic.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly swerves from behind a parked SUV and crosses into the intersection lane.",
+        "Geometry": "The ego vehicle is executing an unprotected left turn at an intersection.",
+        "Spawn Position": "The adversarial agent spawns from behind a parked SUV on the side where the ego vehicle is initiating its left turn across traffic."
+      },
+      "success": true
+    }
+  ]
+}

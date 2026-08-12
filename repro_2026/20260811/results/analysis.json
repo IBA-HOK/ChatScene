@@ -1,0 +1,766 @@
+{
+  "models": {
+    "gemma4_12b": {
+      "scenarios": {
+        "CrossingNegotiation": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 136.8,
+          "max_length": 153,
+          "min_length": 109,
+          "adv_object_counts": {
+            "Pedestrian": 3,
+            "Motorcycle": 1,
+            "Bicycle": 1
+          },
+          "avg_behavior_keywords": 2.6,
+          "avg_geometry_keywords": 1.8,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.27811389210856763,
+          "max_pairwise_jaccard": 0.5416666666666666,
+          "min_pairwise_jaccard": 0.1724137931034483
+        },
+        "LaneChanging": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 140.0,
+          "max_length": 153,
+          "min_length": 129,
+          "adv_object_counts": {
+            "Motorcycle": 3,
+            "Car": 2
+          },
+          "avg_behavior_keywords": 3.8,
+          "avg_geometry_keywords": 1.0,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.32507565910791725,
+          "max_pairwise_jaccard": 0.4230769230769231,
+          "min_pairwise_jaccard": 0.2222222222222222
+        },
+        "RedLightRunning": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 138.4,
+          "max_length": 169,
+          "min_length": 122,
+          "adv_object_counts": {
+            "Car": 5
+          },
+          "avg_behavior_keywords": 2.0,
+          "avg_geometry_keywords": 2.2,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.3219992602410567,
+          "max_pairwise_jaccard": 0.5925925925925926,
+          "min_pairwise_jaccard": 0.15625
+        },
+        "RightTurn": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 132.6,
+          "max_length": 147,
+          "min_length": 121,
+          "adv_object_counts": {
+            "Pedestrian": 3,
+            "Bicycle": 2
+          },
+          "avg_behavior_keywords": 1.6,
+          "avg_geometry_keywords": 1.0,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.43689991404590955,
+          "max_pairwise_jaccard": 0.68,
+          "min_pairwise_jaccard": 0.21875
+        },
+        "StraightObstacle": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 103.2,
+          "max_length": 115,
+          "min_length": 94,
+          "adv_object_counts": {
+            "Pedestrian": 2,
+            "Bicycle": 3
+          },
+          "avg_behavior_keywords": 2.6,
+          "avg_geometry_keywords": 0.4,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.28747903947903947,
+          "max_pairwise_jaccard": 0.47619047619047616,
+          "min_pairwise_jaccard": 0.18518518518518517
+        },
+        "TurningObstacle": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 131.4,
+          "max_length": 144,
+          "min_length": 117,
+          "adv_object_counts": {
+            "Bicycle": 2,
+            "Pedestrian": 3
+          },
+          "avg_behavior_keywords": 1.6,
+          "avg_geometry_keywords": 0.8,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.3778927889870604,
+          "max_pairwise_jaccard": 0.5769230769230769,
+          "min_pairwise_jaccard": 0.21212121212121213
+        },
+        "UnprotectedLeftTurn": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 128.0,
+          "max_length": 136,
+          "min_length": 118,
+          "adv_object_counts": {
+            "Bicycle": 2,
+            "Pedestrian": 2,
+            "Motorcycle": 1
+          },
+          "avg_behavior_keywords": 2.6,
+          "avg_geometry_keywords": 0.8,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.42631194476022066,
+          "max_pairwise_jaccard": 0.85,
+          "min_pairwise_jaccard": 0.27586206896551724
+        },
+        "VehiclePassing": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 129.4,
+          "max_length": 151,
+          "min_length": 111,
+          "adv_object_counts": {
+            "Pedestrian": 2,
+            "Bicycle": 3
+          },
+          "avg_behavior_keywords": 1.8,
+          "avg_geometry_keywords": 0.8,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.44412517308638594,
+          "max_pairwise_jaccard": 0.7391304347826086,
+          "min_pairwise_jaccard": 0.3
+        }
+      },
+      "summary": {
+        "total_scenarios": 8,
+        "total_descriptions": 40,
+        "total_unique": 40,
+        "avg_length": 129.975,
+        "avg_pairwise_jaccard": 0.3622372089770197,
+        "ego_mentioned_ratio": 1.0,
+        "avg_behavior_keywords": 2.325,
+        "adv_object_diversity": 4
+      }
+    },
+    "gemma4_e2b": {
+      "scenarios": {
+        "CrossingNegotiation": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 144.8,
+          "max_length": 168,
+          "min_length": 130,
+          "adv_object_counts": {
+            "Bicycle": 3,
+            "Pedestrian": 2
+          },
+          "avg_behavior_keywords": 3.2,
+          "avg_geometry_keywords": 2.0,
+          "ego_mentioned_ratio": 0.4,
+          "avg_pairwise_jaccard": 0.1603729419431507,
+          "max_pairwise_jaccard": 0.25,
+          "min_pairwise_jaccard": 0.1111111111111111
+        },
+        "LaneChanging": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 154.8,
+          "max_length": 170,
+          "min_length": 126,
+          "adv_object_counts": {
+            "Motorcycle": 2,
+            "Bicycle": 3
+          },
+          "avg_behavior_keywords": 2.8,
+          "avg_geometry_keywords": 1.0,
+          "ego_mentioned_ratio": 0.8,
+          "avg_pairwise_jaccard": 0.27023933920485643,
+          "max_pairwise_jaccard": 0.41379310344827586,
+          "min_pairwise_jaccard": 0.14285714285714285
+        },
+        "RedLightRunning": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 181.2,
+          "max_length": 217,
+          "min_length": 136,
+          "adv_object_counts": {
+            "Car": 2,
+            "Pedestrian": 1,
+            "Bicycle": 2
+          },
+          "avg_behavior_keywords": 3.8,
+          "avg_geometry_keywords": 2.8,
+          "ego_mentioned_ratio": 0.6,
+          "avg_pairwise_jaccard": 0.3106348254936965,
+          "max_pairwise_jaccard": 0.43333333333333335,
+          "min_pairwise_jaccard": 0.23684210526315788
+        },
+        "RightTurn": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 147.2,
+          "max_length": 175,
+          "min_length": 129,
+          "adv_object_counts": {
+            "Motorcycle": 3,
+            "Bicycle": 1,
+            "Pedestrian": 1
+          },
+          "avg_behavior_keywords": 2.8,
+          "avg_geometry_keywords": 1.4,
+          "ego_mentioned_ratio": 0.8,
+          "avg_pairwise_jaccard": 0.3047128334598072,
+          "max_pairwise_jaccard": 0.5172413793103449,
+          "min_pairwise_jaccard": 0.22580645161290322
+        },
+        "StraightObstacle": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 131.2,
+          "max_length": 143,
+          "min_length": 100,
+          "adv_object_counts": {
+            "Motorcycle": 1,
+            "Bicycle": 3,
+            "Pedestrian": 1
+          },
+          "avg_behavior_keywords": 3.2,
+          "avg_geometry_keywords": 1.2,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.2724001831501831,
+          "max_pairwise_jaccard": 0.48,
+          "min_pairwise_jaccard": 0.125
+        },
+        "TurningObstacle": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 147.2,
+          "max_length": 155,
+          "min_length": 130,
+          "adv_object_counts": {
+            "Bicycle": 3,
+            "Motorcycle": 1,
+            "Car": 1
+          },
+          "avg_behavior_keywords": 4.4,
+          "avg_geometry_keywords": 2.0,
+          "ego_mentioned_ratio": 0.6,
+          "avg_pairwise_jaccard": 0.28731482823014265,
+          "max_pairwise_jaccard": 0.5,
+          "min_pairwise_jaccard": 0.1388888888888889
+        },
+        "UnprotectedLeftTurn": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 137.8,
+          "max_length": 160,
+          "min_length": 120,
+          "adv_object_counts": {
+            "Bicycle": 2,
+            "Motorcycle": 2,
+            "Pedestrian": 1
+          },
+          "avg_behavior_keywords": 3.4,
+          "avg_geometry_keywords": 1.0,
+          "ego_mentioned_ratio": 0.6,
+          "avg_pairwise_jaccard": 0.2939869025485724,
+          "max_pairwise_jaccard": 0.44,
+          "min_pairwise_jaccard": 0.16666666666666666
+        },
+        "VehiclePassing": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 144.4,
+          "max_length": 184,
+          "min_length": 131,
+          "adv_object_counts": {
+            "Motorcycle": 2,
+            "Bicycle": 2,
+            "Pedestrian": 1
+          },
+          "avg_behavior_keywords": 2.8,
+          "avg_geometry_keywords": 1.2,
+          "ego_mentioned_ratio": 0.8,
+          "avg_pairwise_jaccard": 0.3483577537488075,
+          "max_pairwise_jaccard": 0.56,
+          "min_pairwise_jaccard": 0.18421052631578946
+        }
+      },
+      "summary": {
+        "total_scenarios": 8,
+        "total_descriptions": 40,
+        "total_unique": 40,
+        "avg_length": 148.575,
+        "avg_pairwise_jaccard": 0.28100245097240206,
+        "ego_mentioned_ratio": 0.7,
+        "avg_behavior_keywords": 3.3,
+        "adv_object_diversity": 4
+      }
+    },
+    "gemma4_e4b": {
+      "scenarios": {
+        "CrossingNegotiation": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 167.4,
+          "max_length": 186,
+          "min_length": 145,
+          "adv_object_counts": {
+            "Pedestrian": 2,
+            "Car": 1,
+            "Bicycle": 1,
+            "Motorcycle": 1
+          },
+          "avg_behavior_keywords": 3.0,
+          "avg_geometry_keywords": 1.2,
+          "ego_mentioned_ratio": 0.8,
+          "avg_pairwise_jaccard": 0.1456920355792935,
+          "max_pairwise_jaccard": 0.2972972972972973,
+          "min_pairwise_jaccard": 0.022727272727272728
+        },
+        "LaneChanging": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 152.8,
+          "max_length": 179,
+          "min_length": 138,
+          "adv_object_counts": {
+            "Pedestrian": 1,
+            "Bicycle": 2,
+            "Motorcycle": 2
+          },
+          "avg_behavior_keywords": 2.0,
+          "avg_geometry_keywords": 1.2,
+          "ego_mentioned_ratio": 0.8,
+          "avg_pairwise_jaccard": 0.2052718769567293,
+          "max_pairwise_jaccard": 0.3333333333333333,
+          "min_pairwise_jaccard": 0.10810810810810811
+        },
+        "RedLightRunning": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 192.4,
+          "max_length": 243,
+          "min_length": 156,
+          "adv_object_counts": {
+            "Car": 5
+          },
+          "avg_behavior_keywords": 3.2,
+          "avg_geometry_keywords": 2.4,
+          "ego_mentioned_ratio": 0.8,
+          "avg_pairwise_jaccard": 0.2020327786484042,
+          "max_pairwise_jaccard": 0.26666666666666666,
+          "min_pairwise_jaccard": 0.13333333333333333
+        },
+        "RightTurn": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 159.4,
+          "max_length": 179,
+          "min_length": 141,
+          "adv_object_counts": {
+            "Pedestrian": 2,
+            "Bicycle": 1,
+            "Car": 1,
+            "Motorcycle": 1
+          },
+          "avg_behavior_keywords": 3.4,
+          "avg_geometry_keywords": 0.6,
+          "ego_mentioned_ratio": 0.4,
+          "avg_pairwise_jaccard": 0.2142552648692663,
+          "max_pairwise_jaccard": 0.375,
+          "min_pairwise_jaccard": 0.09302325581395349
+        },
+        "StraightObstacle": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 145.0,
+          "max_length": 188,
+          "min_length": 121,
+          "adv_object_counts": {
+            "Pedestrian": 1,
+            "Bicycle": 2,
+            "Motorcycle": 2
+          },
+          "avg_behavior_keywords": 3.4,
+          "avg_geometry_keywords": 1.0,
+          "ego_mentioned_ratio": 0.6,
+          "avg_pairwise_jaccard": 0.12116164815855217,
+          "max_pairwise_jaccard": 0.21621621621621623,
+          "min_pairwise_jaccard": 0.05263157894736842
+        },
+        "TurningObstacle": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 176.4,
+          "max_length": 234,
+          "min_length": 135,
+          "adv_object_counts": {
+            "Pedestrian": 2,
+            "Motorcycle": 2,
+            "Car": 1
+          },
+          "avg_behavior_keywords": 2.6,
+          "avg_geometry_keywords": 1.0,
+          "ego_mentioned_ratio": 0.8,
+          "avg_pairwise_jaccard": 0.16363901399860775,
+          "max_pairwise_jaccard": 0.20930232558139536,
+          "min_pairwise_jaccard": 0.1276595744680851
+        },
+        "UnprotectedLeftTurn": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 140.0,
+          "max_length": 161,
+          "min_length": 98,
+          "adv_object_counts": {
+            "Pedestrian": 1,
+            "Bicycle": 3,
+            "Motorcycle": 1
+          },
+          "avg_behavior_keywords": 3.4,
+          "avg_geometry_keywords": 0.8,
+          "ego_mentioned_ratio": 0.6,
+          "avg_pairwise_jaccard": 0.1628405021709351,
+          "max_pairwise_jaccard": 0.21875,
+          "min_pairwise_jaccard": 0.07692307692307693
+        },
+        "VehiclePassing": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 164.0,
+          "max_length": 183,
+          "min_length": 150,
+          "adv_object_counts": {
+            "Bicycle": 5
+          },
+          "avg_behavior_keywords": 2.4,
+          "avg_geometry_keywords": 1.2,
+          "ego_mentioned_ratio": 0.6,
+          "avg_pairwise_jaccard": 0.2410429786449138,
+          "max_pairwise_jaccard": 0.40625,
+          "min_pairwise_jaccard": 0.09523809523809523
+        }
+      },
+      "summary": {
+        "total_scenarios": 8,
+        "total_descriptions": 40,
+        "total_unique": 40,
+        "avg_length": 162.175,
+        "avg_pairwise_jaccard": 0.18199201237833776,
+        "ego_mentioned_ratio": 0.675,
+        "avg_behavior_keywords": 2.925,
+        "adv_object_diversity": 4
+      }
+    },
+    "qwen3.5_4b": {
+      "scenarios": {
+        "CrossingNegotiation": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 300.2,
+          "max_length": 355,
+          "min_length": 252,
+          "adv_object_counts": {
+            "Motorcycle": 2,
+            "Car": 1,
+            "Pedestrian": 2
+          },
+          "avg_behavior_keywords": 3.8,
+          "avg_geometry_keywords": 2.0,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.17721841406388644,
+          "max_pairwise_jaccard": 0.2222222222222222,
+          "min_pairwise_jaccard": 0.14492753623188406
+        },
+        "LaneChanging": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 212.2,
+          "max_length": 252,
+          "min_length": 157,
+          "adv_object_counts": {
+            "Motorcycle": 5
+          },
+          "avg_behavior_keywords": 3.2,
+          "avg_geometry_keywords": 1.0,
+          "ego_mentioned_ratio": 0.6,
+          "avg_pairwise_jaccard": 0.20975401550411815,
+          "max_pairwise_jaccard": 0.35555555555555557,
+          "min_pairwise_jaccard": 0.1044776119402985
+        },
+        "RedLightRunning": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 317.0,
+          "max_length": 377,
+          "min_length": 266,
+          "adv_object_counts": {
+            "Car": 4,
+            "Unknown": 1
+          },
+          "avg_behavior_keywords": 4.2,
+          "avg_geometry_keywords": 2.8,
+          "ego_mentioned_ratio": 0.8,
+          "avg_pairwise_jaccard": 0.22638466231623341,
+          "max_pairwise_jaccard": 0.34210526315789475,
+          "min_pairwise_jaccard": 0.15714285714285714
+        },
+        "RightTurn": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 260.4,
+          "max_length": 343,
+          "min_length": 177,
+          "adv_object_counts": {
+            "Pedestrian": 4,
+            "Bicycle": 1
+          },
+          "avg_behavior_keywords": 1.8,
+          "avg_geometry_keywords": 2.2,
+          "ego_mentioned_ratio": 0.2,
+          "avg_pairwise_jaccard": 0.219791639691942,
+          "max_pairwise_jaccard": 0.3275862068965517,
+          "min_pairwise_jaccard": 0.10294117647058823
+        },
+        "StraightObstacle": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 285.4,
+          "max_length": 390,
+          "min_length": 187,
+          "adv_object_counts": {
+            "Motorcycle": 3,
+            "Pedestrian": 2
+          },
+          "avg_behavior_keywords": 3.4,
+          "avg_geometry_keywords": 1.6,
+          "ego_mentioned_ratio": 0.4,
+          "avg_pairwise_jaccard": 0.15071451820932596,
+          "max_pairwise_jaccard": 0.26785714285714285,
+          "min_pairwise_jaccard": 0.08571428571428572
+        },
+        "TurningObstacle": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 241.0,
+          "max_length": 329,
+          "min_length": 195,
+          "adv_object_counts": {
+            "Pedestrian": 1,
+            "Motorcycle": 3,
+            "Bicycle": 1
+          },
+          "avg_behavior_keywords": 3.4,
+          "avg_geometry_keywords": 2.4,
+          "ego_mentioned_ratio": 0.4,
+          "avg_pairwise_jaccard": 0.16818862963457565,
+          "max_pairwise_jaccard": 0.2857142857142857,
+          "min_pairwise_jaccard": 0.08928571428571429
+        },
+        "UnprotectedLeftTurn": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 292.6,
+          "max_length": 469,
+          "min_length": 189,
+          "adv_object_counts": {
+            "Pedestrian": 3,
+            "Bicycle": 1,
+            "Motorcycle": 1
+          },
+          "avg_behavior_keywords": 3.2,
+          "avg_geometry_keywords": 2.2,
+          "ego_mentioned_ratio": 0.6,
+          "avg_pairwise_jaccard": 0.21979773675982614,
+          "max_pairwise_jaccard": 0.37209302325581395,
+          "min_pairwise_jaccard": 0.12222222222222222
+        },
+        "VehiclePassing": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 234.8,
+          "max_length": 381,
+          "min_length": 163,
+          "adv_object_counts": {
+            "Pedestrian": 1,
+            "Motorcycle": 3,
+            "Bicycle": 1
+          },
+          "avg_behavior_keywords": 3.2,
+          "avg_geometry_keywords": 1.4,
+          "ego_mentioned_ratio": 0.8,
+          "avg_pairwise_jaccard": 0.17645663191048425,
+          "max_pairwise_jaccard": 0.3,
+          "min_pairwise_jaccard": 0.1276595744680851
+        }
+      },
+      "summary": {
+        "total_scenarios": 8,
+        "total_descriptions": 40,
+        "total_unique": 40,
+        "avg_length": 267.95000000000005,
+        "avg_pairwise_jaccard": 0.193538281011299,
+        "ego_mentioned_ratio": 0.6000000000000001,
+        "avg_behavior_keywords": 3.275,
+        "adv_object_diversity": 5
+      }
+    },
+    "GPT4_baseline": {
+      "scenarios": {
+        "StraightObstacle": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 171.8,
+          "max_length": 210,
+          "min_length": 148,
+          "adv_object_counts": {
+            "Pedestrian": 5
+          },
+          "avg_behavior_keywords": 3.6,
+          "avg_geometry_keywords": 1.2,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.4369928458163752,
+          "max_pairwise_jaccard": 0.5769230769230769,
+          "min_pairwise_jaccard": 0.32432432432432434
+        },
+        "TurningObstacle": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 197.4,
+          "max_length": 208,
+          "min_length": 190,
+          "adv_object_counts": {
+            "Motorcycle": 2,
+            "Pedestrian": 2,
+            "Bicycle": 1
+          },
+          "avg_behavior_keywords": 3.4,
+          "avg_geometry_keywords": 1.4,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.5048365770076296,
+          "max_pairwise_jaccard": 0.7333333333333333,
+          "min_pairwise_jaccard": 0.35135135135135137
+        },
+        "LaneChanging": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 218.2,
+          "max_length": 262,
+          "min_length": 120,
+          "adv_object_counts": {
+            "Car": 5
+          },
+          "avg_behavior_keywords": 1.6,
+          "avg_geometry_keywords": 1.0,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.3357402024718967,
+          "max_pairwise_jaccard": 0.525,
+          "min_pairwise_jaccard": 0.225
+        },
+        "VehiclePassing": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 284.2,
+          "max_length": 311,
+          "min_length": 254,
+          "adv_object_counts": {
+            "Pedestrian": 2,
+            "Motorcycle": 1,
+            "Car": 2
+          },
+          "avg_behavior_keywords": 3.6,
+          "avg_geometry_keywords": 1.2,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.3984124637423595,
+          "max_pairwise_jaccard": 0.5333333333333333,
+          "min_pairwise_jaccard": 0.3018867924528302
+        },
+        "RedLightRunning": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 205.8,
+          "max_length": 230,
+          "min_length": 144,
+          "adv_object_counts": {
+            "Car": 5
+          },
+          "avg_behavior_keywords": 1.2,
+          "avg_geometry_keywords": 1.8,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.39837410190531364,
+          "max_pairwise_jaccard": 0.9666666666666667,
+          "min_pairwise_jaccard": 0.15
+        },
+        "UnprotectedLeftTurn": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 203.4,
+          "max_length": 254,
+          "min_length": 134,
+          "adv_object_counts": {
+            "Car": 5
+          },
+          "avg_behavior_keywords": 1.8,
+          "avg_geometry_keywords": 1.2,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.3385581967775268,
+          "max_pairwise_jaccard": 0.5357142857142857,
+          "min_pairwise_jaccard": 0.19148936170212766
+        },
+        "RightTurn": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 133.8,
+          "max_length": 181,
+          "min_length": 104,
+          "adv_object_counts": {
+            "Car": 5
+          },
+          "avg_behavior_keywords": 2.0,
+          "avg_geometry_keywords": 0.6,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.3127072738846867,
+          "max_pairwise_jaccard": 0.631578947368421,
+          "min_pairwise_jaccard": 0.10810810810810811
+        },
+        "CrossingNegotiation": {
+          "n": 5,
+          "unique": 5,
+          "avg_length": 166.6,
+          "max_length": 183,
+          "min_length": 156,
+          "adv_object_counts": {
+            "Car": 5
+          },
+          "avg_behavior_keywords": 2.6,
+          "avg_geometry_keywords": 1.0,
+          "ego_mentioned_ratio": 1.0,
+          "avg_pairwise_jaccard": 0.33870210386339417,
+          "max_pairwise_jaccard": 0.8888888888888888,
+          "min_pairwise_jaccard": 0.1388888888888889
+        }
+      },
+      "summary": {
+        "total_scenarios": 8,
+        "total_descriptions": 40,
+        "total_unique": 40,
+        "avg_length": 197.65,
+        "avg_pairwise_jaccard": 0.38304047068364777,
+        "ego_mentioned_ratio": 1.0,
+        "avg_behavior_keywords": 2.4749999999999996,
+        "adv_object_diversity": 4
+      }
+    }
+  }
+}

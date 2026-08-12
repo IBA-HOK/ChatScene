@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e2b",
+  "base_scenario": "TurningObstacle",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "The ego vehicle is executing a left turn across three lanes, but a cyclist suddenly swerves into the turning path from the adjacent lane without signaling.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: Suddenly swerves into the turning path without signaling.\nGeometry: Executing a left turn across three lanes.\nSpawn Position: The adversarial bicycle swerves from the adjacent lane into the ego vehicle's turning path.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "Suddenly swerves into the turning path without signaling.",
+        "Geometry": "Executing a left turn across three lanes.",
+        "Spawn Position": "The adversarial bicycle swerves from the adjacent lane into the ego vehicle's turning path."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "While executing a left turn at a four-way stop, a cyclist unexpectedly swerves from the bike lane into the intersection, blocking the ego vehicle's path.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly swerves from the bike lane into the intersection, blocking the ego vehicle's path.\nGeometry: Executing a left turn at a four-way stop, involving an intersection and bike lanes.\nSpawn Position: The adversarial agent is moving from the bike lane into the intersection, obstructing the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly swerves from the bike lane into the intersection, blocking the ego vehicle's path.",
+        "Geometry": "Executing a left turn at a four-way stop, involving an intersection and bike lanes.",
+        "Spawn Position": "The adversarial agent is moving from the bike lane into the intersection, obstructing the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A vehicle abruptly cuts across the turning lane from the opposing direction, forcing the ego vehicle to brake hard and risk side-swipe collision.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car abruptly cuts across the turning lane from the opposing direction.\nGeometry: A turning lane at an intersection or road junction.\nSpawn Position: The adversarial car is approaching from the opposing direction and crossing the ego vehicle's intended path.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car abruptly cuts across the turning lane from the opposing direction.",
+        "Geometry": "A turning lane at an intersection or road junction.",
+        "Spawn Position": "The adversarial car is approaching from the opposing direction and crossing the ego vehicle's intended path."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "While executing a left turn across an intersection, a bicyclist unexpectedly enters the travel lane from the wrong direction, blocking the path entirely.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicyclist unexpectedly enters the travel lane from the wrong direction, blocking the path entirely.\nGeometry: Crossing an intersection while executing a left turn.\nSpawn Position: The adversarial agent enters the travel lane from the wrong direction, blocking the ego vehicle's path during the turn.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicyclist unexpectedly enters the travel lane from the wrong direction, blocking the path entirely.",
+        "Geometry": "Crossing an intersection while executing a left turn.",
+        "Spawn Position": "The adversarial agent enters the travel lane from the wrong direction, blocking the ego vehicle's path during the turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "While making a left turn across a four-way stop, a cyclist unexpectedly swerves into the turning lane from the opposite direction.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly swerves into the turning lane from the opposite direction.\nGeometry: A four-way stop intersection.\nSpawn Position: The adversarial agent approaches from the opposite direction and enters the turning lane.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly swerves into the turning lane from the opposite direction.",
+        "Geometry": "A four-way stop intersection.",
+        "Spawn Position": "The adversarial agent approaches from the opposite direction and enters the turning lane."
+      },
+      "success": true
+    }
+  ]
+}

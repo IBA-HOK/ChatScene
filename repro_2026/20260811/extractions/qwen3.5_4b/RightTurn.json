@@ -1,0 +1,66 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "RightTurn",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "While executing a sharp right turn at an intersection, a pedestrian unexpectedly steps off the curb directly into my front tire line without looking left or signaling their intent to move.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian unexpectedly steps off the curb directly into my front tire line without looking left or signaling their intent to move.\nGeometry: An intersection where the ego vehicle is executing a sharp right turn.\nSpawn Position: The adversarial agent is initially positioned at the curb and enters directly into the path of the ego vehicle during its maneuver.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian unexpectedly steps off the curb directly into my front tire line without looking left or signaling their intent to move.",
+        "Geometry": "An intersection where the ego vehicle is executing a sharp right turn.",
+        "Spawn Position": "The adversarial agent is initially positioned at the curb and enters directly into the path of the ego vehicle during its maneuver."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "As I complete the right turn at the intersection, an adversary cyclist suddenly accelerates from behind a parked car and cuts directly into my path without signaling or braking.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversary cyclist suddenly accelerates and cuts directly into the ego vehicle's path without signaling or braking.\nGeometry: A right turn at an intersection where traffic flows allow for a cut-in maneuver from behind obstructions.\nSpawn Position: The adversary cyclist spawns from behind a parked car on the side of the road to enter the lane in front of the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversary cyclist suddenly accelerates and cuts directly into the ego vehicle's path without signaling or braking.",
+        "Geometry": "A right turn at an intersection where traffic flows allow for a cut-in maneuver from behind obstructions.",
+        "Spawn Position": "The adversary cyclist spawns from behind a parked car on the side of the road to enter the lane in front of the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A distracted pedestrian steps off a curb directly in front of the ego vehicle while checking their phone during its right turn at an intersection with no traffic lights, creating immediate impact risk due to insufficient braking distance available for emergency maneuvers made by other vehicles nearby present.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian steps off a curb directly in front of the ego vehicle while checking their phone.\nGeometry: A right turn at an intersection with no traffic lights where the ego vehicle is turning.\nSpawn Position: Directly in front of the ego vehicle, stepping from a curb position into the path during the maneuver.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian steps off a curb directly in front of the ego vehicle while checking their phone.",
+        "Geometry": "A right turn at an intersection with no traffic lights where the ego vehicle is turning.",
+        "Spawn Position": "Directly in front of the ego vehicle, stepping from a curb position into the path during the maneuver."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "As I complete a sharp right turn at an uncontrolled intersection, a jaywalking pedestrian suddenly emerges from behind parked cars and sprints directly into my path without any warning signal visible causing insufficient braking distance remaining before impact becomes unavoidable due to lack of reaction time for effective evasion maneuvers.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian jaywalks by emerging from behind parked cars and sprinting directly into the ego vehicle's path.\nGeometry: An uncontrolled intersection with no traffic signals or warning signs visible.\nSpawn Position: The adversarial agent is initially hidden behind parked cars at the corner of the road and emerges to enter the ego vehicle's path during a sharp right turn.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian jaywalks by emerging from behind parked cars and sprinting directly into the ego vehicle's path.",
+        "Geometry": "An uncontrolled intersection with no traffic signals or warning signs visible.",
+        "Spawn Position": "The adversarial agent is initially hidden behind parked cars at the corner of the road and emerges to enter the ego vehicle's path during a sharp right turn."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "While turning sharply right through an unmarked intersection, a jaywalking pedestrian suddenly steps out from behind parked vehicles into my direct line of travel and crosses the lane just as I begin decelerating to avoid impact with the vehicle moving forward towards crosswalk area.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian steps out suddenly from behind parked vehicles into the direct line of travel and crosses the lane as the ego vehicle decelerates.\nGeometry: An unmarked intersection where an ego vehicle is turning sharply right; no traffic lights are present.\nSpawn Position: Behind parked vehicles on the side, stepping directly in front of the ego vehicle's path during a turn.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian steps out suddenly from behind parked vehicles into the direct line of travel and crosses the lane as the ego vehicle decelerates.",
+        "Geometry": "An unmarked intersection where an ego vehicle is turning sharply right; no traffic lights are present.",
+        "Spawn Position": "Behind parked vehicles on the side, stepping directly in front of the ego vehicle's path during a turn."
+      },
+      "success": true
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:12b",
+  "base_scenario": "StraightObstacle",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A pedestrian suddenly steps into the street from behind a parked car, crossing the ego vehicle's path unexpectedly.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The pedestrian suddenly steps into the street and crosses the ego vehicle's path unexpectedly.\nGeometry: A street.\nSpawn Position: The adversarial agent is positioned behind a parked car, which then enters the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The pedestrian suddenly steps into the street and crosses the ego vehicle's path unexpectedly.",
+        "Geometry": "A street.",
+        "Spawn Position": "The adversarial agent is positioned behind a parked car, which then enters the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "A cyclist swerves abruptly into the path of the ego vehicle while traveling along a straight urban road.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist swerves abruptly into the path of the ego vehicle.\nGeometry: A straight urban road.\nSpawn Position: The adversarial agent is on the same straight road as the ego vehicle, positioned in a way that it can enter the ego's path.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist swerves abruptly into the path of the ego vehicle.",
+        "Geometry": "A straight urban road.",
+        "Spawn Position": "The adversarial agent is on the same straight road as the ego vehicle, positioned in a way that it can enter the ego's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A cyclist suddenly swerves into the ego vehicle's lane from the shoulder to avoid an obstacle.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicycle suddenly swerves from the shoulder into the ego vehicle's lane to avoid an obstacle.\nGeometry: A straight road with a shoulder.\nSpawn Position: The adversarial agent is positioned on the road shoulder adjacent to the ego vehicle's lane.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicycle suddenly swerves from the shoulder into the ego vehicle's lane to avoid an obstacle.",
+        "Geometry": "A straight road with a shoulder.",
+        "Spawn Position": "The adversarial agent is positioned on the road shoulder adjacent to the ego vehicle's lane."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A child suddenly runs out from behind a parked delivery truck into the path of the oncoming ego vehicle.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly runs out from behind a parked truck into the path of the oncoming ego vehicle.\nGeometry: A two-lane road with traffic flowing in opposite directions.\nSpawn Position: The adversarial agent is located behind a parked delivery truck on the side of the road, which acts as an obstruction to the ego vehicle's view.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly runs out from behind a parked truck into the path of the oncoming ego vehicle.",
+        "Geometry": "A two-lane road with traffic flowing in opposite directions.",
+        "Spawn Position": "The adversarial agent is located behind a parked delivery truck on the side of the road, which acts as an obstruction to the ego vehicle's view."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A cyclist suddenly swerves into the ego vehicle's lane while traveling on a straight suburban road.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist suddenly swerves into the ego vehicle's lane.\nGeometry: A straight suburban road.\nSpawn Position: The adversarial agent is on the same straight road as the ego vehicle, moving in the same direction.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist suddenly swerves into the ego vehicle's lane.",
+        "Geometry": "A straight suburban road.",
+        "Spawn Position": "The adversarial agent is on the same straight road as the ego vehicle, moving in the same direction."
+      },
+      "success": true
+    }
+  ]
+}

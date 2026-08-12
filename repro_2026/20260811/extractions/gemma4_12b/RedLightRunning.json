@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:12b",
+  "base_scenario": "RedLightRunning",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "An oncoming vehicle ignores its red light and accelerates rapidly across an intersection, cutting directly into the ego vehicle's path.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car ignores its red light, accelerates rapidly across an intersection, and cuts directly into the ego vehicle's path.\nGeometry: A signalized intersection.\nSpawn Position: The adversarial car is approaching from the opposite side of the intersection.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car ignores its red light, accelerates rapidly across an intersection, and cuts directly into the ego vehicle's path.",
+        "Geometry": "A signalized intersection.",
+        "Spawn Position": "The adversarial car is approaching from the opposite side of the intersection."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "An oncoming vehicle ignores a red light and swerves sharply into the ego vehicle's path at the center of the intersection.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car ignores a red light and swerves sharply into the ego vehicle's path at the center of the intersection.\nGeometry: A four-way signalized intersection.\nSpawn Position: The adversarial car is approaching from the opposite direction in the intersecting lane.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car ignores a red light and swerves sharply into the ego vehicle's path at the center of the intersection.",
+        "Geometry": "A four-way signalized intersection.",
+        "Spawn Position": "The adversarial car is approaching from the opposite direction in the intersecting lane."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "An oncoming vehicle from a cross-street ignores a red light and performs an aggressive, sudden lane change into the ego vehicle\u2019s path at the center of the intersection.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car ignores a red light and performs an aggressive, sudden lane change into the ego vehicle's path at the center of the intersection.\nGeometry: A signalized four-way intersection.\nSpawn Position: The adversarial car is approaching from a cross-street toward the center of the intersection.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car ignores a red light and performs an aggressive, sudden lane change into the ego vehicle's path at the center of the intersection.",
+        "Geometry": "A signalized four-way intersection.",
+        "Spawn Position": "The adversarial car is approaching from a cross-street toward the center of the intersection."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A vehicle from the cross-street abruptly speeds through a red light, entering the ego vehicle's lane in the middle of the intersection.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car speeds through a red light and enters the ego vehicle's lane in the middle of the intersection.\nGeometry: A four-way signalized intersection.\nSpawn Position: The adversarial agent is coming from the cross-street into the center of the intersection.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car speeds through a red light and enters the ego vehicle's lane in the middle of the intersection.",
+        "Geometry": "A four-way signalized intersection.",
+        "Spawn Position": "The adversarial agent is coming from the cross-street into the center of the intersection."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A vehicle from a side street accelerates abruptly through a red light, crossing directly into the ego vehicle's path at high speed.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car accelerates abruptly through a red light and crosses directly into the ego vehicle's path at high speed.\nGeometry: A signalized intersection where a side road meets the main road.\nSpawn Position: The adversarial agent is on a side street, crossing into the ego vehicle's lane from an intersecting direction.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car accelerates abruptly through a red light and crosses directly into the ego vehicle's path at high speed.",
+        "Geometry": "A signalized intersection where a side road meets the main road.",
+        "Spawn Position": "The adversarial agent is on a side street, crossing into the ego vehicle's lane from an intersecting direction."
+      },
+      "success": true
+    }
+  ]
+}

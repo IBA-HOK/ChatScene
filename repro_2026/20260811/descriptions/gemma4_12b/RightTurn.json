@@ -1,0 +1,12 @@
+{
+  "model": "gemma4:12b",
+  "base_scenario": "RightTurn",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is making a right turn at an intersection. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "As the ego vehicle initiates a right turn, a pedestrian suddenly steps into its path from behind a parked delivery truck.",
+    "A cyclist suddenly swerves into the ego vehicle's path from an adjacent lane while the ego vehicle is executing its right turn at the intersection.",
+    "A pedestrian steps into the roadway from behind a parked delivery truck just as the ego vehicle initiates its right turn at the intersection.",
+    "A pedestrian unexpectedly steps into the roadway from behind a parked delivery truck as the ego vehicle executes its right turn.",
+    "A cyclist suddenly swerves into the ego vehicle's path from an adjacent lane as it initiates a right turn at the intersection."
+  ]
+}

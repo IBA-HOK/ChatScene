@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e4b",
+  "base_scenario": "StraightObstacle",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A child chasing a ball suddenly darts directly into the ego vehicle's path from the right shoulder, forcing an immediate evasive maneuver.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: The adversarial pedestrian suddenly darts into the ego vehicle's path.\nGeometry: A straight road.\nSpawn Position: The adversarial agent spawns from the right shoulder/sidewalk area, entering the road directly in front of the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "The adversarial pedestrian suddenly darts into the ego vehicle's path.",
+        "Geometry": "A straight road.",
+        "Spawn Position": "The adversarial agent spawns from the right shoulder/sidewalk area, entering the road directly in front of the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "A cyclist, traveling normally on the shoulder, abruptly swerves back across the lane line, crossing the path of the straight-moving ego vehicle and forcing an emergency avoidance maneuver.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicycle abruptly swerves from the shoulder across the lane line, crossing the path of the straight-moving ego vehicle.\nGeometry: A straight road with a shoulder/curb area adjacent to the driving lane.\nSpawn Position: The adversarial agent spawns from the shoulder on the right side of the ego vehicle's lane, moving into the travel lane.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicycle abruptly swerves from the shoulder across the lane line, crossing the path of the straight-moving ego vehicle.",
+        "Geometry": "A straight road with a shoulder/curb area adjacent to the driving lane.",
+        "Spawn Position": "The adversarial agent spawns from the shoulder on the right side of the ego vehicle's lane, moving into the travel lane."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A cyclist unexpectedly drifts into the ego lane, crossing the solid line and requiring an abrupt swerve to avoid contact.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicycle unexpectedly drifts into the ego vehicle's lane, crossing a solid line.\nGeometry: A straight road with defined lanes.\nSpawn Position: The adversarial agent approaches from an adjacent lane or parallel to the ego vehicle's path and drifts into the ego vehicle's current lane.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicycle unexpectedly drifts into the ego vehicle's lane, crossing a solid line.",
+        "Geometry": "A straight road with defined lanes.",
+        "Spawn Position": "The adversarial agent approaches from an adjacent lane or parallel to the ego vehicle's path and drifts into the ego vehicle's current lane."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "A motorcycle in the adjacent lane accelerates and weaves erratically across multiple lanes without signaling or adhering to traffic markings.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle accelerates and weaves erratically across multiple lanes without signaling or adhering to traffic markings.\nGeometry: The ego vehicle is positioned on a multi-lane straight road.\nSpawn Position: The adversarial agent is in an adjacent lane (parallel) to the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle accelerates and weaves erratically across multiple lanes without signaling or adhering to traffic markings.",
+        "Geometry": "The ego vehicle is positioned on a multi-lane straight road.",
+        "Spawn Position": "The adversarial agent is in an adjacent lane (parallel) to the ego vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A motorcycle performs a sudden U-turn in the straight driving lane, blocking the path directly ahead with insufficient stopping distance.",
+      "extraction_raw": "Adversarial Object: Motorcycle\nBehavior: The adversarial motorcycle suddenly executes a U-turn, blocking the straight driving lane directly ahead.\nGeometry: A straight road/driving lane.\nSpawn Position: The adversarial agent spawns in the straight driving lane directly ahead of the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Motorcycle",
+        "Behavior": "The adversarial motorcycle suddenly executes a U-turn, blocking the straight driving lane directly ahead.",
+        "Geometry": "A straight road/driving lane.",
+        "Spawn Position": "The adversarial agent spawns in the straight driving lane directly ahead of the ego vehicle."
+      },
+      "success": true
+    }
+  ]
+}

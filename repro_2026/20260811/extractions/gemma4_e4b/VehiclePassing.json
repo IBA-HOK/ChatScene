@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e4b",
+  "base_scenario": "VehiclePassing",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "A cyclist unexpectedly swerves out from behind the parked vehicle directly into the ego vehicle's passing lane, forcing an immediate evasive maneuver.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly swerves out from behind a parked vehicle directly into the ego vehicle's path.\nGeometry: A straight road with adjacent parked vehicles.\nSpawn Position: The adversarial agent spawns from behind a parked vehicle on the side of the ego vehicle's passing lane.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly swerves out from behind a parked vehicle directly into the ego vehicle's path.",
+        "Geometry": "A straight road with adjacent parked vehicles.",
+        "Spawn Position": "The adversarial agent spawns from behind a parked vehicle on the side of the ego vehicle's passing lane."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "While passing a double-parked van, an approaching cyclist suddenly swerves into our lane without warning, requiring immediate and drastic evasive action.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicycle suddenly swerves into the ego vehicle's path without warning.\nGeometry: Maneuvering past parked vehicles (e.g., double-parked van).\nSpawn Position: The adversarial agent approaches from an adjacent lane or side while the ego is passing a parked vehicle.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicycle suddenly swerves into the ego vehicle's path without warning.",
+        "Geometry": "Maneuvering past parked vehicles (e.g., double-parked van).",
+        "Spawn Position": "The adversarial agent approaches from an adjacent lane or side while the ego is passing a parked vehicle."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "As the ego vehicle maneuvers past a parked car in the opposite lane, a bicyclist suddenly veers from an intersecting side street directly into the path of travel.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicycle suddenly veers from an intersecting side street directly into the ego vehicle's path of travel.\nGeometry: The ego vehicle is maneuvering in a lane that passes a parked car, near an intersection/side street access point.\nSpawn Position: The adversarial agent spawns from an intersecting side street, entering the main road directly into the ego vehicle's path.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicycle suddenly veers from an intersecting side street directly into the ego vehicle's path of travel.",
+        "Geometry": "The ego vehicle is maneuvering in a lane that passes a parked car, near an intersection/side street access point.",
+        "Spawn Position": "The adversarial agent spawns from an intersecting side street, entering the main road directly into the ego vehicle's path."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "As we execute an opposing lane pass around a parked vehicle, a cyclist suddenly pulls out from behind the parked car directly into our path, creating immediate lateral collision risk.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist suddenly pulls out from behind the parked vehicle directly into the ego vehicle's path.\nGeometry: The ego vehicle is executing an opposing lane pass around a parked vehicle.\nSpawn Position: The adversarial agent spawns from behind a parked vehicle on the side opposite the ego vehicle's direction of travel.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist suddenly pulls out from behind the parked vehicle directly into the ego vehicle's path.",
+        "Geometry": "The ego vehicle is executing an opposing lane pass around a parked vehicle.",
+        "Spawn Position": "The adversarial agent spawns from behind a parked vehicle on the side opposite the ego vehicle's direction of travel."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A cyclist unexpectedly darts from the sidewalk into the opposite lane directly in front of the ego vehicle's passing path, forcing an immediate emergency brake application.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial bicycle unexpectedly darts from the sidewalk into the opposite lane directly in front of the ego vehicle.\nGeometry: A straight road adjacent to a sidewalk.\nSpawn Position: The adversarial agent spawns from the sidewalk on the opposite side of the ego vehicle's current path, crossing into the lanes directly in front of the ego vehicle.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial bicycle unexpectedly darts from the sidewalk into the opposite lane directly in front of the ego vehicle.",
+        "Geometry": "A straight road adjacent to a sidewalk.",
+        "Spawn Position": "The adversarial agent spawns from the sidewalk on the opposite side of the ego vehicle's current path, crossing into the lanes directly in front of the ego vehicle."
+      },
+      "success": true
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "RedLightRunning",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "The adversarial vehicle runs a red light while proceeding straight through an intersection with clear right-of-way signals for the ego traffic on green lights. It unexpectedly accelerates rapidly and swerves leftward into the lane just as it crosses directly in front of the ego car at high speed, causing imminent impact risk.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: Runs red light and accelerates rapidly while swerving leftward into the lane at high speed\nGeometry: Intersection with green lights for ego traffic allowing straight path through\nSpawn Position: Approaching intersection from cross street before entering front of ego's path",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "Runs red light and accelerates rapidly while swerving leftward into the lane at high speed",
+        "Geometry": "Intersection with green lights for ego traffic allowing straight path through",
+        "Spawn Position": "Approaching intersection from cross street before entering front of ego's path"
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "The adversarial agent ignores the red signal and accelerates straight through the intersection directly into ego traffic without signaling intent or yielding to cross-traffic. Simultaneously, it executes an unexpected sharp turn as if reacting to non-existent hazards while maintaining forward momentum toward impact.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car ignores the red signal and accelerates straight through the intersection without signaling or yielding, then executes an unexpected sharp turn while maintaining forward momentum toward impact.\nGeometry: A signalized four-way intersection where the light is red for the adversarial agent; ego vehicle traffic flows directly into its path upon entry.\nSpawn Position: The adversarial car approaches from a cross-traffic lane entering straight ahead of the ego vehicle before executing a sharp turn within the intersection area toward impact.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car ignores the red signal and accelerates straight through the intersection without signaling or yielding, then executes an unexpected sharp turn while maintaining forward momentum toward impact.",
+        "Geometry": "A signalized four-way intersection where the light is red for the adversarial agent; ego vehicle traffic flows directly into its path upon entry.",
+        "Spawn Position": "The adversarial car approaches from a cross-traffic lane entering straight ahead of the ego vehicle before executing a sharp turn within the intersection area toward impact."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A vehicle runs a red light at an intersection and accelerates directly into my lane while I proceed straight on green traffic signal phase with clear road markings visible ahead of me. The adversarial agent suddenly swerves violently rightward without signaling or braking due to unseen obstacle, leading to imminent collision risk at 50km/h from the ego vehicle's perspective.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: The adversarial car runs a red light, accelerates directly into the ego vehicle's lane, and swerves violently rightward without signaling or braking due to an unseen obstacle.\nGeometry: A signalized intersection where the ego vehicle proceeds straight on a green traffic light phase while the adversarial agent is on a conflicting (red) light phase with clear road markings visible ahead of me.\nSpawn Position: The adversarial car approaches from the cross street at the intersection, initially heading directly into the path of the ego vehicle before swerving rightward due to an unseen obstacle.",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "The adversarial car runs a red light, accelerates directly into the ego vehicle's lane, and swerves violently rightward without signaling or braking due to an unseen obstacle.",
+        "Geometry": "A signalized intersection where the ego vehicle proceeds straight on a green traffic light phase while the adversarial agent is on a conflicting (red) light phase with clear road markings visible ahead of me.",
+        "Spawn Position": "The adversarial car approaches from the cross street at the intersection, initially heading directly into the path of the ego vehicle before swerving rightward due to an unseen obstacle."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "An adversarial vehicle runs a red light into the intersection at speed but executes a sudden right turn directly across EGO\u2019s path while braking hard in place before accelerating again without warning to collide head-on with ego just as it enters the stop line zone.",
+      "extraction_raw": "",
+      "extraction": {
+        "Adversarial Object": "",
+        "Behavior": "",
+        "Geometry": "",
+        "Spawn Position": ""
+      },
+      "success": false
+    },
+    {
+      "idx": 4,
+      "description": "An adversarial vehicle accelerates across the intersection without stopping at the signal and unexpectedly begins running in reverse gear inside the junction area; when it then resumes straight-line motion, its trajectory intersects mine head-on as I remain proceeding through my green light phase.",
+      "extraction_raw": "Adversarial Object: Car\nBehavior: Accelerates across intersection without stopping at signal and unexpectedly begins running in reverse gear inside the junction area before resuming straight-line motion to intersect ego head-on while Ego has green light.\nGeometry: Four-way intersection with traffic lights; Adversary crossing against red signal, Ego proceeding through own green phase.\nSpawn Position: Opposite side of the junction relative to ego at start (oncoming lane).",
+      "extraction": {
+        "Adversarial Object": "Car",
+        "Behavior": "Accelerates across intersection without stopping at signal and unexpectedly begins running in reverse gear inside the junction area before resuming straight-line motion to intersect ego head-on while Ego has green light.",
+        "Geometry": "Four-way intersection with traffic lights; Adversary crossing against red signal, Ego proceeding through own green phase.",
+        "Spawn Position": "Opposite side of the junction relative to ego at start (oncoming lane)."
+      },
+      "success": true
+    }
+  ]
+}

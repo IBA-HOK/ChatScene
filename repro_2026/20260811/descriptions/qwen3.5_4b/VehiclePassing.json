@@ -1,0 +1,12 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "VehiclePassing",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is passing a parked vehicle using the opposite lane. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "As I navigate through oncoming traffic to bypass a parked vehicle in my lane, an unexpected pedestrian steps out from behind them and runs directly across my path.",
+    "The ego vehicle enters the opposing traffic lane to navigate around stationary cars but encounters no braking signals until a motorcycle suddenly emerges in front of it.",
+    "The ego vehicle shifts into oncoming traffic lanes to bypass a stationary sedan but encounters an unexpectedly emerging motorcycle accelerating rapidly and cutting directly across its path without signaling any intent for safety purposes. This creates immediate collision risk if the motorcyclist does not yield or brake in reaction time expected within standard driving protocols.",
+    "Ego vehicle enters the opposite traffic lane to bypass stopped cars, but an unexpected cyclist accelerates from behind the obstruction and drifts into ego's direct path while moving against normal flow direction.",
+    "The ego vehicle enters the opposing traffic lane to overtake a stationary car that completely blocks its path. A motorcycle suddenly cuts across my front right trajectory while I am driving in this narrow gap between parked cars and the center line."
+  ]
+}

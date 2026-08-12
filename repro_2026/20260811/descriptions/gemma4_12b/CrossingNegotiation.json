@@ -1,0 +1,12 @@
+{
+  "model": "gemma4:12b",
+  "base_scenario": "CrossingNegotiation",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is negotiating crossing traffic at an intersection. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "A pedestrian suddenly steps into the crosswalk from behind a parked delivery truck just as the ego vehicle enters the intersection.",
+    "A pedestrian suddenly steps into the crosswalk from behind a parked vehicle while the ego vehicle is executing a left turn at the intersection.",
+    "A pedestrian abruptly steps off the curb from behind a parked delivery truck, crossing directly into the ego vehicle's path at a signalized intersection.",
+    "A motorcyclist suddenly weaves across multiple lanes of travel, cutting directly into the ego vehicle\u2019s path while passing through the intersection.",
+    "A cyclist unexpectedly swerves into the ego vehicle's path while crossing an intersection from a side street."
+  ]
+}

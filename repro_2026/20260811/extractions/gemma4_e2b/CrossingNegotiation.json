@@ -1,0 +1,66 @@
+{
+  "model": "gemma4:e2b",
+  "base_scenario": "CrossingNegotiation",
+  "extractions": [
+    {
+      "idx": 0,
+      "description": "An autonomous vehicle approaches a four-way intersection and begins to proceed when a cyclist unexpectedly swerves into the path, attempting to avoid a sudden obstacle.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: Unexpectedly swerves into the path.\nGeometry: Four-way intersection.\nSpawn Position: The cyclist enters the path of the ego vehicle at the four-way intersection.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "Unexpectedly swerves into the path.",
+        "Geometry": "Four-way intersection.",
+        "Spawn Position": "The cyclist enters the path of the ego vehicle at the four-way intersection."
+      },
+      "success": true
+    },
+    {
+      "idx": 1,
+      "description": "A pedestrian suddenly darts from behind a parked bus and into the crosswalk just as the ego vehicle attempts to proceed through the intersection.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: Suddenly darts from behind a parked bus and enters the crosswalk.\nGeometry: An intersection involving a crosswalk.\nSpawn Position: The adversarial agent spawns from behind a parked bus for crossing the road.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "Suddenly darts from behind a parked bus and enters the crosswalk.",
+        "Geometry": "An intersection involving a crosswalk.",
+        "Spawn Position": "The adversarial agent spawns from behind a parked bus for crossing the road."
+      },
+      "success": true
+    },
+    {
+      "idx": 2,
+      "description": "A cyclist unexpectedly enters the intersection from the wrong side, weaving between stopped vehicles and ignoring traffic signals.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: Unexpectedly entering the intersection from the wrong side, weaving between stopped vehicles, and ignoring traffic signals.\nGeometry: An intersection.\nSpawn Position: The adversarial bicycle enters the intersection from the wrong side.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "Unexpectedly entering the intersection from the wrong side, weaving between stopped vehicles, and ignoring traffic signals.",
+        "Geometry": "An intersection.",
+        "Spawn Position": "The adversarial bicycle enters the intersection from the wrong side."
+      },
+      "success": true
+    },
+    {
+      "idx": 3,
+      "description": "While entering a four-way intersection in a moderate speed zone, a cyclist unexpectedly veers across the lane into the ego vehicle's path.",
+      "extraction_raw": "Adversarial Object: Bicycle\nBehavior: The adversarial cyclist unexpectedly veers across the lane into the ego vehicle's path.\nGeometry: Entering a four-way intersection in a moderate speed zone.\nSpawn Position: The adversarial agent is moving from an adjacent lane or side, crossing into the ego vehicle's path within the intersection area.",
+      "extraction": {
+        "Adversarial Object": "Bicycle",
+        "Behavior": "The adversarial cyclist unexpectedly veers across the lane into the ego vehicle's path.",
+        "Geometry": "Entering a four-way intersection in a moderate speed zone.",
+        "Spawn Position": "The adversarial agent is moving from an adjacent lane or side, crossing into the ego vehicle's path within the intersection area."
+      },
+      "success": true
+    },
+    {
+      "idx": 4,
+      "description": "A pedestrian darts unexpectedly from behind a parked delivery truck directly into the crosswalk, forcing an immediate emergency brake maneuver.",
+      "extraction_raw": "Adversarial Object: Pedestrian\nBehavior: Darts unexpectedly into the crosswalk.\nGeometry: A road segment leading to a crosswalk.\nSpawn Position: Behind a parked delivery truck, entering the crosswalk.",
+      "extraction": {
+        "Adversarial Object": "Pedestrian",
+        "Behavior": "Darts unexpectedly into the crosswalk.",
+        "Geometry": "A road segment leading to a crosswalk.",
+        "Spawn Position": "Behind a parked delivery truck, entering the crosswalk."
+      },
+      "success": true
+    }
+  ]
+}

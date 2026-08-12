@@ -1,0 +1,12 @@
+{
+  "model": "qwen3.5:4b",
+  "base_scenario": "CrossingNegotiation",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is negotiating crossing traffic at an intersection. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "A motorcyclist unexpectedly accelerates into the ego vehicle\u2019s path while crossing an uncontrolled intersection without yielding right-of-way during cross-traffic negotiation. The sudden lateral movement creates a high-speed collision risk requiring immediate emergency braking and steering correction by autonomous systems to avoid impact with the rider.",
+    "While negotiating right-of-way at a signalized intersection on green light conditions, the ego vehicle encounters an opposing car that suddenly accelerates and cuts diagonally across its path without signaling or yielding priority to established traffic rules.",
+    "A jaywalking pedestrian suddenly steps out from behind parked cars and runs directly across my path while negotiating right-turn traffic at an uncontrolled intersection, creating a high risk of collision due to sudden trajectory changes in front of me.",
+    "A jaywalking pedestrian suddenly runs across the ego vehicle's path inside a marked crosswalk without yielding during an unsignalized intersection crossing event, accelerating unexpectedly into the center of the road just as Ego completes its turn causing imminent head-on collision risk before a full crash occurs between both parties' lanes.",
+    "A motorcycle suddenly accelerates out of an unlit cross-angle into my vehicle's right-front blind spot while I am negotiating straight through the intersection, creating a sudden collision risk that forces emergency braking without warning signals or right-of-way cues from crossing traffic."
+  ]
+}

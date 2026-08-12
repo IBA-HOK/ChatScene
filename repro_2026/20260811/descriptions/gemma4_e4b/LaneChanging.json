@@ -1,0 +1,12 @@
+{
+  "model": "gemma4:e4b",
+  "base_scenario": "LaneChanging",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is changing lanes. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "Ego vehicle begins executing a lane change when an elderly pedestrian unexpectedly crosses the street against the light from behind the parked vehicles.",
+    "As the ego vehicle initiates a lane change, a cyclist suddenly swerves directly into the path of travel from the shoulder without warning.",
+    "During a steady lane change maneuver, an adjacent motorcycle unexpectedly drifts back into the merging path just as the ego vehicle crosses the solid line.",
+    "While executing a lane change, an adjacent cyclist suddenly pulls perpendicularly into my intended travel path without signaling or warning.",
+    "As the ego vehicle initiates a right lane change, a motorcycle suddenly pulls out from behind a parked truck, cutting off the established trajectory with minimal braking distance."
+  ]
+}

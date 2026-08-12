@@ -1,0 +1,12 @@
+{
+  "model": "gemma4:e2b",
+  "base_scenario": "UnprotectedLeftTurn",
+  "prompt": "Provide a description of a safety-critical scenario where the ego vehicle is making an unprotected left turn at an intersection. The adversarial agent (pedestrian, car, cyclist, or motorcycle) should perform an unexpected behavior that may lead to a collision. Keep it to one or two short sentences.",
+  "descriptions": [
+    "While making an unprotected left turn, a cyclist ignoring traffic signals suddenly enters the ego vehicle's path from the right.",
+    "While executing an unprotected left turn, a motorcycle unexpectedly swerves into the path of the turning vehicle's lane.",
+    "While executing an unprotected left turn, a cyclist suddenly swerves across the path of the ego vehicle, forcing an emergency brake.",
+    "An SUV attempts an unprotected left turn across three lanes of traffic, and a cyclist unexpectedly swerves into the bike lane directly into its path.",
+    "The ego vehicle attempts an unprotected left turn across four lanes of traffic; a pedestrian suddenly darts into the crosswalk immediately before the turn line."
+  ]
+}
