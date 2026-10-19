@@ -6,11 +6,14 @@ model scenic.simulators.carla.model
 EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
 behavior AdvBehavior():
-    while (distance to self) > 60:
-        wait
-    do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED)
+    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED)
+    interrupt when (distance from self to ego) < globalParameters.OPT_SWERVE_TRIGGER_DISTANCE:
+        do SwerveBehavior(ego, globalParameters.OPT_SWERVE_SPEED, globalParameters.OPT_SWERVE_DISTANCE)
 
-param OPT_ADV_SPEED = Range(0, 10)  # This parameter controls the motorcyclist's speed, influencing the urgency and danger of the maneuver.
+param OPT_ADV_SPEED = Range(1, 10)
+param OPT_SWERVE_TRIGGER_DISTANCE = Range(5, 20)
+param OPT_SWERVE_SPEED = Range(1, 10)
+param OPT_SWERVE_DISTANCE = Range(0, 5)
 # Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
 laneSecsWithLeftLane = []
 for lane in network.lanes:

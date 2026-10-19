@@ -9,12 +9,13 @@ behavior AdvBehavior():
     do CrossingBehavior(ego, globalParameters.OPT_ADV_SPEED, globalParameters.OPT_ADV_DISTANCE) until (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
     while True:
         take SetSpeedAction(0)
+        take SetDismountAction()
 
 param OPT_ADV_SPEED = Range(0, 10)
 param OPT_ADV_DISTANCE = Range(0, 15)
 param OPT_STOP_DISTANCE = Range(0, 1)
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
 egoSpawnPt = OrientedPoint in egoInitLane.centerline
@@ -37,5 +38,5 @@ AdvAgent = Bicycle following roadDirection from IntSpawnPt for globalParameters.
     with behavior AdvBehavior()
 
 # Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
+require 70 deg <= RelativeHeading(AdvAgent) <= 110 deg  # Ensuring the agent approaches from an angle indicative of crossing
 require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])

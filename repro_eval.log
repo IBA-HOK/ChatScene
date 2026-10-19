@@ -1,0 +1,13 @@
+== ChatScene paper repro ==
+scenarios: 1 2 3 4 5 6 7 8 | port: 2002/8002 | device: cpu | test_epoch: -1
+carla_root: ./carla (manage: 1)
+>> using /home/hokuto/miniforge3/envs/chatscene/bin/python (invoking python lacks torch)
+>> PYTHONPATH extended for CARLA API
+>> safebench from this tree
+>> [startup] CARLA unhealthy on port 2002 -> restarting
+>> starting CARLA on port 2002 (log: /home/hokuto/chatScene_Strata/ChatScene/carla_2002.log)
+>> CARLA healthy on port 2002 (0s)
+>> eval sid=1 route=8 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 1 --route_id 8 --test_epoch -1 --port 2002 --tm_port 8002 --device cpu
+terminate called after throwing an instance of 'carla::client::TimeoutException'
+  what():  time-out of 10000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:2002
+timeout: 監視しているコマンドがコアダンプしました

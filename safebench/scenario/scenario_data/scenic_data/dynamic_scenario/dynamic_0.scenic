@@ -1,5 +1,5 @@
 '''The ego vehicle is driving on a straight road when a pedestrian suddenly crosses from the right front and suddenly stops as the ego vehicle approaches.'''
-Town = 'Town05'
+Town = 'Town03'
 param map = localPath(f'../maps/{Town}.xodr') 
 param carla_map = Town
 model scenic.simulators.carla.model
@@ -13,18 +13,20 @@ behavior AdvBehavior():
 param OPT_ADV_SPEED = Range(0, 5)
 param OPT_ADV_DISTANCE = Range(0, 15)
 param OPT_STOP_DISTANCE = Range(0, 1)
-intersection = Uniform(*filter(lambda i: i.is4Way and not i.isSignalized, network.intersections))
-egoInitLane = Uniform(*intersection.incomingLanes)
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, egoInitLane.maneuvers))
-egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
-egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
+# Identifying straight lanes
+straightLanes = []
+for lane in network.lanes:
+    if lane.isStraight:
+        straightLanes.append(lane)
 
-# Setting up the ego vehicle at the initial position
+# Selecting a random straight lane for the ego vehicle
+egoLane = Uniform(*straightLanes)
+egoSpawnPt = OrientedPoint in egoLane.centerline
+
+# Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
-
-require 10 <= (distance to intersection) <= 40
 param OPT_GEO_X_DISTANCE = Range(2, 8)
 param OPT_GEO_Y_DISTANCE = Range(15, 50)
 

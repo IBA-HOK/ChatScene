@@ -13,6 +13,7 @@ import os
 import json
 import glob
 import random
+import time
 
 import numpy as np
 import carla
@@ -49,6 +50,11 @@ class ScenicRunner:
         self.num_scenario = scenario_config['num_scenario']
         self.fixed_delta_seconds = scenario_config['fixed_delta_seconds']
         self.scenario_category = scenario_config['scenario_category']
+
+        try:
+            self.episode_timeout = float(scenario_config.get('episode_timeout', 600))
+        except Exception:
+            self.episode_timeout = 600
 
         # continue training flag
         self.continue_agent_training = scenario_config['continue_agent_training']
@@ -218,7 +224,11 @@ class ScenicRunner:
 
             # start loop
             episode_reward = []
+            episode_start = time.time()
             while not self.env.all_scenario_done():
+                if time.time() - episode_start > self.episode_timeout:
+                    self.logger.log(f">> Episode wall-clock timeout ({self.episode_timeout:.0f}s), forcing done.", color='red')
+                    break
                 # get action from agent policy and scenario policy (assume using one batch)
                 ego_actions = self.agent_policy.get_action(obs, infos, deterministic=False)
                 scenario_actions = self.scenario_policy.get_action(obs, infos, deterministic=False)
@@ -311,7 +321,11 @@ class ScenicRunner:
             self.agent_policy.set_ego_and_route(self.env.get_ego_vehicles(), infos)
 
             score_list = {s_i: [] for s_i in range(num_sampled_scenario)}
+            episode_start = time.time()
             while not self.env.all_scenario_done():
+                if time.time() - episode_start > self.episode_timeout:
+                    self.logger.log(f">> Episode wall-clock timeout ({self.episode_timeout:.0f}s), forcing done.", color='red')
+                    break
                 # get action from agent policy and scenario policy (assume using one batch)
                 ego_actions = self.agent_policy.get_action(obs, infos, deterministic=True)
                 scenario_actions = self.scenario_policy.get_action(obs, infos, deterministic=True)
@@ -366,6 +380,7 @@ class ScenicRunner:
         
         if select:
             self.scene_map[log_name]['select_id'] = self.select_adv_scene(self.logger.eval_records, score_function, data_loader.select_num)
+            self.scene_map[log_name]['pinned'] = data_loader.capture_pinned(self.scene_map[log_name]['select_id'])
             self.dump_scene_map()
             
         self.logger.clear()
@@ -438,6 +453,14 @@ class ScenicRunner:
             log_name = f'OPT_{config.behavior}'
             
             ## check if all done ##
+            if self.mode == 'train_scenario':
+                self.scene_map = self.load_scene_map()
+                entry = self.scene_map.get(log_name, {})
+                # replay needs pinned per-scene values; entries selected
+                # before pinning existed must be regenerated
+                if 'select_id' in entry and entry.get('pinned'):
+                    self.logger.log(f">> {log_name} already selected, skipping.")
+                    continue
             if self.mode == 'eval':
                 if self.logger.check_eval_dir(log_name) == config.select_num:
                     self.logger.log(f">> This scenario and route have been done.")
@@ -469,27 +492,34 @@ class ScenicRunner:
             )
             
             # prepare data loader and buffer
-            data_loader = ScenicDataLoader(self.scenic, config, self.num_scenario)
-            # run with different modes
-            
-            if self.mode == 'train_scenario':
-                ### select hard scenic scenario config on the surrogate model ###
-                self.scene_map = self.load_scene_map()
-                self.agent_policy.set_mode('eval')
-                self.scenario_policy.set_mode('eval')
-                self.eval(data_loader, select = True)
-            elif self.mode == 'train_agent':
-                ### train the surrogate model on the selected hard scenrios ###
-                self.agent_policy.set_mode('train')
-                self.scenario_policy.set_mode('eval')
-                self.train(data_loader, start_episode, replay_buffer)
-            elif self.mode == 'eval':
-                ### evaluate the trained agent on different test models ###
-                self.agent_policy.set_mode('eval')
-                self.scenario_policy.set_mode('eval')
-                self.eval(data_loader)
-            else:
-                raise NotImplementedError(f"Unsupported mode: {self.mode}.")
+            # generation failures skip only this config; anything else re-raises
+            try:
+                data_loader = ScenicDataLoader(self.scenic, config, self.num_scenario)
+                # run with different modes
+
+                if self.mode == 'train_scenario':
+                    ### select hard scenic scenario config on the surrogate model ###
+                    self.scene_map = self.load_scene_map()
+                    self.agent_policy.set_mode('eval')
+                    self.scenario_policy.set_mode('eval')
+                    self.eval(data_loader, select = True)
+                elif self.mode == 'train_agent':
+                    ### train the surrogate model on the selected hard scenrios ###
+                    self.agent_policy.set_mode('train')
+                    self.scenario_policy.set_mode('eval')
+                    self.train(data_loader, start_episode, replay_buffer)
+                elif self.mode == 'eval':
+                    ### evaluate the trained agent on different test models ###
+                    self.agent_policy.set_mode('eval')
+                    self.scenario_policy.set_mode('eval')
+                    self.eval(data_loader)
+                else:
+                    raise NotImplementedError(f"Unsupported mode: {self.mode}.")
+            except RuntimeError as e:
+                if 'SCENIC_GEN_FAILED' not in str(e):
+                    raise
+                self.logger.log(f">> Skipping {log_name}: {e}", color='red')
+                continue
 
     def check_continue_training(self, policy, replay_buffer):
         # load previous checkpoint

@@ -22,21 +22,15 @@ egoSpawnPt = OrientedPoint in egoInitLane.centerline
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
-# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-2, 2)
-param OPT_GEO_Y_DISTANCE = Range(2, 6)
+param OPT_GEO_Y_DISTANCE = Range(10, 30)  # Frontal distance range
+param OPT_GEO_X_DISTANCE = Range(5, 15)   # Lateral distance to the right sidewalk
 
-# Setup for the blocking car that the ego must bypass
-laneSec = network.laneSectionAt(ego)
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Spawn point on the road ahead
+FrontSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
 
-# Setup for the pedestrian who suddenly appears and complicates the maneuver
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = Motorcycle at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 90 deg,  # Perpendicular to the road, crossing the street
+# Offset to the right sidewalk
+SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ 0
+AdvAgent = Motorcycle at FrontSpawnPt offset along FrontSpawnPt.heading + 90 deg by SHIFT,
+    with heading FrontSpawnPt.heading,  # Facing same direction as ego (walking along sidewalk)
     with regionContainedIn None,
     with behavior AdvBehavior()

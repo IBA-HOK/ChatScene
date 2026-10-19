@@ -9,7 +9,7 @@ behavior AdvBehavior():
     while (distance to self) > 60:
         wait  # The adversarial vehicle waits until it is within a threatening proximity.
     do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_STEER_DISTANCE
-    # Once close to the ego's trajectory, the adversarial vehicle initiates a sharp turn.
+    # Once close to the ego's trajectory, the adversarial vehicle initiates a sharp right turn.
     while True:
         take SetSpeedAction(self.speed)  # Continues moving at its current speed
         take SetSteerAction(globalParameters.OPT_STEER)  # Makes an abrupt steering adjustment
@@ -40,22 +40,20 @@ ego = Car at egoSpawnPt,
     with blueprint EGO_MODEL
 
 require 10 <= (distance to intersection) <= 40
-# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+# Defining adversarial maneuvers as those conflicting with the ego's straight path
+advManeuvers = filter(lambda i: i.type == ManeuverType.LEFT_TURN, egoManeuver.conflictingManeuvers)
+advManeuver = Uniform(*advManeuvers)
+advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
+advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
+IntSpawnPt = advManeuver.connectingLane.centerline.start  # Start of the connecting lane centerline
 
-# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToLeft.lane
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
-projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
-advHeading = advLane.orientation[projectPt]
-
-# Spawn the Adversarial Agent
-AdvAgent = Car at projectPt,
-    with heading advHeading,
+param OPT_GEO_Y_DISTANCE = Range(-10, 10)
+# Setting up the adversarial agent
+AdvAgent = Car following roadDirection from IntSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE,
+    with heading IntSpawnPt.heading,
     with regionContainedIn None,
     with behavior AdvBehavior()
+
+# Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
+require 70 deg <= RelativeHeading(AdvAgent) <= 110 deg  # Ensuring the agent approaches from an angle indicative of crossing
+require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])

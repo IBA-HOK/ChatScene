@@ -5,19 +5,17 @@ param carla_map = Town
 model scenic.simulators.carla.model
 EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
-param OPT_ADV_SPEED = Range(5, 10)
-param OPT_ADV_DISTANCE = Range(0, 20)
-param OPT_BRAKE = Range(0, 1)
-param OPT_PAUSE_DURATION = Range(10, 30)
-param OPT_THROTTLE = Range(0.5, 1)  # Throttle intensity for acceleration
+param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
+param OPT_BRAKE_DISTANCE = Range(0, 4)  # The critical distance at which the adversarial vehicle begins its sudden stop.
+param OPT_BRAKE = Range(0, 1)  # The intensity of the braking action, potentially simulating an abrupt or gentle stop.
 
 behavior AdvBehavior():
-    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
+    while (distance to self) > 60:
+        wait  # The adversarial vehicle waits until it is within a significant range to impact the ego's maneuver.
+    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_BRAKE_DISTANCE
+    # Once within a critical distance of the ego's trajectory, the adversarial vehicle initiates a sudden braking maneuver.
     while True:
-        take SetBrakeAction(globalParameters.OPT_BRAKE)
-        for _ in range(globalParameters.OPT_PAUSE_DURATION):
-            wait
-        take SetThrottleAction(globalParameters.OPT_THROTTLE)
+        take SetBrakeAction(globalParameters.OPT_BRAKE)  # Continues to apply brakes to simulate an emergency or unexpected stop.
 
 ## MONITORS
 monitor TrafficLights:
@@ -42,7 +40,7 @@ ego = Car at egoSpawnPt,
 
 require 10 <= (distance to intersection) <= 40
 # Defining adversarial maneuvers as those conflicting with the ego's straight path
-advManeuvers = filter(lambda i: i.type == ManeuverType.RIGHT_TURN, egoManeuver.conflictingManeuvers)
+advManeuvers = filter(lambda i: i.type == ManeuverType.STRAIGHT, egoManeuver.conflictingManeuvers)
 advManeuver = Uniform(*advManeuvers)
 advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
 advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
@@ -56,5 +54,5 @@ AdvAgent = Car following roadDirection from IntSpawnPt for globalParameters.OPT_
     with behavior AdvBehavior()
 
 # Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
+require 70 deg <= RelativeHeading(AdvAgent) <= 110 deg  # Ensuring the agent approaches from an angle indicative of crossing from the right
 require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])

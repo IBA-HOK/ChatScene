@@ -8,11 +8,12 @@ EGO_MODEL = "vehicle.lincoln.mkz_2017"
 behavior AdvBehavior():
     while True:
         take SetVelocityAction(*ego.velocity)
-# Identifying lane sections with a right lane moving in the same forward direction
+        take SetSteerAction(0)  # Maintain straight path to block ego's lane
+# Identifying straight lane sections with a right lane
 laneSecsWithRightLane = []
 for lane in network.lanes:
     for laneSec in lane.sections:
-        if laneSec._laneToRight is not None and laneSec._laneToRight.isForward == laneSec.isForward:
+        if laneSec._laneToRight is not None and laneSec.isStraight:
             laneSecsWithRightLane.append(laneSec)
 
 # Selecting a random lane section from identified sections for the ego vehicle
@@ -23,21 +24,21 @@ egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
-# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+# Parameters for the adversarial agent's position relative to the ego vehicle
+param OPT_GEO_Y_DISTANCE = Range(0, 20)  # Distance ahead/behind along the road direction
+param OPT_GEO_X_DISTANCE = Range(0, 5)   # Lateral offset to ensure it is in the right lane
 
-# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
+# Identify the right lane relative to the ego vehicle
 advLane = network.laneSectionAt(ego)._laneToRight.lane
+
+# Create an intermediate point along the road direction from the ego spawn point
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+
+# Project this point onto the centerline of the right lane to get the exact spawn position
 projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
 advHeading = advLane.orientation[projectPt]
 
-# Spawn the Adversarial Agent
+# Spawn the adversarial car in the right lane, parallel to the ego vehicle
 AdvAgent = Car at projectPt,
     with heading advHeading,
     with regionContainedIn None,

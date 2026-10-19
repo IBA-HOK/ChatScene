@@ -5,6 +5,10 @@ param carla_map = Town
 model scenic.simulators.carla.model
 EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
+param OPT_ADV_SPEED = Range(5, 15)
+param OPT_ADV_DISTANCE = Range(0, 20)
+param OPT_WAIT_STEPS = Range(0, 20)
+
 behavior AdvBehavior():
     while True:
         # Follow the lane at the set speed until a certain proximity condition is met
@@ -19,10 +23,6 @@ behavior AdvBehavior():
             # Wait for a fixed interval of 1 second before potentially changing the lane again
             for _ in range(globalParameters.OPT_WAIT_STEPS):
                 wait
-
-param OPT_ADV_SPEED = Range(5, 15)  # Range of speeds for lane following
-param OPT_ADV_DISTANCE = Range(0, 20)  # Distance threshold for lane change trigger
-param OPT_WAIT_STEPS = Range(0, 20)
 # Identifying lane sections with a right lane moving in the same forward direction
 laneSecsWithRightLane = []
 for lane in network.lanes:
@@ -38,21 +38,18 @@ egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
-# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
-
-# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
+# Parameters for the adversarial agent's position in the adjacent lane
 param OPT_GEO_Y_DISTANCE = Range(0, 30)
+
+# Identify the adjacent lane to the left of the ego vehicle
 advLane = network.laneSectionAt(ego)._laneToLeft.lane
+
+# Calculate the spawn point on the centerline of the adjacent lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
 projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
 advHeading = advLane.orientation[projectPt]
 
-# Spawn the Adversarial Agent
+# Spawn the Adversarial Agent in the target lane
 AdvAgent = Car at projectPt,
     with heading advHeading,
     with regionContainedIn None,

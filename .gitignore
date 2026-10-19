@@ -3,5 +3,9 @@
 
 # Ignore Jupyter notebook checkpoints
 .ipynb_checkpoints/
-
+*.pyc
+*.pyo
+*.pyd
 __pycache__/
+.env
+carla/

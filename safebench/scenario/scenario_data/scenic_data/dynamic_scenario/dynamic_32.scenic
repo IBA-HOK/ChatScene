@@ -9,14 +9,14 @@ behavior AdvBehavior():
     while (distance to self) > 60:
         wait  # The adversarial vehicle waits until it is close enough to affect the ego's maneuver.
     do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_STEER_DISTANCE
-    # Initiates a sudden right turn as it gets close to the intersection.
+    # Initiates a sudden swerve to the right as it enters the intersection.
     while True:
         take SetSpeedAction(self.speed)  # Maintains its current speed
-        take SetSteerAction(globalParameters.OPT_STEER)  # Executes a sharp turn
+        take SetSteerAction(globalParameters.OPT_STEER)  # Executes a sharp right swerve
 
 param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
 param OPT_STEER_DISTANCE = Range(0, 4)  # The distance at which the adversarial vehicle starts its sudden maneuver.
-param OPT_STEER = Range(0.5, 1.0)  # The intensity of the steering action, specifying the sharpness of the turn.
+param OPT_STEER = Range(0.5, 1.0)  # The intensity of the steering action, specifying the sharpness of the right swerve.
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
 egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
@@ -41,5 +41,5 @@ AdvAgent = Car following roadDirection from IntSpawnPt for globalParameters.OPT_
     with behavior AdvBehavior()
 
 # Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
+require -110 deg <= RelativeHeading(AdvAgent) <= -70 deg  # Ensuring the agent approaches from an angle indicative of crossing
 require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])

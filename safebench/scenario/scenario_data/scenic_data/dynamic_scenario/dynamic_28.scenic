@@ -40,21 +40,23 @@ ego = Car at egoSpawnPt,
     with blueprint EGO_MODEL
 
 require 10 <= (distance to intersection) <= 40
-# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
+# Parameters for the adversarial agent's position in the opposite lane
+param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Lateral offset to place agent in the opposite lane
+param OPT_GEO_Y_DISTANCE = Range(10, 30) # Longitudinal distance ahead of ego
 
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Identify the lane section and the opposite lane
+laneSec = network.laneSectionAt(ego)
+oppositeLane = laneSec._laneToLeft.lane
 
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = Car at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
+# Create an intermediate point along the road direction to project onto the opposite lane
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+
+# Project the intermediate point onto the centerline of the opposite lane to get the exact spawn position
+projectPt = Vector(*oppositeLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = oppositeLane.orientation[projectPt]
+
+# Spawn the adversarial car in the opposite lane, facing the ego vehicle (oncoming)
+AdvAgent = Car at projectPt,
+    with heading advHeading + 180 deg,
+    with regionContainedIn None,
     with behavior AdvBehavior()

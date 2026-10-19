@@ -1,5 +1,5 @@
 '''The ego vehicle is maintaining a constant speed; the adversarial car, comes from the right, blocks multiple lanes by driving extremely slowly, forcing the ego vehicle to change lanes.'''
-Town = 'Town01'
+Town = 'Town03'
 param map = localPath(f'../maps/{Town}.xodr') 
 param carla_map = Town
 model scenic.simulators.carla.model
@@ -7,39 +7,37 @@ EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
 behavior AdvBehavior():
     while (distance to self) > 60:
-        wait  # The adversarial vehicle waits until it is within impactful range.
-    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_SLOW_DISTANCE
-    # Begins to drive extremely slowly to block the lanes once it is near enough to the intersection.
+        wait  # The adversarial car waits until it is within impactful range.
+    
+    # Drive extremely slowly to block lanes and force lane changes.
     while True:
-        take SetSpeedAction(globalParameters.OPT_SLOW_SPEED)  # Maintains a very slow speed to disrupt traffic flow.
+        take SetSpeedAction(globalParameters.OPT_SLOW_SPEED)
 
-param OPT_SLOW_DISTANCE = Range(0, 4)  # The distance at which the adversarial vehicle starts slowing down.
-param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle initially approaches the intersection.
-param OPT_SLOW_SPEED = Range(0, 2)  # The extremely slow speed that the adversarial vehicle adopts to block the lanes.
-# Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
-laneSecsWithLeftLane = []
+param OPT_SLOW_SPEED = Range(0, 2)  # The extremely slow speed that the adversarial car adopts to block lanes.
+# Identifying lane sections that are part of a straight road with multiple lanes
+# A straight road segment is typically represented by a lane section where the lane is straight
+# and has adjacent lanes (left or right) moving in the same direction, implying multiple lanes.
+laneSecsWithMultipleLanes = []
 for lane in network.lanes:
     for laneSec in lane.sections:
-        if laneSec._laneToLeft is not None and laneSec._laneToRight is None:
-            if laneSec._laneToLeft.isForward != laneSec.isForward:
-                laneSecsWithLeftLane.append(laneSec)
+        # Check if the lane section is straight (no curvature)
+        isStraight = laneSec._lane is not None and laneSec._lane.isStraight
+        # Check if there is at least one adjacent lane (left or right) moving in the same direction
+        hasLeftLane = laneSec._laneToLeft is not None and laneSec._laneToLeft.isForward == laneSec.isForward
+        hasRightLane = laneSec._laneToRight is not None and laneSec._laneToRight.isForward == laneSec.isForward
+        
+        if isStraight and (hasLeftLane or hasRightLane):
+            laneSecsWithMultipleLanes.append(laneSec)
 
-# Selecting a random lane section that matches the criteria
-egoLaneSec = Uniform(*laneSecsWithLeftLane)
+# Selecting a random lane section from identified sections for the ego vehicle
+egoLaneSec = Uniform(*laneSecsWithMultipleLanes)
 egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 
 # Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
-# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
-
-# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
+# Identifying the adjacent lane to the right for the Adversarial Agent and setting its spawn point
 param OPT_GEO_Y_DISTANCE = Range(0, 30)
 advLane = network.laneSectionAt(ego)._laneToRight.lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE

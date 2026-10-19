@@ -22,20 +22,19 @@ egoSpawnPt = OrientedPoint in egoInitLane.centerline
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
-# Defining adversarial maneuvers as those conflicting with the ego's straight path
-advManeuvers = filter(lambda i: i.type == ManeuverType.LEFT_TURN, egoManeuver.conflictingManeuvers)
-advManeuver = Uniform(*advManeuvers)
-advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
-advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
-IntSpawnPt = advManeuver.connectingLane.centerline.start  # Start of the connecting lane centerline
+# Define hyperparameters for the adversarial agent's position relative to the ego vehicle
+param OPT_GEO_X_DISTANCE = Range(-10, -2)  # Left side offset (negative X)
+param OPT_GEO_Y_DISTANCE = Range(5, 20)    # Front offset (positive Y)
 
-param OPT_GEO_Y_DISTANCE = Range(-10, 10)
-# Setting up the adversarial agent
-AdvAgent = Pedestrian following roadDirection from IntSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE,
-    with heading IntSpawnPt.heading,
+# Calculate the spawn point for the adversarial agent
+# First, move forward along the road direction from the ego spawn point
+FrontSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+
+# Then, shift to the left by the specified X distance
+AdvSpawnPt = OrientedPoint left of FrontSpawnPt by globalParameters.OPT_GEO_X_DISTANCE
+
+# Spawn the adversarial agent at the calculated position
+AdvAgent = Pedestrian at AdvSpawnPt,
+    with heading AdvSpawnPt.heading,
     with regionContainedIn None,
     with behavior AdvBehavior()
-
-# Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
-require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])

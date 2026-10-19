@@ -45,6 +45,8 @@ if __name__ == '__main__':
     parser.add_argument('--tm_port', type=int, default=8002, help='traffic manager port')
     parser.add_argument('--fixed_delta_seconds', type=float, default=0.1)
     parser.add_argument('--test_policy', type=str, default='sac')
+    parser.add_argument('--pretrain_dir', type=str, default=None,
+                        help='override agent yaml pretrain_dir (e.g. PPO/TD3 SafeBench checkpoints)')
     parser.add_argument('--route_id', type=int, default=0)
     parser.add_argument('--scenario_id', type=int, default=0)
     parser.add_argument('--test_epoch', type=int, default=None)
@@ -62,6 +64,8 @@ if __name__ == '__main__':
             agent_config_path = osp.join(args.ROOT_DIR, 'safebench/agent/config', agent_cfg)
             agent_config = load_config(agent_config_path)
             agent_config['policy_name'] = args.test_policy
+            if args.pretrain_dir:
+                agent_config['pretrain_dir'] = args.pretrain_dir
           
             ## load the corresponding model ##
             agent_config['load_dir'] = osp.join(agent_config['load_dir'], f'scenario_{args.scenario_id}')
@@ -71,7 +75,7 @@ if __name__ == '__main__':
             scenario_config = load_config(scenario_config_path)
             scenario_config['scenario_id'] = args.scenario_id
                         
-            args.output_dir = osp.join('log', 'adv_train', args.mode, agent_config['policy_name'], f"{agent_cfg.split('.')[0]}_epoch{args.test_epoch}", f"{scenario_cfg.split('.')[0]}")
+            args.output_dir = osp.join(args.output_dir or 'log', 'adv_train', args.mode, agent_config['policy_name'], f"{agent_cfg.split('.')[0]}_epoch{args.test_epoch}", f"{scenario_cfg.split('.')[0]}")
             args.exp_name = 'scenario_' + str(scenario_config['scenario_id'])
             args_dict = vars(args)
             # main entry with a selected mode

@@ -5,19 +5,17 @@ param carla_map = Town
 model scenic.simulators.carla.model
 EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
-param OPT_ADV_SPEED = Range(5, 10)
-param OPT_ADV_DISTANCE = Range(0, 20)
-param OPT_BRAKE = Range(0, 1)
-param OPT_PAUSE_DURATION = Range(10, 30)
-param OPT_THROTTLE = Range(0.5, 1)  # Throttle intensity for acceleration
-
 behavior AdvBehavior():
-    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
+    while (distance to self) > 60:
+        wait  # The adversarial vehicle waits until it is within a significant range to impact the ego's maneuver.
+    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_BRAKE_DISTANCE
+    # Once within a critical distance of the intersection, the adversarial vehicle initiates a sudden braking maneuver.
     while True:
-        take SetBrakeAction(globalParameters.OPT_BRAKE)
-        for _ in range(globalParameters.OPT_PAUSE_DURATION):
-            wait
-        take SetThrottleAction(globalParameters.OPT_THROTTLE)
+        take SetBrakeAction(globalParameters.OPT_BRAKE)  # Continues to apply brakes to simulate an emergency or unexpected stop.
+
+param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
+param OPT_BRAKE_DISTANCE = Range(0, 4)  # The critical distance at which the adversarial vehicle begins its sudden stop.
+param OPT_BRAKE = Range(0, 1)  # The intensity of the braking action, potentially simulating an abrupt or gentle stop.
 
 ## MONITORS
 monitor TrafficLights:
@@ -41,21 +39,21 @@ ego = Car at egoSpawnPt,
     with blueprint EGO_MODEL
 
 require 10 <= (distance to intersection) <= 40
-# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
+# Parameters for the adversarial agent's position in the oncoming lane
+param OPT_GEO_Y_DISTANCE = Range(10, 50)  # Distance ahead of the ego vehicle
+param OPT_GEO_X_DISTANCE = Range(-8, -4)  # Lateral offset to the left (oncoming lane)
 
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Identify the oncoming lane (left lane relative to ego)
+laneSec = network.laneSectionAt(ego)
+oncomingLane = laneSec._laneToLeft.lane
 
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = Car at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
+# Calculate the spawn point in the oncoming lane
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+projectPt = Vector(*oncomingLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = oncomingLane.orientation[projectPt]
+
+# Spawn the adversarial car in the oncoming lane, facing the ego vehicle
+AdvAgent = Car at projectPt,
+    with heading advHeading + 180 deg,  # Facing opposite to the lane direction (towards ego)
+    with regionContainedIn None,
     with behavior AdvBehavior()

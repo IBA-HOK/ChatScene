@@ -5,18 +5,18 @@ param carla_map = Town
 model scenic.simulators.carla.model
 EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
-
 behavior AdvBehavior():
     while (distance to self) > 60:
-        wait
+        wait  # The adversarial vehicle waits until it is close enough to impact the ego's maneuver.
     do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
+    # Suddenly speeds up to enter the intersection.
     while True:
-        take SetThrottleAction(globalParameters.OPT_THROTTLE)
+        take SetThrottleAction(globalParameters.OPT_THROTTLE)  # Applies throttle to increase speed sharply.
 
-param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
-param OPT_ADV_DISTANCE = Range(5, 20)  # The critical distance at which the adversarial begins to accelerate.
-param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the accelerate action, ranging from a slight decrease in speed to a full stop.
-intersection = Uniform(*filter(lambda i: i.is4Way, network.intersections))
+param OPT_ADV_SPEED = Range(5, 15)  # The initial speed at which the adversarial vehicle approaches.
+param OPT_ADV_DISTANCE = Range(5, 20)  # The proximity within which the acceleration is triggered.
+param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the throttle during the sudden acceleration.
+intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
 egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
@@ -40,5 +40,5 @@ AdvAgent = Car following roadDirection from IntSpawnPt for globalParameters.OPT_
     with behavior AdvBehavior()
 
 # Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
+require -110 deg <= RelativeHeading(AdvAgent) <= -70 deg  # Ensuring the agent approaches from an angle indicative of crossing
 require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])

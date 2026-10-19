@@ -5,17 +5,18 @@ param carla_map = Town
 model scenic.simulators.carla.model
 EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
-
 behavior AdvBehavior():
     while (distance to self) > 60:
-        wait
-    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
+        wait  # The adversarial vehicle waits until it is within a threatening proximity.
+    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_STEER_DISTANCE
+    # Once close to the ego's trajectory, the adversarial vehicle initiates a sharp turn into the ego's path.
     while True:
-        take SetThrottleAction(globalParameters.OPT_THROTTLE)
+        take SetSpeedAction(self.speed)  # Continues moving at its current speed
+        take SetSteerAction(globalParameters.OPT_STEER)  # Makes an abrupt steering adjustment
 
 param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
-param OPT_ADV_DISTANCE = Range(5, 20)  # The critical distance at which the adversarial begins to accelerate.
-param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the accelerate action, ranging from a slight decrease in speed to a full stop.
+param OPT_STEER_DISTANCE = Range(0, 4)  # Distance from ego's trajectory at which the vehicle starts to turn.
+param OPT_STEER = Range(-1.0, 1.0)  # Defines the intensity and direction of the steering action.
 # Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
 laneSecsWithLeftLane = []
 for lane in network.lanes:

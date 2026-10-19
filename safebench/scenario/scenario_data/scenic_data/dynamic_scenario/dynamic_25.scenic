@@ -5,32 +5,18 @@ param carla_map = Town
 model scenic.simulators.carla.model
 EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
+param OPT_ADV_SPEED = Range(5, 15)
+param OPT_MALFUNCTION_THROTTLE = Range(0.8, 1.0)  # High throttle value simulating malfunction
+param OPT_MALFUNCTION_DURATION = Range(20, 50)    # Duration of the malfunction in simulation steps
+
 behavior AdvBehavior():
-    while (distance to self) > 60:
-        wait  # The adversarial car waits until it is within 60 meters of the ego vehicle.
-
-    do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED) until (
-        distance to self < globalParameters.OPT_ADV_DISTANCE)
-
-    while True:
-        take SetThrottleAction(globalParameters.OPT_ADV_THROTTLE)  # Aggressively adjusts acceleration.
-        
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_THROTTLE):
-            wait
-
-        take SetBrakeAction(globalParameters.OPT_ADV_BREAK)  # Aggressively adjusts braking.
-
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_BRAKE):
-            wait
-
-param OPT_ADV_SPEED = Range(0, 20)  # Controls the initial speed of the adversarial car.
-param OPT_ADV_DISTANCE = Range(0, 20)  # Specifies the distance at which the car begins its aggressive maneuver.
-param OPT_ADV_THROTTLE = Range(0, 1)  # Aggressive throttle range.
-param OPT_ADV_BREAK = Range(0, 1)  # Determines the intensity of the braking.
-param OPT_WAIT_THROTTLE = Range(5, 20)  # Variable wait time between throttle changes.
-param OPT_WAIT_BRAKE = Range(5, 20)  # Variable wait time between brake applications.
+    # Initial normal driving behavior
+    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < 50
+    
+    # Simulate unexpected acceleration due to throttle malfunction
+    take SetThrottleAction(globalParameters.OPT_MALFUNCTION_THROTTLE)
+    for _ in range(globalParameters.OPT_MALFUNCTION_DURATION):
+        wait
 
 ## MONITORS
 monitor TrafficLights:
@@ -54,22 +40,21 @@ ego = Car at egoSpawnPt,
     with blueprint EGO_MODEL
 
 require 10 <= (distance to intersection) <= 40
-# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+# Parameters for the adversarial agent's position in the oncoming lane
+param OPT_GEO_Y_DISTANCE = Range(10, 50)  # Distance ahead of the ego vehicle
+param OPT_GEO_X_DISTANCE = Range(-8, -4)  # Lateral offset to the left (oncoming lane)
 
-# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToLeft.lane
+# Identify the oncoming lane (left lane relative to ego)
+laneSec = network.laneSectionAt(ego)
+oncomingLane = laneSec._laneToLeft.lane
+
+# Calculate the spawn point in the oncoming lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
-projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
-advHeading = advLane.orientation[projectPt]
+projectPt = Vector(*oncomingLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = oncomingLane.orientation[projectPt]
 
-# Spawn the Adversarial Agent
+# Spawn the adversarial car in the oncoming lane, facing the ego vehicle
 AdvAgent = Car at projectPt,
-    with heading advHeading,
+    with heading advHeading + 180 deg,  # Facing opposite to the lane direction (towards ego)
     with regionContainedIn None,
     with behavior AdvBehavior()

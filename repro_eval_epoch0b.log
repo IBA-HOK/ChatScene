@@ -1,0 +1,1204 @@
+== ChatScene paper repro ==
+scenarios: 1 2 3 4 5 6 7 8 | port: 2002/8002 | device: cpu | test_epoch: 0
+carla_root: ./carla (manage: 1)
+>> using /home/hokuto/miniforge3/envs/chatscene/bin/python (invoking python lacks torch)
+>> PYTHONPATH extended for CARLA API
+>> safebench from this tree
+>> eval sid=1 route=8 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 1 --route_id 8 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_1
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_1/scenario_1_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_1/scenario_1_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=1 route=8
+>> eval sid=1 route=9 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 1 --route_id 9 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_1
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_1/scenario_1_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_1/scenario_1_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=1 route=9
+>> eval sid=2 route=8 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 2 --route_id 8 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_2
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> Initializing scenic simulator: safebench/scenario/scenario_data/scenic_data/scenario_2/behavior_4_opt.scenic[0m
+Beginning scenario construction...
+  Loading cached version of road network...
+  Loaded cached network in 0.69 seconds.
+  Pruning scenario...
+  Pruned scenario in 9.06e-06 seconds.
+Scenario constructed in 0.88 seconds.
+  Connecting to CARLA on port 2002
+  Map loaded in simulator.
+[32;1m>> Initializing carla world[0m
+[32;1m>> Initializing pygame birdeye renderer[0m
+[32;1m>> Drawing the map of the entire town. This may take a while...[0m
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 11[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[1/2] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.435830242967516[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           1.0[0m
+[32;1m	 avg_red_light_freq       1.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.8950015891308866[0m
+[32;1m	 route_completion         0.7973296206315013[0m
+[32;1m	 avg_time_spent           0.0[0m
+[32;1m	 avg_acceleration         0.45214800392586224[0m
+[32;1m	 avg_yaw_velocity         0.2007729577122839[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.25[0m
+[32;1m	 task_os                  0.8974437365874626[0m
+[32;1m	 comfort_os               0.7823596794539515[0m
+[32;1m	 final_score              0.3777803378765906[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 37[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[2/2] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 5.678479852679888[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.5[0m
+[32;1m	 avg_red_light_freq       1.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.8892176437526982[0m
+[32;1m	 route_completion         0.8986648103157506[0m
+[32;1m	 avg_time_spent           0.26666667064030963[0m
+[32;1m	 avg_acceleration         0.3763890678983042[0m
+[32;1m	 avg_yaw_velocity         0.2535090652188637[0m
+[32;1m	 avg_lane_invasion_freq   0.05[0m
+[32;1m	 safety_os                0.5625[0m
+[32;1m	 task_os                  0.840405261142713[0m
+[32;1m	 comfort_os               0.7733672889609441[0m
+[32;1m	 final_score              0.6162998282267957[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-8_records.pkl[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-8_records.pkl[0m
+[32;1m>> Initializing scenic simulator: safebench/scenario/scenario_data/scenic_data/scenario_2/behavior_5_opt.scenic[0m
+Beginning scenario construction...
+  Loading cached version of road network...
+  Loaded cached network in 0.55 seconds.
+  Pruning scenario...
+  Pruned scenario in 7.391e-06 seconds.
+Scenario constructed in 1.05 seconds.
+  Connecting to CARLA on port 2002
+  Map loaded in simulator.
+Loading params...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.harley-davidson.low_rider
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.kawasaki.ninja
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.kawasaki.ninja
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.kawasaki.ninja
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.kawasaki.ninja
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.harley-davidson.low_rider
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.harley-davidson.low_rider
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.harley-davidson.low_rider
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.harley-davidson.low_rider
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.harley-davidson.low_rider
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.kawasaki.ninja
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.harley-davidson.low_rider
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.kawasaki.ninja
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.kawasaki.ninja
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.kawasaki.ninja
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.yamaha.yzf
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.harley-davidson.low_rider
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.kawasaki.ninja
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.kawasaki.ninja
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object vehicle.harley-davidson.low_rider
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 4[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[1/2] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 5.625950926360575[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.0[0m
+[32;1m	 avg_red_light_freq       1.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9068403098920097[0m
+[32;1m	 route_completion         1.0[0m
+[32;1m	 avg_time_spent           0.26500000394880774[0m
+[32;1m	 avg_acceleration         0.2861885852505001[0m
+[32;1m	 avg_yaw_velocity         0.31212179396238293[0m
+[32;1m	 avg_lane_invasion_freq   0.15[0m
+[32;1m	 safety_os                0.875[0m
+[32;1m	 task_os                  0.8806134353144007[0m
+[32;1m	 comfort_os               0.7505632069290391[0m
+[32;1m	 final_score              0.868441393775151[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-8_records.pkl[0m
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+[32;1m>> Loading scenario data id: 47[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[2/2] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 5.426516265582071[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.0[0m
+[32;1m	 avg_red_light_freq       1.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.887630168223007[0m
+[32;1m	 route_completion         1.0[0m
+[32;1m	 avg_time_spent           0.2633333372573058[0m
+[32;1m	 avg_acceleration         0.3021489365084923[0m
+[32;1m	 avg_yaw_velocity         0.24287181638417513[0m
+[32;1m	 avg_lane_invasion_freq   0.075[0m
+[32;1m	 safety_os                0.875[0m
+[32;1m	 task_os                  0.8747656103219003[0m
+[32;1m	 comfort_os               0.7933264157024442[0m
+[32;1m	 final_score              0.8701132935548829[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-8_records.pkl[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-8_records.pkl[0m
+OK: eval sid=2 route=8
+>> eval sid=2 route=9 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 2 --route_id 9 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_2
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> Initializing scenic simulator: safebench/scenario/scenario_data/scenic_data/scenario_2/behavior_3_opt.scenic[0m
+Beginning scenario construction...
+  Loading cached version of road network...
+  Loaded cached network in 0.70 seconds.
+  Pruning scenario...
+  Pruned scenario in 7.153e-06 seconds.
+Scenario constructed in 0.89 seconds.
+  Connecting to CARLA on port 2002
+  Map loaded in simulator.
+[32;1m>> Initializing carla world[0m
+[32;1m>> Initializing pygame birdeye renderer[0m
+[32;1m>> Drawing the map of the entire town. This may take a while...[0m
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object walker.pedestrian.0002
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object walker.pedestrian.0008
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object walker.pedestrian.0007
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object walker.pedestrian.0003
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object walker.pedestrian.0002
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 1[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[1/2] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.722233352751423[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.0[0m
+[32;1m	 avg_red_light_freq       1.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.770812211675225[0m
+[32;1m	 route_completion         1.0[0m
+[32;1m	 avg_time_spent           0.21833333658675352[0m
+[32;1m	 avg_acceleration         0.42518460419139903[0m
+[32;1m	 avg_yaw_velocity         0.21513357516722473[0m
+[32;1m	 avg_lane_invasion_freq   0.25[0m
+[32;1m	 safety_os                0.875[0m
+[32;1m	 task_os                  0.8508262916961572[0m
+[32;1m	 comfort_os               0.7032272735471256[0m
+[32;1m	 final_score              0.8612055249180703[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_3_opt_ROUTE-9_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_3_opt_ROUTE-9_records.pkl[0m
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 4[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[2/2] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.87180509000582[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.0[0m
+[32;1m	 avg_red_light_freq       1.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.7399062706838755[0m
+[32;1m	 route_completion         1.0[0m
+[32;1m	 avg_time_spent           0.22000000327825547[0m
+[32;1m	 avg_acceleration         0.43664419881421734[0m
+[32;1m	 avg_yaw_velocity         0.213774307720393[0m
+[32;1m	 avg_lane_invasion_freq   0.175[0m
+[32;1m	 safety_os                0.875[0m
+[32;1m	 task_os                  0.8399687558018734[0m
+[32;1m	 comfort_os               0.7248604978217966[0m
+[32;1m	 final_score              0.8608781616233553[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_3_opt_ROUTE-9_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_3_opt_ROUTE-9_records.pkl[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_3_opt_ROUTE-9_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_3_opt_ROUTE-9_records.pkl[0m
+[32;1m>> Initializing scenic simulator: safebench/scenario/scenario_data/scenic_data/scenario_2/behavior_4_opt.scenic[0m
+Beginning scenario construction...
+  Loading cached version of road network...
+  Loaded cached network in 0.55 seconds.
+  Pruning scenario...
+  Pruned scenario in 7.629e-06 seconds.
+Scenario constructed in 1.05 seconds.
+  Connecting to CARLA on port 2002
+  Map loaded in simulator.
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 6[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[1/2] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.733299111467953[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.0[0m
+[32;1m	 avg_red_light_freq       1.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.70299551811262[0m
+[32;1m	 route_completion         1.0[0m
+[32;1m	 avg_time_spent           0.22500000335276127[0m
+[32;1m	 avg_acceleration         0.4512153827780726[0m
+[32;1m	 avg_yaw_velocity         0.214345506784843[0m
+[32;1m	 avg_lane_invasion_freq   0.1[0m
+[32;1m	 safety_os                0.875[0m
+[32;1m	 task_os                  0.8259985049199529[0m
+[32;1m	 comfort_os               0.7448130368123614[0m
+[32;1m	 final_score              0.8599886712343907[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-9_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-9_records.pkl[0m
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 7[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[2/2] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.869364500870522[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.0[0m
+[32;1m	 avg_red_light_freq       1.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.7314228728758903[0m
+[32;1m	 route_completion         1.0[0m
+[32;1m	 avg_time_spent           0.2241666700070103[0m
+[32;1m	 avg_acceleration         0.435513179164271[0m
+[32;1m	 avg_yaw_velocity         0.3677838921341059[0m
+[32;1m	 avg_lane_invasion_freq   0.15[0m
+[32;1m	 safety_os                0.875[0m
+[32;1m	 task_os                  0.83575206762296[0m
+[32;1m	 comfort_os               0.6822343095672078[0m
+[32;1m	 final_score              0.8577196719975014[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-9_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-9_records.pkl[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-9_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_4_opt_ROUTE-9_records.pkl[0m
+[32;1m>> Initializing scenic simulator: safebench/scenario/scenario_data/scenic_data/scenario_2/behavior_5_opt.scenic[0m
+Beginning scenario construction...
+  Loading cached version of road network...
+  Loaded cached network in 0.68 seconds.
+  Pruning scenario...
+  Pruned scenario in 7.629e-06 seconds.
+Scenario constructed in 1.31 seconds.
+  Connecting to CARLA on port 2002
+  Map loaded in simulator.
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Loading params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 1[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[1/2] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 3.745073501627533[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           1.0[0m
+[32;1m	 avg_red_light_freq       1.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.7345017352202285[0m
+[32;1m	 route_completion         0.613178370308274[0m
+[32;1m	 avg_time_spent           0.0[0m
+[32;1m	 avg_acceleration         0.5284527307576918[0m
+[32;1m	 avg_yaw_velocity         0.29745911518739143[0m
+[32;1m	 avg_lane_invasion_freq   0.1[0m
+[32;1m	 safety_os                0.25[0m
+[32;1m	 task_os                  0.7825600351761676[0m
+[32;1m	 comfort_os               0.6913627180183056[0m
+[32;1m	 final_score              0.35531264193814205[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-9_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-9_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 34[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[2/2] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.447127736378876[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           1.0[0m
+[32;1m	 avg_red_light_freq       1.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.7226485559477325[0m
+[32;1m	 route_completion         0.613178370308274[0m
+[32;1m	 avg_time_spent           0.0[0m
+[32;1m	 avg_acceleration         0.5792008003761003[0m
+[32;1m	 avg_yaw_velocity         0.28434847003842106[0m
+[32;1m	 avg_lane_invasion_freq   0.15[0m
+[32;1m	 safety_os                0.25[0m
+[32;1m	 task_os                  0.7786089754186688[0m
+[32;1m	 comfort_os               0.6621502431951597[0m
+[32;1m	 final_score              0.3529904563410989[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-9_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-9_records.pkl[0m
+Recording params...
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-9_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_2/scenario_2_rl_scenic_seed_0/eval_results/OPT_behavior_5_opt_ROUTE-9_records.pkl[0m
+OK: eval sid=2 route=9
+>> eval sid=3 route=8 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 3 --route_id 8 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_3
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_3/scenario_3_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_3/scenario_3_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=3 route=8
+>> eval sid=3 route=9 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 3 --route_id 9 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_3
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_3/scenario_3_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_3/scenario_3_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=3 route=9
+>> eval sid=4 route=8 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 4 --route_id 8 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_4
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_4/scenario_4_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_4/scenario_4_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=4 route=8
+>> eval sid=4 route=9 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 4 --route_id 9 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_4
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_4/scenario_4_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_4/scenario_4_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=4 route=9
+>> eval sid=5 route=8 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 5 --route_id 8 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_5
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_5/scenario_5_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_5/scenario_5_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=5 route=8
+>> eval sid=5 route=9 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 5 --route_id 9 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_5
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_5/scenario_5_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_5/scenario_5_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=5 route=9
+>> eval sid=6 route=8 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 6 --route_id 8 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_6
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_6/scenario_6_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_6/scenario_6_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=6 route=8
+>> eval sid=6 route=9 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 6 --route_id 9 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_6
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_6/scenario_6_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_6/scenario_6_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=6 route=9
+>> eval sid=7 route=8 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 7 --route_id 8 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_7
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_7/scenario_7_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_7/scenario_7_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=7 route=8
+>> eval sid=7 route=9 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 7 --route_id 9 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_7
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_7/scenario_7_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_7/scenario_7_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=7 route=9
+>> eval sid=8 route=8 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 8 --route_id 8 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_8
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_8/scenario_8_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_8/scenario_8_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=8 route=8
+>> eval sid=8 route=9 (timeout 3600s): python scripts/run_eval.py --agent_cfg=adv_scenic.yaml --scenario_cfg=eval_scenic.yaml --mode eval --scenario_id 8 --route_id 9 --test_epoch 0 --port 2002 --tm_port 8002 --device cpu
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hokuto/chatScene_Strata/ChatScene/safebench/agent/safe_rl/policy/sac.py:195: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  actor_state_dict, critic_state_dict = torch.load(path)
+/home/hokuto/miniforge3/envs/chatscene/lib/python3.8/site-packages/torch/cuda/__init__.py:230: UserWarning: 
+NVIDIA GeForce RTX 5080 with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA GeForce RTX 5080 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_8
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_8/scenario_8_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic/scenario_8/scenario_8_rl_scenic_seed_0/progress.txt[0m
+[33;1m>> Evaluation Mode, skip config saving[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+[32;1m>> This scenario and route have been done.[0m
+OK: eval sid=8 route=9
+== done ==
+All green. Artifacts:
+  - scenario JSON: safebench/scenario/scenario_data/scenic_data/scenario_{id}/scenario_{id}.json
+  - checkpoints:   safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_{id}/
+  - logs:          log/adv_train/{train_scenario,train_agent,eval}/sac/adv_scenic/scenario_{id}/
+  - carla left running on port 2002 (stop: kill $(cat /home/hokuto/chatScene_Strata/ChatScene/.carla_2002.pid))

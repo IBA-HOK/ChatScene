@@ -6,22 +6,13 @@ model scenic.simulators.carla.model
 EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
 behavior AdvBehavior():
-    initialDirection = self.heading
-    while (distance to self) > globalParameters.OPT_ADV_DISTANCE:
-        wait
+    do CrossingBehavior(ego, globalParameters.OPT_ADV_SPEED, globalParameters.OPT_ADV_DISTANCE) until (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
     while True:
-        take SetWalkingDirectionAction(initialDirection)
-        take SetWalkingSpeedAction(globalParameters.OPT_ADV_SPEED)
-        for _ in range(globalParameters.OPT_WAIT_STEP_1):
-            wait
-        take SetWalkingSpeedAction(0)  # Stop suddenly
-        for _ in range(globalParameters.OPT_WAIT_STEP_2):
-            wait
+        take SetWalkingSpeedAction(0)
 
-param OPT_ADV_SPEED = Range(0, 5)
-param OPT_ADV_DISTANCE = Range(0, 10)
-param OPT_WAIT_STEP_1 = Range(0, 30)  # Wait time in steps for the first direction
-param OPT_WAIT_STEP_2 = Range(0, 30)  # Wait time in steps for the second direction
+param OPT_ADV_SPEED = Range(1, 5)
+param OPT_ADV_DISTANCE = Range(0, 15)
+param OPT_STOP_DISTANCE = Range(0, 1)
 # Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
 laneSecsWithLeftLane = []
 for lane in network.lanes:
@@ -38,21 +29,33 @@ egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
-# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
+# Setup the parked car (blocker) to force the ego vehicle into the opposite lane
+param OPT_BLOCKER_DISTANCE = Range(10, 30)
+param OPT_BLOCKER_SPEED = 0
+BlockerSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_BLOCKER_DISTANCE
+Blocker = Car at BlockerSpawnPt,
+    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_BLOCKER_SPEED)
 
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Identify the opposite lane (left lane relative to ego's current path if ego is bypassing to the left, 
+# but typically "opposite lane" implies the lane on the other side of the center line. 
+# Assuming standard right-hand traffic and ego bypassing a right-side blocker, the opposite lane is to the left.
+# However, the description says "into the opposite lane (the lane the ego is currently using to bypass the parked car)".
+# This implies the ego has moved into the opposite lane. The pedestrian spawns in that same lane, in front of ego.
 
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = Pedestrian at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
+param OPT_GEO_Y_DISTANCE = Range(0, 10)
+# The ego is in the opposite lane. We need to find the lane the ego is currently in.
+# Since the ego is bypassing, it's likely in the lane to the left of its original lane.
+# Let's assume the ego's current lane is the one to the left of the original lane.
+# But to be robust, we can try to get the lane the ego is currently in.
+# In Scenic, `ego` is an object. We can get its lane.
+currentLane = network.laneAt(ego)
+
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+projectPt = Vector(*currentLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = currentLane.orientation[projectPt]
+
+# Spawn the Adversarial Pedestrian
+AdvAgent = Pedestrian at projectPt,
+    with heading advHeading,
+    with regionContainedIn None,
     with behavior AdvBehavior()

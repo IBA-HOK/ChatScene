@@ -6,13 +6,13 @@ model scenic.simulators.carla.model
 EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
 param OPT_ADV_SPEED = Range(5, 10)  # Adversarial vehicle's cruising speed
-param OPT_ADV_DISTANCE = Range(0, 20)  # Distance threshold to initiate braking
+param OPT_ADV_DISTANCE = Range(0, 20)  # Distance threshold to initiate blocking brake
 param OPT_BRAKE = Range(0, 1)  # Braking intensity, where 1 represents full braking
 
 behavior AdvBehavior():
     # Follow the lane at the defined speed until close enough to the ego vehicle
     do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
-    # Once within the distance threshold, execute a sudden brake to test the ego vehicle's response capabilities
+    # Once within the distance threshold, execute a sudden brake to block the lane
     while True:
         take SetBrakeAction(globalParameters.OPT_BRAKE)
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))

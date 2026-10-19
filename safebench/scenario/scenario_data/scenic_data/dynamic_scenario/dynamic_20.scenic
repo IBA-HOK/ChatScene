@@ -7,27 +7,20 @@ EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
 behavior AdvBehavior():
     while (distance to self) > 60:
-        wait  # The adversarial vehicle waits until it is close enough to impact the ego's maneuver.
-    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_ADV_DISTANCE or (distance from self to egoTrajectory) < globalParameters.OPT_BRAKE_DISTANCE
-    # Accelerates towards the ego vehicle.
-    while (distance from self to egoTrajectory) > globalParameters.OPT_BRAKE_DISTANCE:
-        take SetThrottleAction(globalParameters.OPT_THROTTLE)  # Applies throttle to increase speed.
-    # Once close enough, it decelerates abruptly.
+        wait  # The adversarial car waits until it is close enough to the intersection/ego.
+    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
+    # Runs the red light and unexpectedly accelerates.
     while True:
-        take SetBrakeAction(globalParameters.OPT_BRAKE)  # Initiates a sudden brake to reduce speed sharply.
+        take SetThrottleAction(globalParameters.OPT_THROTTLE)  # Aggressively accelerates through the intersection.
 
-param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches.
-param OPT_ADV_DISTANCE = Range(0, 25)  # The proximity within which the acceleration is triggered.
-param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the throttle during the acceleration.
-param OPT_BRAKE = Range(0, 1)  # The intensity of the braking action.
-param OPT_BRAKE_DISTANCE = Range(0, 4)  # The critical distance at which the adversarial vehicle begins its deceleration.
+param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial car approaches the intersection.
+param OPT_ADV_DISTANCE = Range(0, 20)  # The proximity within which the acceleration is triggered.
+param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the throttle during the unexpected acceleration.
 
 ## MONITORS
 monitor TrafficLights:
     freezeTrafficLights()
     while True:
-        if withinDistanceToTrafficLight(ego, 100):
-            setClosestTrafficLightStatus(ego, "green")
         if withinDistanceToTrafficLight(AdvAgent, 100):
             setClosestTrafficLightStatus(AdvAgent, "red")
         wait
@@ -44,21 +37,20 @@ ego = Car at egoSpawnPt,
     with blueprint EGO_MODEL
 
 require 10 <= (distance to intersection) <= 40
-# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-2, 2)
-param OPT_GEO_Y_DISTANCE = Range(2, 6)
+# Defining adversarial maneuvers as those conflicting with the ego's straight path
+advManeuvers = filter(lambda i: i.type == ManeuverType.CROSSING, egoManeuver.conflictingManeuvers)
+advManeuver = Uniform(*advManeuvers)
+advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
+advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
+IntSpawnPt = advManeuver.connectingLane.centerline.start  # Start of the connecting lane centerline
 
-# Setup for the blocking car that the ego must bypass
-laneSec = network.laneSectionAt(ego)
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
+param OPT_GEO_Y_DISTANCE = Range(-10, 10)
+# Setting up the adversarial agent
+AdvAgent = Car following roadDirection from IntSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE,
     with heading IntSpawnPt.heading,
-    with regionContainedIn None
-
-# Setup for the pedestrian who suddenly appears and complicates the maneuver
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = Car at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 90 deg,  # Perpendicular to the road, crossing the street
     with regionContainedIn None,
     with behavior AdvBehavior()
+
+# Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
+require 70 deg <= RelativeHeading(AdvAgent) <= 110 deg  # Ensuring the agent approaches from an angle indicative of crossing
+require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])

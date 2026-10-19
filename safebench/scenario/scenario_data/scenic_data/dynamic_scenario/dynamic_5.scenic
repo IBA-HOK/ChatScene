@@ -15,7 +15,7 @@ param OPT_ADV_DISTANCE = Range(0, 15)
 param OPT_BRAKE_DISTANCE = Range(0, 1)
 param OPT_BRAKE = Range(0, 1)
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
 egoSpawnPt = OrientedPoint in egoInitLane.centerline
@@ -23,13 +23,6 @@ egoSpawnPt = OrientedPoint in egoInitLane.centerline
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
-# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
-
 # Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
 param OPT_GEO_Y_DISTANCE = Range(0, 30)
 advLane = network.laneSectionAt(ego)._laneToRight.lane

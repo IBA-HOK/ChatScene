@@ -110,6 +110,11 @@ class ScenarioDataLoader:
         return selected_scenario, len(selected_scenario)
 
 class ScenicDataLoader:
+    # Rejection sampling in generate_scene used to loop forever when a
+    # (route, behavior) combination cannot yield valid scenes (e.g. every
+    # spawn attempt is rejected by CARLA). Bound the attempts instead.
+    MAX_GEN_ATTEMPTS_FACTOR = 50
+    MIN_GEN_ATTEMPTS = 300
     def __init__(self, scenic, config, num_scenario):
         self.num_scenario = num_scenario
         self.config = config
@@ -125,10 +130,21 @@ class ScenicDataLoader:
         
         if self.mode in ['eval', 'train_agent']:
             self.select_id = self.opt_params['select_id']
-            for j in range(self.sample_num//self.opt_step):
-                self.generate_scene(j, self.opt_step, config.opt_params[f'opt_time_{j}'])
-            if len(self.scene) < self.sample_num:
-                self.generate_scene(j+1, self.sample_num - len(self.scene), config.opt_params[f'opt_time_{j+1}'])
+            pinned = {}
+            if isinstance(self.opt_params, dict):
+                try:
+                    pinned = {int(k): v for k, v in
+                              self.opt_params.get('pinned', {}).items()}
+                except (ValueError, AttributeError):
+                    pinned = {}
+            if pinned and all(i in pinned and pinned[i]
+                              for i in self.select_id):
+                self.replay_scenes(pinned)
+            else:
+                for j in range(self.sample_num//self.opt_step):
+                    self.generate_scene(j, self.opt_step, config.opt_params[f'opt_time_{j}'])
+                if len(self.scene) < self.sample_num:
+                    self.generate_scene(j+1, self.sample_num - len(self.scene), config.opt_params[f'opt_time_{j+1}'])
         else:
             self.train_scene()
         self.reset_idx_counter()
@@ -138,13 +154,76 @@ class ScenicDataLoader:
             self.scenic.load_params(params)
         random.seed(opt_time)
         scenes = []
+        new_scenes = 0
+        attempts = 0
+        max_attempts = max(self.MIN_GEN_ATTEMPTS, sample_num * self.MAX_GEN_ATTEMPTS_FACTOR)
         while len(scenes) < sample_num:
+            attempts += 1
+            if attempts > max_attempts:
+                print(f"Warning: generate_scene gave up after {attempts} attempts "
+                      f"({len(scenes)}/{sample_num} scenes kept).")
+                break
             scene, _ = self.scenic.generateScene()
             if self.scenic.setSimulation(scene):
                 scenes.append(scene)
+                new_scenes += 1
                 self.scenic.endSimulation()
+        if new_scenes == 0:
+            raise RuntimeError(
+                f"SCENIC_GEN_FAILED: 0 scenes after {attempts} attempts "
+                f"(behavior={self.behavior}). Check spawn geometry or CARLA server state.")
         self.scene.extend(scenes)
             
+    def capture_pinned(self, select_ids):
+        # Snapshot exact sampled OPT values of selected scenes so a later
+        # eval can replay them instead of resampling (resampling drifts:
+        # server-dependent setSimulation acceptance desyncs RNG draws).
+        pinned = {}
+        for idx in select_ids:
+            try:
+                scene = self.scene[idx]
+            except (IndexError, KeyError, TypeError):
+                continue
+            try:
+                params = scene.params
+            except AttributeError:
+                continue
+            vals = {}
+            for k, v in params.items():
+                if isinstance(k, str) and k.startswith('OPT'):
+                    try:
+                        vals[k] = float(v)
+                    except (TypeError, ValueError):
+                        continue
+            if vals:
+                pinned[str(idx)] = vals
+        return pinned
+
+    def replay_scenes(self, pinned):
+        # Regenerate ONLY selected scenes with every OPT pinned to its
+        # recorded value (low == high), reproducing selection-time draws
+        # for files whose geometry is a pure function of OPT + route.
+        by_id = {}
+        for idx in self.select_id:
+            point = {p: {'low': float(v), 'high': float(v)}
+                     for p, v in pinned[idx].items()}
+            self.scenic.load_params(point)
+            random.seed(idx)
+            scene = None
+            attempts = 0
+            while scene is None and attempts < self.MIN_GEN_ATTEMPTS:
+                attempts += 1
+                cand, _ = self.scenic.generateScene()
+                if self.scenic.setSimulation(cand):
+                    scene = cand
+                    self.scenic.endSimulation()
+            if scene is None:
+                raise RuntimeError(
+                    f"SCENIC_GEN_FAILED: pinned replay failed for data_id {idx} "
+                    f"(behavior={self.behavior}).")
+            by_id[idx] = scene
+        self.scene = by_id
+
     def reset_idx_counter(self):
         if self.mode in ['eval', 'train_agent']:
             self.num_total_scenario = len(self.select_id)
@@ -163,6 +242,10 @@ class ScenicDataLoader:
         ## no need to be random for scenic loading file ###
         selected_scenario = []
         idx = self.scenario_idx.pop(0)
+        if idx >= len(self.scene):
+            raise RuntimeError(
+                f"SCENIC_GEN_FAILED: scene index {idx} out of range "
+                f"({len(self.scene)} scenes generated).")
         new_config = deepcopy(self.config)
         new_config.scene = self.scene[idx]
         new_config.data_id = idx

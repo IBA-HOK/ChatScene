@@ -6,7 +6,14 @@ model scenic.simulators.carla.model
 EGO_MODEL = "vehicle.lincoln.mkz_2017"
 
 behavior AdvBehavior():
+    # Wait until the ego vehicle is close enough to be a threat
+    while (distance to self) > globalParameters.OPT_ADV_DISTANCE:
+        wait
+    
+    # Suddenly appear in the ego vehicle's path by crossing towards the ego's trajectory
     do CrossingBehavior(ego, globalParameters.OPT_ADV_SPEED, globalParameters.OPT_ADV_DISTANCE) until (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
+    
+    # Once in the path, stop suddenly to create a hazard
     while True:
         take SetWalkingSpeedAction(0)
 
@@ -31,19 +38,19 @@ ego = Car at egoSpawnPt,
     with blueprint EGO_MODEL
 # Parameters for scenario elements
 param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-2, 2)
-param OPT_GEO_Y_DISTANCE = Range(2, 6)
+param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
+param OPT_GEO_Y_DISTANCE = Range(10, 30)
 
-# Setup for the blocking car that the ego must bypass
-laneSec = network.laneSectionAt(ego)
+# Setting up the parked car that blocks the ego's path
+laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
 Blocker = Car at IntSpawnPt,
     with heading IntSpawnPt.heading,
     with regionContainedIn None
 
-# Setup for the pedestrian who suddenly appears and complicates the maneuver
+# Setup for the adversarial pedestrian who appears in the opposite lane near the parked car
 SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
 AdvAgent = Pedestrian at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 90 deg,  # Perpendicular to the road, crossing the street
-    with regionContainedIn None,
+    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
+    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
     with behavior AdvBehavior()

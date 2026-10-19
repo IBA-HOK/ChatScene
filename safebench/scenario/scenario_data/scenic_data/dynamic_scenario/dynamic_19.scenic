@@ -10,7 +10,7 @@ behavior AdvBehavior():
         wait  # The adversarial car waits until it is within 60 meters of the ego vehicle.
     do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
     while True:
-        take SetThrottleAction(globalParameters.OPT_ADV_THROTTLE)  # Aggressively adjusts its speed to close the gap.
+        take SetThrottleAction(globalParameters.OPT_ADV_THROTTLE)  # Aggressively accelerates to close the gap.
 
 param OPT_ADV_SPEED = Range(0, 10)  # Controls the initial speed of the adversarial car.
 param OPT_ADV_DISTANCE = Range(0, 20)  # Specifies the distance at which the car begins its aggressive maneuver.
@@ -31,6 +31,12 @@ egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
+
+# Placing a parked car in the ego's lane to obstruct it
+parkedCar = Car in egoLaneSec,
+    with heading egoLaneSec.heading,
+    with blueprint 'vehicle.tesla.model3',
+    with behavior ParkedCarBehavior()
 # Parameters for scenario elements
 param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
 param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
@@ -43,7 +49,7 @@ Blocker = Car at IntSpawnPt,
     with heading IntSpawnPt.heading,
     with regionContainedIn None
 
-# Setup for the motorcyclist who unexpectedly enters the scene
+# Setup for the adversarial car in the oncoming lane
 SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
 AdvAgent = Car at Blocker offset along IntSpawnPt.heading by SHIFT,
     with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming

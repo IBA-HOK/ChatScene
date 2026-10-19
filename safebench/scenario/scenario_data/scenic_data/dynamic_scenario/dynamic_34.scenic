@@ -12,25 +12,22 @@ behavior AdvBehavior():
     do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED) until (
         distance to self < globalParameters.OPT_ADV_DISTANCE)
 
-    while True:
-        take SetThrottleAction(globalParameters.OPT_ADV_THROTTLE)  # Aggressively adjusts acceleration.
-        
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_THROTTLE):
-            wait
+    # Suddenly accelerates
+    take SetThrottleAction(globalParameters.OPT_THROTTLE)
+    for _ in range(globalParameters.OPT_ACCEL_DURATION):
+        wait
 
-        take SetBrakeAction(globalParameters.OPT_ADV_BREAK)  # Aggressively adjusts braking.
-
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_BRAKE):
-            wait
+    # Then decelerates
+    take SetBrakeAction(globalParameters.OPT_BRAKE)
+    for _ in range(globalParameters.OPT_DECEL_DURATION):
+        wait
 
 param OPT_ADV_SPEED = Range(0, 20)  # Controls the initial speed of the adversarial car.
 param OPT_ADV_DISTANCE = Range(0, 20)  # Specifies the distance at which the car begins its aggressive maneuver.
-param OPT_ADV_THROTTLE = Range(0, 1)  # Aggressive throttle range.
-param OPT_ADV_BREAK = Range(0, 1)  # Determines the intensity of the braking.
-param OPT_WAIT_THROTTLE = Range(5, 20)  # Variable wait time between throttle changes.
-param OPT_WAIT_BRAKE = Range(5, 20)  # Variable wait time between brake applications.
+param OPT_THROTTLE = Range(0.5, 1)  # Aggressive throttle range.
+param OPT_BRAKE = Range(0, 1)  # Determines the intensity of the braking.
+param OPT_ACCEL_DURATION = Range(5, 20)  # Duration of the acceleration phase.
+param OPT_DECEL_DURATION = Range(5, 20)  # Duration of the deceleration phase.
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
 egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
@@ -40,22 +37,18 @@ egoSpawnPt = OrientedPoint in egoInitLane.centerline
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
-# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+param OPT_GEO_BLOCKER_X_DISTANCE = Range(2, 8)
+param OPT_GEO_BLOCKER_Y_DISTANCE = Range(-50, -15)
+param OPT_GEO_X_DISTANCE = Range(-2, 2)
+param OPT_GEO_Y_DISTANCE = Range(-6, -2)
 
-# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToRight.lane
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
-projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
-advHeading = advLane.orientation[projectPt]
+RightBackSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
+Blocker = Car right of RightBackSpawnPt by globalParameters.OPT_GEO_BLOCKER_X_DISTANCE,
+    with heading RightBackSpawnPt.heading,
+    with regionContainedIn None
 
-# Spawn the Adversarial Agent
-AdvAgent = Car at projectPt,
-    with heading advHeading,
+SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
+AdvAgent = Car at Blocker offset along RightBackSpawnPt.heading by SHIFT,
+    with heading RightBackSpawnPt.heading + 90 deg,
     with regionContainedIn None,
     with behavior AdvBehavior()

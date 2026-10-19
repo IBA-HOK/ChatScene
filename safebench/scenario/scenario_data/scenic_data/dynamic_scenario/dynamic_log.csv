@@ -1,24 +1,26 @@
 Scenario,AdvObject,Behavior Description,Behavior Snippet,Geometry Description,Geometry Snippet,Spawn Description,Spawn Snippet,Success
-The ego vehicle is driving on a straight road when a pedestrian suddenly crosses from the right front and suddenly stops as the ego vehicle approaches.,Pedestrian,The adversarial pedestrian suddenly crosses from the right front and stops abruptly as the ego vehicle approaches.,"behavior AdvBehavior():
+The ego vehicle is driving on a straight road when a pedestrian suddenly crosses from the right front and suddenly stops as the ego vehicle approaches.,Pedestrian,The adversarial pedestrian suddenly crosses from the right and stops abruptly as the ego vehicle approaches.,"behavior AdvBehavior():
     do CrossingBehavior(ego, globalParameters.OPT_ADV_SPEED, globalParameters.OPT_ADV_DISTANCE) until (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
     while True:
         take SetWalkingSpeedAction(0)
 
 param OPT_ADV_SPEED = Range(0, 5)
 param OPT_ADV_DISTANCE = Range(0, 15)
-param OPT_STOP_DISTANCE = Range(0, 1)",A straight road.,"Town = 'Town05'
-intersection = Uniform(*filter(lambda i: i.is4Way and not i.isSignalized, network.intersections))
-egoInitLane = Uniform(*intersection.incomingLanes)
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, egoInitLane.maneuvers))
-egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
-egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
+param OPT_STOP_DISTANCE = Range(0, 1)",A straight road.,"Town = 'Town03'
+# Identifying straight lanes
+straightLanes = []
+for lane in network.lanes:
+    if lane.isStraight:
+        straightLanes.append(lane)
 
-# Setting up the ego vehicle at the initial position
+# Selecting a random straight lane for the ego vehicle
+egoLane = Uniform(*straightLanes)
+egoSpawnPt = OrientedPoint in egoLane.centerline
+
+# Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL
-
-require 10 <= (distance to intersection) <= 40",The adversarial agent is on the right front of the ego vehicle on the same straight road for crossing.,"param OPT_GEO_X_DISTANCE = Range(2, 8)
+    with blueprint EGO_MODEL","The adversarial agent is on the right front of the ego vehicle, crossing the road.","param OPT_GEO_X_DISTANCE = Range(2, 8)
 param OPT_GEO_Y_DISTANCE = Range(15, 50)
 
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
@@ -33,31 +35,33 @@ AdvAgent = {AdvObject} right of IntSpawnPt by globalParameters.OPT_GEO_X_DISTANC
 
 param OPT_ADV_SPEED = Range(0, 5)
 param OPT_ADV_DISTANCE = Range(0, 15)
-param OPT_STOP_DISTANCE = Range(0, 1)",A straight road.,"Town = 'Town05'
-intersection = Uniform(*filter(lambda i: i.is4Way and not i.isSignalized, network.intersections))
-egoInitLane = Uniform(*intersection.incomingLanes)
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, egoInitLane.maneuvers))
-egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
-egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
+param OPT_STOP_DISTANCE = Range(0, 1)",A straight road.,"Town = 'Town03'
+# Identifying straight lanes
+straightLanes = []
+for lane in network.lanes:
+    if lane.isStraight:
+        straightLanes.append(lane)
 
-# Setting up the ego vehicle at the initial position
+# Selecting a random straight lane for the ego vehicle
+egoLane = Uniform(*straightLanes)
+egoSpawnPt = OrientedPoint in egoLane.centerline
+
+# Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL
-
-require 10 <= (distance to intersection) <= 40",The adversarial agent stands behind a bus stop on the right front of the ego vehicle on the same straight road.,"param OPT_GEO_BLOCKER_X_DISTANCE = Range(-8, -2)  # Negative range for left side
+    with blueprint EGO_MODEL",The adversarial agent is initially hidden behind a bus stop on the right front of the ego vehicle.,"param OPT_GEO_BLOCKER_X_DISTANCE = Range(2, 8)
 param OPT_GEO_BLOCKER_Y_DISTANCE = Range(15, 50)
 param OPT_GEO_X_DISTANCE = Range(-2, 2)
 param OPT_GEO_Y_DISTANCE = Range(2, 6)
 
-LeftFrontSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = BusStop left of LeftFrontSpawnPt by globalParameters.OPT_GEO_BLOCKER_X_DISTANCE,
-    with heading LeftFrontSpawnPt.heading,
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
+Blocker = BusStop right of IntSpawnPt by globalParameters.OPT_GEO_BLOCKER_X_DISTANCE,
+    with heading IntSpawnPt.heading,
     with regionContainedIn None
-
+    
 SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along LeftFrontSpawnPt.heading by SHIFT,
-    with heading LeftFrontSpawnPt.heading - 90 deg,  # Adjusted for sprinting out from the left
+AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
+    with heading IntSpawnPt.heading + 90 deg,
     with regionContainedIn None,
     with behavior AdvBehavior()",1
 "The ego vehicle is driving on a straight road; the adversarial pedestrian is hidden behind a vending machine on the right front, and abruptly dashes out onto the road, and stops directly in the path of the ego.",Pedestrian,The adversarial pedestrian abruptly dashes out onto the road and stops directly in the path of the ego vehicle.,"behavior AdvBehavior():
@@ -67,115 +71,105 @@ AdvAgent = {AdvObject} at Blocker offset along LeftFrontSpawnPt.heading by SHIFT
 
 param OPT_ADV_SPEED = Range(0, 5)
 param OPT_ADV_DISTANCE = Range(0, 15)
-param OPT_STOP_DISTANCE = Range(0, 1)",A straight road.,"Town = 'Town05'
-intersection = Uniform(*filter(lambda i: i.is4Way and not i.isSignalized, network.intersections))
-egoInitLane = Uniform(*intersection.incomingLanes)
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, egoInitLane.maneuvers))
-egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
-egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
+param OPT_STOP_DISTANCE = Range(0, 1)",A straight road.,"Town = 'Town03'
+# Identifying straight lanes
+straightLanes = []
+for lane in network.lanes:
+    if lane.isStraight:
+        straightLanes.append(lane)
 
-# Setting up the ego vehicle at the initial position
+# Selecting a random straight lane for the ego vehicle
+egoLane = Uniform(*straightLanes)
+egoSpawnPt = OrientedPoint in egoLane.centerline
+
+# Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL
-
-require 10 <= (distance to intersection) <= 40",The adversarial agent is hidden behind a vending machine on the right front of the ego vehicle on the same straight road.,"param OPT_GEO_BLOCKER_X_DISTANCE = Range(-8, -2)  # Negative range for left side
+    with blueprint EGO_MODEL",The adversarial agent is hidden behind a vending machine on the right front of the ego vehicle.,"param OPT_GEO_BLOCKER_X_DISTANCE = Range(2, 8)
 param OPT_GEO_BLOCKER_Y_DISTANCE = Range(15, 50)
 param OPT_GEO_X_DISTANCE = Range(-2, 2)
 param OPT_GEO_Y_DISTANCE = Range(2, 6)
 
-LeftFrontSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = VendingMachine left of LeftFrontSpawnPt by globalParameters.OPT_GEO_BLOCKER_X_DISTANCE,
-    with heading LeftFrontSpawnPt.heading,
+RightFrontSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
+Blocker = VendingMachine right of RightFrontSpawnPt by globalParameters.OPT_GEO_BLOCKER_X_DISTANCE,
+    with heading RightFrontSpawnPt.heading,
     with regionContainedIn None
 
 SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along LeftFrontSpawnPt.heading by SHIFT,
-    with heading LeftFrontSpawnPt.heading - 90 deg,
+AdvAgent = {AdvObject} at Blocker offset along RightFrontSpawnPt.heading by SHIFT,
+    with heading RightFrontSpawnPt.heading + 90 deg,
     with regionContainedIn None,
     with behavior AdvBehavior()",1
-The ego vehicle is driving on a straight road; the adversarial pedestrian appears from a driveway on the left and suddenly stop and walk diagonally.,Pedestrian,"The adversarial pedestrian appears from a driveway on the left, suddenly stops, and then walks diagonally.","behavior AdvBehavior():
-    initialDirection = self.heading
+The ego vehicle is driving on a straight road; the adversarial pedestrian appears from a driveway on the left and suddenly stop and walk diagonally.,Pedestrian,The adversarial pedestrian suddenly stops and walks diagonally.,"behavior AdvBehavior():
     while (distance to self) > globalParameters.OPT_ADV_DISTANCE:
         wait
-    while True:
-        take SetWalkingDirectionAction(initialDirection)
-        take SetWalkingSpeedAction(globalParameters.OPT_ADV_SPEED)
-        for _ in range(globalParameters.OPT_WAIT_STEP_1):
-            wait
-        take SetWalkingSpeedAction(0)  # Stop suddenly
-        for _ in range(globalParameters.OPT_WAIT_STEP_2):
-            wait
-
-param OPT_ADV_SPEED = Range(0, 5)
-param OPT_ADV_DISTANCE = Range(0, 10)
-param OPT_WAIT_STEP_1 = Range(0, 30)  # Wait time in steps for the first direction
-param OPT_WAIT_STEP_2 = Range(0, 30)  # Wait time in steps for the second direction",A straight road.,"Town = 'Town05'
-intersection = Uniform(*filter(lambda i: i.is4Way and not i.isSignalized, network.intersections))
-egoInitLane = Uniform(*intersection.incomingLanes)
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, egoInitLane.maneuvers))
-egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
-egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
-
-# Setting up the ego vehicle at the initial position
-ego = Car at egoSpawnPt,
-    with regionContainedIn None,
-    with blueprint EGO_MODEL
-
-require 10 <= (distance to intersection) <= 40",The adversarial agent emerges from a driveway on the left side of the ego vehicle.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
-
-# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToLeft.lane
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
-projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
-advHeading = advLane.orientation[projectPt]
-
-# Spawn the Adversarial Agent
-AdvAgent = {AdvObject} at projectPt,
-    with heading advHeading,
-    with regionContainedIn None,
-    with behavior AdvBehavior()",1
-The ego vehicle is driving on a straight road; the adversarial pedestrian suddenly appears from behind a parked car on the right front and suddenly stop.,Pedestrian,The adversarial pedestrian suddenly appears from behind a parked car and stops abruptly.,"behavior AdvBehavior():
-    do CrossingBehavior(ego, globalParameters.OPT_ADV_SPEED, globalParameters.OPT_ADV_DISTANCE) until (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
-    while True:
-        take SetWalkingSpeedAction(0)
+    # Suddenly stop
+    take SetWalkingSpeedAction(0)
+    wait globalParameters.OPT_STOP_DURATION
+    # Walk diagonally
+    direction = self.heading + globalParameters.OPT_ADV_DEGREE deg
+    take SetWalkingDirectionAction(direction)
+    take SetWalkingSpeedAction(globalParameters.OPT_ADV_SPEED)
 
 param OPT_ADV_SPEED = Range(0, 5)
 param OPT_ADV_DISTANCE = Range(0, 15)
-param OPT_STOP_DISTANCE = Range(0, 1)",A straight road.,"Town = 'Town05'
-intersection = Uniform(*filter(lambda i: i.is4Way and not i.isSignalized, network.intersections))
-egoInitLane = Uniform(*intersection.incomingLanes)
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, egoInitLane.maneuvers))
-egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
-egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
+param OPT_ADV_DEGREE = Range(-90, 90)
+param OPT_STOP_DURATION = Range(1, 3)",A straight road.,"Town = 'Town03'
+# Identifying straight lanes
+straightLanes = []
+for lane in network.lanes:
+    if lane.isStraight:
+        straightLanes.append(lane)
 
-# Setting up the ego vehicle at the initial position
+# Selecting a random straight lane for the ego vehicle
+egoLane = Uniform(*straightLanes)
+egoSpawnPt = OrientedPoint in egoLane.centerline
+
+# Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL
+    with blueprint EGO_MODEL",The adversarial agent appears from a driveway on the left front of the ego vehicle.,"param OPT_GEO_Y_DISTANCE = Range(10, 40)
+param OPT_GEO_X_DISTANCE = Range(-15, -5)
 
-require 10 <= (distance to intersection) <= 40",The adversarial agent emerges from behind a parked car on the right front of the ego vehicle on the same straight road.,"param OPT_GEO_BLOCKER_X_DISTANCE = Range(-8, -2)  # Negative range for left side
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+AdvAgent = {AdvObject} at IntSpawnPt offset left by globalParameters.OPT_GEO_X_DISTANCE,
+    with heading IntSpawnPt.heading,
+    with regionContainedIn None,
+    with behavior AdvBehavior()",1
+The ego vehicle is driving on a straight road; the adversarial pedestrian suddenly appears from behind a parked car on the right front and suddenly stop.,Pedestrian,The adversarial pedestrian suddenly appears and stops abruptly.,"behavior AdvBehavior():
+    while True:
+        take SetWalkingSpeedAction(0)
+
+param OPT_ADV_SPEED = Range(0, 5)",A straight road.,"Town = 'Town03'
+# Identifying straight lanes
+straightLanes = []
+for lane in network.lanes:
+    if lane.isStraight:
+        straightLanes.append(lane)
+
+# Selecting a random straight lane for the ego vehicle
+egoLane = Uniform(*straightLanes)
+egoSpawnPt = OrientedPoint in egoLane.centerline
+
+# Ego vehicle setup
+ego = Car at egoSpawnPt,
+    with regionContainedIn None,
+    with blueprint EGO_MODEL",The adversarial agent spawns from behind a parked car on the right front of the ego vehicle.,"param OPT_GEO_BLOCKER_X_DISTANCE = Range(2, 8)
 param OPT_GEO_BLOCKER_Y_DISTANCE = Range(15, 50)
 param OPT_GEO_X_DISTANCE = Range(-2, 2)
 param OPT_GEO_Y_DISTANCE = Range(2, 6)
 
-LeftFrontSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car left of LeftFrontSpawnPt by globalParameters.OPT_GEO_BLOCKER_X_DISTANCE,
-    with heading LeftFrontSpawnPt.heading,
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
+Blocker = Car right of IntSpawnPt by globalParameters.OPT_GEO_BLOCKER_X_DISTANCE,
+    with heading IntSpawnPt.heading,
     with regionContainedIn None
-
+    
 SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along LeftFrontSpawnPt.heading by SHIFT,
-    with heading LeftFrontSpawnPt.heading - 90 deg,  # Adjusted for spawning from the left
+AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
+    with heading IntSpawnPt.heading + 90 deg,
     with regionContainedIn None,
     with behavior AdvBehavior()",1
-"The ego vehicle is turning left at an intersection; the adversarial motorcyclist on the right front pretends to cross the road but brakes abruptly at the edge of the road, causing confusion.",Motorcycle,"The adversarial motorcyclist pretends to cross the road but brakes abruptly at the edge of the road, causing confusion.","behavior AdvBehavior():
+"The ego vehicle is turning left at an intersection; the adversarial motorcyclist on the right front pretends to cross the road but brakes abruptly at the edge of the road, causing confusion.",Motorcycle,The adversarial motorcyclist pretends to cross the road but brakes abruptly at the edge of the road.,"behavior AdvBehavior():
     do CrossingBehavior(ego, globalParameters.OPT_ADV_SPEED, globalParameters.OPT_ADV_DISTANCE) until (distance from self to egoTrajectory) < globalParameters.OPT_BRAKE_DISTANCE
     while True:
         take SetBrakeAction(globalParameters.OPT_BRAKE)
@@ -185,21 +179,14 @@ param OPT_ADV_DISTANCE = Range(0, 15)
 param OPT_BRAKE_DISTANCE = Range(0, 1)
 param OPT_BRAKE = Range(0, 1)",The ego vehicle is turning left at an intersection.,"Town = 'Town05'
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
 egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial motorcyclist is on the right front of the ego vehicle at the edge of the road.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
-
-# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
+    with blueprint EGO_MODEL",The adversarial agent is on the right front of the ego vehicle.,"# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
 param OPT_GEO_Y_DISTANCE = Range(0, 30)
 advLane = network.laneSectionAt(ego)._laneToRight.lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
@@ -218,33 +205,45 @@ The ego vehicle is turning left at an intersection; the adversarial pedestrian o
 
 param OPT_ADV_SPEED = Range(0, 5)
 param OPT_ADV_DISTANCE = Range(0, 15)
-param OPT_STOP_DISTANCE = Range(0, 1)",The ego vehicle is turning left at an intersection.,"Town = 'Town05'
+param OPT_STOP_DISTANCE = Range(0, 1)",The ego vehicle turns left at an intersection.,"Town = 'Town05'
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
 egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial pedestrian is on the opposite sidewalk, crossing from the right front of the ego vehicle.","# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-2, 2)
-param OPT_GEO_Y_DISTANCE = Range(2, 6)
+    with blueprint EGO_MODEL","The adversarial agent is on the opposite sidewalk, entering from the right front of the ego vehicle.","```scenic
+# Parameters for the adversarial agent's position relative to the ego vehicle
+param OPT_GEO_X_DISTANCE = Range(2, 10)
+param OPT_GEO_Y_DISTANCE = Range(5, 20)
 
-# Setup for the blocking car that the ego must bypass
-laneSec = network.laneSectionAt(ego)
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Define the spawn point for the adversarial agent
+# The agent is on the opposite sidewalk, entering from the right front.
+# We calculate a point offset from the ego's spawn point.
+# 'right front' implies positive Y (right) and positive X (front) in local coordinates relative to ego heading.
+# However, since it's on the ""opposite sidewalk"", we need to ensure it's across the road.
+# Using the ego's heading as reference for the offset.
 
-# Setup for the pedestrian who suddenly appears and complicates the maneuver
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
 SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 90 deg,  # Perpendicular to the road, crossing the street
-    with regionContainedIn None,
-    with behavior AdvBehavior()",1
+
+# The agent is on the opposite sidewalk. 
+# Assuming standard right-hand traffic, the opposite sidewalk is to the left of the oncoming lane, 
+# which is to the left of the ego's lane. 
+# However, the description says ""entering from the right front"". This usually implies the agent is 
+# physically located to the right of the ego's path but moving towards it, or located on the 
+# sidewalk that is to the right of the ego's current view but across the street? 
+# Let's interpret ""opposite sidewalk"" as the sidewalk on the other side of the road from the ego.
+# If ego is driving forward, the opposite sidewalk is to the Left (in a right-hand traffic system).
+# But the description says ""entering from the right front"". This is a bit contradictory if strictly 
+# geometric. Let's assume the agent is positioned on the sidewalk across the street, but the 
+# ""right front"" refers to its relative position to the ego's future path or the visual entry point.
+# Given the previous examples, we use offsets relative to the ego's heading.
+# To be on the ""opposite"" side, we likely need a significant lateral offset.
+# Let's place it to the left (negative Y in local frame if ego is right-hand traffic) or right?
+# ""Right front"" usually means +X, +Y. ""Opposite sidewalk"" usually means across the road",1
 The ego vehicle is turning right at an intersection; the adversarial motorcyclist on the opposite sidewalk abruptly crosses the road from the right front and comes to a halt in the center of the intersection.,Motorcycle,The adversarial motorcyclist abruptly crosses the road and comes to a halt in the center of the intersection.,"behavior AdvBehavior():
     do CrossingBehavior(ego, globalParameters.OPT_ADV_SPEED, globalParameters.OPT_ADV_DISTANCE) until (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
     while True:
@@ -261,22 +260,16 @@ egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial motorcyclist is on the opposite sidewalk, crossing from the right front of the ego vehicle.","# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-2, 2)
-param OPT_GEO_Y_DISTANCE = Range(2, 6)
+    with blueprint EGO_MODEL",The adversarial agent is on the opposite sidewalk to the right front of the ego vehicle.,"param OPT_GEO_Y_DISTANCE = Range(10, 30)  # Frontal distance range
+param OPT_GEO_X_DISTANCE = Range(5, 15)   # Lateral distance to the right sidewalk
 
-# Setup for the blocking car that the ego must bypass
-laneSec = network.laneSectionAt(ego)
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Spawn point on the road ahead
+FrontSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
 
-# Setup for the pedestrian who suddenly appears and complicates the maneuver
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 90 deg,  # Perpendicular to the road, crossing the street
+# Offset to the right sidewalk
+SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ 0
+AdvAgent = {AdvObject} at FrontSpawnPt offset along FrontSpawnPt.heading + 90 deg by SHIFT,
+    with heading FrontSpawnPt.heading,  # Facing same direction as ego (walking along sidewalk)
     with regionContainedIn None,
     with behavior AdvBehavior()",1
 "The ego vehicle is turning right at an intersection; the adversarial pedestrian on the left front suddenly crosses the road and stops in the middle of the intersection, blocking the ego vehicle's path.",Pedestrian,"The adversarial pedestrian suddenly crosses the road and stops in the middle of the intersection, blocking the ego vehicle's path.","behavior AdvBehavior():
@@ -295,40 +288,40 @@ egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial pedestrian is on the left front of the ego vehicle at the intersection.,"# Defining adversarial maneuvers as those conflicting with the ego's straight path
-advManeuvers = filter(lambda i: i.type == ManeuverType.LEFT_TURN, egoManeuver.conflictingManeuvers)
-advManeuver = Uniform(*advManeuvers)
-advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
-advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
-IntSpawnPt = advManeuver.connectingLane.centerline.start  # Start of the connecting lane centerline
+    with blueprint EGO_MODEL",The adversarial agent is on the left front of the ego vehicle.,"# Define hyperparameters for the adversarial agent's position relative to the ego vehicle
+param OPT_GEO_X_DISTANCE = Range(-10, -2)  # Left side offset (negative X)
+param OPT_GEO_Y_DISTANCE = Range(5, 20)    # Front offset (positive Y)
 
-param OPT_GEO_Y_DISTANCE = Range(-10, 10)
-# Setting up the adversarial agent
-AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE,
-    with heading IntSpawnPt.heading,
+# Calculate the spawn point for the adversarial agent
+# First, move forward along the road direction from the ego spawn point
+FrontSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+
+# Then, shift to the left by the specified X distance
+AdvSpawnPt = OrientedPoint left of FrontSpawnPt by globalParameters.OPT_GEO_X_DISTANCE
+
+# Spawn the adversarial agent at the calculated position
+AdvAgent = {AdvObject} at AdvSpawnPt,
+    with heading AdvSpawnPt.heading,
     with regionContainedIn None,
-    with behavior AdvBehavior()
-
-# Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
-require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
+    with behavior AdvBehavior()",1
 "The ego vehicle is turning left at an intersection; the adversarial cyclist on the left front suddenly stops in the middle of the intersection and dismounts, obstructing the ego vehicle's path.",Bicycle,"The adversarial cyclist suddenly stops in the middle of the intersection and dismounts, obstructing the ego vehicle's path.","behavior AdvBehavior():
     do CrossingBehavior(ego, globalParameters.OPT_ADV_SPEED, globalParameters.OPT_ADV_DISTANCE) until (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
     while True:
         take SetSpeedAction(0)
+        take SetDismountAction()
 
 param OPT_ADV_SPEED = Range(0, 10)
 param OPT_ADV_DISTANCE = Range(0, 15)
-param OPT_STOP_DISTANCE = Range(0, 1)",The ego vehicle is turning left at an intersection.,"Town = 'Town05'
+param OPT_STOP_DISTANCE = Range(0, 1)",The ego vehicle turns left at an intersection.,"Town = 'Town05'
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
 egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial cyclist is on the left front of the ego vehicle in the middle of the intersection.,"# Defining adversarial maneuvers as those conflicting with the ego's straight path
+    with blueprint EGO_MODEL","The adversarial agent is on the left front of the ego vehicle, positioned within the intersection.","# Defining adversarial maneuvers as those conflicting with the ego's straight path
 advManeuvers = filter(lambda i: i.type == ManeuverType.LEFT_TURN, egoManeuver.conflictingManeuvers)
 advManeuver = Uniform(*advManeuvers)
 advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
@@ -343,7 +336,7 @@ AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParamet
     with behavior AdvBehavior()
 
 # Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
+require 70 deg <= RelativeHeading(AdvAgent) <= 110 deg  # Ensuring the agent approaches from an angle indicative of crossing
 require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
 "The ego vehicle is attempting to change lanes to avoid a slow-moving leading vehicle; the adversarial car in the target lane suddenly merges into the ego vehicle's original lane, blocking the ego vehicle from returning to its initial position.",Car,"The adversarial car suddenly merges into the ego vehicle's original lane, blocking the ego vehicle from returning to its initial position.","behavior AdvBehavior():
     do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (
@@ -355,43 +348,89 @@ require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advMa
     do LaneChangeBehavior(laneSectionToSwitch=weaveLaneSec, target_speed=globalParameters.OPT_ADV_SPEED)
 
 param OPT_ADV_SPEED = Range(5, 10)
-param OPT_ADV_DISTANCE = Range(0, 20)",The ego vehicle is on a multi-lane road attempting to change lanes.,"Town = 'Town01'
-# Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
-laneSecsWithLeftLane = []
+param OPT_ADV_DISTANCE = Range(0, 20)","The ego vehicle is on a multi-lane road, attempting to change lanes.","Town = 'Town03'
+# Identifying lane sections that have both a left and a right lane (multi-lane road)
+laneSecsWithBothSides = []
 for lane in network.lanes:
     for laneSec in lane.sections:
-        if laneSec._laneToLeft is not None and laneSec._laneToRight is None:
-            if laneSec._laneToLeft.isForward != laneSec.isForward:
-                laneSecsWithLeftLane.append(laneSec)
+        if laneSec._laneToLeft is not None and laneSec._laneToRight is not None:
+            laneSecsWithBothSides.append(laneSec)
 
-# Selecting a random lane section that matches the criteria
-egoLaneSec = Uniform(*laneSecsWithLeftLane)
+# Selecting a random lane section from identified sections for the ego vehicle
+egoLaneSec = Uniform(*laneSecsWithBothSides)
 egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 
 # Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial car is in the target lane to the side of the ego vehicle.,"# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
+    with blueprint EGO_MODEL","The adversarial car is in the target lane (the lane the ego vehicle is moving into), positioned alongside or slightly ahead of the ego vehicle.","# Parameters for the adversarial agent's position relative to the ego vehicle
+param OPT_GEO_Y_DISTANCE = Range(0, 10)  # Slightly ahead or alongside
+param OPT_GEO_X_DISTANCE = Range(-2, 2)  # Lateral offset within the target lane
 
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Identify the target lane (the lane the ego is moving into)
+# Assuming the ego is attempting a lane change to the left based on typical scenarios, 
+# but we need to identify the specific lane. 
+# In Scenic/CARLA, we often look at the lane to the left or right depending on the maneuver.
+# Let's assume the target lane is the one to the left of the ego's current lane for a left lane change.
+# If the description implies a general ""target lane"", we usually pick the adjacent lane in the direction of the maneuver.
+# Here, we'll assume a left lane change as it's common, but the logic can be adapted.
+advLane = network.laneSectionAt(ego)._laneToLeft.lane
 
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
+# Calculate the spawn point in the target lane
+# We project a point from the ego's position onto the target lane's centerline
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = advLane.orientation[projectPt]
+
+# Spawn the Adversarial Agent in the target lane
+AdvAgent = {AdvObject} at projectPt,
+    with heading advHeading,
+    with regionContainedIn None,
     with behavior AdvBehavior()",1
-The ego vehicle is changing to the right lane; the adversarial car is driving parallel to the ego and blocking its path.,Car,The adversarial car is driving parallel to the ego vehicle and blocking its path.,"behavior AdvBehavior():
+The ego vehicle is changing to the right lane; the adversarial car is driving parallel to the ego and blocking its path.,Car,The adversarial car drives parallel to the ego vehicle and blocks its path.,"behavior AdvBehavior():
     while True:
-        take SetVelocityAction(*ego.velocity)",The ego vehicle is placed in a straight lane that includes a right lane.,"Town = 'Town03'
+        take SetVelocityAction(*ego.velocity)
+        take SetSteerAction(0)  # Maintain straight path to block ego's lane",The ego vehicle is placed in a straight lane that includes a right lane.,"Town = 'Town03'
+# Identifying straight lane sections with a right lane
+laneSecsWithRightLane = []
+for lane in network.lanes:
+    for laneSec in lane.sections:
+        if laneSec._laneToRight is not None and laneSec.isStraight:
+            laneSecsWithRightLane.append(laneSec)
+
+# Selecting a random lane section from identified sections for the ego vehicle
+egoLaneSec = Uniform(*laneSecsWithRightLane)
+egoSpawnPt = OrientedPoint in egoLaneSec.centerline
+
+# Ego vehicle setup
+ego = Car at egoSpawnPt,
+    with regionContainedIn None,
+    with blueprint EGO_MODEL","The adversarial car is positioned in the right lane, parallel to the ego vehicle, blocking the lane change.","# Parameters for the adversarial agent's position relative to the ego vehicle
+param OPT_GEO_Y_DISTANCE = Range(0, 20)  # Distance ahead/behind along the road direction
+param OPT_GEO_X_DISTANCE = Range(0, 5)   # Lateral offset to ensure it is in the right lane
+
+# Identify the right lane relative to the ego vehicle
+advLane = network.laneSectionAt(ego)._laneToRight.lane
+
+# Create an intermediate point along the road direction from the ego spawn point
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+
+# Project this point onto the centerline of the right lane to get the exact spawn position
+projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = advLane.orientation[projectPt]
+
+# Spawn the adversarial car in the right lane, parallel to the ego vehicle
+AdvAgent = {AdvObject} at projectPt,
+    with heading advHeading,
+    with regionContainedIn None,
+    with behavior AdvBehavior()",1
+"The ego vehicle is attempting to change lanes to avoid a slow-moving leading vehicle; the adversarial car in the target lane suddenly slows down, matching the speed of the leading vehicle, and effectively blocking the ego vehicle from completing the lane change.",Car,"The adversarial car suddenly slows down to match the speed of the leading vehicle, blocking the ego vehicle's lane change.","param OPT_ADV_SPEED = Range(5, 10)
+param OPT_ADV_DISTANCE = Range(0, 20)
+
+behavior AdvBehavior():
+    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
+    while True:
+        take SetVelocityAction(*LeadingAgent.velocity)",A multi-lane road where the ego vehicle is attempting a lane change.,"Town = 'Town03'
 # Identifying lane sections with a right lane moving in the same forward direction
 laneSecsWithRightLane = []
 for lane in network.lanes:
@@ -406,66 +445,25 @@ egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 # Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial car is parallel to the ego vehicle on the right side.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+    with blueprint EGO_MODEL","The adversarial car is in the target lane, positioned alongside or slightly ahead of the ego vehicle.","# Parameters for the adversarial agent's position relative to the ego vehicle
+param OPT_GEO_Y_DISTANCE = Range(0, 10)  # Distance ahead of the ego vehicle
+param OPT_GEO_X_DISTANCE = Range(0, 5)   # Lateral offset within the target lane (optional, usually 0 for center)
 
-# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToRight.lane
+# Identify the target lane (assuming the lane to the left is the target lane for a left lane change scenario)
+# Note: If the target lane is to the right, use _laneToRight instead.
+advLane = network.laneSectionAt(ego)._laneToLeft.lane
+
+# Calculate the spawn point in the target lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
 projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
 advHeading = advLane.orientation[projectPt]
 
-# Spawn the Adversarial Agent
+# Spawn the Adversarial Agent in the target lane
 AdvAgent = {AdvObject} at projectPt,
     with heading advHeading,
     with regionContainedIn None,
     with behavior AdvBehavior()",1
-"The ego vehicle is attempting to change lanes to avoid a slow-moving leading vehicle; the adversarial car in the target lane suddenly slows down, matching the speed of the leading vehicle, and effectively blocking the ego vehicle from completing the lane change.",Car,"The adversarial car suddenly slows down to match the speed of the leading vehicle, blocking the ego vehicle from completing the lane change.","param OPT_ADV_SPEED = Range(5, 10)
-param OPT_ADV_DISTANCE = Range(0, 20)
-
-behavior AdvBehavior():
-    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
-    while True:
-        take SetVelocityAction(*LeadingAgent.velocity)",The ego vehicle is on a multi-lane road attempting a lane change.,"Town = 'Town01'
-# Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
-laneSecsWithLeftLane = []
-for lane in network.lanes:
-    for laneSec in lane.sections:
-        if laneSec._laneToLeft is not None and laneSec._laneToRight is None:
-            if laneSec._laneToLeft.isForward != laneSec.isForward:
-                laneSecsWithLeftLane.append(laneSec)
-
-# Selecting a random lane section that matches the criteria
-egoLaneSec = Uniform(*laneSecsWithLeftLane)
-egoSpawnPt = OrientedPoint in egoLaneSec.centerline
-
-# Ego vehicle setup
-ego = Car at egoSpawnPt,
-    with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial car is in the target lane, parallel to the ego vehicle.","# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
-
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
-
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
-    with behavior AdvBehavior()",1
-"The ego vehicle is performing a lane change to evade a slow-moving vehicle; the adversarial car in the target lane on the right front suddenly brakes, causing the ego vehicle to react quickly to avoid a collision.",Car,The adversarial car in the target lane suddenly brakes.,"param OPT_ADV_SPEED = Range(5, 10)  # Adversarial vehicle's cruising speed
+"The ego vehicle is performing a lane change to evade a slow-moving vehicle; the adversarial car in the target lane on the right front suddenly brakes, causing the ego vehicle to react quickly to avoid a collision.",Car,The adversarial car suddenly brakes in the target lane.,"param OPT_ADV_SPEED = Range(5, 10)  # Adversarial vehicle's cruising speed
 param OPT_ADV_DISTANCE = Range(0, 20)  # Distance threshold to initiate braking
 param OPT_BRAKE = Range(0, 1)  # Braking intensity, where 1 represents full braking
 
@@ -474,29 +472,24 @@ behavior AdvBehavior():
     do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
     # Once within the distance threshold, execute a sudden brake to test the ego vehicle's response capabilities
     while True:
-        take SetBrakeAction(globalParameters.OPT_BRAKE)","The ego vehicle is on a straight road, performing a lane change.","Town = 'Town03'
-# Identifying lane sections with a right lane moving in the same forward direction
-laneSecsWithRightLane = []
+        take SetBrakeAction(globalParameters.OPT_BRAKE)",A straight road with multiple lanes allowing for lane changes.,"Town = 'Town03'
+# Identifying lane sections that have both left and right lanes moving in the same forward direction
+# This ensures the ego vehicle is on a multi-lane straight road where lane changes are possible
+laneSecsWithBothSides = []
 for lane in network.lanes:
     for laneSec in lane.sections:
-        if laneSec._laneToRight is not None and laneSec._laneToRight.isForward == laneSec.isForward:
-            laneSecsWithRightLane.append(laneSec)
+        if (laneSec._laneToLeft is not None and laneSec._laneToLeft.isForward == laneSec.isForward) and 
+           (laneSec._laneToRight is not None and laneSec._laneToRight.isForward == laneSec.isForward):
+            laneSecsWithBothSides.append(laneSec)
 
 # Selecting a random lane section from identified sections for the ego vehicle
-egoLaneSec = Uniform(*laneSecsWithRightLane)
+egoLaneSec = Uniform(*laneSecsWithBothSides)
 egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 
 # Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial car is in the target lane on the right front of the ego vehicle.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
-
-# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
+    with blueprint EGO_MODEL","The adversarial car is in the right lane, positioned at the right front of the ego vehicle.","# Identifying the adjacent lane to the right for the Adversarial Agent and setting its spawn point further in front
 param OPT_GEO_Y_DISTANCE = Range(0, 30)
 advLane = network.laneSectionAt(ego)._laneToRight.lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
@@ -508,7 +501,11 @@ AdvAgent = {AdvObject} at projectPt,
     with heading advHeading,
     with regionContainedIn None,
     with behavior AdvBehavior()",1
-"The ego vehicle is preparing to change lanes to evade a slow-moving leading vehicle; the adversarial car in the target lane starts weaving between lanes, making it difficult for the ego vehicle to predict its position and safely execute the lane change.",Car,"The adversarial car starts weaving between lanes, making it difficult for the ego vehicle to predict its position.","behavior AdvBehavior():
+"The ego vehicle is preparing to change lanes to evade a slow-moving leading vehicle; the adversarial car in the target lane starts weaving between lanes, making it difficult for the ego vehicle to predict its position and safely execute the lane change.",Car,"The adversarial car weaves between lanes, making its position unpredictable.","param OPT_ADV_SPEED = Range(5, 15)
+param OPT_ADV_DISTANCE = Range(0, 20)
+param OPT_WAIT_STEPS = Range(0, 20)
+
+behavior AdvBehavior():
     while True:
         # Follow the lane at the set speed until a certain proximity condition is met
         do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until distance to some_target < globalParameters.OPT_ADV_DISTANCE  # This condition should refer to a valid object or marker.
@@ -521,11 +518,7 @@ AdvAgent = {AdvObject} at projectPt,
                 
             # Wait for a fixed interval of 1 second before potentially changing the lane again
             for _ in range(globalParameters.OPT_WAIT_STEPS):
-                wait
-
-param OPT_ADV_SPEED = Range(5, 15)  # Range of speeds for lane following
-param OPT_ADV_DISTANCE = Range(0, 20)  # Distance threshold for lane change trigger
-param OPT_WAIT_STEPS = Range(0, 20)","The ego vehicle is on a multi-lane road, preparing to change lanes.","Town = 'Town03'
+                wait",A multi-lane road where the ego vehicle is attempting a lane change.,"Town = 'Town03'
 # Identifying lane sections with a right lane moving in the same forward direction
 laneSecsWithRightLane = []
 for lane in network.lanes:
@@ -540,33 +533,37 @@ egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 # Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial car is in the target lane of the ego vehicle, moving unpredictably.","# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
-
-# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
+    with blueprint EGO_MODEL",The adversarial car is in the target lane adjacent to the ego vehicle.,"# Parameters for the adversarial agent's position in the adjacent lane
 param OPT_GEO_Y_DISTANCE = Range(0, 30)
+
+# Identify the adjacent lane to the left of the ego vehicle
 advLane = network.laneSectionAt(ego)._laneToLeft.lane
+
+# Calculate the spawn point on the centerline of the adjacent lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
 projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
 advHeading = advLane.orientation[projectPt]
 
-# Spawn the Adversarial Agent
+# Spawn the Adversarial Agent in the target lane
 AdvAgent = {AdvObject} at projectPt,
     with heading advHeading,
     with regionContainedIn None,
     with behavior AdvBehavior()",1
-"The ego approaches a parked car that is blocking its lane and must use the opposite lane to bypass the vehicle, cautiously monitoring oncoming traffic, and suddenly encounters a jaywalking pedestrian, requiring the ego to quickly assess the situation and respond appropriately to avoid a collision.",Pedestrian,The adversarial pedestrian suddenly jaywalks in front of the ego vehicle.,"behavior AdvBehavior():
+"The ego approaches a parked car that is blocking its lane and must use the opposite lane to bypass the vehicle, cautiously monitoring oncoming traffic, and suddenly encounters a jaywalking pedestrian, requiring the ego to quickly assess the situation and respond appropriately to avoid a collision.",Pedestrian,"The adversarial pedestrian jaywalks, suddenly appearing in the ego vehicle's path.","behavior AdvBehavior():
+    # Wait until the ego vehicle is close enough to be a threat
+    while (distance to self) > globalParameters.OPT_ADV_DISTANCE:
+        wait
+    
+    # Suddenly appear in the ego vehicle's path by crossing towards the ego's trajectory
     do CrossingBehavior(ego, globalParameters.OPT_ADV_SPEED, globalParameters.OPT_ADV_DISTANCE) until (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
+    
+    # Once in the path, stop suddenly to create a hazard
     while True:
         take SetWalkingSpeedAction(0)
 
 param OPT_ADV_SPEED = Range(0, 5)
 param OPT_ADV_DISTANCE = Range(0, 15)
-param OPT_STOP_DISTANCE = Range(0, 1)","A two-lane road with traffic flowing in opposite directions, where the ego vehicle must bypass a parked car blocking its lane.","Town = 'Town01'
+param OPT_STOP_DISTANCE = Range(0, 1)",A two-lane road where the ego vehicle is forced to use the opposite lane to bypass a parked car.,"Town = 'Town01'
 # Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
 laneSecsWithLeftLane = []
 for lane in network.lanes:
@@ -582,30 +579,33 @@ egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 # Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial pedestrian appears from the side of the road, crossing the path of the ego vehicle as it uses the opposite lane to bypass the parked car.","# Parameters for scenario elements
+    with blueprint EGO_MODEL","The adversarial pedestrian appears in the opposite lane (the ego's current path) ahead of the ego vehicle, near the parked car.","# Parameters for scenario elements
 param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-2, 2)
-param OPT_GEO_Y_DISTANCE = Range(2, 6)
+param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
+param OPT_GEO_Y_DISTANCE = Range(10, 30)
 
-# Setup for the blocking car that the ego must bypass
-laneSec = network.laneSectionAt(ego)
+# Setting up the parked car that blocks the ego's path
+laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
 Blocker = Car at IntSpawnPt,
     with heading IntSpawnPt.heading,
     with regionContainedIn None
 
-# Setup for the pedestrian who suddenly appears and complicates the maneuver
+# Setup for the adversarial pedestrian who appears in the opposite lane near the parked car
 SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
 AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 90 deg,  # Perpendicular to the road, crossing the street
-    with regionContainedIn None,
+    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
+    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
     with behavior AdvBehavior()",1
-"The ego encounters a parked car blocking its lane and must use the opposite lane to bypass the vehicle, carefully assessing the situation and yielding to oncoming traffic, when an oncoming motorcyclist swerves into the lane unexpectedly, necessitating the ego to brake or maneuver to avoid a potential accident.",Motorcycle,The adversarial motorcyclist swerves into the lane unexpectedly.,"behavior AdvBehavior():
-    while (distance to self) > 60:
-        wait
-    do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED)
+"The ego encounters a parked car blocking its lane and must use the opposite lane to bypass the vehicle, carefully assessing the situation and yielding to oncoming traffic, when an oncoming motorcyclist swerves into the lane unexpectedly, necessitating the ego to brake or maneuver to avoid a potential accident.",Motorcycle,The adversarial motorcyclist swerves into the ego vehicle's path unexpectedly.,"behavior AdvBehavior():
+    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED)
+    interrupt when (distance from self to ego) < globalParameters.OPT_SWERVE_TRIGGER_DISTANCE:
+        do SwerveBehavior(ego, globalParameters.OPT_SWERVE_SPEED, globalParameters.OPT_SWERVE_DISTANCE)
 
-param OPT_ADV_SPEED = Range(0, 10)  # This parameter controls the motorcyclist's speed, influencing the urgency and danger of the maneuver.",The ego vehicle is positioned on a two-lane road with traffic flowing in opposite directions.,"Town = 'Town01'
+param OPT_ADV_SPEED = Range(1, 10)
+param OPT_SWERVE_TRIGGER_DISTANCE = Range(5, 20)
+param OPT_SWERVE_SPEED = Range(1, 10)
+param OPT_SWERVE_DISTANCE = Range(0, 5)","The ego vehicle is on a two-lane road with traffic flowing in opposite directions, where the ego's lane is obstructed by a parked car, forcing the ego to use the oncoming lane.","Town = 'Town01'
 # Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
 laneSecsWithLeftLane = []
 for lane in network.lanes:
@@ -621,7 +621,7 @@ egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 # Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial motorcyclist comes from the near opposite oncoming lane, with a parked car blocking the ego vehicle's lane.","# Parameters for scenario elements
+    with blueprint EGO_MODEL","The adversarial motorcyclist approaches from the opposite direction in the oncoming lane, which the ego vehicle is currently occupying to bypass the parked car.","# Parameters for scenario elements
 param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
 param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
 param OPT_GEO_Y_DISTANCE = Range(10, 30)
@@ -640,22 +640,13 @@ AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
     with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
     with behavior AdvBehavior()",1
 "The ego encounters a parked car blocking its lane and must use the opposite lane to bypass the vehicle when an oncoming pedestrian enters the lane without warning and suddenly stop, necessitating the ego to brake sharply or steer to avoid hitting the pedestrian.",Pedestrian,The adversarial pedestrian enters the lane without warning and suddenly stops.,"behavior AdvBehavior():
-    initialDirection = self.heading
-    while (distance to self) > globalParameters.OPT_ADV_DISTANCE:
-        wait
+    do CrossingBehavior(ego, globalParameters.OPT_ADV_SPEED, globalParameters.OPT_ADV_DISTANCE) until (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
     while True:
-        take SetWalkingDirectionAction(initialDirection)
-        take SetWalkingSpeedAction(globalParameters.OPT_ADV_SPEED)
-        for _ in range(globalParameters.OPT_WAIT_STEP_1):
-            wait
-        take SetWalkingSpeedAction(0)  # Stop suddenly
-        for _ in range(globalParameters.OPT_WAIT_STEP_2):
-            wait
+        take SetWalkingSpeedAction(0)
 
-param OPT_ADV_SPEED = Range(0, 5)
-param OPT_ADV_DISTANCE = Range(0, 10)
-param OPT_WAIT_STEP_1 = Range(0, 30)  # Wait time in steps for the first direction
-param OPT_WAIT_STEP_2 = Range(0, 30)  # Wait time in steps for the second direction","The ego vehicle is on a two-lane road with traffic flowing in opposite directions, with a parked car blocking its lane.","Town = 'Town01'
+param OPT_ADV_SPEED = Range(1, 5)
+param OPT_ADV_DISTANCE = Range(0, 15)
+param OPT_STOP_DISTANCE = Range(0, 1)","The ego vehicle is on a two-lane road with traffic flowing in opposite directions, where the ego's lane is blocked by a parked car, forcing the ego to use the opposite lane.","Town = 'Town01'
 # Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
 laneSecsWithLeftLane = []
 for lane in network.lanes:
@@ -671,179 +662,190 @@ egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 # Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial pedestrian enters from the opposite lane, directly in front of the ego vehicle.","# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
+    with blueprint EGO_MODEL","The adversarial pedestrian spawns from the side of the road into the opposite lane (the lane the ego is currently using to bypass the parked car), directly in front of the ego vehicle.","# Setup the parked car (blocker) to force the ego vehicle into the opposite lane
+param OPT_BLOCKER_DISTANCE = Range(10, 30)
+param OPT_BLOCKER_SPEED = 0
+BlockerSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_BLOCKER_DISTANCE
+Blocker = Car at BlockerSpawnPt,
+    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_BLOCKER_SPEED)
 
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Identify the opposite lane (left lane relative to ego's current path if ego is bypassing to the left, 
+# but typically ""opposite lane"" implies the lane on the other side of the center line. 
+# Assuming standard right-hand traffic and ego bypassing a right-side blocker, the opposite lane is to the left.
+# However, the description says ""into the opposite lane (the lane the ego is currently using to bypass the parked car)"".
+# This implies the ego has moved into the opposite lane. The pedestrian spawns in that same lane, in front of ego.
 
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
-    with behavior AdvBehavior()",1
-"The ego approaches a parked car obstructing its lane and must use the opposite lane to go around when an oncoming car suddenly turns into the ego's path without signaling, requiring the ego to react quickly and take evasive action to prevent a collision.",Car,The adversarial car suddenly turns into the ego's path without signaling.,"
-behavior AdvBehavior():
-    while (distance to self) > 60:
-        wait
-    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
-    while True:
-        take SetThrottleAction(globalParameters.OPT_THROTTLE)
+param OPT_GEO_Y_DISTANCE = Range(0, 10)
+# The ego is in the opposite lane. We need to find the lane the ego is currently in.
+# Since the ego is bypassing, it's likely in the lane to the left of its original lane.
+# Let's assume the ego's current lane is the one to the left of the original lane.
+# But to be robust, we can try to get the lane the ego is currently in.
+# In Scenic, `ego` is an object. We can get its lane.
+currentLane = network.laneAt(ego)
 
-param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
-param OPT_ADV_DISTANCE = Range(5, 20)  # The critical distance at which the adversarial begins to accelerate.
-param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the accelerate action, ranging from a slight decrease in speed to a full stop.",The ego vehicle is positioned on a two-lane road with traffic flowing in opposite directions.,"Town = 'Town01'
-# Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
-laneSecsWithLeftLane = []
-for lane in network.lanes:
-    for laneSec in lane.sections:
-        if laneSec._laneToLeft is not None and laneSec._laneToRight is None:
-            if laneSec._laneToLeft.isForward != laneSec.isForward:
-                laneSecsWithLeftLane.append(laneSec)
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+projectPt = Vector(*currentLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = currentLane.orientation[projectPt]
 
-# Selecting a random lane section that matches the criteria
-egoLaneSec = Uniform(*laneSecsWithLeftLane)
-egoSpawnPt = OrientedPoint in egoLaneSec.centerline
-
-# Ego vehicle setup
-ego = Car at egoSpawnPt,
-    with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial car comes from the near opposite oncoming lane, with a parked car blocking the ego vehicle's lane.","# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
-
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
-
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
-    with behavior AdvBehavior()",1
-"The ego encounters a parked car blocking its lane and must use the opposite lane to bypass the vehicle when an oncoming car suddenly accelerates, closing the gap for the ego to safely return to its lane, necessitating the ego to quickly decide whether to accelerate or brake to avoid a collision.",Car,"The adversarial car suddenly accelerates, closing the gap for the ego vehicle to safely return to its lane.","behavior AdvBehavior():
-    while (distance to self) > 60:
-        wait  # The adversarial car waits until it is within 60 meters of the ego vehicle.
-    do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
-    while True:
-        take SetThrottleAction(globalParameters.OPT_ADV_THROTTLE)  # Aggressively adjusts its speed to close the gap.
-
-param OPT_ADV_SPEED = Range(0, 10)  # Controls the initial speed of the adversarial car.
-param OPT_ADV_DISTANCE = Range(0, 20)  # Specifies the distance at which the car begins its aggressive maneuver.
-param OPT_ADV_THROTTLE = Range(0.5, 1)  # Determines the intensity of the acceleration.","The ego vehicle is on a two-lane road with traffic flowing in opposite directions, with a parked car blocking its lane.","Town = 'Town01'
-# Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
-laneSecsWithLeftLane = []
-for lane in network.lanes:
-    for laneSec in lane.sections:
-        if laneSec._laneToLeft is not None and laneSec._laneToRight is None:
-            if laneSec._laneToLeft.isForward != laneSec.isForward:
-                laneSecsWithLeftLane.append(laneSec)
-
-# Selecting a random lane section that matches the criteria
-egoLaneSec = Uniform(*laneSecsWithLeftLane)
-egoSpawnPt = OrientedPoint in egoLaneSec.centerline
-
-# Ego vehicle setup
-ego = Car at egoSpawnPt,
-    with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial car is approaching from the opposite lane, heading towards the ego vehicle.","# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
-
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
-
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
-    with behavior AdvBehavior()",1
-"The ego is driving straight through an intersection when a crossing vehicle runs the red light and unexpectedly accelerates, forcing the ego to quickly reassess the situation and perform a collision avoidance maneuver.",Car,The adversarial car runs the red light and unexpectedly accelerates.,"behavior AdvBehavior():
-    while (distance to self) > 60:
-        wait  # The adversarial vehicle waits until it is close enough to impact the ego's maneuver.
-    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_ADV_DISTANCE or (distance from self to egoTrajectory) < globalParameters.OPT_BRAKE_DISTANCE
-    # Accelerates towards the ego vehicle.
-    while (distance from self to egoTrajectory) > globalParameters.OPT_BRAKE_DISTANCE:
-        take SetThrottleAction(globalParameters.OPT_THROTTLE)  # Applies throttle to increase speed.
-    # Once close enough, it decelerates abruptly.
-    while True:
-        take SetBrakeAction(globalParameters.OPT_BRAKE)  # Initiates a sudden brake to reduce speed sharply.
-
-param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches.
-param OPT_ADV_DISTANCE = Range(0, 25)  # The proximity within which the acceleration is triggered.
-param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the throttle during the acceleration.
-param OPT_BRAKE = Range(0, 1)  # The intensity of the braking action.
-param OPT_BRAKE_DISTANCE = Range(0, 4)  # The critical distance at which the adversarial vehicle begins its deceleration.",The ego vehicle is driving straight through a four-way signalized intersection; the light is red for the adversarial agent.,"Town = 'Town05'
-
-## MONITORS
-monitor TrafficLights:
-    freezeTrafficLights()
-    while True:
-        if withinDistanceToTrafficLight(ego, 100):
-            setClosestTrafficLightStatus(ego, ""green"")
-        if withinDistanceToTrafficLight(AdvAgent, 100):
-            setClosestTrafficLightStatus(AdvAgent, ""red"")
-        wait
-
-intersection = Uniform(*filter(lambda i: i.is4Way and i.isSignalized, network.intersections))
-egoInitLane = Uniform(*intersection.incomingLanes)
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, egoInitLane.maneuvers))
-egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
-egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
-
-# Setting up the ego vehicle at the initial position
-ego = Car at egoSpawnPt,
-    with regionContainedIn None,
-    with blueprint EGO_MODEL
-
-require 10 <= (distance to intersection) <= 40",The adversarial car is crossing the intersection from the side.,"# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-2, 2)
-param OPT_GEO_Y_DISTANCE = Range(2, 6)
-
-# Setup for the blocking car that the ego must bypass
-laneSec = network.laneSectionAt(ego)
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
-
-# Setup for the pedestrian who suddenly appears and complicates the maneuver
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 90 deg,  # Perpendicular to the road, crossing the street
+# Spawn the Adversarial Pedestrian
+AdvAgent = Pedestrian at projectPt,
+    with heading advHeading,
     with regionContainedIn None,
     with behavior AdvBehavior()",1
-"The ego vehicle is moving straight through the intersection; the adversarial agent, initially on the left front, runs the red light and makes an abrupt right turn, forcing the ego vehicle to perform a collision avoidance maneuver.",Car,"The adversarial car runs the red light and makes an abrupt right turn, forcing the ego vehicle to perform a collision avoidance maneuver.","behavior AdvBehavior():
+"The ego approaches a parked car obstructing its lane and must use the opposite lane to go around when an oncoming car suddenly turns into the ego's path without signaling, requiring the ego to react quickly and take evasive action to prevent a collision.",Car,The adversarial car suddenly turns into the ego's path without signaling.,"behavior AdvBehavior():
     while (distance to self) > 60:
         wait  # The adversarial vehicle waits until it is within a threatening proximity.
     do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_STEER_DISTANCE
-    # Once close to the ego's trajectory, the adversarial vehicle initiates a sharp turn.
+    # Once close to the ego's trajectory, the adversarial vehicle initiates a sharp turn into the ego's path.
     while True:
         take SetSpeedAction(self.speed)  # Continues moving at its current speed
         take SetSteerAction(globalParameters.OPT_STEER)  # Makes an abrupt steering adjustment
 
 param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
 param OPT_STEER_DISTANCE = Range(0, 4)  # Distance from ego's trajectory at which the vehicle starts to turn.
-param OPT_STEER = Range(0.5, 1.0)  # Defines the intensity of the steering action.",The ego vehicle is moving straight through a four-way signalized intersection; the light is red for the adversarial agent.,"Town = 'Town05'
+param OPT_STEER = Range(-1.0, 1.0)  # Defines the intensity and direction of the steering action.",The ego vehicle is positioned on a two-lane road with traffic flowing in opposite directions.,"Town = 'Town01'
+# Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
+laneSecsWithLeftLane = []
+for lane in network.lanes:
+    for laneSec in lane.sections:
+        if laneSec._laneToLeft is not None and laneSec._laneToRight is None:
+            if laneSec._laneToLeft.isForward != laneSec.isForward:
+                laneSecsWithLeftLane.append(laneSec)
+
+# Selecting a random lane section that matches the criteria
+egoLaneSec = Uniform(*laneSecsWithLeftLane)
+egoSpawnPt = OrientedPoint in egoLaneSec.centerline
+
+# Ego vehicle setup
+ego = Car at egoSpawnPt,
+    with regionContainedIn None,
+    with blueprint EGO_MODEL","The adversarial agent comes from the near opposite oncoming lane, with a parked car blocking the ego vehicle's lane.","# Parameters for scenario elements
+param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
+param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
+param OPT_GEO_Y_DISTANCE = Range(10, 30)
+
+# Setting up the parked car that blocks the ego's path
+laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
+Blocker = Car at IntSpawnPt,
+    with heading IntSpawnPt.heading,
+    with regionContainedIn None
+
+# Setup for the motorcyclist who unexpectedly enters the scene
+SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
+AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
+    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
+    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
+    with behavior AdvBehavior()",1
+"The ego encounters a parked car blocking its lane and must use the opposite lane to bypass the vehicle when an oncoming car suddenly accelerates, closing the gap for the ego to safely return to its lane, necessitating the ego to quickly decide whether to accelerate or brake to avoid a collision.",Car,"The adversarial car suddenly accelerates, closing the gap for the ego vehicle to return to its lane.","behavior AdvBehavior():
+    while (distance to self) > 60:
+        wait  # The adversarial car waits until it is within 60 meters of the ego vehicle.
+    do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
+    while True:
+        take SetThrottleAction(globalParameters.OPT_ADV_THROTTLE)  # Aggressively accelerates to close the gap.
+
+param OPT_ADV_SPEED = Range(0, 10)  # Controls the initial speed of the adversarial car.
+param OPT_ADV_DISTANCE = Range(0, 20)  # Specifies the distance at which the car begins its aggressive maneuver.
+param OPT_ADV_THROTTLE = Range(0.5, 1)  # Determines the intensity of the acceleration.","The ego vehicle is on a two-lane road with traffic flowing in opposite directions, where the ego's lane is obstructed by a parked car.","Town = 'Town01'
+# Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
+laneSecsWithLeftLane = []
+for lane in network.lanes:
+    for laneSec in lane.sections:
+        if laneSec._laneToLeft is not None and laneSec._laneToRight is None:
+            if laneSec._laneToLeft.isForward != laneSec.isForward:
+                laneSecsWithLeftLane.append(laneSec)
+
+# Selecting a random lane section that matches the criteria
+egoLaneSec = Uniform(*laneSecsWithLeftLane)
+egoSpawnPt = OrientedPoint in egoLaneSec.centerline
+
+# Ego vehicle setup
+ego = Car at egoSpawnPt,
+    with regionContainedIn None,
+    with blueprint EGO_MODEL
+
+# Placing a parked car in the ego's lane to obstruct it
+parkedCar = Car in egoLaneSec,
+    with heading egoLaneSec.heading,
+    with blueprint 'vehicle.tesla.model3',
+    with behavior ParkedCarBehavior()","The adversarial car is in the oncoming lane, approaching the ego vehicle which is currently occupying that lane to bypass the parked car.","# Parameters for scenario elements
+param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
+param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
+param OPT_GEO_Y_DISTANCE = Range(10, 30)
+
+# Setting up the parked car that blocks the ego's path
+laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
+Blocker = Car at IntSpawnPt,
+    with heading IntSpawnPt.heading,
+    with regionContainedIn None
+
+# Setup for the adversarial car in the oncoming lane
+SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
+AdvAgent = Car at Blocker offset along IntSpawnPt.heading by SHIFT,
+    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
+    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
+    with behavior AdvBehavior()",1
+"The ego is driving straight through an intersection when a crossing vehicle runs the red light and unexpectedly accelerates, forcing the ego to quickly reassess the situation and perform a collision avoidance maneuver.",Car,The adversarial car runs the red light and unexpectedly accelerates.,"behavior AdvBehavior():
+    while (distance to self) > 60:
+        wait  # The adversarial car waits until it is close enough to the intersection/ego.
+    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
+    # Runs the red light and unexpectedly accelerates.
+    while True:
+        take SetThrottleAction(globalParameters.OPT_THROTTLE)  # Aggressively accelerates through the intersection.
+
+param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial car approaches the intersection.
+param OPT_ADV_DISTANCE = Range(0, 20)  # The proximity within which the acceleration is triggered.
+param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the throttle during the unexpected acceleration.",The ego vehicle drives straight through an intersection; the light is red for the adversarial agent.,"Town = 'Town05'
+
+## MONITORS
+monitor TrafficLights:
+    freezeTrafficLights()
+    while True:
+        if withinDistanceToTrafficLight(AdvAgent, 100):
+            setClosestTrafficLightStatus(AdvAgent, ""red"")
+        wait
+
+intersection = Uniform(*filter(lambda i: i.is4Way and i.isSignalized, network.intersections))
+egoInitLane = Uniform(*intersection.incomingLanes)
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, egoInitLane.maneuvers))
+egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
+egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
+
+# Setting up the ego vehicle at the initial position
+ego = Car at egoSpawnPt,
+    with regionContainedIn None,
+    with blueprint EGO_MODEL
+
+require 10 <= (distance to intersection) <= 40",The adversarial car is crossing the intersection from the side.,"# Defining adversarial maneuvers as those conflicting with the ego's straight path
+advManeuvers = filter(lambda i: i.type == ManeuverType.CROSSING, egoManeuver.conflictingManeuvers)
+advManeuver = Uniform(*advManeuvers)
+advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
+advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
+IntSpawnPt = advManeuver.connectingLane.centerline.start  # Start of the connecting lane centerline
+
+param OPT_GEO_Y_DISTANCE = Range(-10, 10)
+# Setting up the adversarial agent
+AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE,
+    with heading IntSpawnPt.heading,
+    with regionContainedIn None,
+    with behavior AdvBehavior()
+
+# Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
+require 70 deg <= RelativeHeading(AdvAgent) <= 110 deg  # Ensuring the agent approaches from an angle indicative of crossing
+require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
+"The ego vehicle is moving straight through the intersection; the adversarial agent, initially on the left front, runs the red light and makes an abrupt right turn, forcing the ego vehicle to perform a collision avoidance maneuver.",Car,"The adversarial car runs the red light and makes an abrupt right turn, forcing the ego vehicle to perform a collision avoidance maneuver.","behavior AdvBehavior():
+    while (distance to self) > 60:
+        wait  # The adversarial vehicle waits until it is within a threatening proximity.
+    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_STEER_DISTANCE
+    # Once close to the ego's trajectory, the adversarial vehicle initiates a sharp right turn.
+    while True:
+        take SetSpeedAction(self.speed)  # Continues moving at its current speed
+        take SetSteerAction(globalParameters.OPT_STEER)  # Makes an abrupt steering adjustment
+
+param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
+param OPT_STEER_DISTANCE = Range(0, 4)  # Distance from ego's trajectory at which the vehicle starts to turn.
+param OPT_STEER = Range(0.5, 1.0)  # Defines the intensity of the steering action.",The ego vehicle drives straight across a four-way signalized intersection; the light is red for the adversarial agent.,"Town = 'Town05'
 
 ## MONITORS
 monitor TrafficLights:
@@ -866,35 +868,33 @@ ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
 
-require 10 <= (distance to intersection) <= 40",The adversarial car is initially on the left front of the ego vehicle.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+require 10 <= (distance to intersection) <= 40",The adversarial agent is initially on the left front of the ego vehicle at the intersection.,"# Defining adversarial maneuvers as those conflicting with the ego's straight path
+advManeuvers = filter(lambda i: i.type == ManeuverType.LEFT_TURN, egoManeuver.conflictingManeuvers)
+advManeuver = Uniform(*advManeuvers)
+advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
+advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
+IntSpawnPt = advManeuver.connectingLane.centerline.start  # Start of the connecting lane centerline
 
-# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToLeft.lane
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
-projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
-advHeading = advLane.orientation[projectPt]
-
-# Spawn the Adversarial Agent
-AdvAgent = {AdvObject} at projectPt,
-    with heading advHeading,
+param OPT_GEO_Y_DISTANCE = Range(-10, 10)
+# Setting up the adversarial agent
+AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE,
+    with heading IntSpawnPt.heading,
     with regionContainedIn None,
-    with behavior AdvBehavior()",1
-The ego vehicle is going straight through the intersection; the adversarial vehicle approaches from the left front and cuts off the ego vehicle.,Car,The adversarial car approaches from the left front and cuts off the ego vehicle.,"behavior AdvBehavior():
+    with behavior AdvBehavior()
+
+# Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
+require 70 deg <= RelativeHeading(AdvAgent) <= 110 deg  # Ensuring the agent approaches from an angle indicative of crossing
+require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
+The ego vehicle is going straight through the intersection; the adversarial vehicle approaches from the left front and cuts off the ego vehicle.,Car,The adversarial car cuts off the ego vehicle.,"behavior AdvBehavior():
     while (distance to self) > 60:
-        wait  # The adversarial vehicle maintains its course until it closes in on a specified proximity.
+        wait  # The adversarial car waits until it is within a close enough range to impact the ego vehicle's path.
     do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
-    # Once within a certain distance, the adversarial vehicle executes a lane change.
+    # Once within a certain distance, the adversarial vehicle executes a lane change to cut off the ego.
     do LaneChangeBehavior(laneSectionToSwitch=network.laneSectionAt(ego), target_speed=globalParameters.OPT_ADV_SPEED)
 
 param OPT_ADV_SPEED = Range(0, 20)  # Controls the speed of the adversarial vehicle.
-param OPT_ADV_DISTANCE = Range(10, 30)  # The distance at which the adversarial vehicle starts its lane change maneuver.",The ego vehicle is driving straight through an intersection.,"Town = 'Town05'
-intersection = Uniform(*filter(lambda i: i.is4Way and not i.isSignalized, network.intersections))
+param OPT_ADV_DISTANCE = Range(10, 30)  # The distance at which the adversarial vehicle starts its cut-off maneuver.",The ego vehicle drives straight through an intersection.,"Town = 'Town05'
+intersection = Uniform(*network.intersections)
 egoInitLane = Uniform(*intersection.incomingLanes)
 egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, egoInitLane.maneuvers))
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
@@ -905,14 +905,7 @@ ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
 
-require 10 <= (distance to intersection) <= 40",The adversarial car approaches from the left front of the ego vehicle at the intersection.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
-
-# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
+require 10 <= (distance to intersection) <= 40",The adversarial car approaches from the left front of the ego vehicle.,"# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
 param OPT_GEO_Y_DISTANCE = Range(0, 30)
 advLane = network.laneSectionAt(ego)._laneToLeft.lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
@@ -926,16 +919,16 @@ AdvAgent = {AdvObject} at projectPt,
     with behavior AdvBehavior()",1
 "The ego vehicle is moving straight through the intersection; the adversarial agent, initially on the left front, runs the red light and makes an abrupt left turn, forcing the ego vehicle to perform a collision avoidance maneuver.",Car,"The adversarial car runs the red light and makes an abrupt left turn, forcing the ego vehicle to perform a collision avoidance maneuver.","behavior AdvBehavior():
     while (distance to self) > 60:
-        wait  # Wait until the vehicle is close enough to influence the ego's path.
-    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_ADV_DISTANCE
-    # Executes a left turn maneuver.
-    take SetSteerAction(globalParameters.OPT_STEER)  # Full left turn
+        wait  # The adversarial vehicle waits until it is within a threatening proximity.
+    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_STEER_DISTANCE
+    # Once close to the ego's trajectory, the adversarial vehicle initiates a sharp left turn.
     while True:
-        take SetSpeedAction(0)  # Eventually stops after completing the turn
+        take SetSpeedAction(self.speed)  # Continues moving at its current speed
+        take SetSteerAction(globalParameters.OPT_STEER)  # Makes an abrupt steering adjustment
 
-param OPT_ADV_SPEED = Range(5, 15)  # Speed at which the vehicle approaches the intersection.
-param OPT_ADV_DISTANCE = Range(0, 5)  # The critical distance to start the turn.
-param OPT_STEER = Range(-1.0, 0.0)",The ego vehicle is moving straight through a four-way signalized intersection; the light is red for the adversarial agent.,"Town = 'Town05'
+param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
+param OPT_STEER_DISTANCE = Range(0, 4)  # Distance from ego's trajectory at which the vehicle starts to turn.
+param OPT_STEER = Range(-1.0, -0.5)  # Defines the intensity of the steering action for a left turn.",The ego vehicle drives straight through a signalized intersection; the light is red for the adversarial agent.,"Town = 'Town05'
 
 ## MONITORS
 monitor TrafficLights:
@@ -947,7 +940,7 @@ monitor TrafficLights:
             setClosestTrafficLightStatus(AdvAgent, ""red"")
         wait
 
-intersection = Uniform(*filter(lambda i: i.is4Way and i.isSignalized, network.intersections))
+intersection = Uniform(*filter(lambda i: i.isSignalized, network.intersections))
 egoInitLane = Uniform(*intersection.incomingLanes)
 egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, egoInitLane.maneuvers))
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
@@ -958,38 +951,26 @@ ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
 
-require 10 <= (distance to intersection) <= 40",The adversarial car is initially on the left front of the ego vehicle.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+require 10 <= (distance to intersection) <= 40","The adversarial agent is initially positioned on the left front of the ego vehicle, crossing the intersection from the left.","param OPT_GEO_X_DISTANCE = Range(-8, -2)  # Adjusted for left side
+param OPT_GEO_Y_DISTANCE = Range(-5, 5)
 
-# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToLeft.lane
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
-projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
-advHeading = advLane.orientation[projectPt]
-
-# Spawn the Adversarial Agent
-AdvAgent = {AdvObject} at projectPt,
-    with heading advHeading,
+IntSpawnPt = egoManeuver.startLane.centerline.end
+SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
+AdvAgent = {AdvObject} at IntSpawnPt offset along IntSpawnPt.heading by SHIFT,
+    with heading IntSpawnPt.heading - 90 deg,  # Adjusted for coming from the left
     with regionContainedIn None,
     with behavior AdvBehavior()",1
-"The ego moves straight at an intersection when a crossing vehicle runs the red light from right and brakes abruptly, causing the ego to rapidly adapt its trajectory and perform a collision avoidance maneuver.",Car,The adversarial car runs the red light from the right and brakes abruptly.,"param OPT_ADV_SPEED = Range(5, 10)
-param OPT_ADV_DISTANCE = Range(0, 20)
-param OPT_BRAKE = Range(0, 1)
-param OPT_PAUSE_DURATION = Range(10, 30)
-param OPT_THROTTLE = Range(0.5, 1)  # Throttle intensity for acceleration
+"The ego moves straight at an intersection when a crossing vehicle runs the red light from right and brakes abruptly, causing the ego to rapidly adapt its trajectory and perform a collision avoidance maneuver.",Car,The adversarial car runs the red light and brakes abruptly.,"param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
+param OPT_BRAKE_DISTANCE = Range(0, 4)  # The critical distance at which the adversarial vehicle begins its sudden stop.
+param OPT_BRAKE = Range(0, 1)  # The intensity of the braking action, potentially simulating an abrupt or gentle stop.
 
 behavior AdvBehavior():
-    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
+    while (distance to self) > 60:
+        wait  # The adversarial vehicle waits until it is within a significant range to impact the ego's maneuver.
+    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_BRAKE_DISTANCE
+    # Once within a critical distance of the ego's trajectory, the adversarial vehicle initiates a sudden braking maneuver.
     while True:
-        take SetBrakeAction(globalParameters.OPT_BRAKE)
-        for _ in range(globalParameters.OPT_PAUSE_DURATION):
-            wait
-        take SetThrottleAction(globalParameters.OPT_THROTTLE)",The ego vehicle moves straight across a four-way signalized intersection; the light is red for the adversarial agent.,"Town = 'Town05'
+        take SetBrakeAction(globalParameters.OPT_BRAKE)  # Continues to apply brakes to simulate an emergency or unexpected stop.",The ego vehicle moves straight through an intersection; the light is red for the adversarial agent.,"Town = 'Town05'
 
 ## MONITORS
 monitor TrafficLights:
@@ -1013,7 +994,7 @@ ego = Car at egoSpawnPt,
     with blueprint EGO_MODEL
 
 require 10 <= (distance to intersection) <= 40",The adversarial car is crossing the intersection from the right.,"# Defining adversarial maneuvers as those conflicting with the ego's straight path
-advManeuvers = filter(lambda i: i.type == ManeuverType.RIGHT_TURN, egoManeuver.conflictingManeuvers)
+advManeuvers = filter(lambda i: i.type == ManeuverType.STRAIGHT, egoManeuver.conflictingManeuvers)
 advManeuver = Uniform(*advManeuvers)
 advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
 advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
@@ -1027,34 +1008,20 @@ AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParamet
     with behavior AdvBehavior()
 
 # Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
+require 70 deg <= RelativeHeading(AdvAgent) <= 110 deg  # Ensuring the agent approaches from an angle indicative of crossing from the right
 require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
-"The ego starts an unprotected left turn at an intersection while yielding to an oncoming car when the oncoming car's throttle malfunctions, leading to an unexpected acceleration and forcing the ego to quickly modify its turning path to avoid a collision.",Car,"The adversarial car experiences a throttle malfunction, leading to unexpected acceleration.","behavior AdvBehavior():
-    while (distance to self) > 60:
-        wait  # The adversarial car waits until it is within 60 meters of the ego vehicle.
+"The ego starts an unprotected left turn at an intersection while yielding to an oncoming car when the oncoming car's throttle malfunctions, leading to an unexpected acceleration and forcing the ego to quickly modify its turning path to avoid a collision.",Car,The adversarial car unexpectedly accelerates due to a throttle malfunction.,"param OPT_ADV_SPEED = Range(5, 15)
+param OPT_MALFUNCTION_THROTTLE = Range(0.8, 1.0)  # High throttle value simulating malfunction
+param OPT_MALFUNCTION_DURATION = Range(20, 50)    # Duration of the malfunction in simulation steps
 
-    do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED) until (
-        distance to self < globalParameters.OPT_ADV_DISTANCE)
-
-    while True:
-        take SetThrottleAction(globalParameters.OPT_ADV_THROTTLE)  # Aggressively adjusts acceleration.
-        
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_THROTTLE):
-            wait
-
-        take SetBrakeAction(globalParameters.OPT_ADV_BREAK)  # Aggressively adjusts braking.
-
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_BRAKE):
-            wait
-
-param OPT_ADV_SPEED = Range(0, 20)  # Controls the initial speed of the adversarial car.
-param OPT_ADV_DISTANCE = Range(0, 20)  # Specifies the distance at which the car begins its aggressive maneuver.
-param OPT_ADV_THROTTLE = Range(0, 1)  # Aggressive throttle range.
-param OPT_ADV_BREAK = Range(0, 1)  # Determines the intensity of the braking.
-param OPT_WAIT_THROTTLE = Range(5, 20)  # Variable wait time between throttle changes.
-param OPT_WAIT_BRAKE = Range(5, 20)  # Variable wait time between brake applications.",The ego vehicle is at an intersection attempting an unprotected left turn.,"Town = 'Town05'
+behavior AdvBehavior():
+    # Initial normal driving behavior
+    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < 50
+    
+    # Simulate unexpected acceleration due to throttle malfunction
+    take SetThrottleAction(globalParameters.OPT_MALFUNCTION_THROTTLE)
+    for _ in range(globalParameters.OPT_MALFUNCTION_DURATION):
+        wait",The ego vehicle is at an intersection performing an unprotected left turn.,"Town = 'Town05'
 
 ## MONITORS
 monitor TrafficLights:
@@ -1077,16 +1044,109 @@ ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
 
-require 10 <= (distance to intersection) <= 40",The adversarial car is oncoming from the opposite direction as the ego vehicle begins its left turn.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+require 10 <= (distance to intersection) <= 40","The adversarial car is in the oncoming lane, directly ahead of the ego vehicle's path.","# Parameters for the adversarial agent's position in the oncoming lane
+param OPT_GEO_Y_DISTANCE = Range(10, 50)  # Distance ahead of the ego vehicle
+param OPT_GEO_X_DISTANCE = Range(-8, -4)  # Lateral offset to the left (oncoming lane)
 
-# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
+# Identify the oncoming lane (left lane relative to ego)
+laneSec = network.laneSectionAt(ego)
+oncomingLane = laneSec._laneToLeft.lane
+
+# Calculate the spawn point in the oncoming lane
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+projectPt = Vector(*oncomingLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = oncomingLane.orientation[projectPt]
+
+# Spawn the adversarial car in the oncoming lane, facing the ego vehicle
+AdvAgent = Car at projectPt,
+    with heading advHeading + 180 deg,  # Facing opposite to the lane direction (towards ego)
+    with regionContainedIn None,
+    with behavior AdvBehavior()",1
+"The ego attempts an unprotected left turn at an intersection while yielding to an oncoming car when the oncoming car's suddenly brakes, necessitating the ego to rapidly reassess the situation and adjust its turn.",Car,The adversarial car suddenly brakes while approaching the intersection.,"behavior AdvBehavior():
+    while (distance to self) > 60:
+        wait  # The adversarial vehicle waits until it is within a significant range to impact the ego's maneuver.
+    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_BRAKE_DISTANCE
+    # Once within a critical distance of the intersection, the adversarial vehicle initiates a sudden braking maneuver.
+    while True:
+        take SetBrakeAction(globalParameters.OPT_BRAKE)  # Continues to apply brakes to simulate an emergency or unexpected stop.
+
+param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
+param OPT_BRAKE_DISTANCE = Range(0, 4)  # The critical distance at which the adversarial vehicle begins its sudden stop.
+param OPT_BRAKE = Range(0, 1)  # The intensity of the braking action, potentially simulating an abrupt or gentle stop.",The ego vehicle is at an intersection attempting an unprotected left turn.,"Town = 'Town05'
+
+## MONITORS
+monitor TrafficLights:
+    freezeTrafficLights()
+    while True:
+        if withinDistanceToTrafficLight(ego, 100):
+            setClosestTrafficLightStatus(ego, ""green"")
+        if withinDistanceToTrafficLight(AdvAgent, 100):
+            setClosestTrafficLightStatus(AdvAgent, ""green"")
+        wait
+
+intersection = Uniform(*filter(lambda i: i.is4Way and i.isSignalized, network.intersections))
+egoInitLane = Uniform(*intersection.incomingLanes)
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, egoInitLane.maneuvers))
+egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
+egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
+
+# Setting up the ego vehicle at the initial position
+ego = Car at egoSpawnPt,
+    with regionContainedIn None,
+    with blueprint EGO_MODEL
+
+require 10 <= (distance to intersection) <= 40","The adversarial car is in the oncoming lane, directly ahead of the ego vehicle's path.","# Parameters for the adversarial agent's position in the oncoming lane
+param OPT_GEO_Y_DISTANCE = Range(10, 50)  # Distance ahead of the ego vehicle
+param OPT_GEO_X_DISTANCE = Range(-8, -4)  # Lateral offset to the left (oncoming lane)
+
+# Identify the oncoming lane (left lane relative to ego)
+laneSec = network.laneSectionAt(ego)
+oncomingLane = laneSec._laneToLeft.lane
+
+# Calculate the spawn point in the oncoming lane
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+projectPt = Vector(*oncomingLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = oncomingLane.orientation[projectPt]
+
+# Spawn the adversarial car in the oncoming lane, facing the ego vehicle
+AdvAgent = Car at projectPt,
+    with heading advHeading + 180 deg,  # Facing opposite to the lane direction (towards ego)
+    with regionContainedIn None,
+    with behavior AdvBehavior()",1
+"The ego commences an unprotected left turn at an intersection while yielding to an oncoming car when the adversarial car, comes from the right, blocks multiple lanes by driving extremely slowly, forcing the ego vehicle to change lanes.",Car,"The adversarial car drives extremely slowly, blocking multiple lanes and forcing the ego vehicle to change lanes.","behavior AdvBehavior():
+    while (distance to self) > 60:
+        wait  # The adversarial car waits until it is within impactful range.
+    
+    # Begins to drive extremely slowly to block the lanes once it is near enough.
+    while True:
+        take SetSpeedAction(globalParameters.OPT_SLOW_SPEED)  # Maintains a very slow speed to disrupt traffic flow and force lane changes.
+
+param OPT_SLOW_SPEED = Range(0, 2)  # The extremely slow speed that the adversarial car adopts to block the lanes.",The ego vehicle is at an intersection performing an unprotected left turn.,"Town = 'Town05'
+
+## MONITORS
+monitor TrafficLights:
+    freezeTrafficLights()
+    while True:
+        if withinDistanceToTrafficLight(ego, 100):
+            setClosestTrafficLightStatus(ego, ""green"")
+        if withinDistanceToTrafficLight(AdvAgent, 100):
+            setClosestTrafficLightStatus(AdvAgent, ""green"")
+        wait
+
+intersection = Uniform(*filter(lambda i: i.is4Way and i.isSignalized, network.intersections))
+egoInitLane = Uniform(*intersection.incomingLanes)
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, egoInitLane.maneuvers))
+egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
+egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
+
+# Setting up the ego vehicle at the initial position
+ego = Car at egoSpawnPt,
+    with regionContainedIn None,
+    with blueprint EGO_MODEL
+
+require 10 <= (distance to intersection) <= 40",The adversarial car comes from the right side of the ego vehicle.,"# Identifying the adjacent lane to the right for the Adversarial Agent and setting its spawn point
 param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToLeft.lane
+advLane = network.laneSectionAt(ego)._laneToRight.lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
 projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
 advHeading = advLane.orientation[projectPt]
@@ -1096,110 +1156,7 @@ AdvAgent = {AdvObject} at projectPt,
     with heading advHeading,
     with regionContainedIn None,
     with behavior AdvBehavior()",1
-"The ego attempts an unprotected left turn at an intersection while yielding to an oncoming car when the oncoming car's suddenly brakes, necessitating the ego to rapidly reassess the situation and adjust its turn.",Car,The oncoming adversarial car suddenly brakes.,"param OPT_ADV_SPEED = Range(5, 10)
-param OPT_ADV_DISTANCE = Range(0, 20)
-param OPT_BRAKE = Range(0, 1)
-param OPT_PAUSE_DURATION = Range(10, 30)
-param OPT_THROTTLE = Range(0.5, 1)  # Throttle intensity for acceleration
-
-behavior AdvBehavior():
-    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
-    while True:
-        take SetBrakeAction(globalParameters.OPT_BRAKE)
-        for _ in range(globalParameters.OPT_PAUSE_DURATION):
-            wait
-        take SetThrottleAction(globalParameters.OPT_THROTTLE)",The ego vehicle is attempting an unprotected left turn at an intersection.,"Town = 'Town05'
-
-## MONITORS
-monitor TrafficLights:
-    freezeTrafficLights()
-    while True:
-        if withinDistanceToTrafficLight(ego, 100):
-            setClosestTrafficLightStatus(ego, ""green"")
-        if withinDistanceToTrafficLight(AdvAgent, 100):
-            setClosestTrafficLightStatus(AdvAgent, ""green"")
-        wait
-
-intersection = Uniform(*filter(lambda i: i.is4Way and i.isSignalized, network.intersections))
-egoInitLane = Uniform(*intersection.incomingLanes)
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, egoInitLane.maneuvers))
-egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
-egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
-
-# Setting up the ego vehicle at the initial position
-ego = Car at egoSpawnPt,
-    with regionContainedIn None,
-    with blueprint EGO_MODEL
-
-require 10 <= (distance to intersection) <= 40","The adversarial car is approaching from the opposite direction, directly in front of the ego vehicle.","# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
-
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
-
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
-    with behavior AdvBehavior()",1
-"The ego commences an unprotected left turn at an intersection while yielding to an oncoming car when the adversarial car, comes from the right, blocks multiple lanes by driving extremely slowly, forcing the ego vehicle to change lanes.",Car,"The adversarial car drives extremely slowly, blocking multiple lanes and forcing the ego vehicle to change lanes.","behavior AdvBehavior():
-    while (distance to self) > 60:
-        wait  # The adversarial vehicle waits until it is within impactful range.
-    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_SLOW_DISTANCE
-    # Begins to drive extremely slowly to block the lanes once it is near enough to the intersection.
-    while True:
-        take SetSpeedAction(globalParameters.OPT_SLOW_SPEED)  # Maintains a very slow speed to disrupt traffic flow.
-
-param OPT_SLOW_DISTANCE = Range(0, 4)  # The distance at which the adversarial vehicle starts slowing down.
-param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle initially approaches the intersection.
-param OPT_SLOW_SPEED = Range(0, 2)  # The extremely slow speed that the adversarial vehicle adopts to block the lanes.",An intersection where the ego vehicle is attempting an unprotected left turn.,"Town = 'Town05'
-
-## MONITORS
-monitor TrafficLights:
-    freezeTrafficLights()
-    while True:
-        if withinDistanceToTrafficLight(ego, 100):
-            setClosestTrafficLightStatus(ego, ""green"")
-        if withinDistanceToTrafficLight(AdvAgent, 100):
-            setClosestTrafficLightStatus(AdvAgent, ""green"")
-        wait
-
-intersection = Uniform(*filter(lambda i: i.is4Way and i.isSignalized, network.intersections))
-egoInitLane = Uniform(*intersection.incomingLanes)
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, egoInitLane.maneuvers))
-egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
-egoSpawnPt = OrientedPoint in egoManeuver.startLane.centerline
-
-# Setting up the ego vehicle at the initial position
-ego = Car at egoSpawnPt,
-    with regionContainedIn None,
-    with blueprint EGO_MODEL
-
-require 10 <= (distance to intersection) <= 40",The adversarial car comes from the right side of the intersection.,"# Defining adversarial maneuvers as those conflicting with the ego's straight path
-advManeuvers = filter(lambda i: i.type == ManeuverType.RIGHT_TURN, egoManeuver.conflictingManeuvers)
-advManeuver = Uniform(*advManeuvers)
-advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
-advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
-IntSpawnPt = advManeuver.connectingLane.centerline.start  # Start of the connecting lane centerline
-
-param OPT_GEO_Y_DISTANCE = Range(-10, 10)
-# Setting up the adversarial agent
-AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None,
-    with behavior AdvBehavior()
-
-# Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
-require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
-The ego vehicle is making an unprotected left turn; the adversarial vehicle approaches the intersection at a normal speed but then suddenly attempts to make a last-second right turn.,Car,The adversarial car approaches the intersection at a normal speed but then suddenly attempts to make a last-second right turn.,"behavior AdvBehavior():
+The ego vehicle is making an unprotected left turn; the adversarial vehicle approaches the intersection at a normal speed but then suddenly attempts to make a last-second right turn.,Car,The adversarial car approaches at a normal speed and then suddenly attempts a last-second right turn.,"behavior AdvBehavior():
     while (distance to self) > 60:
         wait  # The adversarial vehicle waits until it is close enough to affect the ego's maneuver.
     do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_STEER_DISTANCE
@@ -1233,39 +1190,36 @@ ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
 
-require 10 <= (distance to intersection) <= 40",The adversarial car approaches from the opposite direction of the ego vehicle at the intersection.,"# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
+require 10 <= (distance to intersection) <= 40",The adversarial car is approaching the intersection from the opposite direction relative to the ego vehicle.,"# Parameters for the adversarial agent's position in the opposite lane
+param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Lateral offset to place agent in the opposite lane
+param OPT_GEO_Y_DISTANCE = Range(10, 30) # Longitudinal distance ahead of ego
 
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Identify the lane section and the opposite lane
+laneSec = network.laneSectionAt(ego)
+oppositeLane = laneSec._laneToLeft.lane
 
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
+# Create an intermediate point along the road direction to project onto the opposite lane
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+
+# Project the intermediate point onto the centerline of the opposite lane to get the exact spawn position
+projectPt = Vector(*oppositeLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = oppositeLane.orientation[projectPt]
+
+# Spawn the adversarial car in the opposite lane, facing the ego vehicle (oncoming)
+AdvAgent = Car at projectPt,
+    with heading advHeading + 180 deg,
+    with regionContainedIn None,
     with behavior AdvBehavior()",1
-The ego attempts an unprotected left turn at an intersection while yielding to an oncoming car when the oncoming car veer erratically.,Car,The adversarial car veers erratically.,"param OPT_ADV_SPEED = Range(5, 10)
-param OPT_LANE_SWAP_FREQUENCY = Range(20, 50)  # Frequency of lane swaps
-param OPT_STEER = Range(-1, 1)  # Steering range for lane changes
-param OPT_WAIT_LEFT = Range(5, 20)  # Wait time after steering left
+The ego attempts an unprotected left turn at an intersection while yielding to an oncoming car when the oncoming car veer erratically.,Car,The adversarial car veers erratically.,"param OPT_ADV_SPEED = Range(5, 15)
+param OPT_ADV_STEER = Range(-1, 1)
+param OPT_WAIT_STEER = Range(5, 20)
 
 behavior AdvBehavior():
     do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED)
     
     while True:
-        take SetSteerAction(Range(-1, 0))  # Steering left
-        for _ in range(globalParameters.OPT_WAIT_LEFT):  # Wait for a random duration in Range(5,20)
-            wait
-
-        take SetSteerAction(Range(0, 1))  # Steering right
-        for _ in range(globalParameters.OPT_LANE_SWAP_FREQUENCY):  # Wait for a random duration in Range(20,50)
+        take SetSteerAction(globalParameters.OPT_ADV_STEER)
+        for _ in range(globalParameters.OPT_WAIT_STEER):
             wait",The ego vehicle is at an intersection attempting an unprotected left turn.,"Town = 'Town05'
 
 ## MONITORS
@@ -1289,36 +1243,36 @@ ego = Car at egoSpawnPt,
     with regionContainedIn None,
     with blueprint EGO_MODEL
 
-require 10 <= (distance to intersection) <= 40",The adversarial car is oncoming from the opposite direction of the ego vehicle.,"# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
+require 10 <= (distance to intersection) <= 40","The adversarial car is in the oncoming lane, approaching the intersection from the front.","# Parameters for the adversarial agent's position in the oncoming lane
+param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Lateral offset to place agent in oncoming lane
+param OPT_GEO_Y_DISTANCE = Range(10, 50) # Distance ahead of ego in the oncoming lane
 
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Identify the oncoming lane (left lane relative to ego's direction)
+laneSec = network.laneSectionAt(ego)
+oncomingLane = laneSec._laneToLeft.lane
 
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
+# Calculate spawn point in the oncoming lane
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+projectPt = Vector(*oncomingLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = oncomingLane.orientation[projectPt]
+
+# Spawn the adversarial car in the oncoming lane, facing the ego vehicle
+AdvAgent = Car at projectPt,
+    with heading advHeading,
+    with regionContainedIn None,
     with behavior AdvBehavior()",1
-"The ego is performing a right turn at an intersection when the crossing car suddenly speeds up, entering the intersection and causing the ego to brake abruptly to avoid a collision.",Car,"The adversarial car suddenly speeds up, entering the intersection and causing the ego to brake abruptly.","
-behavior AdvBehavior():
+"The ego is performing a right turn at an intersection when the crossing car suddenly speeds up, entering the intersection and causing the ego to brake abruptly to avoid a collision.",Car,The adversarial car suddenly speeds up and enters the intersection.,"behavior AdvBehavior():
     while (distance to self) > 60:
-        wait
+        wait  # The adversarial vehicle waits until it is close enough to impact the ego's maneuver.
     do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
+    # Suddenly speeds up to enter the intersection.
     while True:
-        take SetThrottleAction(globalParameters.OPT_THROTTLE)
+        take SetThrottleAction(globalParameters.OPT_THROTTLE)  # Applies throttle to increase speed sharply.
 
-param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
-param OPT_ADV_DISTANCE = Range(5, 20)  # The critical distance at which the adversarial begins to accelerate.
-param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the accelerate action, ranging from a slight decrease in speed to a full stop.",The ego vehicle is performing a right turn at a four-way intersection.,"Town = 'Town05'
-intersection = Uniform(*filter(lambda i: i.is4Way, network.intersections))
+param OPT_ADV_SPEED = Range(5, 15)  # The initial speed at which the adversarial vehicle approaches.
+param OPT_ADV_DISTANCE = Range(5, 20)  # The proximity within which the acceleration is triggered.
+param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the throttle during the sudden acceleration.",The ego vehicle is turning right at an intersection.,"Town = 'Town05'
+intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
 egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
@@ -1341,16 +1295,16 @@ AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParamet
     with behavior AdvBehavior()
 
 # Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
+require -110 deg <= RelativeHeading(AdvAgent) <= -70 deg  # Ensuring the agent approaches from an angle indicative of crossing
 require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
-The ego vehicle is turning right; the adversarial car (positioned ahead on the right) blocks the lane by braking suddenly.,Car,"The adversarial car suddenly brakes, blocking the lane.","param OPT_ADV_SPEED = Range(5, 10)  # Adversarial vehicle's cruising speed
-param OPT_ADV_DISTANCE = Range(0, 20)  # Distance threshold to initiate braking
+The ego vehicle is turning right; the adversarial car (positioned ahead on the right) blocks the lane by braking suddenly.,Car,The adversarial car blocks the lane by braking suddenly.,"param OPT_ADV_SPEED = Range(5, 10)  # Adversarial vehicle's cruising speed
+param OPT_ADV_DISTANCE = Range(0, 20)  # Distance threshold to initiate blocking brake
 param OPT_BRAKE = Range(0, 1)  # Braking intensity, where 1 represents full braking
 
 behavior AdvBehavior():
     # Follow the lane at the defined speed until close enough to the ego vehicle
     do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (distance to self) < globalParameters.OPT_ADV_DISTANCE
-    # Once within the distance threshold, execute a sudden brake to test the ego vehicle's response capabilities
+    # Once within the distance threshold, execute a sudden brake to block the lane
     while True:
         take SetBrakeAction(globalParameters.OPT_BRAKE)",The ego vehicle is turning right.,"Town = 'Town05'
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
@@ -1361,7 +1315,7 @@ egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial car is positioned ahead on the right of the ego vehicle.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
+    with blueprint EGO_MODEL",The adversarial car is positioned ahead on the right.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
 param OPT_LEADING_DISTANCE = Range(0, 30)
 param OPT_LEADING_SPEED = Range(1, 5)
 LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
@@ -1380,18 +1334,18 @@ AdvAgent = {AdvObject} at projectPt,
     with heading advHeading,
     with regionContainedIn None,
     with behavior AdvBehavior()",1
-"The ego vehicle is turning right; the adversarial vehicle enters the intersection from the left side, swerving to the right suddenly.",Car,The adversarial car enters the intersection from the left and swerves to the right suddenly.,"behavior AdvBehavior():
+"The ego vehicle is turning right; the adversarial vehicle enters the intersection from the left side, swerving to the right suddenly.",Car,The adversarial car enters the intersection and suddenly swerves to the right.,"behavior AdvBehavior():
     while (distance to self) > 60:
         wait  # The adversarial vehicle waits until it is close enough to affect the ego's maneuver.
     do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_STEER_DISTANCE
-    # Initiates a sudden right turn as it gets close to the intersection.
+    # Initiates a sudden swerve to the right as it enters the intersection.
     while True:
         take SetSpeedAction(self.speed)  # Maintains its current speed
-        take SetSteerAction(globalParameters.OPT_STEER)  # Executes a sharp turn
+        take SetSteerAction(globalParameters.OPT_STEER)  # Executes a sharp right swerve
 
 param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches the intersection.
 param OPT_STEER_DISTANCE = Range(0, 4)  # The distance at which the adversarial vehicle starts its sudden maneuver.
-param OPT_STEER = Range(0.5, 1.0)  # The intensity of the steering action, specifying the sharpness of the turn.",The ego vehicle is turning right at an intersection.,"Town = 'Town05'
+param OPT_STEER = Range(0.5, 1.0)  # The intensity of the steering action, specifying the sharpness of the right swerve.",The ego vehicle is turning right at an intersection.,"Town = 'Town05'
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
 egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
@@ -1415,27 +1369,19 @@ AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParamet
     with behavior AdvBehavior()
 
 # Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
+require -110 deg <= RelativeHeading(AdvAgent) <= -70 deg  # Ensuring the agent approaches from an angle indicative of crossing
 require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
 The ego vehicle is turning right; the adversarial car (positioned ahead on the right) reverses abruptly.,Car,The adversarial car reverses abruptly.,"behavior AdvBehavior():
-    # Follow the lane at the speed defined by OPT_ADV_SPEED until a condition is met
-    do FollowLaneBehavior(target_speed=globalParameters.OPT_ADV_SPEED) until (
-        distance to some_target < globalParameters.OPT_ADV_DISTANCE)
-    
-    # Perform a lane change to an adjacent lane
-    targetLaneSec = network.laneSectionAt(self).adjacentLanes[0]
-    do LaneChangeBehavior(laneSectionToSwitch=targetLaneSec, target_speed=globalParameters.OPT_ADV_SPEED)
-
-    # Wait for a number of steps directly specified by OPT_WAIT_STEPS
-    for _ in range(globalParameters.OPT_WAIT_STEPS):
+    # Wait until the adversarial car is within a certain distance of the ego vehicle
+    while (distance to self) > globalParameters.OPT_ADV_DISTANCE:
         wait
 
-    # Stop the vehicle after waiting
-    do SetSpeedAction(0)
+    # Initiate abrupt reversal
+    take SetReverseAction(True)
+    take SetThrottleAction(globalParameters.OPT_THROTTLE)
 
-param OPT_ADV_SPEED = Range(5, 10)  # Speed range for the vehicle
-param OPT_ADV_DISTANCE = Range(0, 20)  # Distance threshold for stopping the follow behavior
-param OPT_WAIT_STEPS = Range(0, 20)  # Directly used range for wait steps before stopping",The ego vehicle is turning right.,"Town = 'Town05'
+param OPT_ADV_DISTANCE = Range(0, 50)  # Distance threshold to trigger reversal
+param OPT_THROTTLE = Range(0.5, 1.0)  # Throttle intensity during reversal",The ego vehicle is turning right at an intersection.,"Town = 'Town05'
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
 egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
@@ -1444,14 +1390,7 @@ egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial car is positioned ahead on the right of the ego vehicle.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
-
-# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
+    with blueprint EGO_MODEL",The adversarial car is positioned ahead on the right of the ego vehicle.,"# Identifying the adjacent lane to the right for the Adversarial Agent and setting its spawn point further in front
 param OPT_GEO_Y_DISTANCE = Range(0, 30)
 advLane = network.laneSectionAt(ego)._laneToRight.lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
@@ -1470,25 +1409,22 @@ The ego vehicle is turning right; the adversarial car (positioned behind on the 
     do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED) until (
         distance to self < globalParameters.OPT_ADV_DISTANCE)
 
-    while True:
-        take SetThrottleAction(globalParameters.OPT_ADV_THROTTLE)  # Aggressively adjusts acceleration.
-        
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_THROTTLE):
-            wait
+    # Suddenly accelerates
+    take SetThrottleAction(globalParameters.OPT_THROTTLE)
+    for _ in range(globalParameters.OPT_ACCEL_DURATION):
+        wait
 
-        take SetBrakeAction(globalParameters.OPT_ADV_BREAK)  # Aggressively adjusts braking.
-
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_BRAKE):
-            wait
+    # Then decelerates
+    take SetBrakeAction(globalParameters.OPT_BRAKE)
+    for _ in range(globalParameters.OPT_DECEL_DURATION):
+        wait
 
 param OPT_ADV_SPEED = Range(0, 20)  # Controls the initial speed of the adversarial car.
 param OPT_ADV_DISTANCE = Range(0, 20)  # Specifies the distance at which the car begins its aggressive maneuver.
-param OPT_ADV_THROTTLE = Range(0, 1)  # Aggressive throttle range.
-param OPT_ADV_BREAK = Range(0, 1)  # Determines the intensity of the braking.
-param OPT_WAIT_THROTTLE = Range(5, 20)  # Variable wait time between throttle changes.
-param OPT_WAIT_BRAKE = Range(5, 20)  # Variable wait time between brake applications.",The ego vehicle is turning right.,"Town = 'Town05'
+param OPT_THROTTLE = Range(0.5, 1)  # Aggressive throttle range.
+param OPT_BRAKE = Range(0, 1)  # Determines the intensity of the braking.
+param OPT_ACCEL_DURATION = Range(5, 20)  # Duration of the acceleration phase.
+param OPT_DECEL_DURATION = Range(5, 20)  # Duration of the deceleration phase.",The ego vehicle is turning right at an intersection.,"Town = 'Town05'
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
 egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
@@ -1497,145 +1433,133 @@ egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial car is positioned behind on the right of the ego vehicle.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+    with blueprint EGO_MODEL",The adversarial car is positioned behind the ego vehicle on the right.,"param OPT_GEO_BLOCKER_X_DISTANCE = Range(2, 8)
+param OPT_GEO_BLOCKER_Y_DISTANCE = Range(-50, -15)
+param OPT_GEO_X_DISTANCE = Range(-2, 2)
+param OPT_GEO_Y_DISTANCE = Range(-6, -2)
 
-# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToRight.lane
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
-projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
-advHeading = advLane.orientation[projectPt]
+RightBackSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
+Blocker = Car right of RightBackSpawnPt by globalParameters.OPT_GEO_BLOCKER_X_DISTANCE,
+    with heading RightBackSpawnPt.heading,
+    with regionContainedIn None
 
-# Spawn the Adversarial Agent
-AdvAgent = {AdvObject} at projectPt,
-    with heading advHeading,
+SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
+AdvAgent = {AdvObject} at Blocker offset along RightBackSpawnPt.heading by SHIFT,
+    with heading RightBackSpawnPt.heading + 90 deg,
     with regionContainedIn None,
     with behavior AdvBehavior()",1
 The ego vehicle is approaching the intersection; the adversarial car (on the left) suddenly accelerates and enters the intersection first and suddenly stop.,Car,The adversarial car suddenly accelerates to enter the intersection first and then suddenly stops.,"behavior AdvBehavior():
     while (distance to self) > 60:
         wait  # The adversarial vehicle waits until it is close enough to impact the ego's maneuver.
-    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_ADV_DISTANCE or (distance from self to egoTrajectory) < globalParameters.OPT_BRAKE_DISTANCE
-    # Accelerates towards the ego vehicle.
-    while (distance from self to egoTrajectory) > globalParameters.OPT_BRAKE_DISTANCE:
+    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_ADV_DISTANCE or (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
+    # Accelerates to enter the intersection first.
+    while (distance from self to egoTrajectory) > globalParameters.OPT_STOP_DISTANCE:
         take SetThrottleAction(globalParameters.OPT_THROTTLE)  # Applies throttle to increase speed.
     # Once close enough, it decelerates abruptly.
     while True:
-        take SetBrakeAction(globalParameters.OPT_BRAKE)  # Initiates a sudden brake to reduce speed sharply.
+        take SetSpeedAction(0)  # Initiates a sudden stop.
 
 param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches.
 param OPT_ADV_DISTANCE = Range(0, 25)  # The proximity within which the acceleration is triggered.
 param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the throttle during the acceleration.
-param OPT_BRAKE = Range(0, 1)  # The intensity of the braking action.
-param OPT_BRAKE_DISTANCE = Range(0, 4)  # The critical distance at which the adversarial vehicle begins its deceleration.",The ego vehicle is approaching a four-way intersection.,"Town = 'Town05'
-intersection = Uniform(*filter(lambda i: i.is4Way, network.intersections))
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, intersection.maneuvers))
+param OPT_STOP_DISTANCE = Range(0, 4)  # The critical distance at which the adversarial vehicle begins its deceleration.",The ego vehicle is approaching an intersection.,"Town = 'Town05'
+intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
 egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial car is on the left of the ego vehicle, approaching the intersection.","# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+    with blueprint EGO_MODEL","The adversarial car is located on the left side of the ego vehicle, entering the intersection from the left.","# Defining adversarial maneuvers as those conflicting with the ego's straight path
+advManeuvers = filter(lambda i: i.type == ManeuverType.LEFT_TURN, egoManeuver.conflictingManeuvers)
+advManeuver = Uniform(*advManeuvers)
+advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
+advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
+IntSpawnPt = advManeuver.connectingLane.centerline.start  # Start of the connecting lane centerline
 
-# Identifying the adjacent lane to the left for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToLeft.lane
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
-projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
-advHeading = advLane.orientation[projectPt]
-
-# Spawn the Adversarial Agent
-AdvAgent = {AdvObject} at projectPt,
-    with heading advHeading,
+param OPT_GEO_Y_DISTANCE = Range(-10, 10)
+# Setting up the adversarial agent
+AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE,
+    with heading IntSpawnPt.heading,
     with regionContainedIn None,
-    with behavior AdvBehavior()",1
+    with behavior AdvBehavior()
+
+# Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
+require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
+require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
 The ego vehicle is approaching the intersection; the adversarial car (on the right) suddenly accelerates and enters the intersection first and suddenly stop.,Car,The adversarial car suddenly accelerates to enter the intersection first and then suddenly stops.,"behavior AdvBehavior():
     while (distance to self) > 60:
         wait  # The adversarial vehicle waits until it is close enough to impact the ego's maneuver.
-    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_ADV_DISTANCE or (distance from self to egoTrajectory) < globalParameters.OPT_BRAKE_DISTANCE
-    # Accelerates towards the ego vehicle.
-    while (distance from self to egoTrajectory) > globalParameters.OPT_BRAKE_DISTANCE:
+    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance to self) < globalParameters.OPT_ADV_DISTANCE or (distance from self to egoTrajectory) < globalParameters.OPT_STOP_DISTANCE
+    # Accelerates to enter the intersection first.
+    while (distance from self to egoTrajectory) > globalParameters.OPT_STOP_DISTANCE:
         take SetThrottleAction(globalParameters.OPT_THROTTLE)  # Applies throttle to increase speed.
     # Once close enough, it decelerates abruptly.
     while True:
-        take SetBrakeAction(globalParameters.OPT_BRAKE)  # Initiates a sudden brake to reduce speed sharply.
+        take SetSpeedAction(0)  # Initiates a sudden stop.
 
 param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle approaches.
 param OPT_ADV_DISTANCE = Range(0, 25)  # The proximity within which the acceleration is triggered.
 param OPT_THROTTLE = Range(0.5, 1.0)  # The intensity of the throttle during the acceleration.
-param OPT_BRAKE = Range(0, 1)  # The intensity of the braking action.
-param OPT_BRAKE_DISTANCE = Range(0, 4)  # The critical distance at which the adversarial vehicle begins its deceleration.",The ego vehicle is approaching a four-way intersection.,"Town = 'Town05'
-intersection = Uniform(*filter(lambda i: i.is4Way, network.intersections))
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, intersection.maneuvers))
+param OPT_STOP_DISTANCE = Range(0, 4)  # The critical distance at which the adversarial vehicle begins its deceleration.",The ego vehicle is approaching an intersection.,"Town = 'Town05'
+intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
 egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL","The adversarial car is on the right of the ego vehicle, approaching the intersection.","# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
+    with blueprint EGO_MODEL","The adversarial car is located on the right side of the ego vehicle, entering the intersection from the right.","# Defining adversarial maneuvers as those conflicting with the ego's straight path
+advManeuvers = filter(lambda i: i.type == ManeuverType.RIGHT_TURN, egoManeuver.conflictingManeuvers)
+advManeuver = Uniform(*advManeuvers)
+advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
+advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
+IntSpawnPt = advManeuver.connectingLane.centerline.start  # Start of the connecting lane centerline
 
-# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
-param OPT_GEO_Y_DISTANCE = Range(0, 30)
-advLane = network.laneSectionAt(ego)._laneToRight.lane
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
-projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
-advHeading = advLane.orientation[projectPt]
-
-# Spawn the Adversarial Agent
-AdvAgent = {AdvObject} at projectPt,
-    with heading advHeading,
+param OPT_GEO_Y_DISTANCE = Range(-10, 10)
+# Setting up the adversarial agent
+AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE,
+    with heading IntSpawnPt.heading,
     with regionContainedIn None,
-    with behavior AdvBehavior()",1
+    with behavior AdvBehavior()
+
+# Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
+require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
+require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
 "The ego vehicle is maintaining a constant speed; the adversarial car, comes from the right, blocks multiple lanes by driving extremely slowly, forcing the ego vehicle to change lanes.",Car,"The adversarial car drives extremely slowly, blocking multiple lanes and forcing the ego vehicle to change lanes.","behavior AdvBehavior():
     while (distance to self) > 60:
-        wait  # The adversarial vehicle waits until it is within impactful range.
-    do FollowTrajectoryBehavior(globalParameters.OPT_ADV_SPEED, advTrajectory) until (distance from self to egoTrajectory) < globalParameters.OPT_SLOW_DISTANCE
-    # Begins to drive extremely slowly to block the lanes once it is near enough to the intersection.
+        wait  # The adversarial car waits until it is within impactful range.
+    
+    # Drive extremely slowly to block lanes and force lane changes.
     while True:
-        take SetSpeedAction(globalParameters.OPT_SLOW_SPEED)  # Maintains a very slow speed to disrupt traffic flow.
+        take SetSpeedAction(globalParameters.OPT_SLOW_SPEED)
 
-param OPT_SLOW_DISTANCE = Range(0, 4)  # The distance at which the adversarial vehicle starts slowing down.
-param OPT_ADV_SPEED = Range(5, 15)  # The speed at which the adversarial vehicle initially approaches the intersection.
-param OPT_SLOW_SPEED = Range(0, 2)  # The extremely slow speed that the adversarial vehicle adopts to block the lanes.",A multi-lane road.,"Town = 'Town01'
-# Collecting lane sections that have a left lane (opposite traffic direction) and no right lane (single forward road)
-laneSecsWithLeftLane = []
+param OPT_SLOW_SPEED = Range(0, 2)  # The extremely slow speed that the adversarial car adopts to block lanes.",A straight road with multiple lanes.,"Town = 'Town03'
+# Identifying lane sections that are part of a straight road with multiple lanes
+# A straight road segment is typically represented by a lane section where the lane is straight
+# and has adjacent lanes (left or right) moving in the same direction, implying multiple lanes.
+laneSecsWithMultipleLanes = []
 for lane in network.lanes:
     for laneSec in lane.sections:
-        if laneSec._laneToLeft is not None and laneSec._laneToRight is None:
-            if laneSec._laneToLeft.isForward != laneSec.isForward:
-                laneSecsWithLeftLane.append(laneSec)
+        # Check if the lane section is straight (no curvature)
+        isStraight = laneSec._lane is not None and laneSec._lane.isStraight
+        # Check if there is at least one adjacent lane (left or right) moving in the same direction
+        hasLeftLane = laneSec._laneToLeft is not None and laneSec._laneToLeft.isForward == laneSec.isForward
+        hasRightLane = laneSec._laneToRight is not None and laneSec._laneToRight.isForward == laneSec.isForward
+        
+        if isStraight and (hasLeftLane or hasRightLane):
+            laneSecsWithMultipleLanes.append(laneSec)
 
-# Selecting a random lane section that matches the criteria
-egoLaneSec = Uniform(*laneSecsWithLeftLane)
+# Selecting a random lane section from identified sections for the ego vehicle
+egoLaneSec = Uniform(*laneSecsWithMultipleLanes)
 egoSpawnPt = OrientedPoint in egoLaneSec.centerline
 
 # Ego vehicle setup
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial car comes from the right side of the ego vehicle.,"# Setup the leading vehicle's spawn point directly in front of the ego to simulate a slow-moving vehicle
-param OPT_LEADING_DISTANCE = Range(0, 30)
-param OPT_LEADING_SPEED = Range(1, 5)
-LeadingSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_LEADING_DISTANCE
-LeadingAgent = Car at LeadingSpawnPt,
-    with behavior FollowLaneBehavior(target_speed=globalParameters.OPT_LEADING_SPEED)
-
-# Identifying the adjacent lane for the Adversarial Agent and setting its spawn point further in front
+    with blueprint EGO_MODEL",The adversarial car comes from the right side of the ego vehicle.,"# Identifying the adjacent lane to the right for the Adversarial Agent and setting its spawn point
 param OPT_GEO_Y_DISTANCE = Range(0, 30)
 advLane = network.laneSectionAt(ego)._laneToRight.lane
 IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
@@ -1654,99 +1578,82 @@ AdvAgent = {AdvObject} at projectPt,
     do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED) until (
         distance to self < globalParameters.OPT_ADV_DISTANCE)
 
+    # Execute a left turn maneuver
+    do TurnBehavior(direction='left', target_speed=globalParameters.OPT_ADV_SPEED) until (
+        distance to self < globalParameters.OPT_STOP_DISTANCE)
+
+    # Stop abruptly to cause a near collision
+    take SetBrakeAction(1.0)
     while True:
-        take SetThrottleAction(globalParameters.OPT_ADV_THROTTLE)  # Aggressively adjusts acceleration.
-        
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_THROTTLE):
-            wait
-
-        take SetBrakeAction(globalParameters.OPT_ADV_BREAK)  # Aggressively adjusts braking.
-
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_BRAKE):
-            wait
+        take SetBrakeAction(1.0)
+        wait
 
 param OPT_ADV_SPEED = Range(0, 20)  # Controls the initial speed of the adversarial car.
-param OPT_ADV_DISTANCE = Range(0, 20)  # Specifies the distance at which the car begins its aggressive maneuver.
-param OPT_ADV_THROTTLE = Range(0, 1)  # Aggressive throttle range.
-param OPT_ADV_BREAK = Range(0, 1)  # Determines the intensity of the braking.
-param OPT_WAIT_THROTTLE = Range(5, 20)  # Variable wait time between throttle changes.
-param OPT_WAIT_BRAKE = Range(5, 20)  # Variable wait time between brake applications.",The ego vehicle is entering a four-way intersection.,"Town = 'Town05'
-intersection = Uniform(*filter(lambda i: i.is4Way, network.intersections))
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.LEFT_TURN, intersection.maneuvers))
+param OPT_ADV_DISTANCE = Range(10, 30)  # Specifies the distance at which the car begins its maneuver.
+param OPT_STOP_DISTANCE = Range(5, 15)  # The distance at which the adversarial vehicle stops abruptly.",The ego vehicle is entering an intersection.,"Town = 'Town05'
+intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
+egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.STRAIGHT, intersection.maneuvers))
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
 egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial car comes from the opposite direction of the ego vehicle.,"# Parameters for scenario elements
-param OPT_GEO_BLOCKER_Y_DISTANCE = Range(0, 40)
-param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Offset for the agent in the opposite lane
-param OPT_GEO_Y_DISTANCE = Range(10, 30)
+    with blueprint EGO_MODEL",The adversarial car is coming from the opposite direction of the ego vehicle.,"# Parameters for the adversarial agent's position in the oncoming lane
+param OPT_GEO_X_DISTANCE = Range(-8, 0)  # Lateral offset to place agent in the opposite lane
+param OPT_GEO_Y_DISTANCE = Range(10, 30) # Longitudinal distance ahead of ego
 
-# Setting up the parked car that blocks the ego's path
-laneSec = network.laneSectionAt(ego)  # Assuming network.laneSectionAt(ego) is predefined in the geometry part
-IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_BLOCKER_Y_DISTANCE
-Blocker = Car at IntSpawnPt,
-    with heading IntSpawnPt.heading,
-    with regionContainedIn None
+# Identify the oncoming lane (left lane relative to ego's direction)
+laneSec = network.laneSectionAt(ego)
+oncomingLane = laneSec._laneToLeft.lane
 
-# Setup for the motorcyclist who unexpectedly enters the scene
-SHIFT = globalParameters.OPT_GEO_X_DISTANCE @ globalParameters.OPT_GEO_Y_DISTANCE
-AdvAgent = {AdvObject} at Blocker offset along IntSpawnPt.heading by SHIFT,
-    with heading IntSpawnPt.heading + 180 deg,  # The agent is facing the opposite direction, indicating oncoming
-    with regionContainedIn laneSec._laneToLeft,  # Positioned in the left lane, assuming it's the oncoming traffic lane
+# Calculate spawn point projected onto the oncoming lane's centerline
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+projectPt = Vector(*oncomingLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = oncomingLane.orientation[projectPt]
+
+# Spawn the adversarial car facing the ego vehicle (opposite direction)
+AdvAgent = Car at projectPt,
+    with heading advHeading + 180 deg,
+    with regionContainedIn None,
     with behavior AdvBehavior()",1
-"The ego vehicle is entering the intersection; the adversarial vehicle comes from the right and turns left and stop, causing a near collision with the ego vehicle.",Car,"The adversarial car comes from the right, turns left, and stops, causing a near collision with the ego vehicle.","behavior AdvBehavior():
+"The ego vehicle is entering the intersection; the adversarial vehicle comes from the right and turns left and stop, causing a near collision with the ego vehicle.",Car,"The adversarial car turns left and stops, causing a near collision with the ego vehicle.","behavior AdvBehavior():
     while (distance to self) > 60:
         wait  # The adversarial car waits until it is within 60 meters of the ego vehicle.
 
     do FollowLaneBehavior(globalParameters.OPT_ADV_SPEED) until (
         distance to self < globalParameters.OPT_ADV_DISTANCE)
 
+    # Execute a left turn maneuver
+    do TurnBehavior(direction='left', target_speed=globalParameters.OPT_ADV_SPEED) until (
+        distance to self < globalParameters.OPT_STOP_DISTANCE)
+
+    # Stop abruptly to cause a near collision
+    take SetBrakeAction(1.0)
     while True:
-        take SetThrottleAction(globalParameters.OPT_ADV_THROTTLE)  # Aggressively adjusts acceleration.
-        
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_THROTTLE):
-            wait
-
-        take SetBrakeAction(globalParameters.OPT_ADV_BREAK)  # Aggressively adjusts braking.
-
-        # Wait for a dynamically determined duration
-        for _ in range(globalParameters.OPT_WAIT_BRAKE):
-            wait
+        take SetBrakeAction(1.0)
+        wait
 
 param OPT_ADV_SPEED = Range(0, 20)  # Controls the initial speed of the adversarial car.
-param OPT_ADV_DISTANCE = Range(0, 20)  # Specifies the distance at which the car begins its aggressive maneuver.
-param OPT_ADV_THROTTLE = Range(0, 1)  # Aggressive throttle range.
-param OPT_ADV_BREAK = Range(0, 1)  # Determines the intensity of the braking.
-param OPT_WAIT_THROTTLE = Range(5, 20)  # Variable wait time between throttle changes.
-param OPT_WAIT_BRAKE = Range(5, 20)  # Variable wait time between brake applications.",The ego vehicle is entering an intersection.,"Town = 'Town05'
+param OPT_ADV_DISTANCE = Range(10, 30)  # Specifies the distance at which the car begins its maneuver.
+param OPT_STOP_DISTANCE = Range(5, 15)  # The distance at which the adversarial vehicle stops abruptly.",The ego vehicle is entering an intersection.,"Town = 'Town05'
 intersection = Uniform(*filter(lambda i: i.is4Way or i.is3Way, network.intersections))
-egoManeuver = Uniform(*filter(lambda m: m.type is ManeuverType.RIGHT_TURN, intersection.maneuvers))
+egoManeuver = Uniform(*intersection.maneuvers)
 egoInitLane = egoManeuver.startLane
 egoTrajectory = [egoInitLane, egoManeuver.connectingLane, egoManeuver.endLane]
 egoSpawnPt = OrientedPoint in egoInitLane.centerline
 
 ego = Car at egoSpawnPt,
     with regionContainedIn None,
-    with blueprint EGO_MODEL",The adversarial car approaches from the right side of the intersection.,"# Defining adversarial maneuvers as those conflicting with the ego's straight path
-advManeuvers = filter(lambda i: i.type == ManeuverType.RIGHT_TURN, egoManeuver.conflictingManeuvers)
-advManeuver = Uniform(*advManeuvers)
-advTrajectory = [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]
-advSpawnPt = advManeuver.connectingLane.centerline[0]  # Initial point on the connecting lane's centerline
-IntSpawnPt = advManeuver.connectingLane.centerline.start  # Start of the connecting lane centerline
+    with blueprint EGO_MODEL",The adversarial car comes from the right side of the ego vehicle.,"# Identifying the adjacent lane to the right for the Adversarial Agent and setting its spawn point
+param OPT_GEO_Y_DISTANCE = Range(0, 30)
+advLane = network.laneSectionAt(ego)._laneToRight.lane
+IntSpawnPt = OrientedPoint following roadDirection from egoSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE
+projectPt = Vector(*advLane.centerline.project(IntSpawnPt.position).coords[0])
+advHeading = advLane.orientation[projectPt]
 
-param OPT_GEO_Y_DISTANCE = Range(-10, 10)
-# Setting up the adversarial agent
-AdvAgent = {AdvObject} following roadDirection from IntSpawnPt for globalParameters.OPT_GEO_Y_DISTANCE,
-    with heading IntSpawnPt.heading,
+# Spawn the Adversarial Agent
+AdvAgent = {AdvObject} at projectPt,
+    with heading advHeading,
     with regionContainedIn None,
-    with behavior AdvBehavior()
-
-# Requirements to ensure the adversarial agent's relative position and trajectory are correctly aligned with the scenario's needs
-require 160 deg <= abs(RelativeHeading(AdvAgent)) <= 180 deg
-require any([AdvAgent.position in traj for traj in [advManeuver.startLane, advManeuver.connectingLane, advManeuver.endLane]])",1
+    with behavior AdvBehavior()",1
