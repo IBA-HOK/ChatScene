@@ -1,0 +1,538 @@
+== ChatScene paper repro ==
+scenarios: 1 3 5 | port: 2002/8002 | device: cpu | test_epoch: 0
+carla_root: ./carla (manage: 1)
+>> using /home/hokuto/miniforge3/envs/chatscene/bin/python (invoking python lacks torch)
+>> PYTHONPATH extended for CARLA API
+>> safebench from this tree
+>> [startup] forced CARLA restart
+>> starting CARLA on port 2002 (log: /home/hokuto/chatScene_Strata/ChatScene/carla_2002.log)
+>> CARLA healthy on port 2002 (10s)
+>> train_scenario sid=1 (timeout 21600s): python scripts/run_train.py --agent_cfg=adv_scenic.yaml --scenario_cfg=train_scenario_scenic.yaml --mode train_scenario --scenario_id 1 --port 2002 --tm_port 8002 --device cpu
+setGPU: Setting GPU to: 0
+pygame 2.3.0 (SDL 2.24.2, Python 3.8.20)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+[32;1m>> ----------------------------------------[0m
+[33;1m>> Log path /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0 already exists! Storing info there anyway.[0m
+[32;1m>> Logging data to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/progress.txt[0m
+[32;1m>> Agent Policy: rl[0m
+[32;1m>> Scenario Policy: scenic[0m
+[32;1m>> ----------------------------------------[0m
+[32;1m
+Number of parameters: 	 actor pi: 68100, 	 critic q: 135682, 
+[0m
+[32;1m>> Initilizing sac model from safebench/agent/model_ckpt/safe_rl/sac/model_save/model.pt[0m
+[33;1m>> This scenario does not require policy model, using a dummy one[0m
+[32;1m>> OPT_behavior_1_opt_ROUTE-0 already selected, skipping.[0m
+[32;1m>> OPT_behavior_1_opt_ROUTE-1 already selected, skipping.[0m
+[32;1m>> OPT_behavior_1_opt_ROUTE-2 already selected, skipping.[0m
+[32;1m>> OPT_behavior_1_opt_ROUTE-3 already selected, skipping.[0m
+[32;1m>> OPT_behavior_1_opt_ROUTE-4 already selected, skipping.[0m
+[32;1m>> OPT_behavior_1_opt_ROUTE-5 already selected, skipping.[0m
+[32;1m>> OPT_behavior_1_opt_ROUTE-6 already selected, skipping.[0m
+[32;1m>> OPT_behavior_1_opt_ROUTE-7 already selected, skipping.[0m
+[32;1m>> Initializing scenic simulator: safebench/scenario/scenario_data/scenic_data/scenario_1/behavior_1_opt.scenic[0m
+Beginning scenario construction...
+  Loading cached version of road network...
+  Loaded cached network in 0.64 seconds.
+  Pruning scenario...
+  Pruned scenario in 7.153e-06 seconds.
+Scenario constructed in 0.83 seconds.
+  Connecting to CARLA on port 2002
+  Map loaded in simulator.
+[32;1m>> Initializing carla world[0m
+[32;1m>> Initializing pygame birdeye renderer[0m
+[32;1m>> Drawing the map of the entire town. This may take a while...[0m
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object walker.pedestrian.0002
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+Saving params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 0[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[1/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 3.3506417740369145[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           1.0[0m
+[32;1m	 avg_red_light_freq       0.0[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.945771705635574[0m
+[32;1m	 route_completion         0.3717126409048912[0m
+[32;1m	 avg_time_spent           0.0[0m
+[32;1m	 avg_acceleration         0.5411173539609614[0m
+[32;1m	 avg_yaw_velocity         0.015952563149309373[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.375[0m
+[32;1m	 task_os                  0.772494782180155[0m
+[32;1m	 comfort_os               0.8143100276299098[0m
+[32;1m	 final_score              0.4601315039453642[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 1[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[2/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 6.556012927416007[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.5[0m
+[32;1m	 avg_red_light_freq       0.5[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9245687552052239[0m
+[32;1m	 route_completion         0.6858563204524456[0m
+[32;1m	 avg_time_spent           0.25666667049129804[0m
+[32;1m	 avg_acceleration         0.33302814620630017[0m
+[32;1m	 avg_yaw_velocity         0.011278239559923955[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.625[0m
+[32;1m	 task_os                  0.7845861350554572[0m
+[32;1m	 comfort_os               0.885231204744592[0m
+[32;1m	 final_score              0.6641601906366278[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 2[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[3/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 6.589422428493836[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.3333333333333333[0m
+[32;1m	 avg_red_light_freq       0.3333333333333333[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9174469934640505[0m
+[32;1m	 route_completion         0.7905708803016305[0m
+[32;1m	 avg_time_spent           0.25666667049129804[0m
+[32;1m	 avg_acceleration         0.2592186711387099[0m
+[32;1m	 avg_yaw_velocity         0.009399975928962277[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.75[0m
+[32;1m	 task_os                  0.8171170677581276[0m
+[32;1m	 comfort_os               0.9104604509774428[0m
+[32;1m	 final_score              0.7695001853686789[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 3[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[4/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 6.700160359343526[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.25[0m
+[32;1m	 avg_red_light_freq       0.5[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.913995764802703[0m
+[32;1m	 route_completion         0.8429281602262229[0m
+[32;1m	 avg_time_spent           0.25666667049129804[0m
+[32;1m	 avg_acceleration         0.22338937355124286[0m
+[32;1m	 avg_yaw_velocity         0.00834670936044531[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.78125[0m
+[32;1m	 task_os                  0.8334190848458759[0m
+[32;1m	 comfort_os               0.9227546390294372[0m
+[32;1m	 final_score              0.7974041000679679[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 4[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[5/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 5.722438534983939[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.2[0m
+[32;1m	 avg_red_light_freq       0.6[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.913874599467433[0m
+[32;1m	 route_completion         0.8743425281809782[0m
+[32;1m	 avg_time_spent           0.257500003837049[0m
+[32;1m	 avg_acceleration         0.22975777653484028[0m
+[32;1m	 avg_yaw_velocity         0.008693839059019532[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.8[0m
+[32;1m	 task_os                  0.8435723746037874[0m
+[32;1m	 comfort_os               0.9205161281353801[0m
+[32;1m	 final_score              0.8136305186917733[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 5[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[6/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 5.922710737991285[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.16666666666666666[0m
+[32;1m	 avg_red_light_freq       0.5[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9133655761467024[0m
+[32;1m	 route_completion         0.8952854401508152[0m
+[32;1m	 avg_time_spent           0.2576666705061992[0m
+[32;1m	 avg_acceleration         0.2286087691549853[0m
+[32;1m	 avg_yaw_velocity         0.008693309541849577[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.8333333333333334[0m
+[32;1m	 task_os                  0.8503281152637729[0m
+[32;1m	 comfort_os               0.920899307101055[0m
+[32;1m	 final_score              0.8410592498834613[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 6[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[7/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.7179848749507975[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.2857142857142857[0m
+[32;1m	 avg_red_light_freq       0.42857142857142855[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9174373646629272[0m
+[32;1m	 route_completion         0.8098689688554616[0m
+[32;1m	 avg_time_spent           0.2576666705061992[0m
+[32;1m	 avg_acceleration         0.25076155938647166[0m
+[32;1m	 avg_yaw_velocity         0.00919791304538492[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.7678571428571429[0m
+[32;1m	 task_os                  0.8232132210040634[0m
+[32;1m	 comfort_os               0.9133468425227145[0m
+[32;1m	 final_score              0.7847212950373136[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 7[0m
+[33;1m>> Scenario stops due to route completion[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[8/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 6.349222799397335[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.25[0m
+[32;1m	 avg_red_light_freq       0.5[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9160729568178466[0m
+[32;1m	 route_completion         0.8336353477485289[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.23869089064295612[0m
+[32;1m	 avg_yaw_velocity         0.008853471220092531[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.78125[0m
+[32;1m	 task_os                  0.8306435076491366[0m
+[32;1m	 comfort_os               0.9174852127123173[0m
+[32;1m	 final_score              0.796678850406049[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 8[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[9/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 3.4839534705604804[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.3333333333333333[0m
+[32;1m	 avg_red_light_freq       0.4444444444444444[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9197566803409145[0m
+[32;1m	 route_completion         0.7585622966043062[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.2688240519036408[0m
+[32;1m	 avg_yaw_velocity         0.00948071804214066[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.7361111111111112[0m
+[32;1m	 task_os                  0.8068470651087516[0m
+[32;1m	 comfort_os               0.9072317433514062[0m
+[32;1m	 final_score              0.756782032927016[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 9[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[10/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 5.773965783565756[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.4[0m
+[32;1m	 avg_red_light_freq       0.4[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9201018251235452[0m
+[32;1m	 route_completion         0.7180187711975221[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.2640700491932848[0m
+[32;1m	 avg_yaw_velocity         0.00951284700324377[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.7[0m
+[32;1m	 task_os                  0.7934476049007005[0m
+[32;1m	 comfort_os               0.9088057012678238[0m
+[32;1m	 final_score              0.7262826562486876[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+Updating params...
+Saving params...
+{'OPT_GEO_X_DISTANCE': {'low': 2.6, 'high': 4.22}, 'OPT_GEO_Y_DISTANCE': {'low': 24.69, 'high': 42.45}, 'OPT_ADV_SPEED': {'low': 1.51, 'high': 2.98}, 'OPT_ADV_DISTANCE': {'low': 9.83, 'high': 13.51}, 'OPT_STOP_DISTANCE': {'low': 0.19, 'high': 0.73}}
+Saving params...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Failed to create simulation: Unable to spawn object walker.pedestrian.0008
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+  Beginning simulation of top-level scenario...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 10[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[11/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 5.474554933853428[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.45454545454545453[0m
+[32;1m	 avg_red_light_freq       0.36363636363636365[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9207806761043609[0m
+[32;1m	 route_completion         0.6823123912531931[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.2617131579165725[0m
+[32;1m	 avg_yaw_velocity         0.009550962160674078[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.6704545454545454[0m
+[32;1m	 task_os                  0.7817717619128627[0m
+[32;1m	 comfort_os               0.9095786266409178[0m
+[32;1m	 final_score              0.7011921962861593[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 11[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[12/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.324886100241267[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.5[0m
+[32;1m	 avg_red_light_freq       0.3333333333333333[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9221528219150499[0m
+[32;1m	 route_completion         0.6463618633603493[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.27673634071423486[0m
+[32;1m	 avg_yaw_velocity         0.01023267804168484[0m
+[32;1m	 avg_lane_invasion_freq   0.0[0m
+[32;1m	 safety_os                0.6458333333333333[0m
+[32;1m	 task_os                  0.7702456345521443[0m
+[32;1m	 comfort_os               0.9043436604146936[0m
+[32;1m	 final_score              0.6796674569053168[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 12[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[13/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 5.064734835320826[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.5384615384615384[0m
+[32;1m	 avg_red_light_freq       0.3076923076923077[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9230861686970202[0m
+[32;1m	 route_completion         0.618801514192206[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.2773057551029739[0m
+[32;1m	 avg_yaw_velocity         0.01044896027453071[0m
+[32;1m	 avg_lane_invasion_freq   0.0038461538461538464[0m
+[32;1m	 safety_os                0.625[0m
+[32;1m	 task_os                  0.7613699670900868[0m
+[32;1m	 comfort_os               0.9027997102587806[0m
+[32;1m	 final_score              0.6617559184940988[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 13[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[14/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.973376184913508[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.5714285714285714[0m
+[32;1m	 avg_red_light_freq       0.2857142857142857[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9239517514039182[0m
+[32;1m	 route_completion         0.5978334483077558[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.28027157151811716[0m
+[32;1m	 avg_yaw_velocity         0.010819077129876668[0m
+[32;1m	 avg_lane_invasion_freq   0.007142857142857143[0m
+[32;1m	 safety_os                0.6071428571428572[0m
+[32;1m	 task_os                  0.754669139364236[0m
+[32;1m	 comfort_os               0.9005888314030497[0m
+[32;1m	 final_score              0.6464851351515883[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 14[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[15/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.333740147926675[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.6[0m
+[32;1m	 avg_red_light_freq       0.26666666666666666[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9255109307606014[0m
+[32;1m	 route_completion         0.5753244766504335[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.28932707558175913[0m
+[32;1m	 avg_yaw_velocity         0.010998700485722742[0m
+[32;1m	 avg_lane_invasion_freq   0.006666666666666666[0m
+[32;1m	 safety_os                0.5916666666666667[0m
+[32;1m	 task_os                  0.7476858752640231[0m
+[32;1m	 comfort_os               0.8976691857552838[0m
+[32;1m	 final_score              0.6330162037309444[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 15[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[16/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.747804765981284[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.625[0m
+[32;1m	 avg_red_light_freq       0.25[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9266623388467994[0m
+[32;1m	 route_completion         0.5544675243366698[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.2909245066020752[0m
+[32;1m	 avg_yaw_velocity         0.01105157655186055[0m
+[32;1m	 avg_lane_invasion_freq   0.00625[0m
+[32;1m	 safety_os                0.578125[0m
+[32;1m	 task_os                  0.7411173605215011[0m
+[32;1m	 comfort_os               0.8972579722820214[0m
+[32;1m	 final_score              0.6212901806090559[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 16[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[17/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 3.582535099872962[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.6470588235294118[0m
+[32;1m	 avg_red_light_freq       0.23529411764705882[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9279252675630868[0m
+[32;1m	 route_completion         0.5349710585411307[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.304320479719789[0m
+[32;1m	 avg_yaw_velocity         0.011361758687183992[0m
+[32;1m	 avg_lane_invasion_freq   0.0058823529411764705[0m
+[32;1m	 safety_os                0.5661764705882353[0m
+[32;1m	 task_os                  0.7350395148284172[0m
+[32;1m	 comfort_os               0.8928118028839503[0m
+[32;1m	 final_score              0.6106592196711761[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 17[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[18/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 3.498979568395518[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.6666666666666666[0m
+[32;1m	 avg_red_light_freq       0.2222222222222222[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.9288142751867191[0m
+[32;1m	 route_completion         0.5248686132075382[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.31883756339330177[0m
+[32;1m	 avg_yaw_velocity         0.0116237059673244[0m
+[32;1m	 avg_lane_invasion_freq   0.005555555555555555[0m
+[32;1m	 safety_os                0.5555555555555556[0m
+[32;1m	 task_os                  0.7319683689250972[0m
+[32;1m	 comfort_os               0.8879943916946064[0m
+[32;1m	 final_score              0.6015043200840451[0m
+[32;1m>> Saving evaluation results to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_results.pkl[0m
+[32;1m>> Saving evaluation records to /home/hokuto/chatScene_Strata/ChatScene/log/adv_train/train_scenario/sac/adv_scenic/scenario_1/exp/exp_rl_scenic_seed_0/eval_results/OPT_behavior_1_opt_ROUTE-8_records.pkl[0m
+Recording params...
+[32;1m>> Begin to run the scene...[0m
+  Beginning simulation of top-level scenario...
+[32;1m>> Loading scenario data id: 18[0m
+[33;1m>> Scenario stops due to collision[0m
+[32;1m>> All scenarios are completed. Clearning up all actors[0m
+[33;1m[19/50] Ranking scores for batch scenario:[0m
+[33;1m	 Env id 0: 4.805072853942929[0m
+[32;1mEvaluation results:[0m
+[32;1m	 collision_rate           0.6842105263157895[0m
+[32;1m	 avg_red_light_freq       0.21052631578947367[0m
+[32;1m	 avg_stop_sign_freq       0.0[0m
+[32;1m	 out_of_road_length       0.0[0m
+[32;1m	 route_following_stability0.929300258283035[0m
+[32;1m	 route_completion         0.5128950094115277[0m
+[32;1m	 avg_time_spent           0.25777778161896603[0m
+[32;1m	 avg_acceleration         0.319701350248726[0m
+[32;1m	 avg_yaw_velocity         0.0117928638085208[0m
+[32;1m	 avg_lane_invasion_freq   0.005263157894736842[0m
+[32;1m	 safety_os                0.5460526315789473[0m
+[32;1m	 task_os                  0.7281391620251988[0m
+[32;1m	 comfort_os               0.8877475426826722[0m

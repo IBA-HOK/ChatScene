@@ -168,7 +168,7 @@ class ScenicDataLoader:
                 scenes.append(scene)
                 new_scenes += 1
                 self.scenic.endSimulation()
-        if new_scenes == 0:
+        if new_scenes == 0 and sample_num > 0:
             raise RuntimeError(
                 f"SCENIC_GEN_FAILED: 0 scenes after {attempts} attempts "
                 f"(behavior={self.behavior}). Check spawn geometry or CARLA server state.")

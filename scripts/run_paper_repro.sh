@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ChatScene paper repro: train_scenario -> train_agent -> eval for scenario_1..8
 # Usage:
-#   bash scripts/run_paper_repro.sh [--scenarios "1 2 3"] [--test-epoch -1] [--skip-train-scenario] [--skip-train-agent] [--no-carla] [--restart-carla]
+#   bash scripts/run_paper_repro.sh [--scenarios "1 2 3"] [--test-epoch -1] [--skip-train-scenario] [--skip-train-agent] [--no-carla] [--restart-carla] [--aggregate]
 # Env: PORT TM_PORT DEVICE AGENT_CFG CARLA_ROOT EVAL_ROUTES EVAL_TEST_EPOCH STEP_TIMEOUT (or $ROOT_DIR/.env)
 set -u
 
@@ -53,6 +53,7 @@ while [ $# -gt 0 ]; do
     --skip-train-agent) SKIP_AGT=1; shift ;;
     --no-carla) MANAGE_CARLA=0; shift ;;
     --restart-carla) FORCE_RESTART=1; shift ;;
+    --aggregate) AGGREGATE=1; shift ;;
     --help|-h) sed -n '2,5p' "$0"; exit 0 ;;
     *) # bare "1 2 3" also accepted
       if [[ "$1" =~ ^[0-9\ ]+$ ]]; then SCENARIOS="$1"; shift
@@ -206,8 +207,10 @@ fi
 
 FAILED=""
 # per-step wall-clock cap (seconds, 0=disable): a wedged simulator call can
-# block forever, so fence each step; resume logic makes a retry cheap
+# block forever, so fence each step; resume logic makes a retry cheap.
+# Train steps run 50 episodes per config and need hours; eval steps are short.
 STEP_TIMEOUT="${STEP_TIMEOUT:-3600}"
+STEP_TIMEOUT_TRAIN="${STEP_TIMEOUT_TRAIN:-21600}"
 run_step() { # $1=desc, $@=cmd
   local desc="$1"; shift
   local rc=0
@@ -227,6 +230,8 @@ run_step() { # $1=desc, $@=cmd
   fi
 }
 
+_SAVED_STEP_TIMEOUT="$STEP_TIMEOUT"
+STEP_TIMEOUT="$STEP_TIMEOUT_TRAIN"
 for sid in $SCENARIOS; do
   if [ "$SKIP_SCE" -eq 0 ]; then
     [ "$MANAGE_CARLA" -eq 1 ] && ensure_carla "sid=$sid" || true
@@ -244,6 +249,7 @@ for sid in $SCENARIOS; do
         --mode train_agent --scenario_id "$sid" --port "$PORT" --tm_port "$TM_PORT" --device "$DEVICE"
   fi
 done
+STEP_TIMEOUT="$_SAVED_STEP_TIMEOUT"
 
 for sid in $SCENARIOS; do
   for rid in $EVAL_ROUTES; do
@@ -264,6 +270,10 @@ done
 
 echo "== done =="
 if [ -n "$FAILED" ]; then echo "FAILED:$FAILED" >&2; exit 1; fi
+if [ "${AGGREGATE:-0}" -eq 1 ]; then
+  echo "== aggregation =="
+  SCENARIOS="$SCENARIOS" bash scripts/summarize_table1.sh || echo "aggregation failed (tables above may be partial)" >&2
+fi
 echo "All green. Artifacts:"
 echo "  - scenario JSON: safebench/scenario/scenario_data/scenic_data/scenario_{id}/scenario_{id}.json"
 echo "  - checkpoints:   safebench/agent/model_ckpt/adv_train/sac/scenic/scenario_{id}/"
