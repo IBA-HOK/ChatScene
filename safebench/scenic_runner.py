@@ -48,6 +48,11 @@ from safebench.util.avoidable_dsf import (
     select_param_entries_avoidable,
     select_scene_ids_avoidable,
 )
+from safebench.util.directional_dsf import (
+    DirectionalConfig,
+    scene_direction,
+    select_directional,
+)
 from safebench.util.scenic_utils import ScenicSimulator
 
 
@@ -101,13 +106,14 @@ class ScenicRunner:
         self.selection_metric = str(
             scenario_config.get('selection_metric', 'collision')
         ).strip().lower()
-        if self.selection_metric not in ('collision', 'dsf', 'dsf_avoidable'):
+        if self.selection_metric not in ('collision', 'dsf', 'dsf_avoidable', 'dsf_directional'):
             raise ValueError(
                 f"Unsupported selection_metric: {self.selection_metric!r} "
-                "(expected 'collision', 'dsf', or 'dsf_avoidable')"
+                "(expected 'collision', 'dsf', 'dsf_avoidable', or 'dsf_directional')"
             )
         self.dsf_config = DSFConfig.from_mapping(scenario_config.get('dsf'))
         self.avoidable_config = AvoidableConfig.from_mapping(scenario_config.get('avoidable'))
+        self.directional_config = DirectionalConfig.from_mapping(scenario_config.get('directional'))
         self.scene_map_dir = (
             scenario_config.get('scene_map_dir') or scenario_config['scenic_dir']
         )
@@ -373,6 +379,7 @@ class ScenicRunner:
         dsf_entries = []
         self._last_dsf_info = None
         self._last_avoidable_info = None
+        self._last_directional_info = None
         score_function = (
             get_route_scores
             if self.scenario_category in ['planning', 'scenic']
@@ -463,7 +470,22 @@ class ScenicRunner:
                 self.logger.print_eval_results()
                 self.logger.save_eval_results(log_name)
 
-                if select and self.selection_metric in ('dsf', 'dsf_avoidable'):
+                if select and self.selection_metric == 'dsf_directional':
+                    data_id = sampled_scenario_configs[0].data_id
+                    sequence = all_running_results.get(data_id)
+                    if sequence:
+                        params = dict(getattr(sampled_scenario_configs[0].scene, 'params', {}) or {})
+                        features = scene_direction(sequence, self.directional_config)
+                        dsf_entries.append({'data_id': data_id, 'features': features, 'params': params})
+                        if infos[0]['collision']:
+                            self.scenic.record_params()
+                        self.logger.log(
+                            f">> Directional DSF data_id={data_id}: "
+                            f"status={features.status} front={features.front_dsf:.4g} "
+                            f"ratio={features.front_ratio:.3g}", color='yellow')
+                    else:
+                        self.logger.log(f">> Directional DSF data_id={data_id}: missing record, skipped", color='red')
+                elif select and self.selection_metric in ('dsf', 'dsf_avoidable'):
                     data_id = sampled_scenario_configs[0].data_id
                     sequence = all_running_results.get(data_id)
                     if sequence:
@@ -541,7 +563,9 @@ class ScenicRunner:
             self.scene_map[log_name]['select_id'] = self.select_adv_scene(
                 self.logger.eval_records, score_function, data_loader.select_num
             )
-            if self.selection_metric == 'dsf_avoidable' and self._last_avoidable_info is not None:
+            if self.selection_metric == 'dsf_directional' and self._last_directional_info is not None:
+                self.scene_map[log_name]['directional_selection'] = self._last_directional_info
+            elif self.selection_metric == 'dsf_avoidable' and self._last_avoidable_info is not None:
                 info = self._last_avoidable_info
                 self.scene_map[log_name]['avoidable_selection'] = info
             elif self.selection_metric == 'dsf' and self._last_dsf_info is not None:
@@ -567,6 +591,14 @@ class ScenicRunner:
             self.scenic.destroy()
     
     def select_adv_scene(self, results, score_function, select_num):
+        if self.selection_metric == 'dsf_directional':
+            selected, info = select_directional(results, select_num, self.directional_config, score_function)
+            self._last_directional_info = info
+            self.logger.log(
+                f">> Directional DSF selection: source={info['source']} "
+                f"selected={info['selected']} status={info['status']} "
+                f"front={info['front_dsf']} ratio={info['front_ratio']}", color='yellow')
+            return selected
         if self.selection_metric == 'dsf_avoidable':
             selected, info = select_scene_ids_avoidable(
                 results, select_num, self.avoidable_config, self.dsf_config, score_function
