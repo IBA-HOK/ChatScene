@@ -1,0 +1,1062 @@
+{
+  "N": 5,
+  "meta": {
+    "1/1/r8": {
+      "available_avoidable": 1,
+      "margin": [
+        0.192,
+        0
+      ],
+      "reason": "avoidable_soft+noncollision",
+      "selected": [
+        13,
+        4
+      ],
+      "soft": [
+        0.381,
+        0.007
+      ],
+      "status": [
+        "avoidable",
+        "non_collision"
+      ]
+    },
+    "1/1/r9": {
+      "available_avoidable": 18,
+      "margin": [
+        0.303,
+        0.617,
+        0.08,
+        0.587,
+        0.317
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        5,
+        22,
+        42,
+        12,
+        49
+      ],
+      "soft": [
+        0.514,
+        0.397,
+        0.348,
+        0.309,
+        0.298
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "1/2/r8": {
+      "available_avoidable": 0,
+      "margin": [
+        0,
+        0
+      ],
+      "reason": "avoidable_soft+noncollision",
+      "selected": [
+        9,
+        2
+      ],
+      "soft": [
+        -0.008,
+        -0.009
+      ],
+      "status": [
+        "non_collision",
+        "non_collision"
+      ]
+    },
+    "1/2/r9": {
+      "available_avoidable": 4,
+      "margin": [
+        0.035,
+        0.09,
+        0.169,
+        0.005
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        10,
+        37,
+        32,
+        16
+      ],
+      "soft": [
+        1.161,
+        0.46,
+        0.207,
+        0.204
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "1/3/r8": {
+      "available_avoidable": 0,
+      "margin": [
+        0,
+        0
+      ],
+      "reason": "avoidable_soft+noncollision",
+      "selected": [
+        11,
+        1
+      ],
+      "soft": [
+        -0.009,
+        -0.01
+      ],
+      "status": [
+        "non_collision",
+        "non_collision"
+      ]
+    },
+    "1/3/r9": {
+      "available_avoidable": 1,
+      "margin": [
+        1.576,
+        0
+      ],
+      "reason": "avoidable_soft+noncollision",
+      "selected": [
+        49,
+        41
+      ],
+      "soft": [
+        0.113,
+        -0.003
+      ],
+      "status": [
+        "avoidable",
+        "non_collision"
+      ]
+    },
+    "1/4/r8": {
+      "available_avoidable": 0,
+      "margin": [
+        0,
+        0
+      ],
+      "reason": "avoidable_soft+noncollision",
+      "selected": [
+        1,
+        2
+      ],
+      "soft": [
+        -0.009,
+        -0.045
+      ],
+      "status": [
+        "non_collision",
+        "non_collision"
+      ]
+    },
+    "1/4/r9": {
+      "available_avoidable": 9,
+      "margin": [
+        0.498,
+        0.882,
+        0.837,
+        0.209,
+        0.486
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        44,
+        42,
+        10,
+        47,
+        48
+      ],
+      "soft": [
+        0.417,
+        0.167,
+        0.136,
+        0.136,
+        0.11
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "1/5/r8": {
+      "available_avoidable": 0,
+      "margin": [
+        0,
+        0
+      ],
+      "reason": "avoidable_soft+noncollision",
+      "selected": [
+        13,
+        5
+      ],
+      "soft": [
+        -0.008,
+        -0.008
+      ],
+      "status": [
+        "non_collision",
+        "non_collision"
+      ]
+    },
+    "1/5/r9": {
+      "available_avoidable": 5,
+      "margin": [
+        0.204,
+        0.508,
+        0.074,
+        0.29,
+        1.005
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        37,
+        32,
+        10,
+        30,
+        48
+      ],
+      "soft": [
+        0.696,
+        0.344,
+        0.251,
+        0.174,
+        0.098
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/1/r8": {
+      "available_avoidable": 8,
+      "margin": [
+        0.224,
+        0.79,
+        0.974,
+        0.615,
+        0.471
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        26,
+        7,
+        11,
+        42,
+        49
+      ],
+      "soft": [
+        0.094,
+        0.071,
+        0.04,
+        0.036,
+        0.034
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/1/r9": {
+      "available_avoidable": 9,
+      "margin": [
+        1.269,
+        1.196,
+        0.719,
+        0.825,
+        0.86
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        14,
+        21,
+        38,
+        7,
+        48
+      ],
+      "soft": [
+        0.076,
+        0.071,
+        0.064,
+        0.06,
+        0.053
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/2/r8": {
+      "available_avoidable": 19,
+      "margin": [
+        2.635,
+        2.591,
+        2.529,
+        2.511,
+        2.606
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        29,
+        46,
+        4,
+        25,
+        8
+      ],
+      "soft": [
+        0.06,
+        0.049,
+        0.046,
+        0.029,
+        0.027
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/2/r9": {
+      "available_avoidable": 9,
+      "margin": [
+        2.825,
+        2.582,
+        2.952,
+        2.835,
+        2.887
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        12,
+        8,
+        15,
+        44,
+        43
+      ],
+      "soft": [
+        0.016,
+        0.013,
+        0.011,
+        -0.017,
+        -0.033
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/3/r8": {
+      "available_avoidable": 13,
+      "margin": [
+        2.412,
+        0.332,
+        0.425,
+        0.284,
+        0.75
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        30,
+        0,
+        14,
+        21,
+        38
+      ],
+      "soft": [
+        0.204,
+        0.104,
+        0.095,
+        0.093,
+        0.082
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/3/r9": {
+      "available_avoidable": 12,
+      "margin": [
+        2.022,
+        0.296,
+        0.472,
+        0.488,
+        1.696
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        15,
+        45,
+        43,
+        19,
+        6
+      ],
+      "soft": [
+        0.09,
+        0.089,
+        0.062,
+        0.06,
+        0.057
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/4/r8": {
+      "available_avoidable": 15,
+      "margin": [
+        0.928,
+        1.24,
+        0.757,
+        1.008,
+        1.238
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        45,
+        5,
+        11,
+        3,
+        39
+      ],
+      "soft": [
+        0.097,
+        0.086,
+        0.084,
+        0.079,
+        0.076
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/4/r9": {
+      "available_avoidable": 14,
+      "margin": [
+        1.089,
+        0.641,
+        0.204,
+        1.585,
+        0.344
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        5,
+        8,
+        32,
+        7,
+        44
+      ],
+      "soft": [
+        0.065,
+        0.059,
+        0.056,
+        0.049,
+        0.038
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/5/r8": {
+      "available_avoidable": 14,
+      "margin": [
+        0.831,
+        0.846,
+        0.945,
+        0.862,
+        1.651
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        11,
+        13,
+        26,
+        17,
+        49
+      ],
+      "soft": [
+        0.153,
+        0.079,
+        0.07,
+        0.064,
+        0.06
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/5/r9": {
+      "available_avoidable": 20,
+      "margin": [
+        0.346,
+        0.285,
+        0.864,
+        0.819,
+        0.08
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        38,
+        1,
+        26,
+        17,
+        8
+      ],
+      "soft": [
+        0.126,
+        0.121,
+        0.07,
+        0.066,
+        0.064
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/1/r8": {
+      "available_avoidable": 4,
+      "margin": [
+        0.831,
+        1.082,
+        0.702,
+        0.5
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        12,
+        14,
+        25,
+        22
+      ],
+      "soft": [
+        0.178,
+        0.065,
+        0.042,
+        0.037
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/1/r9": {
+      "available_avoidable": 3,
+      "margin": [
+        0.276,
+        0.07,
+        0.779
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        24,
+        48,
+        45
+      ],
+      "soft": [
+        0.185,
+        0.075,
+        -0.019
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/2/r8": {
+      "available_avoidable": 11,
+      "margin": [
+        0.058,
+        0.614,
+        0.796,
+        0.706,
+        1.029
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        37,
+        38,
+        5,
+        11,
+        12
+      ],
+      "soft": [
+        0.195,
+        0.171,
+        0.166,
+        0.118,
+        0.075
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/2/r9": {
+      "available_avoidable": 16,
+      "margin": [
+        1.149,
+        0.134,
+        0.058,
+        2.041,
+        0.402
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        44,
+        47,
+        14,
+        41,
+        0
+      ],
+      "soft": [
+        0.255,
+        0.249,
+        0.235,
+        0.197,
+        0.169
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/3/r8": {
+      "available_avoidable": 15,
+      "margin": [
+        0.218,
+        0.163,
+        0.229,
+        0.72,
+        0.679
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        17,
+        19,
+        25,
+        36,
+        10
+      ],
+      "soft": [
+        0.187,
+        0.166,
+        0.162,
+        0.161,
+        0.093
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/3/r9": {
+      "available_avoidable": 22,
+      "margin": [
+        0.156,
+        0.357,
+        0.22,
+        0.11,
+        0.133
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        17,
+        32,
+        48,
+        30,
+        8
+      ],
+      "soft": [
+        0.124,
+        0.115,
+        0.115,
+        0.107,
+        0.097
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/4/r8": {
+      "available_avoidable": 10,
+      "margin": [
+        0.449,
+        0.473,
+        0.066,
+        0.842,
+        0.858
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        40,
+        0,
+        19,
+        41,
+        30
+      ],
+      "soft": [
+        0.193,
+        0.171,
+        0.158,
+        0.128,
+        0.116
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/4/r9": {
+      "available_avoidable": 6,
+      "margin": [
+        0.118,
+        0.002,
+        0.202,
+        0.731,
+        0.26
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        14,
+        15,
+        21,
+        30,
+        22
+      ],
+      "soft": [
+        0.135,
+        0.135,
+        0.129,
+        0.115,
+        0.111
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/5/r8": {
+      "available_avoidable": 4,
+      "margin": [
+        0.299,
+        1.096,
+        1.093,
+        1.23
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        9,
+        36,
+        2,
+        4
+      ],
+      "soft": [
+        0.198,
+        0.061,
+        0.054,
+        0.04
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/5/r9": {
+      "available_avoidable": 5,
+      "margin": [
+        0.85,
+        0.624,
+        0.694,
+        0.522,
+        0.903
+      ],
+      "reason": "avoidable_soft",
+      "selected": [
+        35,
+        26,
+        30,
+        16,
+        24
+      ],
+      "soft": [
+        0.173,
+        0.166,
+        0.158,
+        0.074,
+        0.042
+      ],
+      "status": [
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable",
+        "avoidable"
+      ]
+    }
+  },
+  "selected": {
+    "1/1/r8": [
+      13,
+      4
+    ],
+    "1/1/r9": [
+      5,
+      22,
+      42,
+      12,
+      49
+    ],
+    "1/2/r8": [
+      9,
+      2
+    ],
+    "1/2/r9": [
+      10,
+      37,
+      32,
+      16
+    ],
+    "1/3/r8": [
+      11,
+      1
+    ],
+    "1/3/r9": [
+      49,
+      41
+    ],
+    "1/4/r8": [
+      1,
+      2
+    ],
+    "1/4/r9": [
+      44,
+      42,
+      10,
+      47,
+      48
+    ],
+    "1/5/r8": [
+      13,
+      5
+    ],
+    "1/5/r9": [
+      37,
+      32,
+      10,
+      30,
+      48
+    ],
+    "3/1/r8": [
+      26,
+      7,
+      11,
+      42,
+      49
+    ],
+    "3/1/r9": [
+      14,
+      21,
+      38,
+      7,
+      48
+    ],
+    "3/2/r8": [
+      29,
+      46,
+      4,
+      25,
+      8
+    ],
+    "3/2/r9": [
+      12,
+      8,
+      15,
+      44,
+      43
+    ],
+    "3/3/r8": [
+      30,
+      0,
+      14,
+      21,
+      38
+    ],
+    "3/3/r9": [
+      15,
+      45,
+      43,
+      19,
+      6
+    ],
+    "3/4/r8": [
+      45,
+      5,
+      11,
+      3,
+      39
+    ],
+    "3/4/r9": [
+      5,
+      8,
+      32,
+      7,
+      44
+    ],
+    "3/5/r8": [
+      11,
+      13,
+      26,
+      17,
+      49
+    ],
+    "3/5/r9": [
+      38,
+      1,
+      26,
+      17,
+      8
+    ],
+    "5/1/r8": [
+      12,
+      14,
+      25,
+      22
+    ],
+    "5/1/r9": [
+      24,
+      48,
+      45
+    ],
+    "5/2/r8": [
+      37,
+      38,
+      5,
+      11,
+      12
+    ],
+    "5/2/r9": [
+      44,
+      47,
+      14,
+      41,
+      0
+    ],
+    "5/3/r8": [
+      17,
+      19,
+      25,
+      36,
+      10
+    ],
+    "5/3/r9": [
+      17,
+      32,
+      48,
+      30,
+      8
+    ],
+    "5/4/r8": [
+      40,
+      0,
+      19,
+      41,
+      30
+    ],
+    "5/4/r9": [
+      14,
+      15,
+      21,
+      30,
+      22
+    ],
+    "5/5/r8": [
+      9,
+      36,
+      2,
+      4
+    ],
+    "5/5/r9": [
+      35,
+      26,
+      30,
+      16,
+      24
+    ]
+  }
+}

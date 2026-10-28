@@ -1,0 +1,642 @@
+{
+  "avoidability_l1_pass": {
+    "below_0_25": 2,
+    "below_0_50": 8,
+    "max": 1.0,
+    "mean": 0.9873731685329854,
+    "min": 0.15000000223517418,
+    "n": 887,
+    "p10": 1.0,
+    "p25": 1.0,
+    "p50": 1.0,
+    "p75": 1.0,
+    "p90": 1.0
+  },
+  "by_group": {
+    "1/1/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 43,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 43,
+      "l1_pass": 43,
+      "low_avoidability": 0
+    },
+    "1/1/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.9969696978276427,
+        "min": 0.9500000141561031,
+        "n": 33,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 33,
+      "l1_pass": 33,
+      "low_avoidability": 0
+    },
+    "1/2/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 42,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 42,
+      "l1_pass": 42,
+      "low_avoidability": 0
+    },
+    "1/2/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.9750000033527613,
+        "min": 0.9000000134110451,
+        "n": 8,
+        "p10": 0.9000000134110451,
+        "p25": 0.9750000033527613,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 40,
+      "l1_pass": 8,
+      "low_avoidability": 0
+    },
+    "1/3/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 31,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 31,
+      "l1_pass": 31,
+      "low_avoidability": 0
+    },
+    "1/3/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.9250000063329935,
+        "min": 0.850000012665987,
+        "n": 2,
+        "p10": 0.8650000113993883,
+        "p25": 0.8875000094994903,
+        "p50": 0.9250000063329935,
+        "p75": 0.9625000031664968,
+        "p90": 0.9850000012665987
+      },
+      "collisions": 2,
+      "l1_pass": 2,
+      "low_avoidability": 0
+    },
+    "1/4/r8": {
+      "avoidability": {
+        "n": 0
+      },
+      "collisions": 46,
+      "l1_pass": 0,
+      "low_avoidability": 0
+    },
+    "1/4/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.950000006028197,
+        "min": 0.800000011920929,
+        "n": 11,
+        "p10": 0.800000011920929,
+        "p25": 0.9500000141561031,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 42,
+      "l1_pass": 11,
+      "low_avoidability": 0
+    },
+    "1/5/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 32,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 32,
+      "l1_pass": 32,
+      "low_avoidability": 0
+    },
+    "1/5/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.9777777791023254,
+        "min": 0.800000011920929,
+        "n": 9,
+        "p10": 0.9600000023841858,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 40,
+      "l1_pass": 9,
+      "low_avoidability": 0
+    },
+    "3/1/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.9972222230086724,
+        "min": 0.9500000141561031,
+        "n": 18,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 18,
+      "l1_pass": 18,
+      "low_avoidability": 0
+    },
+    "3/1/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 21,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 22,
+      "l1_pass": 21,
+      "low_avoidability": 0
+    },
+    "3/2/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 50,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 50,
+      "l1_pass": 50,
+      "low_avoidability": 0
+    },
+    "3/2/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 26,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 30,
+      "l1_pass": 26,
+      "low_avoidability": 0
+    },
+    "3/3/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.9833333345041388,
+        "min": 0.800000011920929,
+        "n": 21,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 23,
+      "l1_pass": 21,
+      "low_avoidability": 0
+    },
+    "3/3/r9": {
+      "avoidability": {
+        "below_0_25": 1,
+        "below_0_50": 2,
+        "max": 1.0,
+        "mean": 0.8976190489317689,
+        "min": 0.20000000298023224,
+        "n": 21,
+        "p10": 0.6000000089406967,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 21,
+      "l1_pass": 21,
+      "low_avoidability": 2
+    },
+    "3/4/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 1,
+        "max": 1.0,
+        "mean": 0.971428572599377,
+        "min": 0.45000000670552254,
+        "n": 28,
+        "p10": 0.985000004246831,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 29,
+      "l1_pass": 28,
+      "low_avoidability": 1
+    },
+    "3/4/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 1,
+        "max": 1.0,
+        "mean": 0.9480769251688168,
+        "min": 0.30000000447034836,
+        "n": 26,
+        "p10": 0.9250000137835741,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 29,
+      "l1_pass": 26,
+      "low_avoidability": 1
+    },
+    "3/5/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 3,
+        "max": 1.0,
+        "mean": 0.8907407429759149,
+        "min": 0.2500000037252903,
+        "n": 27,
+        "p10": 0.4600000068545341,
+        "p25": 0.9750000070780516,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 27,
+      "l1_pass": 27,
+      "low_avoidability": 3
+    },
+    "3/5/r9": {
+      "avoidability": {
+        "below_0_25": 1,
+        "below_0_50": 1,
+        "max": 1.0,
+        "mean": 0.9357142874172756,
+        "min": 0.15000000223517418,
+        "n": 28,
+        "p10": 0.7700000114738941,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 30,
+      "l1_pass": 28,
+      "low_avoidability": 1
+    },
+    "5/1/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 48,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 48,
+      "l1_pass": 48,
+      "low_avoidability": 0
+    },
+    "5/1/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 48,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 48,
+      "l1_pass": 48,
+      "low_avoidability": 0
+    },
+    "5/2/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 20,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 20,
+      "l1_pass": 20,
+      "low_avoidability": 0
+    },
+    "5/2/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 39,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 39,
+      "l1_pass": 39,
+      "low_avoidability": 0
+    },
+    "5/3/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.9894736856222153,
+        "min": 0.850000012665987,
+        "n": 38,
+        "p10": 0.985000004246831,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 38,
+      "l1_pass": 38,
+      "low_avoidability": 0
+    },
+    "5/3/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.9967391310340684,
+        "min": 0.9000000134110451,
+        "n": 46,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 46,
+      "l1_pass": 46,
+      "low_avoidability": 0
+    },
+    "5/4/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 36,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 36,
+      "l1_pass": 36,
+      "low_avoidability": 0
+    },
+    "5/4/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 38,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 38,
+      "l1_pass": 38,
+      "low_avoidability": 0
+    },
+    "5/5/r8": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 50,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 50,
+      "l1_pass": 50,
+      "low_avoidability": 0
+    },
+    "5/5/r9": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 1.0,
+        "min": 1.0,
+        "n": 47,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 47,
+      "l1_pass": 47,
+      "low_avoidability": 0
+    }
+  },
+  "by_scenario": {
+    "1": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.9943127969006227,
+        "min": 0.800000011920929,
+        "n": 211,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 351,
+      "l1_pass": 211,
+      "reasons": {
+        "collision_actor_not_near": 140
+      }
+    },
+    "3": {
+      "avoidability": {
+        "below_0_25": 2,
+        "below_0_50": 8,
+        "max": 1.0,
+        "mean": 0.9644736851936668,
+        "min": 0.15000000223517418,
+        "n": 266,
+        "p10": 0.9750000070780516,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 279,
+      "l1_pass": 266,
+      "reasons": {
+        "collision_actor_not_near": 6,
+        "collision_after_timeout": 7
+      }
+    },
+    "5": {
+      "avoidability": {
+        "below_0_25": 0,
+        "below_0_50": 0,
+        "max": 1.0,
+        "mean": 0.9986585367834423,
+        "min": 0.850000012665987,
+        "n": 410,
+        "p10": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0,
+        "p90": 1.0
+      },
+      "collisions": 410,
+      "l1_pass": 410,
+      "reasons": {}
+    }
+  },
+  "collisions": 1040,
+  "config": {
+    "collision_actor_distance_m": 5.0,
+    "conflict_distance_m": 5.0,
+    "conflict_horizon_s": 3.0,
+    "drac_ceiling_mps2": 10.0,
+    "drac_good_mps2": 4.0,
+    "initial_overlap_m": 2.0,
+    "max_decel_mps2": 8.0,
+    "min_sim_time_s": 0.5,
+    "route_complete_threshold": 99.9,
+    "teleport_distance_m": 10.0,
+    "timeout_s": 15.0,
+    "ttc_floor_s": 0.5,
+    "ttc_good_s": 2.0,
+    "warning_good_s": 2.0
+  },
+  "files": 30,
+  "groups": {
+    "below_select_num": [
+      "1/4/r8"
+    ],
+    "select_num": 2,
+    "total": 30,
+    "with_at_least_select_num": 29
+  },
+  "l1_pass": 887,
+  "l1_reasons": {
+    "collision_actor_not_near": 146,
+    "collision_after_timeout": 7
+  },
+  "l1_reject": 153,
+  "no_collision": 460,
+  "scenes": 1500
+}

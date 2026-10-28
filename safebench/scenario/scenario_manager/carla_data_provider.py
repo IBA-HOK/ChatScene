@@ -722,9 +722,14 @@ class CarlaDataProvider(object):
             Remove an actor from the pool using its ID
         """
         if actor_id in CarlaDataProvider._carla_actor_pool:
-            CarlaDataProvider._carla_actor_pool[actor_id].destroy()
-            CarlaDataProvider._carla_actor_pool[actor_id] = None
-            CarlaDataProvider._carla_actor_pool.pop(actor_id)
+            try:
+                CarlaDataProvider._carla_actor_pool[actor_id].destroy()
+            except (RuntimeError, AttributeError, KeyError):
+                pass
+            try:
+                CarlaDataProvider._carla_actor_pool.pop(actor_id, None)
+            except (RuntimeError, AttributeError, KeyError):
+                pass
         else:
             print("Trying to remove a non-existing actor id {}".format(actor_id))
 
@@ -733,10 +738,22 @@ class CarlaDataProvider(object):
         """
             Remove all actors from the pool that are closer than distance to the provided location
         """
-        for actor_id in CarlaDataProvider._carla_actor_pool.copy():
-            if CarlaDataProvider._carla_actor_pool[actor_id].get_location().distance(location) < distance:
-                CarlaDataProvider._carla_actor_pool[actor_id].destroy()
-                CarlaDataProvider._carla_actor_pool.pop(actor_id)
+        for actor_id in list(CarlaDataProvider._carla_actor_pool.copy().keys()):
+            try:
+                if CarlaDataProvider._carla_actor_pool[actor_id].get_location().distance(location) < distance:
+                    try:
+                        CarlaDataProvider._carla_actor_pool[actor_id].destroy()
+                    except (RuntimeError, AttributeError, KeyError):
+                        pass
+                    try:
+                        CarlaDataProvider._carla_actor_pool.pop(actor_id, None)
+                    except (RuntimeError, AttributeError, KeyError):
+                        pass
+            except (RuntimeError, AttributeError, KeyError):
+                try:
+                    CarlaDataProvider._carla_actor_pool.pop(actor_id, None)
+                except (RuntimeError, AttributeError, KeyError):
+                    pass
 
         # Remove all keys with None values
         CarlaDataProvider._carla_actor_pool = dict({k: v for k, v in CarlaDataProvider._carla_actor_pool.items() if v})
@@ -764,22 +781,35 @@ class CarlaDataProvider(object):
         """
             Cleanup and remove all entries from all dictionaries
         """
-        DestroyActor = carla.command.DestroyActor       # pylint: disable=invalid-name
+        try:
+            DestroyActor = carla.command.DestroyActor       # pylint: disable=invalid-name
+        except (AttributeError, KeyError):
+            DestroyActor = None  # type: ignore
         batch = []
 
-        for actor_id in CarlaDataProvider._carla_actor_pool.copy():
-            actor = CarlaDataProvider._carla_actor_pool[actor_id]
-            if actor is not None and actor.is_alive:
-                batch.append(DestroyActor(actor))
+        for actor_id in list(CarlaDataProvider._carla_actor_pool.copy().keys()):
+            try:
+                actor = CarlaDataProvider._carla_actor_pool[actor_id]
+            except KeyError:
+                continue
+            try:
+                if actor is not None and getattr(actor, "is_alive", False):
+                    if DestroyActor is not None:
+                        try:
+                            batch.append(DestroyActor(actor))
+                        except (RuntimeError, AttributeError, KeyError):
+                            pass
+            except (RuntimeError, AttributeError, KeyError):
+                pass
 
         if CarlaDataProvider._client:
             try:
                 CarlaDataProvider._client.apply_batch_sync(batch)
-            except RuntimeError as e:
-                if "time-out" in str(e):
+            except (RuntimeError, AttributeError, KeyError) as e:
+                if isinstance(e, RuntimeError) and "time-out" in str(e):
                     pass
                 else:
-                    raise e
+                    pass
 
         CarlaDataProvider._actor_velocity_map.clear()
         CarlaDataProvider._actor_location_map.clear()

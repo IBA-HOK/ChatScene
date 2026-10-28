@@ -66,7 +66,7 @@ def is_json_serializable(v):
     try:
         json.dumps(v)
         return True
-    except:
+    except (TypeError, ValueError, OverflowError):
         return False
 
 
@@ -230,21 +230,60 @@ class Logger:
 #         self.log(f'>> Saving evaluation records to {self.record_file}, length: {len(self.eval_records)}')
 #         joblib.dump(self.eval_records, self.record_file)
 
+    def _atomic_joblib_dump(self, obj, target_path):
+        """Atomic tmp+fsync+rename write via joblib."""
+        tmp_path = target_path + '.tmp'
+        os.makedirs(os.path.dirname(target_path), exist_ok=True)
+        joblib.dump(obj, tmp_path)
+        # fsync tmp file to disk
+        try:
+            with open(tmp_path, 'rb') as f:
+                os.fsync(f.fileno())
+        except Exception:
+            pass
+        os.rename(tmp_path, target_path)
+        # fsync directory entry
+        try:
+            dir_fd = os.open(os.path.dirname(target_path), os.O_DIRECTORY)
+            try:
+                os.fsync(dir_fd)
+            finally:
+                os.close(dir_fd)
+        except Exception:
+            pass
+
     def save_eval_results(self, name = None):
-        if name == None:
+        if name is None:
             self.log(f'>> Saving evaluation results to {self.result_file}')
-            joblib.dump(self.eval_results, self.result_file)
+            self._atomic_joblib_dump(self.eval_results, self.result_file)
             self.log(f'>> Saving evaluation records to {self.record_file}, length: {len(self.eval_records)}')
-            joblib.dump(self.eval_records, self.record_file)
+            self._atomic_joblib_dump(self.eval_records, self.record_file)
         else:
             result_dir = os.path.join(self.output_dir, 'eval_results')
             os.makedirs(result_dir, exist_ok=True)
             self.result_file = os.path.join(result_dir, name + '_results.pkl')
             self.record_file = os.path.join(result_dir, name + '_records.pkl')
             self.log(f'>> Saving evaluation results to {self.result_file}')
-            joblib.dump(self.eval_results, self.result_file)
+            self._atomic_joblib_dump(self.eval_results, self.result_file)
             self.log(f'>> Saving evaluation records to {self.record_file}')
-            joblib.dump(self.eval_records, self.record_file)
+            self._atomic_joblib_dump(self.eval_records, self.record_file)
+
+    def _rename_fossil(self, path):
+        """Rename fossil file to *.fossil.pkl instead of deleting."""
+        try:
+            if osp.exists(path):
+                if path.endswith('.pkl'):
+                    fossil_path = path[:-4] + '.fossil.pkl'
+                else:
+                    fossil_path = path + '.fossil.pkl'
+                if not osp.exists(fossil_path):
+                    os.rename(path, fossil_path)
+                else:
+                    # avoid collision: append timestamp
+                    fossil_path = fossil_path + f".{int(time.time())}"
+                    os.rename(path, fossil_path)
+        except (OSError, IOError):
+            pass
 
     def check_eval_dir(self, name):
         result_dir = os.path.join(self.output_dir, 'eval_results')
@@ -253,8 +292,76 @@ class Logger:
         self.record_file = os.path.join(result_dir, name + '_records.pkl')
         try:
             return len(joblib.load(self.record_file))
-        except:
+        except FileNotFoundError:
             return 0
+        except Exception:
+            return 0
+
+    def is_eval_complete(self, log_name, select_num, scene_entry=None):
+        """Check if eval already complete with valid pinned records.
+
+        Skip requires entry.get('pinned') + len(records)==select_num.
+        Fossils (count mismatch or corrupted) are renamed to *.fossil.pkl
+        not deleted, logged yellow, and return False to force re-eval.
+        Mirrors train path `if 'select_id' in entry and entry.get('pinned')`.
+        """
+        result_dir = os.path.join(self.output_dir, 'eval_results')
+        os.makedirs(result_dir, exist_ok=True)
+        self.result_file = os.path.join(result_dir, log_name + '_results.pkl')
+        self.record_file = os.path.join(result_dir, log_name + '_records.pkl')
+        # pinned validity: if scene_entry supplied, require select_id + pinned
+        if scene_entry is not None:
+            if not ('select_id' in scene_entry and scene_entry.get('pinned')):
+                # missing pinned => not complete; if records exist, they are fossil
+                try:
+                    cnt = len(joblib.load(self.record_file))
+                except FileNotFoundError:
+                    return False
+                except Exception:
+                    self.log(f">> fossil detection: {log_name} corrupted records without valid pinned, renaming to fossil.", 'yellow')
+                    self._rename_fossil(self.record_file)
+                    self._rename_fossil(self.result_file)
+                    return False
+                if cnt != 0:
+                    self.log(f">> fossil detection: {log_name} has {cnt} records but missing pinned, renaming to fossil.", 'yellow')
+                    self._rename_fossil(self.record_file)
+                    self._rename_fossil(self.result_file)
+                return False
+            # also validate pinned JSON is non-empty dict with OPT entries
+            pinned = scene_entry.get('pinned')
+            try:
+                if not isinstance(pinned, dict) or len(pinned) == 0:
+                    raise ValueError("empty pinned")
+                # ensure at least one entry has OPT data
+                has_opt = any(isinstance(v, dict) and any(k.startswith('OPT') for k in v.keys()) for v in pinned.values())
+                if not has_opt:
+                    # still consider valid if any pinned values present
+                    pass
+            except (ValueError, AttributeError, TypeError):
+                self.log(f">> fossil detection: {log_name} has invalid pinned JSON, renaming to fossil.", 'yellow')
+                try:
+                    self._rename_fossil(self.record_file)
+                    self._rename_fossil(self.result_file)
+                except (OSError, IOError):
+                    pass
+                return False
+        try:
+            records = joblib.load(self.record_file)
+            count = len(records)
+        except FileNotFoundError:
+            return False
+        except Exception:
+            self.log(f">> fossil detection: {log_name} corrupted records, renaming to fossil.", 'yellow')
+            self._rename_fossil(self.record_file)
+            self._rename_fossil(self.result_file)
+            return False
+        if count == select_num:
+            return True
+        if count != 0:
+            self.log(f">> fossil detection: {log_name} has {count} records but select_num={select_num}, renaming to fossil.", 'yellow')
+            self._rename_fossil(self.record_file)
+            self._rename_fossil(self.result_file)
+        return False
         
     def clear(self):
         self.eval_results = {}
@@ -315,7 +422,7 @@ class Logger:
         fname = 'vars.pkl' if itr is None else 'vars%d.pkl' % itr
         try:
             joblib.dump(state_dict, osp.join(self.output_dir, fname))
-        except:
+        except Exception:
             self.log('Warning: could not pickle state_dict.', color='red')
 
     def dump_tabular(self, x_axis="Epoch", verbose=True, env=None):

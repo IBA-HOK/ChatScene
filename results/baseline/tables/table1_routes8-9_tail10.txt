@@ -1,0 +1,10 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+# Table1-style (ego=sac-pretrain, root=log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic)
+# scenario | n_scenes | routes | CR(↑) | OS(final,↓) | ADE(↑, proxy)
+       1 |       20 | [8, 9] | 1.000 | 0.436 | 2.392
+       3 |       20 | [8, 9] | 0.700 | 0.584 | 6.687
+       5 |       20 | [8, 9] | 0.850 | 0.531 | 3.876
+avg      | | | 0.850 | 0.517 |
+

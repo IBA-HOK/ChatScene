@@ -103,17 +103,23 @@ def scenic_parse(config, logger):
     """
     mode = config['mode']
     scenic_dir = config['scenic_dir']
-    
+    scene_map_dir = config.get('scene_map_dir') or scenic_dir
+
     route_file_formatter = osp.join(config['route_dir'], 'scenic_route.pickle')
     with open(route_file_formatter, 'rb') as f:
         data_full = pickle.load(f)
         
     scenic_rel_listdir = []
     scenic_abs_listdir = []
-    if config['scenario_id'] is None:
-        search_scenarios = [i for i in range(1, 9)]
-    else:
+    requested = config.get('scenario_ids')
+    if config['scenario_id'] is not None:
         search_scenarios = [config['scenario_id']]
+    elif requested:
+        if isinstance(requested, str):
+            requested = requested.replace(',', ' ').split()
+        search_scenarios = [int(i) for i in requested]
+    else:
+        search_scenarios = [i for i in range(1, 9)]
         
     scenario_ids = []
     for j in search_scenarios:
@@ -126,12 +132,6 @@ def scenic_parse(config, logger):
     behaviors = [path.split('.')[0] for path in scenic_rel_listdir]
     assert len(scenic_rel_listdir) > 0, 'no scenic file in this dir'
     
-    try:
-        params_dir = open(osp.join(scenic_dir, f"scenario_{config['scenario_id']}.json"))
-        params = json.load(params_dir)
-    except:
-        params = {}
-
     config_list = []
     for i, scenic_file in enumerate(scenic_abs_listdir):
         parsed_config = ScenarioConfig()
@@ -143,11 +143,15 @@ def scenic_parse(config, logger):
         parsed_config.scenario_generation_method = config['method']
         parsed_config.scenario_id = scenario_ids[i]
         
-        current_scenic_dir = osp.join(scenic_dir, f'scenario_{scenario_ids[i]}')
+        current_scene_map_dir = osp.join(
+            scene_map_dir, f'scenario_{scenario_ids[i]}'
+        )
         try:
-            params_dir = open(osp.join(current_scenic_dir, f"scenario_{scenario_ids[i]}.json"))
-            params = json.load(params_dir)
-        except:
+            with open(osp.join(
+                current_scene_map_dir, f"scenario_{scenario_ids[i]}.json"
+            )) as params_dir:
+                params = json.load(params_dir)
+        except Exception:
             params = {}
         
         parsed_config.sample_num = config['sample_num']

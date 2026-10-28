@@ -9,3 +9,5 @@
 __pycache__/
 .env
 carla/
+*.scenic_bytes
+/tmp/chatscene_scene_bytes/

@@ -1,0 +1,5 @@
+scenario,baseline_CR,dsf_CR,baseline_OS,dsf_OS,baseline_ADE_eval_proxy,dsf_ADE_eval_proxy,baseline_ADE_tail10,dsf_ADE_tail10
+1,1.000,0.000,0.436,0.872,2.628,5.079,2.392,3.165
+3,0.700,0.350,0.584,0.770,12.687,16.498,6.687,12.825
+5,0.850,0.600,0.531,0.661,4.456,5.516,3.876,4.214
+avg,0.850,0.317,0.517,0.768,,,,

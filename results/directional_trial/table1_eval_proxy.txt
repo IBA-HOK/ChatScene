@@ -1,0 +1,7 @@
+# Table1-style (ego=sac-pretrain, root=log/adv_train/eval/sac/adv_scenic_epoch0/eval_scenic_directional)
+# scenario | n_scenes | routes | CR(↑) | OS(final,↓) | ADE(↑, proxy)
+       1 |       20 | [8, 9] | 0.750 | 0.531 | 3.538
+       3 |       20 | [8, 9] | 0.600 | 0.638 | 16.602
+       5 |       20 | [8, 9] | 0.900 | 0.505 | 4.364
+avg      | | | 0.750 | 0.558 |
+

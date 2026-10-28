@@ -11,6 +11,7 @@ import setGPU
 import traceback
 import os
 import os.path as osp
+import sys
 
 import torch 
 from safebench.util.run_util import load_config
@@ -44,6 +45,8 @@ if __name__ == '__main__':
     parser.add_argument('--tm_port', type=int, default=8002, help='traffic manager port')
     parser.add_argument('--fixed_delta_seconds', type=float, default=0.1)
     parser.add_argument('--scenario_id', type=int, default=None)
+    parser.add_argument('--run_tag', type=str, default='',
+                        help='optional suffix for the output tree (e.g. dsf)')
     args = parser.parse_args()
     args_dict = vars(args)
 
@@ -74,17 +77,27 @@ if __name__ == '__main__':
                 
             # main entry with a selected mode
             agent_config.update(args_dict)
-            args_dict['output_dir'] = osp.join('log', 'adv_train', args.mode, agent_config['policy_name'], f"{agent_cfg.split('.')[0]}", f"scenario_{scenario_config['scenario_id']}")
+            output_group = agent_cfg.split('.')[0]
+            if args.run_tag:
+                output_group = f"{output_group}_{args.run_tag}"
+            args_dict['output_dir'] = osp.join('log', 'adv_train', args.mode, agent_config['policy_name'], output_group, f"scenario_{scenario_config['scenario_id']}")
             scenario_config.update(args_dict)
-            if scenario_config['policy_type'] == 'scenic':
-                from safebench.scenic_runner import ScenicRunner
-                scenario_config['num_scenario'] = 1 ### 'the num_scenario can only be one for scenic'
-                runner = ScenicRunner(agent_config, scenario_config)
-            else:
-                runner = CarlaRunner(agent_config, scenario_config)
+            # fenced CARLA/storage calls abort with TimeoutError: exit 42/43 so
+            # the batch retries this step (43 keeps the warm server)
+            try:
+                if scenario_config['policy_type'] == 'scenic':
+                    from safebench.scenic_runner import ScenicRunner
+                    scenario_config['num_scenario'] = 1 ### 'the num_scenario can only be one for scenic'
+                    runner = ScenicRunner(agent_config, scenario_config)
+                else:
+                    runner = CarlaRunner(agent_config, scenario_config)
 
-            # start running
-            runner.run()
+                # start running
+                runner.run()
+            except TimeoutError as e:
+                code = getattr(e, 'fence_code', 43)
+                print(f">> {e}; aborting worker for batch retry (exit {code}).", flush=True)
+                sys.exit(code)
 
     for err in err_list:
         print(err[0], err[1], 'failed!')

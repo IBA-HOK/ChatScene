@@ -1,0 +1,32 @@
+policy_type: 'scenic'
+scenario_category: 'scenic'
+
+route_dir: 'safebench/scenario/scenario_data/route'
+scenic_dir: 'safebench/scenario/scenario_data/scenic_data/'
+scene_map_dir: 'safebench/scenario/scenario_data/scenic_data_softfuture/'
+sample_num: 50
+opt_step: 10
+select_num: 2
+
+method: 'scenic'
+scenario_id: null
+scenario_ids: [1, 3, 5]
+route_id: [8, 9]
+
+selection_metric: 'dsf'
+dsf:
+  top_k_percent: 10.0
+  speed_unit: 'kmh'
+  eval_point: 'midpoint'
+  ttc_min_s: 1.0
+  drac_max_mps2: 4.0
+  require_no_collision: true
+  fill_from_all_feasible: true
+  param_update: false
+  drac_gap_offset_m: 0.0
+  min_adv_count: 1
+  eps: 0.001
+
+ego_action_dim: 2
+ego_state_dim: 4
+ego_action_limit: 1.0

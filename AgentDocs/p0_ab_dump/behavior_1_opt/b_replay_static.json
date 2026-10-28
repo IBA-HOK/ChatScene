@@ -1,0 +1,178 @@
+{
+  "data_id": 0,
+  "behavior": "CrossingBehavior",
+  "scenic_file": "/home/hokuto/chatScene_Strata/ChatScene/safebench/scenario/scenario_data/scenic_data/scenario_1/behavior_1_opt.scenic",
+  "egoTrajectoryPts": [
+    [
+      -4.25592525068234,
+      -9.449370311337344,
+      0.0
+    ],
+    [
+      2.0875023542912667,
+      -5.2699567189464265,
+      0.0
+    ],
+    [
+      11.445593884085968,
+      -6.865851520434763,
+      0.0
+    ],
+    [
+      -0.2600688703701106,
+      3.20629301718117,
+      0.0
+    ],
+    [
+      15.143911769004589,
+      0.150537789059892,
+      0.0
+    ]
+  ],
+  "AdvAgent.position": [
+    3.1907631333820974,
+    31.709040419805593,
+    0.0
+  ],
+  "OPT_params": {
+    "OPT_GEO_X_DISTANCE": 2.9050950435470115,
+    "OPT_GEO_Y_DISTANCE": 42.29715772840402,
+    "OPT_ADV_SPEED": 2.1920461572044676,
+    "OPT_ADV_DISTANCE": 10.851977667464118,
+    "OPT_STOP_DISTANCE": 0.9779895119966027
+  },
+  "rng": {
+    "capture_pre": {
+      "label": "capture_pre",
+      "random_state_head": [
+        2147483648,
+        2261207994,
+        869397079,
+        3419597362,
+        2889296379
+      ],
+      "numpy_state_head": [
+        7,
+        4097098180,
+        3572822661,
+        1142383841,
+        2757143652
+      ],
+      "numpy_state_pos": 624,
+      "random_version": 3
+    },
+    "capture_mid_seed": {
+      "label": "capture_mid_only_random_seed",
+      "random_state_head": [
+        2147483648,
+        2261207994,
+        869397079,
+        3419597362,
+        2889296379
+      ],
+      "numpy_state_head": [
+        7,
+        4097098180,
+        3572822661,
+        1142383841,
+        2757143652
+      ],
+      "numpy_state_pos": 624,
+      "random_version": 3
+    },
+    "capture_post": {
+      "label": "capture_post",
+      "random_state_head": [
+        2209797851,
+        1310782419,
+        3119086015,
+        1729616049,
+        3847713558
+      ],
+      "numpy_state_head": [
+        2022286329,
+        1444425037,
+        2858264774,
+        1581888170,
+        958328592
+      ],
+      "numpy_state_pos": 34,
+      "random_version": 3
+    },
+    "replay_pre": {
+      "label": "replay_pre_idx_seed_only_random",
+      "random_state_head": [
+        2147483648,
+        766982754,
+        497961170,
+        3952298588,
+        2331775348
+      ],
+      "numpy_state_head": [
+        2022286329,
+        1444425037,
+        2858264774,
+        1581888170,
+        958328592
+      ],
+      "numpy_state_pos": 34,
+      "random_version": 3
+    },
+    "replay_post": {
+      "label": "replay_post",
+      "random_state_head": [
+        1372342863,
+        3221959423,
+        4180954279,
+        3990540705,
+        1021773023
+      ],
+      "numpy_state_head": [
+        2022286329,
+        1444425037,
+        2858264774,
+        1581888170,
+        958328592
+      ],
+      "numpy_state_pos": 68,
+      "random_version": 3
+    }
+  },
+  "sampler": {
+    "capture_pre": {
+      "externalSampler": {
+        "counter": 0,
+        "log_len": 0
+      },
+      "scenario.resetExternalSampler": "available",
+      "scenic.resetExternalSampler": "available",
+      "reset_called": false,
+      "scenario_reset_available": true
+    },
+    "capture_post": {
+      "externalSampler": {
+        "counter": 1,
+        "log_len": 1
+      },
+      "scenario.resetExternalSampler": "available",
+      "scenic.resetExternalSampler": "available"
+    },
+    "replay_pre": {
+      "externalSampler": {
+        "counter": 1,
+        "log_len": 1
+      },
+      "scenario.resetExternalSampler": "available",
+      "scenic.resetExternalSampler": "available",
+      "reset_called": false
+    },
+    "replay_post": {
+      "externalSampler": {
+        "counter": 2,
+        "log_len": 2
+      },
+      "scenario.resetExternalSampler": "available",
+      "scenic.resetExternalSampler": "available"
+    }
+  }
+}

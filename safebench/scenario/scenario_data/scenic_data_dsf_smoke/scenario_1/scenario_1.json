@@ -1,0 +1,571 @@
+{
+    "OPT_behavior_1_opt_ROUTE-8": {
+        "opt_time_0": {
+            "OPT_GEO_X_DISTANCE": {
+                "low": 2.0,
+                "high": 8.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 15.0,
+                "high": 50.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 0.0,
+                "high": 5.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 15.0
+            },
+            "OPT_STOP_DISTANCE": {
+                "low": 0.0,
+                "high": 1.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_GEO_X_DISTANCE": {
+                "low": 2.0,
+                "high": 8.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 15.0,
+                "high": 50.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 0.0,
+                "high": 5.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 15.0
+            },
+            "OPT_STOP_DISTANCE": {
+                "low": 0.0,
+                "high": 1.0
+            }
+        },
+        "select_id": [
+            0
+        ],
+        "dsf_selection": {
+            "config": {
+                "top_k_percent": 10.0,
+                "speed_unit": "kmh",
+                "eval_point": "midpoint",
+                "ttc_min_s": 1.0,
+                "drac_max_mps2": 4.0,
+                "require_no_collision": true,
+                "fill_from_all_feasible": true,
+                "param_update": true,
+                "drac_gap_offset_m": 0.0,
+                "min_adv_count": 1,
+                "eps": 0.001
+            },
+            "top_k": 1,
+            "feasible_count": 0,
+            "filled_from_all_feasible": false,
+            "fallback_non_collision": true,
+            "fallback_legacy": false,
+            "selected": [
+                0
+            ],
+            "metrics": {
+                "0": {
+                    "dsf_max": 0.9236246630180801,
+                    "dsf_at_ego_max": 0.4130496211056009,
+                    "ttc_min": 0.9791162325657607,
+                    "drac_max": 3.755368256724641,
+                    "collision": false,
+                    "feasible": false,
+                    "n_steps": 157,
+                    "n_adv": 1
+                },
+                "1": {
+                    "dsf_max": 4.356360001757003,
+                    "dsf_at_ego_max": 3.915959245478506,
+                    "ttc_min": 0.3569310555094152,
+                    "drac_max": 10.235930439729527,
+                    "collision": true,
+                    "feasible": false,
+                    "n_steps": 48,
+                    "n_adv": 1
+                }
+            }
+        },
+        "pinned": {
+            "0": {
+                "OPT_GEO_X_DISTANCE": 3.173432002932383,
+                "OPT_GEO_Y_DISTANCE": 32.91875957948882,
+                "OPT_ADV_SPEED": 2.677458234890926,
+                "OPT_ADV_DISTANCE": 3.090275981669302,
+                "OPT_STOP_DISTANCE": 0.8943932629464334
+            }
+        }
+    },
+    "OPT_behavior_2_opt_ROUTE-8": {
+        "opt_time_0": {
+            "OPT_GEO_BLOCKER_X_DISTANCE": {
+                "low": 2.0,
+                "high": 8.0
+            },
+            "OPT_GEO_BLOCKER_Y_DISTANCE": {
+                "low": 15.0,
+                "high": 50.0
+            },
+            "OPT_GEO_X_DISTANCE": {
+                "low": -2.0,
+                "high": 2.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 2.0,
+                "high": 6.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 0.0,
+                "high": 5.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 15.0
+            },
+            "OPT_STOP_DISTANCE": {
+                "low": 0.0,
+                "high": 1.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_GEO_BLOCKER_X_DISTANCE": {
+                "low": 2.0,
+                "high": 8.0
+            },
+            "OPT_GEO_BLOCKER_Y_DISTANCE": {
+                "low": 15.0,
+                "high": 50.0
+            },
+            "OPT_GEO_X_DISTANCE": {
+                "low": -2.0,
+                "high": 2.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 2.0,
+                "high": 6.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 0.0,
+                "high": 5.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 15.0
+            },
+            "OPT_STOP_DISTANCE": {
+                "low": 0.0,
+                "high": 1.0
+            }
+        },
+        "select_id": [
+            1
+        ],
+        "dsf_selection": {
+            "config": {
+                "top_k_percent": 10.0,
+                "speed_unit": "kmh",
+                "eval_point": "midpoint",
+                "ttc_min_s": 1.0,
+                "drac_max_mps2": 4.0,
+                "require_no_collision": true,
+                "fill_from_all_feasible": true,
+                "param_update": true,
+                "drac_gap_offset_m": 0.0,
+                "min_adv_count": 1,
+                "eps": 0.001
+            },
+            "top_k": 1,
+            "feasible_count": 0,
+            "filled_from_all_feasible": false,
+            "fallback_non_collision": true,
+            "fallback_legacy": true,
+            "selected": [
+                1
+            ],
+            "metrics": {
+                "0": {
+                    "dsf_max": 4.419372600383821,
+                    "dsf_at_ego_max": 2.8176378252994074,
+                    "ttc_min": 0.23837669576251974,
+                    "drac_max": 17.791046027601915,
+                    "collision": true,
+                    "feasible": false,
+                    "n_steps": 62,
+                    "n_adv": 1
+                },
+                "1": {
+                    "dsf_max": 8.469079622806362,
+                    "dsf_at_ego_max": 6.155701479333879,
+                    "ttc_min": 0.17409981000870522,
+                    "drac_max": 21.35662583196806,
+                    "collision": true,
+                    "feasible": false,
+                    "n_steps": 46,
+                    "n_adv": 1
+                }
+            }
+        },
+        "pinned": {
+            "1": {
+                "OPT_GEO_BLOCKER_X_DISTANCE": 3.8353859901835152,
+                "OPT_GEO_BLOCKER_Y_DISTANCE": 19.067701723742214,
+                "OPT_GEO_X_DISTANCE": -1.1910834776507402,
+                "OPT_GEO_Y_DISTANCE": 5.04868549091964,
+                "OPT_ADV_SPEED": 0.43434764046630603,
+                "OPT_ADV_DISTANCE": 7.232211157585507,
+                "OPT_STOP_DISTANCE": 0.062314050348921124
+            }
+        }
+    },
+    "OPT_behavior_3_opt_ROUTE-8": {
+        "opt_time_0": {
+            "OPT_GEO_X_DISTANCE": {
+                "low": 2.0,
+                "high": 8.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 15.0,
+                "high": 50.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 0.0,
+                "high": 5.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 15.0
+            },
+            "OPT_ADV_DEGREE": {
+                "low": -90.0,
+                "high": 90.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_GEO_X_DISTANCE": {
+                "low": 2.0,
+                "high": 8.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 15.0,
+                "high": 50.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 0.0,
+                "high": 5.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 15.0
+            },
+            "OPT_ADV_DEGREE": {
+                "low": -90.0,
+                "high": 90.0
+            }
+        },
+        "select_id": [
+            0
+        ],
+        "dsf_selection": {
+            "config": {
+                "top_k_percent": 10.0,
+                "speed_unit": "kmh",
+                "eval_point": "midpoint",
+                "ttc_min_s": 1.0,
+                "drac_max_mps2": 4.0,
+                "require_no_collision": true,
+                "fill_from_all_feasible": true,
+                "param_update": true,
+                "drac_gap_offset_m": 0.0,
+                "min_adv_count": 1,
+                "eps": 0.001
+            },
+            "top_k": 1,
+            "feasible_count": 0,
+            "filled_from_all_feasible": false,
+            "fallback_non_collision": true,
+            "fallback_legacy": false,
+            "selected": [
+                0
+            ],
+            "metrics": {
+                "0": {
+                    "dsf_max": 1.307320020701345,
+                    "dsf_at_ego_max": 0.5448789934465665,
+                    "ttc_min": 0.8107539228990291,
+                    "drac_max": 3.502951793727024,
+                    "collision": false,
+                    "feasible": false,
+                    "n_steps": 155,
+                    "n_adv": 1
+                },
+                "1": {
+                    "dsf_max": 1.2222551749766377,
+                    "dsf_at_ego_max": 0.5138439191887255,
+                    "ttc_min": 0.8655755664178648,
+                    "drac_max": 3.2012556766856965,
+                    "collision": false,
+                    "feasible": false,
+                    "n_steps": 156,
+                    "n_adv": 1
+                }
+            }
+        },
+        "pinned": {
+            "0": {
+                "OPT_GEO_X_DISTANCE": 3.173432002932383,
+                "OPT_GEO_Y_DISTANCE": 32.91875957948882,
+                "OPT_ADV_SPEED": 2.677458234890926,
+                "OPT_ADV_DISTANCE": 3.090275981669302,
+                "OPT_ADV_DEGREE": 70.99078733035802
+            }
+        }
+    },
+    "OPT_behavior_4_opt_ROUTE-8": {
+        "opt_time_0": {
+            "OPT_GEO_BLOCKER_X_DISTANCE": {
+                "low": 2.0,
+                "high": 8.0
+            },
+            "OPT_GEO_BLOCKER_Y_DISTANCE": {
+                "low": 15.0,
+                "high": 50.0
+            },
+            "OPT_GEO_X_DISTANCE": {
+                "low": -2.0,
+                "high": 2.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 2.0,
+                "high": 6.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 0.0,
+                "high": 5.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 15.0
+            },
+            "OPT_STOP_DISTANCE": {
+                "low": 0.0,
+                "high": 1.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_GEO_BLOCKER_X_DISTANCE": {
+                "low": 2.0,
+                "high": 8.0
+            },
+            "OPT_GEO_BLOCKER_Y_DISTANCE": {
+                "low": 15.0,
+                "high": 50.0
+            },
+            "OPT_GEO_X_DISTANCE": {
+                "low": -2.0,
+                "high": 2.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 2.0,
+                "high": 6.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 0.0,
+                "high": 5.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 15.0
+            },
+            "OPT_STOP_DISTANCE": {
+                "low": 0.0,
+                "high": 1.0
+            }
+        },
+        "select_id": [
+            1
+        ],
+        "dsf_selection": {
+            "config": {
+                "top_k_percent": 10.0,
+                "speed_unit": "kmh",
+                "eval_point": "midpoint",
+                "ttc_min_s": 1.0,
+                "drac_max_mps2": 4.0,
+                "require_no_collision": true,
+                "fill_from_all_feasible": true,
+                "param_update": true,
+                "drac_gap_offset_m": 0.0,
+                "min_adv_count": 1,
+                "eps": 0.001
+            },
+            "top_k": 1,
+            "feasible_count": 0,
+            "filled_from_all_feasible": false,
+            "fallback_non_collision": true,
+            "fallback_legacy": true,
+            "selected": [
+                1
+            ],
+            "metrics": {
+                "0": {
+                    "dsf_max": 0.30964329869748364,
+                    "dsf_at_ego_max": 0.09291203595154827,
+                    "ttc_min": 1.8448943432173703,
+                    "drac_max": 1.7711099739806118,
+                    "collision": true,
+                    "feasible": false,
+                    "n_steps": 55,
+                    "n_adv": 1
+                },
+                "1": {
+                    "dsf_max": 0.4806283058873638,
+                    "dsf_at_ego_max": 0.10869945066751542,
+                    "ttc_min": 1.2432218958856402,
+                    "drac_max": 3.0030832727561525,
+                    "collision": true,
+                    "feasible": false,
+                    "n_steps": 41,
+                    "n_adv": 1
+                }
+            }
+        },
+        "pinned": {
+            "1": {
+                "OPT_GEO_BLOCKER_X_DISTANCE": 2.804530689214186,
+                "OPT_GEO_BLOCKER_Y_DISTANCE": 24.10005551965031,
+                "OPT_GEO_X_DISTANCE": 0.1816902785781198,
+                "OPT_GEO_Y_DISTANCE": 4.43860440696628,
+                "OPT_ADV_SPEED": 1.7713111163501827,
+                "OPT_ADV_DISTANCE": 13.78776392320107,
+                "OPT_STOP_DISTANCE": 0.48628975316605527
+            }
+        }
+    },
+    "OPT_behavior_5_opt_ROUTE-8": {
+        "opt_time_0": {
+            "OPT_GEO_BLOCKER_X_DISTANCE": {
+                "low": 2.0,
+                "high": 8.0
+            },
+            "OPT_GEO_BLOCKER_Y_DISTANCE": {
+                "low": 15.0,
+                "high": 50.0
+            },
+            "OPT_GEO_X_DISTANCE": {
+                "low": -2.0,
+                "high": 2.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 2.0,
+                "high": 6.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 0.0,
+                "high": 5.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 15.0
+            },
+            "OPT_STOP_DISTANCE": {
+                "low": 0.0,
+                "high": 1.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_GEO_BLOCKER_X_DISTANCE": {
+                "low": 2.0,
+                "high": 8.0
+            },
+            "OPT_GEO_BLOCKER_Y_DISTANCE": {
+                "low": 15.0,
+                "high": 50.0
+            },
+            "OPT_GEO_X_DISTANCE": {
+                "low": -2.0,
+                "high": 2.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 2.0,
+                "high": 6.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 0.0,
+                "high": 5.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 15.0
+            },
+            "OPT_STOP_DISTANCE": {
+                "low": 0.0,
+                "high": 1.0
+            }
+        },
+        "select_id": [
+            1
+        ],
+        "dsf_selection": {
+            "config": {
+                "top_k_percent": 10.0,
+                "speed_unit": "kmh",
+                "eval_point": "midpoint",
+                "ttc_min_s": 1.0,
+                "drac_max_mps2": 4.0,
+                "require_no_collision": true,
+                "fill_from_all_feasible": true,
+                "param_update": true,
+                "drac_gap_offset_m": 0.0,
+                "min_adv_count": 1,
+                "eps": 0.001
+            },
+            "top_k": 1,
+            "feasible_count": 0,
+            "filled_from_all_feasible": false,
+            "fallback_non_collision": true,
+            "fallback_legacy": true,
+            "selected": [
+                1
+            ],
+            "metrics": {
+                "0": {
+                    "dsf_max": 5.96997157637974,
+                    "dsf_at_ego_max": 4.118493208457612,
+                    "ttc_min": 0.19280655728623877,
+                    "drac_max": 23.84639157966942,
+                    "collision": true,
+                    "feasible": false,
+                    "n_steps": 60,
+                    "n_adv": 1
+                },
+                "1": {
+                    "dsf_max": 5.734053723416849,
+                    "dsf_at_ego_max": 3.1204604085597016,
+                    "ttc_min": 0.19943865926676843,
+                    "drac_max": 20.44324240177147,
+                    "collision": true,
+                    "feasible": false,
+                    "n_steps": 44,
+                    "n_adv": 1
+                }
+            }
+        },
+        "pinned": {
+            "1": {
+                "OPT_GEO_BLOCKER_X_DISTANCE": 3.8353859901835152,
+                "OPT_GEO_BLOCKER_Y_DISTANCE": 19.067701723742214,
+                "OPT_GEO_X_DISTANCE": -1.1910834776507402,
+                "OPT_GEO_Y_DISTANCE": 5.04868549091964,
+                "OPT_ADV_SPEED": 0.43434764046630603,
+                "OPT_ADV_DISTANCE": 7.232211157585507,
+                "OPT_STOP_DISTANCE": 0.062314050348921124
+            }
+        }
+    }
+}

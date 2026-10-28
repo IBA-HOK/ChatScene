@@ -43,8 +43,12 @@ for ego in $EGOS; do
   esac
   root="log/adv_train/eval/$stem/eval_scenic"
   echo "===== ego=$ego root=$root scenarios=[$scen_csv] ====="
+  echo "--- raw (min_drive=0) ---"
   python tools/compute_table1.py --eval-root "$root" --ego "$ego" \
-    --scenarios "$scen_csv" 2>/dev/null || rc=$?
+    --scenarios "$scen_csv" --min-drive 0 || rc=$?
+  echo "--- filtered (min_drive=2.0, dropped via ego_displacement) ---"
+  python tools/compute_table1.py --eval-root "$root" --ego "$ego" \
+    --scenarios "$scen_csv" --min-drive 2.0 || rc=$?
 done
 IFS="$OLD_IFS"
 echo "summarize rc=$rc (outputs above; compare CR columns across egos)"

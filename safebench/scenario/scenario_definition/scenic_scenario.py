@@ -52,7 +52,7 @@ class ScenicScenario():
             if 'Adv' in str(other_actor.behavior):
                 adv_actor = other_actor.carlaActor
                 self.adv_actors.append(adv_actor)
-                CarlaDataProvider._carla_actor_pool[actor.id] = adv_actor
+                CarlaDataProvider._carla_actor_pool[adv_actor.id] = adv_actor
                 CarlaDataProvider.register_actor(adv_actor)      
         
         if len(self.config.trajectory) == 0:

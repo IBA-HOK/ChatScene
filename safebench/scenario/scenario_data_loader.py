@@ -8,11 +8,76 @@ Description:
     For a copy, see <https://opensource.org/licenses/MIT>
 '''
 
+import math
+import os
+import json
+import base64
+import hashlib
+
 import numpy as np
 import carla
 from copy import deepcopy
 import random
 from safebench.scenario.tools.route_manipulation import interpolate_trajectory
+
+
+def _derive_seed(opt_time, idx=None):
+    """Stable composite RNG seed — chunk-level, not per-idx.
+
+    Uses hashlib.sha256(f"{opt_time}:{idx}".encode()).digest masked to 31-bit.
+    Stable across workers: Python's built-in hash() is salted per-process via
+    PYTHONHASHSEED and diverges across workers, so we MUST NOT use hash((...)).
+    Documented choice: BOTH generate_scene and replay_scenes use chunk-level
+    seed derived from opt_time only (replay computes opt_time_for_idx = idx // opt_step
+    and calls _derive_seed(opt_time_for_idx) WITHOUT idx). This reproduces
+    intra-chunk random() progression (generate draws N scenes per chunk without
+    reseeding). Including idx per-scene would desync intra-chunk draws and
+    re-introduce drift. Chunk-level keeps draw-count invariant for Range OPT.
+    Mask to 31-bit for random/np seed bounds.
+    """
+    if idx is None:
+        payload = f"{int(opt_time)}".encode()
+    else:
+        payload = f"{int(opt_time)}:{int(idx)}".encode()
+    digest = hashlib.sha256(payload).digest()
+    # use first 4 bytes, mask to 31-bit
+    val = int.from_bytes(digest[:4], "little") & 0x7fffffff
+    return val
+
+
+def _reset_external_sampler(scenic, context, seed):
+    """Reset Scenic external sampler(s) after seeding, guarded with hasattr.
+
+    Calls scenic.resetExternalSampler() and scenic.scenario.resetExternalSampler()
+    where available, logs result. Keeps capture_pinned OPT* filter intact —
+    no new pinned semantics beyond seed fix.
+    """
+    reset = False
+    if hasattr(scenic, "resetExternalSampler"):
+        try:
+            scenic.resetExternalSampler()
+            print(f"[RNG] scenic.resetExternalSampler() called for {context} seed={seed}")
+            reset = True
+        except (RuntimeError, AttributeError, TypeError) as e:
+            print(f"[RNG] scenic.resetExternalSampler failed for {context}: {e}")
+    if hasattr(scenic, "scenario") and hasattr(scenic.scenario, "resetExternalSampler"):
+        try:
+            scenic.scenario.resetExternalSampler()
+            print(f"[RNG] scenario.resetExternalSampler() called for {context} seed={seed}")
+            reset = True
+        except (RuntimeError, AttributeError, TypeError) as e:
+            print(f"[RNG] scenario.resetExternalSampler failed for {context}: {e}")
+    if not reset:
+        print(f"[RNG] no resetExternalSampler API for {context} seed={seed} (guarded)")
+
+
+# Low==high degenerate: when pinned replay sets low==high, Scenic Range would
+# still draw via random/np but return degenerate value. To keep draw-count
+# invariant between capture (low<high) and replay (low==high), we intentionally
+# keep sampling draws identical (do NOT short-circuit). If Scenic optimized
+# away the draw, drift would reappear. Documented here; see load_params.
+# LIMIT: only fixes Range OPT draw-count; does NOT pin egoTrajectoryPts,
+# AdvAgent.position or non-OPT geometry — best-effort only for pure OPT+route files.
 
 
 def calculate_interpolate_trajectory(config, world):
@@ -127,6 +192,7 @@ class ScenicDataLoader:
         self.opt_step = config.opt_step
         self.scenic = scenic
         self.scene = []
+        self.all_params = {}
         
         if self.mode in ['eval', 'train_agent']:
             self.select_id = self.opt_params['select_id']
@@ -152,7 +218,11 @@ class ScenicDataLoader:
     def generate_scene(self, opt_time, sample_num, params = None):
         if params is not None:
             self.scenic.load_params(params)
-        random.seed(opt_time)
+        # P0-A: unify RNG domains — seed random+np+resetExternalSampler with same composite seed
+        _seed = _derive_seed(opt_time)
+        random.seed(_seed)
+        np.random.seed(_seed)
+        _reset_external_sampler(self.scenic, f"generate_scene opt_time={opt_time}", _seed)
         scenes = []
         new_scenes = 0
         attempts = 0
@@ -167,13 +237,72 @@ class ScenicDataLoader:
             if self.scenic.setSimulation(scene):
                 scenes.append(scene)
                 new_scenes += 1
+                if os.environ.get("DUMP_ALL_PARAMS") == "1":
+                    idx = len(self.scene) + len(scenes) - 1
+                    vals = {}
+                    for k, v in getattr(scene, "params", {}).items():
+                        if isinstance(k, str) and k.startswith("OPT"):
+                            try:
+                                vals[k] = float(v)
+                            except (TypeError, ValueError):
+                                continue
+                    if vals:
+                        self.all_params[idx] = vals
                 self.scenic.endSimulation()
         if new_scenes == 0 and sample_num > 0:
             raise RuntimeError(
                 f"SCENIC_GEN_FAILED: 0 scenes after {attempts} attempts "
                 f"(behavior={self.behavior}). Check spawn geometry or CARLA server state.")
         self.scene.extend(scenes)
-            
+        # P0 spike: optional sidecar write gated by USE_SCENE_BYTES=1 (default off).
+        # Does NOT replace T2 pinned path; only writes a bytes sidecar for triage.
+        # Uses official Scenario.sceneToBytes when available, else pickle fallback.
+        if os.environ.get("USE_SCENE_BYTES") == "1":
+            for _scene in scenes:
+                try:
+                    self._write_scene_bytes_sidecar(_scene, opt_time)
+                except Exception as e:
+                    print(f"[SCENE_BYTES] sidecar write failed opt_time={opt_time}: {e}")
+
+    def _write_scene_bytes_sidecar(self, scene, opt_time):
+        scenario = getattr(self.scenic, "scenario", None)
+        data = None
+        used = "pickle"
+        if scenario is not None and hasattr(scenario, "sceneToBytes"):
+            try:
+                data = scenario.sceneToBytes(scene)
+                used = "sceneToBytes"
+            except Exception as e:
+                print(f"[SCENE_BYTES] sceneToBytes failed, falling back to pickle: {e}")
+                data = None
+        if data is None:
+            import pickle
+            try:
+                data = pickle.dumps(scene)
+            except Exception as e:
+                print(f"[SCENE_BYTES] pickle fallback failed: {e}")
+                return
+            used = "pickle"
+        out_dir = os.environ.get("SCENE_BYTES_DIR", "/tmp/chatscene_scene_bytes")
+        try:
+            os.makedirs(out_dir, exist_ok=True)
+        except OSError:
+            out_dir = "/tmp"
+        h = hashlib.sha256(data).hexdigest()[:12]
+        fname = os.path.join(out_dir, f"opt{opt_time}_{h}.scenic_bytes")
+        if os.path.exists(fname):
+            return
+        with open(fname, "wb") as f:
+            f.write(data)
+        preview = base64.b64encode(data[:48]).decode()
+        print(f"[SCENE_BYTES] wrote {fname} via {used} len={len(data)} sha12={h} b64_48={preview}...")
+
+    def dump_all_params(self, path):
+        os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+        with open(path, "w", encoding="utf-8") as handle:
+            json.dump({str(k): v for k, v in self.all_params.items()}, handle, indent=4, sort_keys=True)
+            handle.write("\n")
+
     def capture_pinned(self, select_ids):
         # Snapshot exact sampled OPT values of selected scenes so a later
         # eval can replay them instead of resampling (resampling drifts:
@@ -203,12 +332,27 @@ class ScenicDataLoader:
         # Regenerate ONLY selected scenes with every OPT pinned to its
         # recorded value (low == high), reproducing selection-time draws
         # for files whose geometry is a pure function of OPT + route.
+        # P0-A: low==high degenerate handled — keep Range OPT draw-count invariant
+        # (see _derive_seed doc); do not short-circuit sampling.
         by_id = {}
         for idx in self.select_id:
+            if idx not in pinned:
+                if str(idx) not in pinned:
+                    raise RuntimeError(
+                        f"SCENIC_GEN_FAILED: missing pinned for data_id {idx} (behavior={self.behavior})")
+                pinned_entry = pinned[str(idx)]
+            else:
+                pinned_entry = pinned[idx]
             point = {p: {'low': float(v), 'high': float(v)}
-                     for p, v in pinned[idx].items()}
+                     for p, v in pinned_entry.items()}
             self.scenic.load_params(point)
-            random.seed(idx)
+            # P0-A: chunk-level seed — replay uses same opt_time_for_idx derived seed as capture,
+            # NOT bare idx and NOT per-idx hash. See _derive_seed doc.
+            _opt_time_for_idx = idx // self.opt_step if getattr(self, "opt_step", 0) else idx
+            _seed = _derive_seed(_opt_time_for_idx)
+            random.seed(_seed)
+            np.random.seed(_seed)
+            _reset_external_sampler(self.scenic, f"replay_scenes data_id={idx}", _seed)
             scene = None
             attempts = 0
             while scene is None and attempts < self.MIN_GEN_ATTEMPTS:
@@ -242,7 +386,14 @@ class ScenicDataLoader:
         ## no need to be random for scenic loading file ###
         selected_scenario = []
         idx = self.scenario_idx.pop(0)
-        if idx >= len(self.scene):
+        # replay_scenes stores a dict keyed by select_id; a plain range
+        # check would reject valid pinned ids (e.g. 17 with 2 scenes kept)
+        if isinstance(self.scene, dict):
+            if idx not in self.scene:
+                raise RuntimeError(
+                    f"SCENIC_GEN_FAILED: scene index {idx} not in replayed "
+                    f"scenes {sorted(self.scene.keys())}.")
+        elif idx >= len(self.scene):
             raise RuntimeError(
                 f"SCENIC_GEN_FAILED: scene index {idx} out of range "
                 f"({len(self.scene)} scenes generated).")

@@ -1,0 +1,21 @@
+snapshot_at=2026-10-24T08:29:13+09:00
+pilot_pid=3760917
+pilot_alive=no
+
+[baseline]
+files=633
+size=229M
+
+[dsf]
+files=133
+size=65M
+
+[dsf map key counts]
+scenario_1.json=10
+scenario_3.json=10
+scenario_5.json=10
+
+[dsf capture records]
+records=30
+[dsf eval records]
+records=30

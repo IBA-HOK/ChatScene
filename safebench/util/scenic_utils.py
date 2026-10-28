@@ -4,6 +4,7 @@
 ### modified from https://github.com/BerkeleyLearnVerify/Scenic/blob/main/src/scenic/__main__.py
 ### & https://github.com/BerkeleyLearnVerify/Scenic/blob/main/src/scenic/core/simulators.py
 
+import math
 import os 
 import random
 import numpy as np 
@@ -11,15 +12,45 @@ import torch
 
 import enum
 import sys
+import signal
 import time
 import argparse
 import pygame
 from collections import OrderedDict, defaultdict
+from contextlib import contextmanager
 
 if sys.version_info >= (3, 8):
     from importlib import metadata
 else:
     import importlib_metadata as metadata
+
+
+class _FenceTimeout(BaseException):
+    def __init__(self, code):
+        self.code = code
+
+
+_fence_code = [42]
+
+
+def _fence_alarm(signum, frame):
+    raise _FenceTimeout(_fence_code[0])
+
+
+@contextmanager
+def carla_fence(seconds, desc, code=42):
+    prev = signal.signal(signal.SIGALRM, _fence_alarm)
+    _fence_code[0] = code
+    signal.alarm(int(seconds))
+    try:
+        yield
+    except _FenceTimeout as f:
+        err = TimeoutError(f"{desc} exceeded {seconds}s")
+        err.fence_code = f.code
+        raise err
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, prev)
 
 import scenic.syntax.translator as translator
 import scenic.core.errors as errors
@@ -31,6 +62,7 @@ import scenic.core.dynamics as dynamics
 from scenic.core.errors import RuntimeParseError, InvalidScenarioError, optionallyDebugRejection
 from scenic.core.requirements import RequirementType
 from scenic.core.vectors import Vector
+
 
 def get_parser(scenicFile):
     parser = argparse.ArgumentParser(prog='scenic', add_help=False,
@@ -155,7 +187,30 @@ class ScenicSimulator:
         for param in self.opt_record.keys():
             self.opt_record[param].append(all_params[param])
         print("Recording params...")
-              
+
+    def record_params_values(self, params):
+        """Record OPT values from a scene selected by an explicit policy.
+
+        DSF selection happens after the rollout, when ``self.scene`` may no
+        longer be the scene that produced the record, so the caller passes the
+        sampled params instead of relying on simulator state.
+        """
+        recorded = 0
+        for param in self.opt_record.keys():
+            if param not in params:
+                continue
+            try:
+                self.opt_record[param].append(float(params[param]))
+                recorded += 1
+            except (TypeError, ValueError):
+                continue
+        print(f"Recording params... ({recorded} OPT values)")
+
+    def reset_opt_record(self):
+        """Clear recorded OPT values after a chunk-level update."""
+        for param in self.opt_record.keys():
+            self.opt_record[param] = []
+
     def update_params(self):
         print("Updating params...")
         for param in self.opt_params.keys():
@@ -171,8 +226,15 @@ class ScenicSimulator:
     def load_params(self, params):
         print("Loading params...")
         for param in params.keys():
-            self.opt_params[param].low = params[param]['low']
-            self.opt_params[param].high = params[param]['high']
+            # P0-A: low==high degenerate pinned replay — keep draw-count invariant
+            # When low == high, Scenic's Range would still consume an RNG draw but
+            # return fixed value. Do NOT short-circuit; keep distribution update
+            # so iteration counts stay aligned between capture and replay.
+            low = float(params[param]['low'])
+            high = float(params[param]['high'])
+            # degenerate path: low==high is valid pinned point, not error
+            self.opt_params[param].low = low
+            self.opt_params[param].high = high
         self.scenario.params.update(self.opt_params)
         
     def save_params(self):
@@ -192,9 +254,13 @@ class ScenicSimulator:
     def setSimulation(self, scene):
         if self.args.verbosity >= 1:
             print(f'  Beginning simulation of {scene.dynamicScenario}...')
-        try:     
+        try:
             self.scene = scene
-            self.simulation = self.simulator.createSimulation(scene, verbosity=self.args.verbosity)
+            fence = int(os.environ.get('FENCE_SETUP', '900'))
+            with carla_fence(fence, 'simulator.createSimulation', 43):
+                self.simulation = self.simulator.createSimulation(scene, verbosity=self.args.verbosity)
+        except TimeoutError:
+            raise
         except SimulationCreationError as e:
             if self.args.verbosity >= 1:
                 print(f'  Failed to create simulation: {e}')
@@ -333,8 +399,9 @@ class ScenicSimulator:
         for name, val in values.items():
             self.simulation.records[name] = val
         
-        ### destroy ###
-        self.simulation.destroy()
+        fence = int(os.environ.get('FENCE_DESTROY', '120'))
+        with carla_fence(fence, 'simulation.destroy', 42):
+            self.simulation.destroy()
         for obj in self.simulation.scene.objects:
             disableDynamicProxyFor(obj)
         for agent in self.simulation.agents:
@@ -344,9 +411,11 @@ class ScenicSimulator:
             if monitor._isRunning:
                 monitor._stop()
         veneer.endSimulation(self.simulation)
-        
+
     def destroy(self):
-        self.simulator.destroy()
+        fence = int(os.environ.get('FENCE_DESTROY', '120'))
+        with carla_fence(fence, 'simulator.destroy', 42):
+            self.simulator.destroy()
         
 class Action:
     """An :term:`action` which can be taken by an agent for one step of a simulation."""

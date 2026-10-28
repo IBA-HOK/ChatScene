@@ -1,0 +1,176 @@
+{
+  "context": {
+    "all_baseline_collisions": {
+      "avoidable": 887,
+      "collision_inevitability_rate": 0.0,
+      "collisions": 1040,
+      "unavoidable": 0,
+      "unknown": 153
+    },
+    "l1_pass_brake_only": {
+      "avoidable": 887,
+      "collision_inevitability_rate": 0.0,
+      "collisions": 887,
+      "unavoidable": 0,
+      "unknown": 0
+    },
+    "l1_pass_collisions": {
+      "avoidable": 887,
+      "collision_inevitability_rate": 0.0,
+      "collisions": 887,
+      "unavoidable": 0,
+      "unknown": 0
+    }
+  },
+  "definition": {
+    "collision_radius_m": 2.0,
+    "horizon_s": 5.0,
+    "max_decel_mps2": 8.0,
+    "max_lateral_accel_mps2": 5.0,
+    "note": "kinematic proxy; adversary follows recorded trajectory",
+    "reaction_s": 0.3
+  },
+  "selected": {
+    "baseline": {
+      "1": {
+        "avoidable": 12,
+        "brake_only": {
+          "avoidable": 12,
+          "collision_inevitability_rate": 0.0,
+          "collisions": 20,
+          "unavoidable": 0,
+          "unknown": 8
+        },
+        "collision_inevitability_rate": 0.0,
+        "collisions": 20,
+        "selected_scenes": 20,
+        "unavoidable": 0,
+        "unknown": 8
+      },
+      "3": {
+        "avoidable": 19,
+        "brake_only": {
+          "avoidable": 19,
+          "collision_inevitability_rate": 0.0,
+          "collisions": 20,
+          "unavoidable": 0,
+          "unknown": 1
+        },
+        "collision_inevitability_rate": 0.0,
+        "collisions": 20,
+        "selected_scenes": 20,
+        "unavoidable": 0,
+        "unknown": 1
+      },
+      "5": {
+        "avoidable": 20,
+        "brake_only": {
+          "avoidable": 20,
+          "collision_inevitability_rate": 0.0,
+          "collisions": 20,
+          "unavoidable": 0,
+          "unknown": 0
+        },
+        "collision_inevitability_rate": 0.0,
+        "collisions": 20,
+        "selected_scenes": 20,
+        "unavoidable": 0,
+        "unknown": 0
+      }
+    },
+    "current_dsf": {
+      "1": {
+        "avoidable": 0,
+        "brake_only": {
+          "avoidable": 0,
+          "collision_inevitability_rate": null,
+          "collisions": 0,
+          "unavoidable": 0,
+          "unknown": 0
+        },
+        "collision_inevitability_rate": null,
+        "collisions": 0,
+        "selected_scenes": 20,
+        "unavoidable": 0,
+        "unknown": 0
+      },
+      "3": {
+        "avoidable": 2,
+        "brake_only": {
+          "avoidable": 2,
+          "collision_inevitability_rate": 0.0,
+          "collisions": 2,
+          "unavoidable": 0,
+          "unknown": 0
+        },
+        "collision_inevitability_rate": 0.0,
+        "collisions": 2,
+        "selected_scenes": 20,
+        "unavoidable": 0,
+        "unknown": 0
+      },
+      "5": {
+        "avoidable": 0,
+        "brake_only": {
+          "avoidable": 0,
+          "collision_inevitability_rate": null,
+          "collisions": 0,
+          "unavoidable": 0,
+          "unknown": 0
+        },
+        "collision_inevitability_rate": null,
+        "collisions": 0,
+        "selected_scenes": 20,
+        "unavoidable": 0,
+        "unknown": 0
+      }
+    },
+    "directional_dsf": {
+      "1": {
+        "avoidable": 18,
+        "brake_only": {
+          "avoidable": 18,
+          "collision_inevitability_rate": 0.0,
+          "collisions": 18,
+          "unavoidable": 0,
+          "unknown": 0
+        },
+        "collision_inevitability_rate": 0.0,
+        "collisions": 18,
+        "selected_scenes": 20,
+        "unavoidable": 0,
+        "unknown": 0
+      },
+      "3": {
+        "avoidable": 20,
+        "brake_only": {
+          "avoidable": 20,
+          "collision_inevitability_rate": 0.0,
+          "collisions": 20,
+          "unavoidable": 0,
+          "unknown": 0
+        },
+        "collision_inevitability_rate": 0.0,
+        "collisions": 20,
+        "selected_scenes": 20,
+        "unavoidable": 0,
+        "unknown": 0
+      },
+      "5": {
+        "avoidable": 20,
+        "brake_only": {
+          "avoidable": 20,
+          "collision_inevitability_rate": 0.0,
+          "collisions": 20,
+          "unavoidable": 0,
+          "unknown": 0
+        },
+        "collision_inevitability_rate": 0.0,
+        "collisions": 20,
+        "selected_scenes": 20,
+        "unavoidable": 0,
+        "unknown": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,516 @@
+{
+  "detection_m": 5.0,
+  "fov_half_deg": 45.0,
+  "front_min": 0.6,
+  "reasons": {
+    "1/1/r8": {
+      "available_avoidable": 1,
+      "available_full": 1,
+      "reason": "fallback_noncollision",
+      "selected": [
+        13,
+        3
+      ],
+      "selected_status": [
+        "avoidable",
+        "non_collision"
+      ]
+    },
+    "1/1/r9": {
+      "available_avoidable": 18,
+      "available_full": 14,
+      "reason": "avoidable_front",
+      "selected": [
+        12,
+        45
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "1/2/r8": {
+      "available_avoidable": 0,
+      "available_full": 0,
+      "reason": "fallback_noncollision",
+      "selected": [
+        8,
+        1
+      ],
+      "selected_status": [
+        "non_collision",
+        "non_collision"
+      ]
+    },
+    "1/2/r9": {
+      "available_avoidable": 4,
+      "available_full": 4,
+      "reason": "avoidable_front",
+      "selected": [
+        16,
+        37
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "1/3/r8": {
+      "available_avoidable": 0,
+      "available_full": 0,
+      "reason": "fallback_noncollision",
+      "selected": [
+        12,
+        7
+      ],
+      "selected_status": [
+        "non_collision",
+        "non_collision"
+      ]
+    },
+    "1/3/r9": {
+      "available_avoidable": 1,
+      "available_full": 1,
+      "reason": "fallback_noncollision",
+      "selected": [
+        49,
+        25
+      ],
+      "selected_status": [
+        "avoidable",
+        "non_collision"
+      ]
+    },
+    "1/4/r8": {
+      "available_avoidable": 0,
+      "available_full": 0,
+      "reason": "fallback_noncollision",
+      "selected": [
+        5,
+        2
+      ],
+      "selected_status": [
+        "non_collision",
+        "non_collision"
+      ]
+    },
+    "1/4/r9": {
+      "available_avoidable": 9,
+      "available_full": 8,
+      "reason": "avoidable_front",
+      "selected": [
+        43,
+        22
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "1/5/r8": {
+      "available_avoidable": 0,
+      "available_full": 0,
+      "reason": "fallback_noncollision",
+      "selected": [
+        13,
+        17
+      ],
+      "selected_status": [
+        "non_collision",
+        "non_collision"
+      ]
+    },
+    "1/5/r9": {
+      "available_avoidable": 5,
+      "available_full": 5,
+      "reason": "avoidable_front",
+      "selected": [
+        30,
+        32
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/1/r8": {
+      "available_avoidable": 8,
+      "available_full": 7,
+      "reason": "avoidable_front",
+      "selected": [
+        6,
+        49
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/1/r9": {
+      "available_avoidable": 9,
+      "available_full": 7,
+      "reason": "avoidable_front",
+      "selected": [
+        48,
+        6
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/2/r8": {
+      "available_avoidable": 19,
+      "available_full": 2,
+      "reason": "avoidable_front",
+      "selected": [
+        48,
+        8
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/2/r9": {
+      "available_avoidable": 9,
+      "available_full": 3,
+      "reason": "avoidable_front",
+      "selected": [
+        8,
+        12
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/3/r8": {
+      "available_avoidable": 13,
+      "available_full": 12,
+      "reason": "avoidable_front",
+      "selected": [
+        18,
+        31
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/3/r9": {
+      "available_avoidable": 12,
+      "available_full": 9,
+      "reason": "avoidable_front",
+      "selected": [
+        15,
+        46
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/4/r8": {
+      "available_avoidable": 15,
+      "available_full": 11,
+      "reason": "avoidable_front",
+      "selected": [
+        0,
+        16
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/4/r9": {
+      "available_avoidable": 14,
+      "available_full": 12,
+      "reason": "avoidable_front",
+      "selected": [
+        0,
+        11
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/5/r8": {
+      "available_avoidable": 14,
+      "available_full": 14,
+      "reason": "avoidable_front",
+      "selected": [
+        49,
+        21
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "3/5/r9": {
+      "available_avoidable": 20,
+      "available_full": 19,
+      "reason": "avoidable_front",
+      "selected": [
+        10,
+        7
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/1/r8": {
+      "available_avoidable": 4,
+      "available_full": 1,
+      "reason": "fallback_noncollision",
+      "selected": [
+        12,
+        5
+      ],
+      "selected_status": [
+        "avoidable",
+        "non_collision"
+      ]
+    },
+    "5/1/r9": {
+      "available_avoidable": 3,
+      "available_full": 2,
+      "reason": "avoidable_front",
+      "selected": [
+        24,
+        48
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/2/r8": {
+      "available_avoidable": 11,
+      "available_full": 4,
+      "reason": "avoidable_front",
+      "selected": [
+        38,
+        5
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/2/r9": {
+      "available_avoidable": 16,
+      "available_full": 12,
+      "reason": "avoidable_front",
+      "selected": [
+        3,
+        8
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/3/r8": {
+      "available_avoidable": 15,
+      "available_full": 7,
+      "reason": "avoidable_front",
+      "selected": [
+        36,
+        17
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/3/r9": {
+      "available_avoidable": 22,
+      "available_full": 14,
+      "reason": "avoidable_front",
+      "selected": [
+        49,
+        23
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/4/r8": {
+      "available_avoidable": 10,
+      "available_full": 7,
+      "reason": "avoidable_front",
+      "selected": [
+        14,
+        0
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/4/r9": {
+      "available_avoidable": 6,
+      "available_full": 5,
+      "reason": "avoidable_front",
+      "selected": [
+        21,
+        22
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    },
+    "5/5/r8": {
+      "available_avoidable": 4,
+      "available_full": 1,
+      "reason": "fallback_noncollision",
+      "selected": [
+        9
+      ],
+      "selected_status": [
+        "avoidable"
+      ]
+    },
+    "5/5/r9": {
+      "available_avoidable": 5,
+      "available_full": 3,
+      "reason": "avoidable_front",
+      "selected": [
+        35,
+        26
+      ],
+      "selected_status": [
+        "avoidable",
+        "avoidable"
+      ]
+    }
+  },
+  "selected": {
+    "1/1/r8": [
+      13,
+      3
+    ],
+    "1/1/r9": [
+      12,
+      45
+    ],
+    "1/2/r8": [
+      8,
+      1
+    ],
+    "1/2/r9": [
+      16,
+      37
+    ],
+    "1/3/r8": [
+      12,
+      7
+    ],
+    "1/3/r9": [
+      49,
+      25
+    ],
+    "1/4/r8": [
+      5,
+      2
+    ],
+    "1/4/r9": [
+      43,
+      22
+    ],
+    "1/5/r8": [
+      13,
+      17
+    ],
+    "1/5/r9": [
+      30,
+      32
+    ],
+    "3/1/r8": [
+      6,
+      49
+    ],
+    "3/1/r9": [
+      48,
+      6
+    ],
+    "3/2/r8": [
+      48,
+      8
+    ],
+    "3/2/r9": [
+      8,
+      12
+    ],
+    "3/3/r8": [
+      18,
+      31
+    ],
+    "3/3/r9": [
+      15,
+      46
+    ],
+    "3/4/r8": [
+      0,
+      16
+    ],
+    "3/4/r9": [
+      0,
+      11
+    ],
+    "3/5/r8": [
+      49,
+      21
+    ],
+    "3/5/r9": [
+      10,
+      7
+    ],
+    "5/1/r8": [
+      12,
+      5
+    ],
+    "5/1/r9": [
+      24,
+      48
+    ],
+    "5/2/r8": [
+      38,
+      5
+    ],
+    "5/2/r9": [
+      3,
+      8
+    ],
+    "5/3/r8": [
+      36,
+      17
+    ],
+    "5/3/r9": [
+      49,
+      23
+    ],
+    "5/4/r8": [
+      14,
+      0
+    ],
+    "5/4/r9": [
+      21,
+      22
+    ],
+    "5/5/r8": [
+      9
+    ],
+    "5/5/r9": [
+      35,
+      26
+    ]
+  }
+}

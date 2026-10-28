@@ -8,7 +8,9 @@ Description:
     For a copy, see <https://opensource.org/licenses/MIT>
 '''
 import setGPU
+import sys
 import traceback
+import os
 import os.path as osp
 
 import torch 
@@ -16,6 +18,7 @@ import torch
 from safebench.util.run_util import load_config
 from safebench.util.torch_util import set_seed, set_torch_variable
 from safebench.carla_runner import CarlaRunner
+from safebench.scenic_runner import carla_fence
 
 
 if __name__ == '__main__':
@@ -78,6 +81,10 @@ if __name__ == '__main__':
             args.output_dir = osp.join(args.output_dir or 'log', 'adv_train', args.mode, agent_config['policy_name'], f"{agent_cfg.split('.')[0]}_epoch{args.test_epoch}", f"{scenario_cfg.split('.')[0]}")
             args.exp_name = 'scenario_' + str(scenario_config['scenario_id'])
             args_dict = vars(args)
+            # argparse default of None must not clobber the yaml value:
+            # dropping the key keeps safebench/agent/config/*.yaml's pretrain_dir
+            if args_dict.get('pretrain_dir') is None:
+                args_dict.pop('pretrain_dir', None)
             # main entry with a selected mode
             agent_config.update(args_dict)
             print(agent_config['load_dir'])
@@ -92,11 +99,23 @@ if __name__ == '__main__':
                 scenario_config['route_id'] = args.route_id + 4
                 runner = CarlaRunner(agent_config, scenario_config)
 
-            # start running
+            # start running — fenced: every ScenicRunner RPC outside the
+            # episode step loop gets a wall-clock fence so a wedged CARLA
+            # server never hangs the batch. FENCE_SETUP honors env tuning;
+            # TimeoutError fence_code propagates to sys.exit for batch retry.
+            fence_setup = int(os.environ.get('FENCE_SETUP', '900'))
             try:
-                runner.run(args.test_epoch)
-            except:
-                runner.close()
+                with carla_fence(fence_setup, 'eval_fenced', 43):
+                    runner.run(args.test_epoch)
+            except TimeoutError as e:
+                code = getattr(e, 'fence_code', 42)
+                print(f">> {e}; aborting worker for batch retry (exit {code}).", flush=True)
+                sys.exit(code)
+            except Exception:
+                try:
+                    runner.close()
+                except Exception:
+                    pass
                 traceback.print_exc()
                 err_list.append([agent_cfg, scenario_cfg, traceback.format_exc()])
 

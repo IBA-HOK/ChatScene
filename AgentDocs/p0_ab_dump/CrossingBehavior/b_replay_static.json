@@ -1,0 +1,194 @@
+{
+  "data_id": 0,
+  "behavior": "CrossingBehavior",
+  "scenic_file": "/home/hokuto/chatScene_Strata/ChatScene/safebench/scenario/scenario_data/scenic_data/scenario_1/behavior_1_opt.scenic",
+  "egoTrajectoryPts": [
+    [
+      -7.259315428467955,
+      -6.5835385241745605,
+      0.0
+    ],
+    [
+      6.904284413871186,
+      20.331392614152165,
+      0.0
+    ],
+    [
+      0.2280950373694406,
+      -13.732326978205158,
+      0.0
+    ],
+    [
+      16.41099133310661,
+      3.342591730490841,
+      0.0
+    ],
+    [
+      -12.080494212752289,
+      14.669709327581945,
+      0.0
+    ]
+  ],
+  "AdvAgent.position": [
+    7.550735014209429,
+    23.389072412693025,
+    0.0
+  ],
+  "OPT_params": {
+    "OPT_GEO_X_DISTANCE": 3.9600441677184213,
+    "OPT_GEO_Y_DISTANCE": 24.68821457094615,
+    "OPT_ADV_SPEED": 2.9950582022904513,
+    "OPT_ADV_DISTANCE": 4.908193638987504,
+    "OPT_STOP_DISTANCE": 0.10813247171319085
+  },
+  "rng": {
+    "capture_pre": {
+      "label": "capture_pre",
+      "random_state_head": [
+        2147483648,
+        1419836337,
+        4215854293,
+        1081137936,
+        2613428097
+      ],
+      "numpy_state_head": [
+        1726737503,
+        4213477143,
+        4287244006,
+        1821697372,
+        117981877
+      ],
+      "numpy_state_pos": 624,
+      "random_version": 3
+    },
+    "capture_mid_seed": {
+      "label": "capture_mid_chunk_seed",
+      "random_state_head": [
+        2147483648,
+        1419836337,
+        4215854293,
+        1081137936,
+        2613428097
+      ],
+      "numpy_state_head": [
+        1726737503,
+        4213477143,
+        4287244006,
+        1821697372,
+        117981877
+      ],
+      "numpy_state_pos": 624,
+      "random_version": 3
+    },
+    "capture_post": {
+      "label": "capture_post",
+      "random_state_head": [
+        2375783077,
+        1841117616,
+        948825075,
+        2351261243,
+        1054813073
+      ],
+      "numpy_state_head": [
+        2354608695,
+        2883966958,
+        875713355,
+        977859841,
+        4270159704
+      ],
+      "numpy_state_pos": 34,
+      "random_version": 3
+    },
+    "replay_pre": {
+      "label": "replay_pre_chunk_seed",
+      "random_state_head": [
+        2147483648,
+        1419836337,
+        4215854293,
+        1081137936,
+        2613428097
+      ],
+      "numpy_state_head": [
+        1726737503,
+        4213477143,
+        4287244006,
+        1821697372,
+        117981877
+      ],
+      "numpy_state_pos": 624,
+      "random_version": 3
+    },
+    "replay_post": {
+      "label": "replay_post",
+      "random_state_head": [
+        2375783077,
+        1841117616,
+        948825075,
+        2351261243,
+        1054813073
+      ],
+      "numpy_state_head": [
+        2354608695,
+        2883966958,
+        875713355,
+        977859841,
+        4270159704
+      ],
+      "numpy_state_pos": 34,
+      "random_version": 3
+    }
+  },
+  "sampler": {
+    "capture_pre": {
+      "externalSampler": {
+        "counter": 0,
+        "log_len": 0
+      },
+      "scenario.externalSampler": {
+        "counter": 0,
+        "log_len": 0
+      },
+      "scenario.resetExternalSampler": "available",
+      "scenic.resetExternalSampler": "available",
+      "reset_called": true,
+      "scenario_reset_available": true
+    },
+    "capture_post": {
+      "externalSampler": {
+        "counter": 1,
+        "log_len": 1
+      },
+      "scenario.externalSampler": {
+        "counter": 1,
+        "log_len": 1
+      },
+      "scenario.resetExternalSampler": "available",
+      "scenic.resetExternalSampler": "available"
+    },
+    "replay_pre": {
+      "externalSampler": {
+        "counter": 0,
+        "log_len": 0
+      },
+      "scenario.externalSampler": {
+        "counter": 0,
+        "log_len": 0
+      },
+      "scenario.resetExternalSampler": "available",
+      "scenic.resetExternalSampler": "available",
+      "reset_called": true
+    },
+    "replay_post": {
+      "externalSampler": {
+        "counter": 1,
+        "log_len": 1
+      },
+      "scenario.externalSampler": {
+        "counter": 1,
+        "log_len": 1
+      },
+      "scenario.resetExternalSampler": "available",
+      "scenic.resetExternalSampler": "available"
+    }
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "detection_ranges_m": [
+    32.0,
+    5.0
+  ],
+  "methods": {
+    "baseline": {
+      "1": {
+        "ranges": {
+          "32.0": {
+            "avoidable": 12,
+            "collision_inevitability_rate": 0.0,
+            "collisions": 20,
+            "unavoidable": 0,
+            "unknown": 8
+          },
+          "5.0": {
+            "avoidable": 3,
+            "collision_inevitability_rate": 0.75,
+            "collisions": 20,
+            "unavoidable": 9,
+            "unknown": 8
+          }
+        },
+        "selected_scenes": 20
+      },
+      "3": {
+        "ranges": {
+          "32.0": {
+            "avoidable": 14,
+            "collision_inevitability_rate": 0.0,
+            "collisions": 14,
+            "unavoidable": 0,
+            "unknown": 0
+          },
+          "5.0": {
+            "avoidable": 10,
+            "collision_inevitability_rate": 0.2857142857142857,
+            "collisions": 14,
+            "unavoidable": 4,
+            "unknown": 0
+          }
+        },
+        "selected_scenes": 20
+      },
+      "5": {
+        "ranges": {
+          "32.0": {
+            "avoidable": 17,
+            "collision_inevitability_rate": 0.0,
+            "collisions": 17,
+            "unavoidable": 0,
+            "unknown": 0
+          },
+          "5.0": {
+            "avoidable": 5,
+            "collision_inevitability_rate": 0.7058823529411765,
+            "collisions": 17,
+            "unavoidable": 12,
+            "unknown": 0
+          }
+        },
+        "selected_scenes": 20
+      }
+    },
+    "current_dsf": {
+      "1": {
+        "ranges": {
+          "32.0": {
+            "avoidable": 0,
+            "collision_inevitability_rate": null,
+            "collisions": 0,
+            "unavoidable": 0,
+            "unknown": 0
+          },
+          "5.0": {
+            "avoidable": 0,
+            "collision_inevitability_rate": null,
+            "collisions": 0,
+            "unavoidable": 0,
+            "unknown": 0
+          }
+        },
+        "selected_scenes": 20
+      },
+      "3": {
+        "ranges": {
+          "32.0": {
+            "avoidable": 6,
+            "collision_inevitability_rate": 0.0,
+            "collisions": 7,
+            "unavoidable": 0,
+            "unknown": 1
+          },
+          "5.0": {
+            "avoidable": 5,
+            "collision_inevitability_rate": 0.16666666666666666,
+            "collisions": 7,
+            "unavoidable": 1,
+            "unknown": 1
+          }
+        },
+        "selected_scenes": 20
+      },
+      "5": {
+        "ranges": {
+          "32.0": {
+            "avoidable": 12,
+            "collision_inevitability_rate": 0.0,
+            "collisions": 12,
+            "unavoidable": 0,
+            "unknown": 0
+          },
+          "5.0": {
+            "avoidable": 6,
+            "collision_inevitability_rate": 0.5,
+            "collisions": 12,
+            "unavoidable": 6,
+            "unknown": 0
+          }
+        },
+        "selected_scenes": 20
+      }
+    },
+    "directional_dsf": {
+      "1": {
+        "ranges": {
+          "32.0": {
+            "avoidable": 10,
+            "collision_inevitability_rate": 0.0,
+            "collisions": 15,
+            "unavoidable": 0,
+            "unknown": 5
+          },
+          "5.0": {
+            "avoidable": 1,
+            "collision_inevitability_rate": 0.9,
+            "collisions": 15,
+            "unavoidable": 9,
+            "unknown": 5
+          }
+        },
+        "selected_scenes": 20
+      },
+      "3": {
+        "ranges": {
+          "32.0": {
+            "avoidable": 11,
+            "collision_inevitability_rate": 0.0,
+            "collisions": 12,
+            "unavoidable": 0,
+            "unknown": 1
+          },
+          "5.0": {
+            "avoidable": 6,
+            "collision_inevitability_rate": 0.45454545454545453,
+            "collisions": 12,
+            "unavoidable": 5,
+            "unknown": 1
+          }
+        },
+        "selected_scenes": 20
+      },
+      "5": {
+        "ranges": {
+          "32.0": {
+            "avoidable": 18,
+            "collision_inevitability_rate": 0.0,
+            "collisions": 18,
+            "unavoidable": 0,
+            "unknown": 0
+          },
+          "5.0": {
+            "avoidable": 4,
+            "collision_inevitability_rate": 0.7777777777777778,
+            "collisions": 18,
+            "unavoidable": 14,
+            "unknown": 0
+          }
+        },
+        "selected_scenes": 20
+      }
+    }
+  }
+}
