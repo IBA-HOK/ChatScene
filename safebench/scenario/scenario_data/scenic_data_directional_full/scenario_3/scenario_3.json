@@ -1,0 +1,1704 @@
+{
+    "OPT_behavior_1_opt_ROUTE-8": {
+        "opt_time_0": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.0,
+                "high": 5.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.0,
+                "high": 10.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 20.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 9.35,
+                "high": 29.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.07,
+                "high": 4.2
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 9.3,
+                "high": 25.35
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.65,
+                "high": 8.78
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.86,
+                "high": 15.78
+            }
+        },
+        "opt_time_2": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 10.31,
+                "high": 24.61
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.26,
+                "high": 4.17
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 10.8,
+                "high": 22.56
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.03,
+                "high": 8.37
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.47,
+                "high": 13.5
+            }
+        },
+        "opt_time_3": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 11.56,
+                "high": 24.5
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.36,
+                "high": 4.2
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 12.04,
+                "high": 22.46
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.23,
+                "high": 8.39
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.34,
+                "high": 12.75
+            }
+        },
+        "opt_time_4": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 12.1,
+                "high": 23.67
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.41,
+                "high": 4.14
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 11.59,
+                "high": 20.76
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.37,
+                "high": 8.29
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.15,
+                "high": 11.88
+            }
+        },
+        "opt_time_5": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 12.12,
+                "high": 23.13
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.45,
+                "high": 4.15
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 11.55,
+                "high": 20.05
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.5,
+                "high": 8.32
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.14,
+                "high": 11.47
+            }
+        },
+        "select_id": [
+            40,
+            35
+        ],
+        "directional_selection": {
+            "source": "directional_front",
+            "selected": [
+                40,
+                35
+            ],
+            "status": [
+                "collision",
+                "collision"
+            ],
+            "front_dsf": [
+                1.9073220193829223,
+                1.340803275545172
+            ],
+            "front_ratio": [
+                1.0,
+                1.0
+            ],
+            "counts": {
+                "collision": 20,
+                "non_collision": 28,
+                "l1_reject": 2
+            }
+        },
+        "pinned": {
+            "40": {
+                "OPT_LEADING_DISTANCE": 13.344433403818403,
+                "OPT_LEADING_SPEED": 3.4869818064966536,
+                "OPT_GEO_Y_DISTANCE": 13.771952068084108,
+                "OPT_ADV_SPEED": 7.9944208434410235,
+                "OPT_ADV_DISTANCE": 8.0855057263349
+            },
+            "35": {
+                "OPT_LEADING_DISTANCE": 19.56105435072769,
+                "OPT_LEADING_SPEED": 3.795734176775258,
+                "OPT_GEO_Y_DISTANCE": 15.787501594093712,
+                "OPT_ADV_SPEED": 7.817860277275154,
+                "OPT_ADV_DISTANCE": 6.444273713793951
+            }
+        }
+    },
+    "OPT_behavior_1_opt_ROUTE-9": {
+        "opt_time_0": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.0,
+                "high": 5.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.0,
+                "high": 10.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 20.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 11.0,
+                "high": 28.8
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.13,
+                "high": 4.15
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 9.55,
+                "high": 24.05
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.01,
+                "high": 9.17
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.74,
+                "high": 14.86
+            }
+        },
+        "opt_time_2": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 11.73,
+                "high": 25.28
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.28,
+                "high": 4.12
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 10.74,
+                "high": 21.82
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.35,
+                "high": 8.8
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.21,
+                "high": 13.0
+            }
+        },
+        "opt_time_3": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 11.88,
+                "high": 24.84
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.32,
+                "high": 4.14
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 11.21,
+                "high": 21.96
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.36,
+                "high": 8.71
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.38,
+                "high": 12.85
+            }
+        },
+        "opt_time_4": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 12.46,
+                "high": 23.95
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.37,
+                "high": 4.08
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 10.73,
+                "high": 20.1
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.52,
+                "high": 8.6
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.18,
+                "high": 11.91
+            }
+        },
+        "opt_time_5": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 12.83,
+                "high": 23.18
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.37,
+                "high": 4.04
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 11.28,
+                "high": 19.67
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.76,
+                "high": 8.66
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.32,
+                "high": 11.47
+            }
+        },
+        "select_id": [
+            43,
+            35
+        ],
+        "directional_selection": {
+            "source": "directional_front",
+            "selected": [
+                43,
+                35
+            ],
+            "status": [
+                "collision",
+                "collision"
+            ],
+            "front_dsf": [
+                1.8733525733392271,
+                1.7983550903811132
+            ],
+            "front_ratio": [
+                1.0,
+                1.0
+            ],
+            "counts": {
+                "collision": 21,
+                "non_collision": 27,
+                "l1_reject": 2
+            }
+        },
+        "pinned": {
+            "43": {
+                "OPT_LEADING_DISTANCE": 16.023395889805403,
+                "OPT_LEADING_SPEED": 4.000770612044495,
+                "OPT_GEO_Y_DISTANCE": 12.478278735638924,
+                "OPT_ADV_SPEED": 8.37518899414849,
+                "OPT_ADV_DISTANCE": 6.553265471231536
+            },
+            "35": {
+                "OPT_LEADING_DISTANCE": 19.89342074075973,
+                "OPT_LEADING_SPEED": 3.745359553518704,
+                "OPT_GEO_Y_DISTANCE": 15.076184466075567,
+                "OPT_ADV_SPEED": 8.087533172035469,
+                "OPT_ADV_DISTANCE": 6.485249754796703
+            }
+        }
+    },
+    "OPT_behavior_2_opt_ROUTE-8": {
+        "opt_time_0": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.0,
+                "high": 5.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.0,
+                "high": 5.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 12.95,
+                "high": 26.58
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.89,
+                "high": 3.94
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.92,
+                "high": 3.51
+            }
+        },
+        "opt_time_2": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 13.01,
+                "high": 23.55
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.96,
+                "high": 3.72
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.95,
+                "high": 2.96
+            }
+        },
+        "opt_time_3": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 13.73,
+                "high": 23.14
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.08,
+                "high": 3.61
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 1.07,
+                "high": 2.8
+            }
+        },
+        "opt_time_4": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 14.43,
+                "high": 23.07
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.17,
+                "high": 3.57
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 1.13,
+                "high": 2.68
+            }
+        },
+        "opt_time_5": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 14.96,
+                "high": 23.04
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.2,
+                "high": 3.51
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 1.19,
+                "high": 2.63
+            }
+        },
+        "select_id": [],
+        "directional_selection": {
+            "source": "directional_front+noncollision",
+            "selected": [],
+            "status": [],
+            "front_dsf": [],
+            "front_ratio": [],
+            "counts": {
+                "collision": 50,
+                "non_collision": 0,
+                "l1_reject": 0
+            }
+        },
+        "pinned": {}
+    },
+    "OPT_behavior_2_opt_ROUTE-9": {
+        "opt_time_0": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.0,
+                "high": 5.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.0,
+                "high": 5.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 12.83,
+                "high": 14.48
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.04,
+                "high": 2.11
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 3.06,
+                "high": 3.72
+            }
+        },
+        "opt_time_2": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 12.88,
+                "high": 13.99
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.04,
+                "high": 2.09
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 3.11,
+                "high": 3.54
+            }
+        },
+        "opt_time_3": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 12.91,
+                "high": 13.84
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.05,
+                "high": 2.09
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 3.16,
+                "high": 3.49
+            }
+        },
+        "opt_time_4": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 13.0,
+                "high": 13.84
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.05,
+                "high": 2.09
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 3.19,
+                "high": 3.46
+            }
+        },
+        "opt_time_5": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 13.04,
+                "high": 13.83
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.05,
+                "high": 2.08
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 3.2,
+                "high": 3.46
+            }
+        },
+        "select_id": [
+            48,
+            17
+        ],
+        "directional_selection": {
+            "source": "directional_front+noncollision",
+            "selected": [
+                48,
+                17
+            ],
+            "status": [
+                "non_collision",
+                "non_collision"
+            ],
+            "front_dsf": [
+                0.0,
+                0.0
+            ],
+            "front_ratio": [
+                0.0,
+                0.0
+            ],
+            "counts": {
+                "collision": 15,
+                "non_collision": 30,
+                "l1_reject": 5
+            }
+        },
+        "pinned": {
+            "48": {
+                "OPT_LEADING_DISTANCE": 13.630081904986596,
+                "OPT_LEADING_SPEED": 2.074431825098788,
+                "OPT_GEO_Y_DISTANCE": 3.3140318984488473
+            },
+            "17": {
+                "OPT_LEADING_DISTANCE": 13.44451359217419,
+                "OPT_LEADING_SPEED": 2.082732156298687,
+                "OPT_GEO_Y_DISTANCE": 3.240660307468305
+            }
+        }
+    },
+    "OPT_behavior_3_opt_ROUTE-8": {
+        "opt_time_0": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.0,
+                "high": 5.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.0,
+                "high": 10.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 20.0
+            },
+            "OPT_BRAKE": {
+                "low": 0.0,
+                "high": 1.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.66,
+                "high": 21.65
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.08,
+                "high": 4.08
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 12.25,
+                "high": 23.23
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.03,
+                "high": 8.26
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 2.49,
+                "high": 14.23
+            },
+            "OPT_BRAKE": {
+                "low": 0.21,
+                "high": 0.75
+            }
+        },
+        "opt_time_2": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 2.4,
+                "high": 18.56
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.53,
+                "high": 4.13
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 11.73,
+                "high": 20.31
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.15,
+                "high": 7.88
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 4.07,
+                "high": 12.69
+            },
+            "OPT_BRAKE": {
+                "low": 0.24,
+                "high": 0.69
+            }
+        },
+        "opt_time_3": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 4.79,
+                "high": 17.15
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.68,
+                "high": 3.99
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 12.93,
+                "high": 19.76
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.36,
+                "high": 7.71
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.4,
+                "high": 12.47
+            },
+            "OPT_BRAKE": {
+                "low": 0.27,
+                "high": 0.62
+            }
+        },
+        "opt_time_4": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 5.65,
+                "high": 17.09
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.67,
+                "high": 3.89
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 12.85,
+                "high": 19.27
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.4,
+                "high": 7.67
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.79,
+                "high": 12.38
+            },
+            "OPT_BRAKE": {
+                "low": 0.28,
+                "high": 0.61
+            }
+        },
+        "opt_time_5": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 5.73,
+                "high": 15.69
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.73,
+                "high": 3.79
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 12.96,
+                "high": 18.7
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.51,
+                "high": 7.65
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.26,
+                "high": 12.26
+            },
+            "OPT_BRAKE": {
+                "low": 0.29,
+                "high": 0.58
+            }
+        },
+        "select_id": [
+            21,
+            39
+        ],
+        "directional_selection": {
+            "source": "directional_front",
+            "selected": [
+                21,
+                39
+            ],
+            "status": [
+                "collision",
+                "collision"
+            ],
+            "front_dsf": [
+                1.9027488845524876,
+                1.3043968075557733
+            ],
+            "front_ratio": [
+                0.6492428266437817,
+                1.0
+            ],
+            "counts": {
+                "collision": 26,
+                "non_collision": 23,
+                "l1_reject": 1
+            }
+        },
+        "pinned": {
+            "21": {
+                "OPT_LEADING_DISTANCE": 13.770052821820244,
+                "OPT_LEADING_SPEED": 3.312323004572866,
+                "OPT_GEO_Y_DISTANCE": 18.43013420506412,
+                "OPT_ADV_SPEED": 6.951793415405622,
+                "OPT_ADV_DISTANCE": 5.323934604690709,
+                "OPT_BRAKE": 0.5070701739531591
+            },
+            "39": {
+                "OPT_LEADING_DISTANCE": 14.256510159371363,
+                "OPT_LEADING_SPEED": 3.035098148453457,
+                "OPT_GEO_Y_DISTANCE": 17.26307682435833,
+                "OPT_ADV_SPEED": 7.570159942803861,
+                "OPT_ADV_DISTANCE": 12.243547517804881,
+                "OPT_BRAKE": 0.6025824993855473
+            }
+        }
+    },
+    "OPT_behavior_3_opt_ROUTE-9": {
+        "opt_time_0": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.0,
+                "high": 5.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.0,
+                "high": 10.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 20.0
+            },
+            "OPT_BRAKE": {
+                "low": 0.0,
+                "high": 1.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.66,
+                "high": 21.65
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.08,
+                "high": 4.08
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 12.25,
+                "high": 23.23
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.03,
+                "high": 8.26
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 2.49,
+                "high": 14.23
+            },
+            "OPT_BRAKE": {
+                "low": 0.21,
+                "high": 0.75
+            }
+        },
+        "opt_time_2": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 2.37,
+                "high": 17.17
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.58,
+                "high": 4.07
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 11.81,
+                "high": 19.96
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.26,
+                "high": 7.83
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 4.02,
+                "high": 11.92
+            },
+            "OPT_BRAKE": {
+                "low": 0.27,
+                "high": 0.67
+            }
+        },
+        "opt_time_3": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 3.97,
+                "high": 16.04
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.68,
+                "high": 3.98
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 12.61,
+                "high": 19.45
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.41,
+                "high": 7.72
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.28,
+                "high": 11.96
+            },
+            "OPT_BRAKE": {
+                "low": 0.29,
+                "high": 0.62
+            }
+        },
+        "opt_time_4": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 4.83,
+                "high": 16.25
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.65,
+                "high": 3.88
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 12.44,
+                "high": 19.04
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.42,
+                "high": 7.68
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.65,
+                "high": 12.02
+            },
+            "OPT_BRAKE": {
+                "low": 0.29,
+                "high": 0.62
+            }
+        },
+        "opt_time_5": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 5.0,
+                "high": 15.04
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.71,
+                "high": 3.79
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 12.44,
+                "high": 18.34
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.52,
+                "high": 7.67
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.01,
+                "high": 11.92
+            },
+            "OPT_BRAKE": {
+                "low": 0.3,
+                "high": 0.59
+            }
+        },
+        "select_id": [
+            30,
+            40
+        ],
+        "directional_selection": {
+            "source": "directional_front",
+            "selected": [
+                30,
+                40
+            ],
+            "status": [
+                "collision",
+                "collision"
+            ],
+            "front_dsf": [
+                1.5154514057852233,
+                1.175856878025283
+            ],
+            "front_ratio": [
+                1.0,
+                1.0
+            ],
+            "counts": {
+                "collision": 23,
+                "non_collision": 24,
+                "l1_reject": 3
+            }
+        },
+        "pinned": {
+            "30": {
+                "OPT_LEADING_DISTANCE": 15.296108522462898,
+                "OPT_LEADING_SPEED": 2.893816270514045,
+                "OPT_GEO_Y_DISTANCE": 12.780078430113615,
+                "OPT_ADV_SPEED": 7.020398797991403,
+                "OPT_ADV_DISTANCE": 7.441038637739226,
+                "OPT_BRAKE": 0.29281986063965365
+            },
+            "40": {
+                "OPT_LEADING_DISTANCE": 6.058299867900274,
+                "OPT_LEADING_SPEED": 2.779709071220389,
+                "OPT_GEO_Y_DISTANCE": 14.010434421958026,
+                "OPT_ADV_SPEED": 7.486026178508172,
+                "OPT_ADV_DISTANCE": 7.801687866798134,
+                "OPT_BRAKE": 0.44718341801366485
+            }
+        }
+    },
+    "OPT_behavior_4_opt_ROUTE-8": {
+        "opt_time_0": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.0,
+                "high": 5.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.0,
+                "high": 10.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 20.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 6.66,
+                "high": 26.78
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.15,
+                "high": 4.22
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 7.93,
+                "high": 23.59
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.0,
+                "high": 9.46
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 4.25,
+                "high": 14.66
+            }
+        },
+        "opt_time_2": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 7.79,
+                "high": 23.9
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.29,
+                "high": 4.02
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 8.77,
+                "high": 20.49
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.56,
+                "high": 9.11
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 4.77,
+                "high": 12.59
+            }
+        },
+        "opt_time_3": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 8.55,
+                "high": 24.52
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.36,
+                "high": 4.03
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 9.29,
+                "high": 20.69
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.49,
+                "high": 8.99
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 4.92,
+                "high": 12.38
+            }
+        },
+        "opt_time_4": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 9.25,
+                "high": 23.26
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.45,
+                "high": 3.91
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 9.03,
+                "high": 18.78
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.68,
+                "high": 8.9
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 4.71,
+                "high": 11.31
+            }
+        },
+        "opt_time_5": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 9.97,
+                "high": 22.53
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 2.44,
+                "high": 3.79
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 9.62,
+                "high": 18.19
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.93,
+                "high": 8.92
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 4.74,
+                "high": 10.67
+            }
+        },
+        "select_id": [
+            19,
+            44
+        ],
+        "directional_selection": {
+            "source": "directional_front",
+            "selected": [
+                19,
+                44
+            ],
+            "status": [
+                "collision",
+                "collision"
+            ],
+            "front_dsf": [
+                2.2035222023769734,
+                1.7502965845586673
+            ],
+            "front_ratio": [
+                1.0,
+                0.667655458086552
+            ],
+            "counts": {
+                "collision": 22,
+                "non_collision": 26,
+                "l1_reject": 2
+            }
+        },
+        "pinned": {
+            "19": {
+                "OPT_LEADING_DISTANCE": 23.499784199396725,
+                "OPT_LEADING_SPEED": 2.202908249304596,
+                "OPT_GEO_Y_DISTANCE": 9.697504676926606,
+                "OPT_ADV_SPEED": 7.938710813133834,
+                "OPT_ADV_DISTANCE": 8.875827588426741
+            },
+            "44": {
+                "OPT_LEADING_DISTANCE": 21.686362741073943,
+                "OPT_LEADING_SPEED": 2.6293129952562353,
+                "OPT_GEO_Y_DISTANCE": 12.548827258021838,
+                "OPT_ADV_SPEED": 7.524891337158914,
+                "OPT_ADV_DISTANCE": 4.7611497407355365
+            }
+        }
+    },
+    "OPT_behavior_4_opt_ROUTE-9": {
+        "opt_time_0": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.0,
+                "high": 5.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.0,
+                "high": 10.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 20.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 11.0,
+                "high": 28.8
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.13,
+                "high": 4.15
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 9.55,
+                "high": 24.05
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.01,
+                "high": 9.17
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.74,
+                "high": 14.86
+            }
+        },
+        "opt_time_2": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 11.73,
+                "high": 25.28
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.28,
+                "high": 4.12
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 10.74,
+                "high": 21.82
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.35,
+                "high": 8.8
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.21,
+                "high": 13.0
+            }
+        },
+        "opt_time_3": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 11.88,
+                "high": 24.84
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.32,
+                "high": 4.14
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 11.21,
+                "high": 21.96
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.36,
+                "high": 8.71
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.38,
+                "high": 12.85
+            }
+        },
+        "opt_time_4": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 12.46,
+                "high": 23.95
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.37,
+                "high": 4.08
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 10.73,
+                "high": 20.1
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.52,
+                "high": 8.6
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.18,
+                "high": 11.91
+            }
+        },
+        "opt_time_5": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 12.83,
+                "high": 23.18
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.37,
+                "high": 4.04
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 11.28,
+                "high": 19.67
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.76,
+                "high": 8.66
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 6.32,
+                "high": 11.47
+            }
+        },
+        "select_id": [
+            43,
+            35
+        ],
+        "directional_selection": {
+            "source": "directional_front",
+            "selected": [
+                43,
+                35
+            ],
+            "status": [
+                "collision",
+                "collision"
+            ],
+            "front_dsf": [
+                2.0251280607385302,
+                1.914198641931716
+            ],
+            "front_ratio": [
+                1.0,
+                1.0
+            ],
+            "counts": {
+                "collision": 20,
+                "non_collision": 27,
+                "l1_reject": 3
+            }
+        },
+        "pinned": {
+            "43": {
+                "OPT_LEADING_DISTANCE": 16.023395889805403,
+                "OPT_LEADING_SPEED": 4.000770612044495,
+                "OPT_GEO_Y_DISTANCE": 12.478278735638924,
+                "OPT_ADV_SPEED": 8.37518899414849,
+                "OPT_ADV_DISTANCE": 6.553265471231536
+            },
+            "35": {
+                "OPT_LEADING_DISTANCE": 19.89342074075973,
+                "OPT_LEADING_SPEED": 3.745359553518704,
+                "OPT_GEO_Y_DISTANCE": 15.076184466075567,
+                "OPT_ADV_SPEED": 8.087533172035469,
+                "OPT_ADV_DISTANCE": 6.485249754796703
+            }
+        }
+    },
+    "OPT_behavior_5_opt_ROUTE-8": {
+        "opt_time_0": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.0,
+                "high": 5.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.0,
+                "high": 10.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 20.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 6.6,
+                "high": 25.4
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.2,
+                "high": 4.37
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 7.02,
+                "high": 24.34
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.32,
+                "high": 7.82
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 4.55,
+                "high": 15.63
+            }
+        },
+        "opt_time_2": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 7.07,
+                "high": 20.3
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.39,
+                "high": 4.27
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 9.35,
+                "high": 20.34
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.69,
+                "high": 7.49
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.34,
+                "high": 12.3
+            }
+        },
+        "opt_time_3": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 7.71,
+                "high": 19.78
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.46,
+                "high": 4.28
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 10.2,
+                "high": 20.34
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.77,
+                "high": 7.43
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.3,
+                "high": 11.82
+            }
+        },
+        "opt_time_4": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 8.01,
+                "high": 19.04
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.5,
+                "high": 4.23
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 9.89,
+                "high": 18.84
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.84,
+                "high": 7.32
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.17,
+                "high": 11.04
+            }
+        },
+        "opt_time_5": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 8.39,
+                "high": 18.26
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.5,
+                "high": 4.18
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 10.43,
+                "high": 18.41
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.02,
+                "high": 7.36
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.32,
+                "high": 10.56
+            }
+        },
+        "select_id": [
+            38,
+            35
+        ],
+        "directional_selection": {
+            "source": "directional_front",
+            "selected": [
+                38,
+                35
+            ],
+            "status": [
+                "collision",
+                "collision"
+            ],
+            "front_dsf": [
+                1.6602127842100998,
+                1.270282133589835
+            ],
+            "front_ratio": [
+                1.0,
+                1.0
+            ],
+            "counts": {
+                "collision": 19,
+                "non_collision": 28,
+                "l1_reject": 3
+            }
+        },
+        "pinned": {
+            "38": {
+                "OPT_LEADING_DISTANCE": 7.757679147268505,
+                "OPT_LEADING_SPEED": 4.064695100010668,
+                "OPT_GEO_Y_DISTANCE": 12.488757827340251,
+                "OPT_ADV_SPEED": 7.117785551656821,
+                "OPT_ADV_DISTANCE": 7.643760926734647
+            },
+            "35": {
+                "OPT_LEADING_DISTANCE": 15.173116384334097,
+                "OPT_LEADING_SPEED": 3.8853595535187044,
+                "OPT_GEO_Y_DISTANCE": 13.846800975442441,
+                "OPT_ADV_SPEED": 6.990300027905905,
+                "OPT_ADV_DISTANCE": 5.406063122298995
+            }
+        }
+    },
+    "OPT_behavior_5_opt_ROUTE-9": {
+        "opt_time_0": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 1.0,
+                "high": 5.0
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 0.0,
+                "high": 30.0
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.0,
+                "high": 10.0
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 0.0,
+                "high": 20.0
+            }
+        },
+        "opt_time_1": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 9.04,
+                "high": 26.35
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.24,
+                "high": 4.26
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 7.93,
+                "high": 22.95
+            },
+            "OPT_ADV_SPEED": {
+                "low": 5.66,
+                "high": 8.72
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 4.76,
+                "high": 14.49
+            }
+        },
+        "opt_time_2": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 9.34,
+                "high": 22.66
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.36,
+                "high": 4.19
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 10.06,
+                "high": 20.98
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.18,
+                "high": 8.45
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.17,
+                "high": 12.48
+            }
+        },
+        "opt_time_3": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 10.05,
+                "high": 22.08
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.43,
+                "high": 4.2
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 10.99,
+                "high": 20.98
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.3,
+                "high": 8.37
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.12,
+                "high": 11.93
+            }
+        },
+        "opt_time_4": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 10.0,
+                "high": 20.88
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.49,
+                "high": 4.18
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 10.91,
+                "high": 19.7
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.36,
+                "high": 8.26
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 4.93,
+                "high": 11.21
+            }
+        },
+        "opt_time_5": {
+            "OPT_LEADING_DISTANCE": {
+                "low": 10.41,
+                "high": 20.03
+            },
+            "OPT_LEADING_SPEED": {
+                "low": 3.49,
+                "high": 4.13
+            },
+            "OPT_GEO_Y_DISTANCE": {
+                "low": 11.51,
+                "high": 19.23
+            },
+            "OPT_ADV_SPEED": {
+                "low": 6.61,
+                "high": 8.31
+            },
+            "OPT_ADV_DISTANCE": {
+                "low": 5.11,
+                "high": 10.64
+            }
+        },
+        "select_id": [
+            33,
+            42
+        ],
+        "directional_selection": {
+            "source": "directional_front",
+            "selected": [
+                33,
+                42
+            ],
+            "status": [
+                "collision",
+                "collision"
+            ],
+            "front_dsf": [
+                1.5295284493606658,
+                1.325875956714041
+            ],
+            "front_ratio": [
+                1.0,
+                1.0
+            ],
+            "counts": {
+                "collision": 18,
+                "non_collision": 30,
+                "l1_reject": 2
+            }
+        },
+        "pinned": {
+            "33": {
+                "OPT_LEADING_DISTANCE": 16.318742507167876,
+                "OPT_LEADING_SPEED": 4.113141617206435,
+                "OPT_GEO_Y_DISTANCE": 12.041957977453315,
+                "OPT_ADV_SPEED": 6.7235222656976,
+                "OPT_ADV_DISTANCE": 5.143463214227218
+            },
+            "42": {
+                "OPT_LEADING_DISTANCE": 16.278508533645386,
+                "OPT_LEADING_SPEED": 3.535319462707973,
+                "OPT_GEO_Y_DISTANCE": 18.030424061958534,
+                "OPT_ADV_SPEED": 7.416424191215269,
+                "OPT_ADV_DISTANCE": 7.66220440305924
+            }
+        }
+    }
+}

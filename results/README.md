@@ -35,6 +35,7 @@ results/
   softfuture_trial/         # soft future-front top5 + eval-dispose trial
   dsf_avoidable_pilot/      # fine-tuning-layer dsf_avoidable pilot (s1 r8)
   dsf_avoidable_full/       # full s1/s3/s5 routes8-9 dsf_avoidable run
+  directional_full/         # full directional DSF run (no I45 selection)
   baseline/
     maps/                  # scenic_data/scenario_{1,3,5}/ (JSON + Scenic files + .bak)
     capture/               # train_scenario/sac/adv_scenic/scenario_{1,3,5}/.../eval_results

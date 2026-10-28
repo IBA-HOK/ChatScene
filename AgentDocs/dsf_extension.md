@@ -684,3 +684,20 @@ Full run without the LLM generation stage: 1500 capture scenes, 10-step
   7.338; CR .850 -> .533 and OS .517 -> .663 (worse).  This is a valid full
   result, but not a clean success: OS increased.
 - Artifacts: `results/dsf_avoidable_full/`.
+
+## 24. Full directional DSF run (no I45 selection, 2026-10-24)
+
+Selection: L1 pass, current-frame directional DSF with front_ratio >= 0.60,
+rank by front DSF/OS.  No I45/margin/avoidability in selection.  Baseline
+collision-based parameter updates.  s1/s3/s5 routes 8-9, pinned eval.
+
+- CR: .750 / .556 / .900; avg .735
+- OS: .531 / .662 / .505; avg .566
+- ADE: 3.538 / 18.315 / 4.364; avg 8.739
+- I45: .900 / .778 / .778; overall .811 (30/37)
+- side+rear: 5
+- n = 20/18/20; s3 behavior2 route8 selected zero scenes (empty select_id)
+
+Directional is the best non-I45 DSF method on CR/OS, but does not beat baseline
+and has worse I45 than baseline/current DSF.  Full artifacts:
+`results/directional_full/`.
